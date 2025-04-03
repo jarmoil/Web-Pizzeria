@@ -1,0 +1,150 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+
+
+/* ------------ SignUp HTML Section ------------ */
+.signUp-container {
+  padding: 16px;
+}
+#signUp-section{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100vh;
+  background: url('../../public/plain-smooth-green-wall-texture.jpg') no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+input[type=emailtext], input[type=passwordtext] {
+  width: 100%;
+  padding: 15px;
+  margin: 5px 0 22px 0;
+  display: inline-block;
+  border: none;
+  background: #f1f1f1;
+}
+
+input[type=text]:focus, input[type=passwordtext]:focus {
+  background-color: #ddd;
+  outline: none;
+}
+#signUp-container-h1, #signUp-container-p, #signUp-container-terms-privacy, #signUp-container-label,#signUp-container-signIn-container-p{
+  color: #fff;
+}
+#signUp-container-terms-privacy-a, #signUp-container-signIn-container-a{
+  color: dodgerblue;
+}
+#signUp-container-hr {
+  border: 1px solid #f1f1f1;
+  margin-bottom: 25px;
+}
+.signUp-container-registerbtn {
+  background-color: #04AA6D;
+  color: white;
+  padding: 16px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  opacity: 0.9;
+}
+.signUp-container-registerbtn:hover {
+  opacity:1;
+}
+#signUp-container-signIn-container, #signUp-container-signIn-container-p {
+  background-color: #f1f1f1;
+  background: transparent;
+  text-align: center;
+
+}
+/* ------------ SignUp HTML Section ------------ */
+
+/* ------------ Forgot Password HTML Section ------------ */
+#forgotPassword-section{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100vh;
+  background: url('../../public/plain-smooth-green-wall-texture.jpg') no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+.forgotPassword-container{
+  position:relative;
+  width: 400px;
+  height: 450px;
+  background: transparent;
+  border: 2px solid rgba(255, 255, 255, .5);
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 20px;
+  backdrop-filter: blur(15px);
+}
+#forgotPassword-container-h2 {
+  margin: 0;
+  font-size: 24px;
+  color: white;
+  text-align: center;
+}
+#forgotPassword-input-p {
+  margin: 15px 0;
+  font-size: 14px;
+  color: white;
+  text-align: center;
+}
+.forgotPassword-input-container{
+  position: relative;
+  width: 100%;
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+#forgotPassword-input-label{
+  position: relative;
+  top: 0;
+  left: 0;
+  font-size: 14px;
+  color: white;
+  background: transparent;
+  padding: 0;
+  margin-bottom: 5px;
+  border-radius: 0;
+  text-align: center;
+}
+#forgotPassword-input-input{
+  width: 100%;
+  padding: 10px;
+  border: 2px solid rgba(255, 255, 255, .5);
+  border-radius: 5px;
+  background: transparent;
+  color: white;
+  font-size: 16px;
+  text-align: center;
+}
+.forgotPassword-send-new-password-button{
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  padding: 10px 20px;
+  background-color: #0073e6;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+.forgotPassword-send-new-password-button:hover{
+  background-color: #004080;
+}
+/* ------------ Forgot Password HTML Section ------------ */
