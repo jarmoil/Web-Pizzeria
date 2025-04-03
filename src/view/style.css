@@ -148,3 +148,120 @@ input[type=text]:focus, input[type=passwordtext]:focus {
   background-color: #004080;
 }
 /* ------------ Forgot Password HTML Section ------------ */
+
+/* ------------ Footer Section ------------ */
+.footer-body{
+  display: grid;
+  justify-content: end;
+  align-content: end;
+  min-height: 100vh;
+}
+footer {
+  position: relative;
+  width: 100%;
+  height: auto;
+  padding: 50px 100px;
+  background: hwb(231 22% 7%) ;
+}
+.footer-container{
+  width: 100%;
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  grid-gap: 20px;
+}
+.footer-container h2{
+  position:relative;
+  color: #fff;
+  font-weight: 500;
+  margin-bottom: 15px;
+}
+.footer-container h2::before{
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 50px;
+  height: 2px;
+  background: #ffeb3b;
+}
+.footer-container p{
+  color: #fff;
+}
+.footer-ul{
+  margin-top: 20px;
+  display: grid;
+  grid-template-columns: repeat(4, 50px);
+  grid-gap: 10px;
+}
+.footer-ul li{
+  list-style: none;
+}
+.footer-ul li a{
+  display: inline-block;
+  width: 48px;
+  height: 48px;
+  background: hsl(231, 90%, 51%);
+  display: grid;
+  align-content: center;
+  justify-content: center;
+  text-decoration: none;
+  border-radius: 4px;
+}
+.footer-ul li a:hover{
+  background: #6380fe;
+}
+.footer-ul li a .fa{
+  color: #fff;
+  font-size: 20px;
+}
+.quicklink-container .Shop-container{
+  position: relative;
+}
+.quicklink-container li, .Shop-container li{
+  list-style: none;
+}
+.quicklink-container li a, .Shop-container li a{
+  color: #f7f7f7;
+  text-decoration: none;
+  margin-bottom: 10px;
+  display: inline-block;
+}
+.quicklink-container li a:hover, .Shop-container li a:hover{
+  color:#ffeb3b
+}
+.info{
+  position: relative;
+}
+.info li{
+  display: grid;
+  grid-template-columns: 30px 1fr;
+  margin-bottom: 16px;
+}
+.info li span:nth-child(1){
+  color: #fff;
+  font-size: 20px;
+}
+.info li span{
+  color: #fff;
+}
+.info a{
+  color: #f7f7f7;
+  text-decoration: none;
+}
+.info a:hover{
+  color: #ffeb3b;
+}
+@media (max-width: 991px){
+  footer{
+    padding: 40px;
+  }
+  .footer-container{
+    grid-template-columns: repeat(2,1fr);
+  }
+}
+@media (max-width: 768px){
+  .footer-container{
+    grid-template-columns: repeat(1,1fr);
+  }
+}
+/* ------------ Footer Section ------------ */
