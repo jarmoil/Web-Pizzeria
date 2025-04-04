@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Pápá's Pizzeria</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <header>
+      <!-- Header and nav content here, when it is ready-->
+    </header>
+    <main id="homepage-main-wrapper">
+      <section id="homepage-hero" class="homepage-section">
+        <div class="homepage-hero-content">
+          <h1>Tervetuloa Pápán Pizzeriaan!</h1>
+          <p>Herkullista pizzaa vuodesta 2001 asti</p>
+          <button class="homepage-menu-button">Katso menu</button>
+        </div>
+      </section>
+
+      <section id="homepage-about" class="homepage-section">
+        <div class="homepage-about-grid">
+          <div class="homepage-about-text">
+            <h2>Meidän taustamme</h2>
+            <p>
+              Olemme tehneet käsintehtyjä pizzoja kotimaisilla aineksilla
+              vuodesta....
+            </p>
+          </div>
+          <div class="homepage-about-image">
+            <img src="../../public/pizza-oven.jpg" alt="Pizza oven" />
+          </div>
+        </div>
+      </section>
+
+      <section id="homepage-featured-pizza" class="homepage-section">
+        <h2>Viikon pizza</h2>
+        <div class="homepage-featured-grid">
+          <!-- Placeholder, jotta näkee ulkoasun-->
+          <div class="homepage-pizza-card">
+            <img src="../../public/margerita-pizza.jpg" alt="Featured pizza" />
+            <h3 id="homepage-featured-pizza-name">Margherita</h3>
+            <p id="homepage-featured-pizza-description">
+              Perinteinen pizza, jossa on tomaattikastiketta, mozzarella-juustoa
+              ja tuoretta basilikaa.
+            </p>
+            <p id="homepage-featured-pizza-rating">⭐ 4.8 / 5</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="homepage-ratings" class="homepage-section">
+        <h2>Asiakkaiden arvostelut</h2>
+        <div class="homepage-ratings-controls">
+          <label for="homepage-ratings-sort">Suodata:</label>
+          <select id="homepage-ratings-sort" name="sort">
+            <option value="newest">Uusimmat</option>
+            <option value="most-liked">Suosituimmat</option>
+            <option value="oldest">Vanhimmat</option>
+          </select>
+        </div>
+
+        <div class="homepage-ratings-scroll">
+          <!-- Placeholder-->
+          <div class="homepage-rating-card">
+            <p class="homepage-rating-card-text">
+              "Pizza oli todella herkullista ja palvelu oli erinomaista!"
+            </p>
+            <div class="homepage-rating-meta">
+              <span class="homepage-rating-user">- Anna</span>
+              <span class="homepage-rating-likes">👍 12</span>
+              <span class="homepage-rating-date">2025-04-03</span>
+            </div>
+          </div>
+
+          <!-- Lisätään .homepage-rating-card dynaamisesti myöhemmin-->
+        </div>
+      </section>
+
+      <section id="homepage-gallery" class="homepage-section">
+        <h2>Kuvagalleria</h2>
+        <div class="homepage-gallery-grid">
+          <img src="../../public/galleria-kuva1.jpg" alt="Pizza dough" />
+          <img src="../../public/galleria-kuva2.jpg" alt="Pepperoni pizza" />
+        </div>
+      </section>
+
+      <section id="homepage-hours-location" class="homepage-section">
+        <div class="homepage-hours-location-grid">
+          <div class="homepage-hours">
+            <h3>Aukioloajat</h3>
+            <ul>
+              <li>Ma-Pe: 11:00 - 22:00</li>
+              <li>La: 12:00 - 23:00</li>
+              <li>Su: 12:00 - 21:00</li>
+            </ul>
+          </div>
+          <div class="homepage-map">
+            <h3>Osoite</h3>
+            <p>
+              Pápán Pizzeria, Helsinginkatu 1<br />
+              00010, Helsinki<br />FIN
+            </p>
+            <p>TÄHÄN TULEE LEAFLET KARTTA</p>
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer>
+      <!-- Footer content here-->
+    </footer>
+  </body>
+</html>
