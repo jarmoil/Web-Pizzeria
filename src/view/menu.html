@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Pápá's Pizzeria</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body class="menu-body">
+    <header>
+      <!-- Header ja nav tänne ku valmis-->
+    </header>
+    <main id="menu-main-wrapper">
+      <!-- Muutama kopioitu menu-card, jotta näkee ulkoasun, mutta nämä dynaamisesti javascriptillä myöhemmin-->
+      <section id="menu-wrapper" class="menu-wrapper-grid">
+        <!-- Placeholder itemi-->
+        <article class="menu-card" id="menu-card-1">
+          <img
+            src="../../public/images/margerita-pizza.jpg"
+            alt="Margerita pizza"
+            class="menu-card-image"
+          />
+
+          <div class="menu-card-content">
+            <h3 class="menu-card-title">Margherita</h3>
+            <p class="menu-card-description">
+              Tomaattikastike, mozzarella-juustoa ja tuoretta basilikaa.
+            </p>
+            <!-- Ratings summary -->
+            <div class="menu-card-rating">
+              <span class="menu-card-rating-stars">⭐ 4.5</span>
+              <span class="menu-card-rating-count">(37 reviews)</span>
+            </div>
+            <div class="menu-card-price">8.90€</div>
+            <button class="menu-card-button-add">Lisää ostoskoriin</button>
+          </div>
+
+          <button
+            class="menu-card-button-reviews"
+            data-modal-target="menu-modal-1"
+          >
+            Katso arvostelut
+          </button>
+        </article>
+
+        <!-- Modal for reviews -->
+        <div class="menu-modal" id="menu-modal-1">
+          <div class="menu-modal-content">
+            <button class="menu-modal-close" aria-label="Sulje arvosteluikkuna">
+              ×
+            </button>
+            <h2 class="menu-modal-title">Arvostelut: Margherita</h2>
+
+            <div class="menu-modal-scroll">
+              <!-- Placeholder review cards -->
+              <div class="menu-review-card">
+                <p class="menu-review-card-text">
+                  "Pizza oli täydellistä! Tulee tilattua varmasti uudelleen."
+                </p>
+                <div class="menu-review-meta">
+                  <span class="menu-review-user">– Markku</span>
+                  <span class="menu-modal-review-rating">⭐ 4.5</span>
+                  <span class="menu-review-date">2025-04-02</span>
+                </div>
+              </div>
+
+              <div class="menu-review-card">
+                <p class="menu-review-card-text">
+                  "Hinta-laatusuhde kohdillaan. Mukava henkilökunta."
+                </p>
+                <div class="menu-review-meta">
+                  <span class="menu-review-user">– Salla</span>
+                  <span class="menu-modal-review-rating">⭐ 4.3</span>
+                  <span class="menu-review-date">2025-03-28</span>
+                </div>
+              </div>
+
+              <!-- Reviews will be populated dynamically here later -->
+            </div>
+          </div>
+        </div>
+
+        <article class="menu-card" id="menu-card-1">
+          <img
+            src="../../public/images/margerita-pizza.jpg"
+            alt="Margerita pizza"
+            class="menu-card-image"
+          />
+
+          <div class="menu-card-content">
+            <h3 class="menu-card-title">Margherita</h3>
+            <p class="menu-card-description">
+              Tomaattikastike, mozzarella-juustoa ja tuoretta basilikaa.
+            </p>
+            <!-- Ratings summary -->
+            <div class="menu-card-rating">
+              <span class="menu-card-rating-stars">⭐ 4.5</span>
+              <span class="menu-card-rating-count">(37 reviews)</span>
+            </div>
+            <div class="menu-card-price">8.90€</div>
+            <button class="menu-card-button-add">Lisää ostoskoriin</button>
+          </div>
+        </article>
+
+        <article class="menu-card" id="menu-card-1">
+          <img
+            src="../../public/images/margerita-pizza.jpg"
+            alt="Margerita pizza"
+            class="menu-card-image"
+          />
+
+          <div class="menu-card-content">
+            <h3 class="menu-card-title">Margherita</h3>
+            <p class="menu-card-description">
+              Tomaattikastike, mozzarella-juustoa ja tuoretta basilikaa.
+            </p>
+            <!-- Ratings summary -->
+            <div class="menu-card-rating">
+              <span class="menu-card-rating-stars">⭐ 4.5</span>
+              <span class="menu-card-rating-count">(37 reviews)</span>
+            </div>
+            <div class="menu-card-price">8.90€</div>
+            <button class="menu-card-button-add">Lisää ostoskoriin</button>
+          </div>
+        </article>
+
+        <article class="menu-card" id="menu-card-1">
+          <img
+            src="../../public/images/margerita-pizza.jpg"
+            alt="Margerita pizza"
+            class="menu-card-image"
+          />
+
+          <div class="menu-card-content">
+            <h3 class="menu-card-title">Margherita</h3>
+            <p class="menu-card-description">
+              Tomaattikastike, mozzarella-juustoa ja tuoretta basilikaa.
+            </p>
+            <!-- Ratings summary -->
+            <div class="menu-card-rating">
+              <span class="menu-card-rating-stars">⭐ 4.5</span>
+              <span class="menu-card-rating-count">(37 reviews)</span>
+            </div>
+            <div class="menu-card-price">8.90€</div>
+            <button class="menu-card-button-add">Lisää ostoskoriin</button>
+          </div>
+        </article>
+
+        <article class="menu-card" id="menu-card-1">
+          <img
+            src="../../public/images/margerita-pizza.jpg"
+            alt="Margerita pizza"
+            class="menu-card-image"
+          />
+
+          <div class="menu-card-content">
+            <h3 class="menu-card-title">Margherita</h3>
+            <p class="menu-card-description">
+              Tomaattikastike, mozzarella-juustoa ja tuoretta basilikaa.
+            </p>
+            <!-- Ratings summary -->
+            <div class="menu-card-rating">
+              <span class="menu-card-rating-stars">⭐ 4.5</span>
+              <span class="menu-card-rating-count">(37 reviews)</span>
+            </div>
+            <div class="menu-card-price">8.90€</div>
+            <button class="menu-card-button-add">Lisää ostoskoriin</button>
+          </div>
+        </article>
+      </section>
+    </main>
+    <footer>
+      <!-- Kopioin nyt vaan ton footerin tänne, pitäisi javascriptillä tehdä, jos haluaa tehdä siistimmin-->
+    </footer>
+  </body>
+  <!-- Pienei javascripti ton modalin avaamiselle, jotta näkee sen idean / ulkoasun, tämä pois myöhemmin-->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      document.querySelectorAll('[data-modal-target]').forEach((button) => {
+        button.addEventListener('click', () => {
+          const modalId = button.getAttribute('data-modal-target');
+          const modal = document.getElementById(modalId);
+          if (modal) {
+            modal.style.display = 'flex';
+          }
+        });
+      });
+
+      document.querySelectorAll('.menu-modal-close').forEach((button) => {
+        button.addEventListener('click', () => {
+          const modal = button.closest('.menu-modal');
+          if (modal) {
+            modal.style.display = 'none';
+          }
+        });
+      });
+
+      document.querySelectorAll('.menu-modal').forEach((modal) => {
+        modal.addEventListener('click', (e) => {
+          if (e.target === modal) {
+            modal.style.display = 'none';
+          }
+        });
+      });
+    });
+  </script>
+</html>

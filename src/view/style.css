@@ -716,3 +716,206 @@ footer {
 }
 
 /* ------------ End Homepage Section ------------ */
+
+/* ------------ Menu Section ------------ */
+
+.menu-wrapper-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  padding: 2rem;
+}
+
+/* Menu item card styles */
+.menu-card {
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: transform 0.2s ease;
+}
+
+.menu-card:hover {
+  transform: translateY(-4px);
+}
+
+/* Menu item image styles */
+.menu-card-image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+/* Menu item content */
+.menu-card-content {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.menu-card-title {
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+
+.menu-card-description {
+  font-size: 0.95rem;
+  color: #555;
+}
+
+.menu-card-price {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #e74c3c;
+}
+
+.menu-card-button-add {
+  margin-top: auto;
+  padding: 0.5rem;
+  background-color: #4ac67d;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.menu-card-button-add:hover {
+  background-color: #3bbf6b;
+  scale: 1.05;
+  rotate: -2deg;
+}
+
+.menu-card-button-add:active {
+  background-color: #36a65f;
+  scale: 1;
+  rotate: 0deg;
+}
+
+/* Menu card ratings */
+.menu-card-rating {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  font-size: 0.95rem;
+  color: #f39c12;
+  margin: 0.3rem 0;
+}
+
+.menu-card-rating-count {
+  font-size: 0.85rem;
+  color: #666;
+}
+
+.menu-card-button-reviews {
+  width: 100%;
+  padding: 0.75rem;
+  background-color: #f5f5f5;
+  color: #444;
+  border: none;
+  border-top: 1px solid #eee;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: all 0.2s ease;
+}
+
+.menu-card-button-reviews:hover {
+  background-color: #e8e8e8;
+  color: #038857;
+}
+
+.menu-card-button-reviews:active {
+  background-color: #ddd;
+}
+
+/* Menu card all reviews */
+.menu-modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  justify-content: center;
+  align-items: center;
+}
+
+.menu-modal-review-rating {
+  font-size: 0.95rem;
+  color: #f5b301; /* golden star color */
+  margin-right: 0.75rem;
+  font-weight: 500;
+}
+
+.menu-modal-content {
+  background-color: #fff;
+  padding: 2rem;
+  width: 90%;
+  max-width: 600px;
+  max-height: 80vh;
+  overflow-y: auto;
+  border-radius: 12px;
+  position: relative;
+}
+
+.menu-modal-title {
+  margin-bottom: 1.5rem;
+}
+
+.menu-modal-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  font-size: 1.5rem;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+/* Scrollable content inside modal */
+.menu-modal-scroll {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* Menu reviews */
+.menu-review-card {
+  flex: 0 0 auto;
+  background-color: #f7f7f7;
+  padding: 1rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s ease;
+}
+
+.menu-review-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.menu-review-card-text {
+  font-size: 1.1rem;
+  line-height: 1.5;
+}
+
+.menu-review-meta {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.85rem;
+  margin-top: 0.5rem;
+  color: #555;
+}
+
+.menu-review-user {
+  font-weight: 500;
+}
+
+.menu-review-date {
+  color: #666;
+}
+
+/* ---------- End Menu Section ------------ */
