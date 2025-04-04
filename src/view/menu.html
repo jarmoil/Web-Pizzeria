@@ -170,11 +170,87 @@
         </article>
       </section>
     </main>
+    <!-- Kopioin nyt vaan ton footerin tänne, pitäisi javascriptillä tehdä, jos haluaa tehdä siistimmin-->
     <footer>
-      <!-- Kopioin nyt vaan ton footerin tänne, pitäisi javascriptillä tehdä, jos haluaa tehdä siistimmin-->
+      <div class="footer-container">
+        <div class="about-us-container">
+          <h2 class="footer-h2">About Us</h2>
+          <p>
+            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Aut
+            incidunt ratione quia? Mollitia, explicabo, error quae non dolorem
+            nulla reiciendis molestiae exercitationem accusamus, quasi id omnis
+            voluptate debitis voluptatibus quam.
+          </p>
+          <ul class="footer-ul">
+            <li>
+              <a href="https://www.facebook.com"
+                ><i class="fa fa-facebook" aria-hidden="true"></i
+              ></a>
+            </li>
+            <li>
+              <a href="https://x.com"
+                ><i class="fa fa-twitter" aria-hidden="true"></i
+              ></a>
+            </li>
+            <li>
+              <a href="https://www.instagram.com"
+                ><i class="fa fa-instagram" aria-hidden="true"></i
+              ></a>
+            </li>
+            <li>
+              <a href="https://www.youtube.com"
+                ><i class="fa fa-youtube-play" aria-hidden="true"></i
+              ></a>
+            </li>
+          </ul>
+        </div>
+        <div class="quicklink-container">
+          <h2>Quick Links</h2>
+          <ul class="quicklink-ul">
+            <li><a href="#">About</a></li>
+            <li><a href="#">FAQ</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Help</a></li>
+            <li><a href="#">Terms $ Conditions</a></li>
+            <li><a href="#">Contact</a></li>
+          </ul>
+        </div>
+        <div class="Shop-container">
+          <h2>Shop</h2>
+          <ul class="shop-ul">
+            <li><a href="#">Menu</a></li>
+            <li><a href="#">Kartta</a></li>
+            <li><a href="#">lorem</a></li>
+            <li><a href="#">lorem</a></li>
+          </ul>
+        </div>
+        <div class="contact-container">
+          <h2>Contact Us</h2>
+          <ul class="info">
+            <li>
+              <span><i class="fa fa-map-marker" aria-hidden="true"></i></span>
+              <span
+                >Helsinginkatu 1<br />
+                00010, Helsinki<br />FIN</span
+              >
+            </li>
+            <li>
+              <span><i class="fa fa-phone" aria-hidden="true"></i></span>
+              <p>
+                <a href="tel:+358123123123">+358 123 123 123</a><br />
+                <a href="tel:+358123123123">+358 123 123 123</a>
+              </p>
+            </li>
+            <li>
+              <span><i class="fa fa-envelope" aria-hidden="true"></i></span>
+              <p><a href="mailto:fakemail@fake.com">fakemail@fake.com</a></p>
+            </li>
+          </ul>
+        </div>
+      </div>
     </footer>
   </body>
-  <!-- Pienei javascripti ton modalin avaamiselle, jotta näkee sen idean / ulkoasun, tämä pois myöhemmin-->
+  <!-- Pieni javascripti ton modalin avaamiselle, jotta näkee sen idean / ulkoasun, tämä pois myöhemmin-->
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       document.querySelectorAll('[data-modal-target]').forEach((button) => {

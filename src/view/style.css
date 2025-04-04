@@ -873,6 +873,23 @@ footer {
   background: transparent;
   border: none;
   cursor: pointer;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.menu-modal-close:hover {
+  color: #e74c3c;
+  transform: rotate(180deg) scale(1.2);
+  background-color: rgba(231, 76, 60, 0.1);
+}
+
+.menu-modal-close:active {
+  transform: rotate(180deg) scale(0.95);
 }
 
 /* Scrollable content inside modal */
@@ -918,4 +935,4 @@ footer {
   color: #666;
 }
 
-/* ---------- End Menu Section ------------ */
+/* ------------ End Menu Section ------------ */
