@@ -166,7 +166,7 @@ footer {
   width: 100%;
   height: auto;
   padding: 50px 100px;
-  background: hwb(231 22% 7%);
+  background: #038857;
 }
 .footer-container {
   width: 100%;
@@ -205,7 +205,7 @@ footer {
   display: inline-block;
   width: 48px;
   height: 48px;
-  background: hsl(231, 90%, 51%);
+  background: #038857;
   display: grid;
   align-content: center;
   justify-content: center;
@@ -213,7 +213,7 @@ footer {
   border-radius: 4px;
 }
 .footer-ul li a:hover {
-  background: #6380fe;
+  background: #64a860;
 }
 .footer-ul li a .fa {
   color: #fff;

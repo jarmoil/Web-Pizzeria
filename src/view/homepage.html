@@ -5,11 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Pápá's Pizzeria</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
     <link rel="stylesheet" href="./style.css" />
   </head>
   <body class="homepage-body">
     <header>
-      <!-- Header and nav content here, when it is ready-->
+      <!-- Header ja nav tänne ku valmis-->
     </header>
     <main id="homepage-main-wrapper">
       <section id="homepage-hero" class="homepage-section">
@@ -81,11 +85,48 @@
             </div>
           </div>
 
+          <div class="homepage-rating-card">
+            <p class="homepage-rating-card-text">
+              "Pizza oli todella herkullista ja palvelu oli erinomaista!"
+            </p>
+            <div class="homepage-rating-meta">
+              <span class="homepage-rating-user">- Anna</span>
+              <button
+                class="homepage-rating-like-btn"
+                aria-label="Like this review"
+              >
+                <span class="like-emoji">👍</span>
+                <span class="like-count">12</span>
+              </button>
+              <span class="homepage-rating-date">2025-04-03</span>
+            </div>
+          </div>
+
+          <div class="homepage-rating-card">
+            <p class="homepage-rating-card-text">
+              "Pizza oli todella herkullista ja palvelu oli erinomaista!"
+            </p>
+            <div class="homepage-rating-meta">
+              <span class="homepage-rating-user">- Anna</span>
+              <button
+                class="homepage-rating-like-btn"
+                aria-label="Like this review"
+              >
+                <span class="like-emoji">👍</span>
+                <span class="like-count">12</span>
+              </button>
+              <span class="homepage-rating-date">2025-04-03</span>
+            </div>
+          </div>
+
+          <!-- tässä on kopioituna noita cardeja, jotta saan havainnollistettua ulkoasun-->
           <!-- Lisätään .homepage-rating-card dynaamisesti myöhemmin-->
         </div>
       </section>
 
       <section id="homepage-gallery" class="homepage-section">
+        <!-- Tähän javascriptillä niin, että voi click-and-drag tota koko sectionia, nyt vähä scuffed scrollilla-->
+        <!-- myös joku modal kun painaa kuvaa, niin saa kuvan silleen isoksi-->
         <h2>Kuvagalleria</h2>
         <div class="homepage-gallery-grid">
           <div class="homepage-gallery-column">
@@ -131,7 +172,85 @@
       </section>
     </main>
     <footer>
-      <!-- Footer content here-->
+      <!-- Kopioin nyt vaan ton footerin tänne, pitäisi javascriptillä tehdä, jos haluaa tehdä siistimmin-->
+      <footer>
+        <div class="footer-container">
+          <div class="about-us-container">
+            <h2 class="footer-h2">About Us</h2>
+            <p>
+              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Aut
+              incidunt ratione quia? Mollitia, explicabo, error quae non dolorem
+              nulla reiciendis molestiae exercitationem accusamus, quasi id
+              omnis voluptate debitis voluptatibus quam.
+            </p>
+            <ul class="footer-ul">
+              <li>
+                <a href="https://www.facebook.com"
+                  ><i class="fa fa-facebook" aria-hidden="true"></i
+                ></a>
+              </li>
+              <li>
+                <a href="https://x.com"
+                  ><i class="fa fa-twitter" aria-hidden="true"></i
+                ></a>
+              </li>
+              <li>
+                <a href="https://www.instagram.com"
+                  ><i class="fa fa-instagram" aria-hidden="true"></i
+                ></a>
+              </li>
+              <li>
+                <a href="https://www.youtube.com"
+                  ><i class="fa fa-youtube-play" aria-hidden="true"></i
+                ></a>
+              </li>
+            </ul>
+          </div>
+          <div class="quicklink-container">
+            <h2>Quick Links</h2>
+            <ul class="quicklink-ul">
+              <li><a href="#">About</a></li>
+              <li><a href="#">FAQ</a></li>
+              <li><a href="#">Privacy Policy</a></li>
+              <li><a href="#">Help</a></li>
+              <li><a href="#">Terms $ Conditions</a></li>
+              <li><a href="#">Contact</a></li>
+            </ul>
+          </div>
+          <div class="Shop-container">
+            <h2>Shop</h2>
+            <ul class="shop-ul">
+              <li><a href="#">Menu</a></li>
+              <li><a href="#">Kartta</a></li>
+              <li><a href="#">lorem</a></li>
+              <li><a href="#">lorem</a></li>
+            </ul>
+          </div>
+          <div class="contact-container">
+            <h2>Contact Us</h2>
+            <ul class="info">
+              <li>
+                <span><i class="fa fa-map-marker" aria-hidden="true"></i></span>
+                <span
+                  >Helsinginkatu 1<br />
+                  00010, Helsinki<br />FIN</span
+                >
+              </li>
+              <li>
+                <span><i class="fa fa-phone" aria-hidden="true"></i></span>
+                <p>
+                  <a href="tel:+358123123123">+358 123 123 123</a><br />
+                  <a href="tel:+358123123123">+358 123 123 123</a>
+                </p>
+              </li>
+              <li>
+                <span><i class="fa fa-envelope" aria-hidden="true"></i></span>
+                <p><a href="mailto:fakemail@fake.com">fakemail@fake.com</a></p>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </footer>
     </footer>
   </body>
 </html>
