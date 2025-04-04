@@ -276,4 +276,431 @@ footer {
 
 /* ------------ Homepage Section ------------ */
 
+.homepage-body {
+  background: linear-gradient(
+      rgba(255, 255, 255, 0.9),
+      rgba(255, 255, 255, 0.9)
+    ),
+    url('../../public/pizza-pattern-bg.jpg') repeat;
+  background-attachment: fixed;
+  min-height: 100vh;
+}
+
+#homepage-main-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+  padding: 2rem;
+  background: transparent;
+}
+
+.homepage-section {
+  max-width: 1200px;
+  margin: 0 auto;
+  margin-bottom: 4rem;
+  padding: 0 2rem;
+}
+
+.homepage-section h2 {
+  margin-bottom: 2rem;
+  font-size: 2rem;
+}
+
+.homepage-section p {
+  line-height: 1.6;
+}
+
+#homepage-hero {
+  min-height: 100vh;
+  width: 100%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background: url('../../public/hero-picture.jpg') no-repeat center center;
+  background-size: cover;
+  background-position: center;
+  padding: 2rem;
+  margin-bottom: 4rem;
+  border-radius: 24px;
+}
+
+.homepage-hero-content {
+  color: #fff;
+  padding: 2rem;
+  max-width: 800px;
+  background: rgba(0, 0, 0, 0.15);
+  border-radius: 12px;
+  backdrop-filter: blur(2px);
+}
+
+.homepage-hero-content h1 {
+  font-size: 3.5rem;
+  margin-bottom: 1rem;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.homepage-hero-content p {
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.homepage-menu-button {
+  padding: 1rem 2rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #fff;
+  background-color: #04aa6d;
+  border: 2px solid transparent;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-top: 2rem;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.homepage-menu-button:hover {
+  background-color: #038857;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+}
+
+.homepage-menu-button:active {
+  transform: translateY(0);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.homepage-about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  align-items: center;
+  padding: 2rem 0;
+}
+
+.homepage-about-text {
+  padding-right: 2rem;
+}
+
+.homepage-about-image img {
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.homepage-featured-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 800px));
+  justify-content: center;
+  gap: 2rem;
+  padding: 2rem 0;
+}
+
+.homepage-pizza-card {
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.homepage-pizza-card img {
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+}
+
+.homepage-pizza-card h3,
+.homepage-pizza-card p {
+  padding: 1rem;
+}
+
+#homepage-ratings {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.homepage-ratings-controls {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  padding: 0.5rem;
+  background: #f7f7f7;
+  border-radius: 8px;
+}
+
+.homepage-ratings-controls label {
+  font-weight: 500;
+  color: #333;
+}
+
+#homepage-ratings-sort {
+  padding: 0.5rem;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  background: white;
+  cursor: pointer;
+  font-size: 0.9rem;
+  color: #444;
+  transition: all 0.2s ease;
+}
+
+#homepage-ratings-sort:hover {
+  border: 1px solid #b1e1af;
+}
+
+#homepage-ratings-sort:focus {
+  outline: none;
+  border: 1px solid #04aa6d;
+}
+
+.homepage-ratings-scroll {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  max-height: 300px;
+  overflow-y: auto;
+  padding-bottom: 1rem;
+  scroll-snap-type: y proximity;
+  position: relative;
+}
+
+.homepage-ratings-scroll::-webkit-scrollbar {
+  width: 8px;
+  background-color: transparent;
+}
+
+.homepage-ratings-scroll::-webkit-scrollbar-thumb {
+  background-color: #b1e1af;
+  border-radius: 6px;
+  transition: background-color 0.3s;
+}
+
+.homepage-ratings-scroll::-webkit-scrollbar-thumb:hover {
+  background-color: #8ecf8e;
+}
+
+.homepage-ratings-scroll::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+.homepage-rating-card {
+  flex: 0 0 auto;
+  background-color: #f7f7f7;
+  padding: 1rem;
+  border-radius: 12px;
+  scroll-snap-align: start;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  transform-origin: center center;
+  will-change: transform;
+  transition: all 0.2s ease;
+  position: relative;
+  z-index: 1;
+}
+
+.homepage-rating-card:hover {
+  transform: translateY(-4px);
+  z-index: 2;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.homepage-rating-card-text {
+  font-size: 1.1rem;
+  line-height: 1.5;
+}
+
+.homepage-rating-meta {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.85rem;
+  margin-top: 0.5rem;
+  color: #555;
+}
+
+.homepage-rating-like-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.3rem 0.6rem;
+  border: 1px solid #ddd;
+  border-radius: 20px;
+  background: white;
+  cursor: pointer;
+  font-size: 0.85rem;
+  color: #555;
+  transition: all 0.2s ease;
+}
+
+.homepage-rating-like-btn:hover {
+  background: #f0f0f0;
+  border-color: #b1e1af;
+}
+
+.homepage-rating-like-btn:active {
+  transform: scale(0.95);
+}
+
+.homepage-rating-like-btn .like-emoji {
+  font-size: 0.9rem;
+}
+
+.homepage-rating-like-btn .like-count {
+  min-width: 20px;
+  text-align: left;
+}
+
+#homepage-gallery {
+  max-width: 100%;
+  overflow: hidden; /* Prevent section from causing horizontal scroll */
+}
+
+.homepage-gallery-grid {
+  display: flex;
+  gap: 1.5rem;
+  overflow-x: auto;
+  padding: 1rem 0;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+.homepage-gallery-column {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  flex: 0 0 auto;
+  width: min(600px, 80vw);
+  scroll-snap-align: start;
+}
+
+.homepage-gallery-grid img {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.homepage-gallery-grid img:hover {
+  transform: scale(1.02);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+.homepage-gallery-grid::-webkit-scrollbar {
+  height: 8px;
+}
+
+.homepage-gallery-grid::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.homepage-gallery-grid::-webkit-scrollbar-thumb {
+  background-color: #b1e1af;
+  border-radius: 6px;
+}
+
+.homepage-gallery-grid::-webkit-scrollbar-thumb:hover {
+  background-color: #8ecf8e;
+}
+
+.homepage-hours-location-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  background: #f9f9f9;
+  padding: 2rem;
+  border-radius: 12px;
+}
+
+.homepage-hours ul {
+  list-style: none;
+  margin-top: 1rem;
+}
+
+.homepage-hours li {
+  padding: 0.5rem 0;
+  border-bottom: 1px solid #eee;
+}
+
+.homepage-map {
+  min-height: 300px;
+}
+
+/* Responsive Design Enhancements */
+@media (max-width: 1024px) {
+  #homepage-main-wrapper {
+    gap: 3rem;
+    padding: 1.5rem;
+  }
+
+  .homepage-section {
+    padding: 0 1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  #homepage-hero {
+    min-height: 60vh;
+  }
+
+  .homepage-hero-content h1 {
+    font-size: 2.5rem;
+  }
+
+  .homepage-hero-content p {
+    font-size: 1rem;
+  }
+
+  .homepage-section {
+    padding: 0 1rem;
+  }
+
+  .homepage-menu-button {
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
+  }
+
+  .homepage-about-text {
+    padding-right: 0;
+  }
+
+  .homepage-pizza-card {
+    grid-template-columns: 1fr;
+  }
+
+  .homepage-pizza-card img {
+    height: 250px;
+  }
+
+  .homepage-gallery-grid {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    padding: 1rem;
+    gap: 1rem;
+  }
+
+  .homepage-gallery-column {
+    width: min(300px, 70vw);
+  }
+
+  .homepage-gallery-grid img {
+    height: 250px;
+  }
+
+  .homepage-hours-location-grid > div {
+    padding: 1rem;
+  }
+}
+
 /* ------------ Homepage Section ------------ */

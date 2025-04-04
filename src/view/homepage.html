@@ -7,7 +7,7 @@
     <title>Pápá's Pizzeria</title>
     <link rel="stylesheet" href="./style.css" />
   </head>
-  <body>
+  <body class="homepage-body">
     <header>
       <!-- Header and nav content here, when it is ready-->
     </header>
@@ -70,7 +70,13 @@
             </p>
             <div class="homepage-rating-meta">
               <span class="homepage-rating-user">- Anna</span>
-              <span class="homepage-rating-likes">👍 12</span>
+              <button
+                class="homepage-rating-like-btn"
+                aria-label="Like this review"
+              >
+                <span class="like-emoji">👍</span>
+                <span class="like-count">12</span>
+              </button>
               <span class="homepage-rating-date">2025-04-03</span>
             </div>
           </div>
@@ -82,8 +88,24 @@
       <section id="homepage-gallery" class="homepage-section">
         <h2>Kuvagalleria</h2>
         <div class="homepage-gallery-grid">
-          <img src="../../public/galleria-kuva1.jpg" alt="Pizza dough" />
-          <img src="../../public/galleria-kuva2.jpg" alt="Pepperoni pizza" />
+          <div class="homepage-gallery-column">
+            <img src="../../public/galleria-kuva1.jpg" alt="Pizza dough" />
+            <img src="../../public/galleria-kuva2.jpg" alt="Pepperoni pizza" />
+          </div>
+          <div class="homepage-gallery-column">
+            <img src="../../public/galleria-kuva3.jpg" alt="Pizza slice" />
+            <img
+              src="../../public/galleria-kuva4.jpg"
+              alt="Fresh ingredients"
+            />
+          </div>
+          <div class="homepage-gallery-column">
+            <img
+              src="../../public/galleria-kuva5.jpg"
+              alt="Restaurant glasses"
+            />
+            <img src="../../public/galleria-kuva6.jpg" alt="Viiksivallu" />
+          </div>
         </div>
       </section>
 
