@@ -719,6 +719,16 @@ footer {
 
 /* ------------ Menu Section ------------ */
 
+.menu-body {
+  background: linear-gradient(
+      rgba(255, 255, 255, 0.9),
+      rgba(255, 255, 255, 0.9)
+    ),
+    url('../../public/images/pizza-pattern-bg.jpg') repeat;
+  background-attachment: fixed;
+  min-height: 100vh;
+}
+
 .menu-wrapper-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
