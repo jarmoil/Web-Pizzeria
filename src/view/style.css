@@ -716,3 +716,211 @@ footer {
 }
 
 /* ------------ End Homepage Section ------------ */
+
+
+/* ------------ Header Section ------------ */
+
+#header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  background-color: #333;
+  color: white;
+}
+
+#logo {
+  font-size: 1.8rem;
+}
+
+#main-nav {
+  display: flex;
+  justify-content: center;
+  flex-grow: 1;
+}
+
+#main-nav a {
+  color: white;
+  margin-right: 15px;
+  text-decoration: none;
+  font-size: 1.2rem;
+}
+
+#main-nav a:hover {
+  text-decoration: underline;
+}
+
+#header-actions {
+  display: flex;
+}
+
+#cart-btn, #signin-btn, #signup-btn {
+  margin-left: 10px;
+  padding: 10px 20px;
+  border: none;
+  background-color: #ff6f61;
+  color: white;
+  cursor: pointer;
+  font-size: 1rem;
+  border-radius: 5px;
+}
+
+#cart-btn:hover, #signin-btn:hover, #signup-btn:hover {
+  background-color: #ff5a4f;
+}
+
+#cart-btn {
+  position: relative;
+}
+
+#cart-count {
+  position: absolute;
+  top: -5px;
+  right: -10px;
+  background-color: red;
+  color: white;
+  border-radius: 50%;
+  padding: 5px 10px;
+  font-size: 0.8rem;
+  font-weight: bold;
+}
+
+#signin-modal, #cart-dropdown {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+#signin-modal.hidden, #cart-dropdown.hidden {
+  display: none;
+}
+
+#signin-box, #cart-box {
+  position: relative;
+  background-color: #fff;
+  padding: 20px;
+  width: 300px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+#signin-close, #cart-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 20px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #333;
+}
+
+#signin-close:hover, #cart-close:hover {
+  color: #ff6f61;
+}
+
+#signin-heading {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+#signin-email, #signin-password, #signin-submit-btn, #cart-checkout-btn {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+#signin-submit-btn, #cart-checkout-btn {
+  background-color: #ff6f61;
+  color: white;
+  cursor: pointer;
+}
+
+#signin-submit-btn:hover, #cart-checkout-btn:hover {
+  background-color: #ff5a4f;
+}
+
+#cart-items li {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+  border-bottom: 1px solid #ddd;
+}
+
+#cart-total {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+  font-weight: bold;
+}
+
+#cart-checkout-btn {
+  background-color: #4caf50;
+}
+
+#cart-checkout-btn:hover {
+  background-color: #45a049;
+}
+
+.cart-dropdown {
+  position: absolute;
+  top: 60px;
+  left: 0;
+  width: 300px;
+  padding: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+  background-color: white;
+  display: none;
+  z-index: 1001;
+}
+
+.cart-dropdown.visible {
+  display: block;
+}
+
+#signup-btn {
+  display: inline-block;
+  padding: 5px 10px;
+  font-size: 1rem;
+  background-color: #ff6f61;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+#signup-btn:hover {
+  background-color: #ff5a4f;
+}
+
+@media (max-width: 768px) {
+  #header {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  #main-nav {
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+
+  #cart-btn, #signin-btn {
+    width: 100%;
+    margin-top: 10px;
+  }
+
+  #signin-box, #cart-box {
+    width: 80%;
+    max-width: 400px;
+  }
+}
