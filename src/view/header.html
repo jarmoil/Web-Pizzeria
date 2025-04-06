@@ -34,6 +34,10 @@
       </div>
       <input id="signin-email" type="email" placeholder="Email" />
       <input id="signin-password" type="password" placeholder="Password" />
+      <div class="remember-forgot">
+        <label><input type="checkbox">Remember me</label>
+        <a href="forgotPassword.html">Forgot Password?</a>
+      </div>
       <button id="signin-submit-btn">Login</button>
       <p>Don't have an account? <button id="signup-btn">Sign Up</button></p>
     </div>
@@ -74,7 +78,7 @@
       });
 
       signupBtn.addEventListener('click', () => {
-        alert("Redirect to Sign Up page or show Sign Up Modal");
+        window.location.href = 'signUp.html';
         signinModal.classList.add('hidden');
       });
 

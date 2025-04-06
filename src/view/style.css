@@ -1220,6 +1220,28 @@ footer {
   background-color: #ff5a4f;
 }
 
+.remember-forgot {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 13px;
+  margin-top: 10px;
+}
+
+.remember-forgot label {
+  padding-right: 5px;
+  color: #333;
+}
+
+.remember-forgot a {
+  color: #ff6f61;
+  text-decoration: none;
+}
+
+.remember-forgot a:hover {
+  text-decoration: underline;
+}
+
 #cart-items li {
   display: flex;
   justify-content: space-between;
