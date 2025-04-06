@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Pápá's Pizzeria</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <header id="header">
+      <div id="logo">MyShop</div>
+
+      <nav id="main-nav">
+        <a id="home-link" href="#">Home</a>
+        <a id="shop-link" href="#">Shop</a>
+        <a id="contact-link" href="#">Contact</a>
+      </nav>
+
+      <div id="header-actions">
+        <button id="cart-btn">
+          Cart
+          <span id="cart-count">3</span>
+        </button>
+        <button id="signin-btn">Sign In</button>
+      </div>
+    </header>
+
+    <div id="signin-modal" class="modal-overlay hidden">
+      <div id="signin-box" class="modal-box">
+        <button id="signin-close" class="close-btn">&times;</button>
+        <div id="signin-heading">
+          <span>Sign In</span>
+        </div>
+        <input id="signin-email" type="email" placeholder="Email" />
+        <input id="signin-password" type="password" placeholder="Password" />
+        <button id="signin-submit-btn">Login</button>
+        <p>Don't have an account? <button id="signup-btn">Sign Up</button></p>
+      </div>
+    </div>
+
+    <div id="cart-dropdown" class="cart-dropdown hidden">
+      <div id="cart-box">
+        <button id="cart-close" class="close-btn">&times;</button>
+        <h2>Your Cart</h2>
+        <ul id="cart-items">
+          <li id="cart-item1"><span>Item 1</span><span>$10</span></li>
+          <li id="cart-item2"><span>Item 2</span><span>$15</span></li>
+        </ul>
+        <div id="cart-total"><span>Total:</span><span>$25</span></div>
+        <button id="cart-checkout-btn">Checkout</button>
+      </div>
+    </div>
+
+    <main class="managementPage-main-wrapper">
+      <!-- Erillinen navigointi näille admin/employee "työkaluille", jos osioista tulee pitkiä ja isoja.-->
+      <nav class="managementPage-sidebar">
+        <ul class="managementPage-sidebar-menu">
+          <li>
+            <a href="#menu-management" class="managementPage-sidebar-link"
+              >Menun hallinta</a
+            >
+          </li>
+          <li>
+            <a href="#order-management" class="managementPage-sidebar-link"
+              >Tilausten hallinta</a
+            >
+          </li>
+          <li>
+            <a href="#user-management" class="managementPage-sidebar-link"
+              >Käyttäjien hallinta</a
+            >
+          </li>
+          <li>
+            <a href="#review-moderation" class="managementPage-sidebar-link"
+              >Arvosteluiden hallinta</a
+            >
+          </li>
+        </ul>
+      </nav>
+
+      <div class="managementPage-content">
+        <h1>HUOM. TÄMÄ SIVU VAIN ADMIN/EMPLOYEE KÄYTTÄJILLE</h1>
+        <section id="menu-management" class="managementPage-section">
+          <h2 class="managementPage-section-title">Menun hallinta</h2>
+          <p>Muokkaa menun tuotteita, hintoja ja kuvauksia</p>
+          <!-- Myöhemmin menun tuote muokkaus form tai joku-->
+        </section>
+
+        <section id="order-management" class="managementPage-section">
+          <h2 class="managementPage-section-title">Tilausten hallinta</h2>
+          <p>Hallinnoi asiakastilauksia ja toimituksia</p>
+          <!-- Tilausten hallinta form tai joku-->
+        </section>
+
+        <section id="user-management" class="managementPage-section">
+          <h2 class="managementPage-section-title">Käyttäjien hallinta</h2>
+          <p>Hallinnoi käyttäjätilejä</p>
+          <!-- Käyttäjien hallinta form tai joku-->
+        </section>
+
+        <section id="review-moderation" class="managementPage-section">
+          <h2 class="managementPage-section-title">Arvosteluiden hallinta</h2>
+          <p>Hallinnoi asiakasarvosteluja, moderointi</p>
+          <!-- Arvosteluiden hallinta form tai joku-->
+        </section>
+      </div>
+    </main>
+
+    <footer>
+      <div class="footer-container">
+        <div class="about-us-container">
+          <h2 class="footer-h2">About Us</h2>
+          <p>
+            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Aut
+            incidunt ratione quia? Mollitia, explicabo, error quae non dolorem
+            nulla reiciendis molestiae exercitationem accusamus, quasi id omnis
+            voluptate debitis voluptatibus quam.
+          </p>
+          <ul class="footer-ul">
+            <li>
+              <a href="https://www.facebook.com"
+                ><i class="fa fa-facebook" aria-hidden="true"></i
+              ></a>
+            </li>
+            <li>
+              <a href="https://x.com"
+                ><i class="fa fa-twitter" aria-hidden="true"></i
+              ></a>
+            </li>
+            <li>
+              <a href="https://www.instagram.com"
+                ><i class="fa fa-instagram" aria-hidden="true"></i
+              ></a>
+            </li>
+            <li>
+              <a href="https://www.youtube.com"
+                ><i class="fa fa-youtube-play" aria-hidden="true"></i
+              ></a>
+            </li>
+          </ul>
+        </div>
+        <div class="quicklink-container">
+          <h2>Quick Links</h2>
+          <ul class="quicklink-ul">
+            <li><a href="#">About</a></li>
+            <li><a href="#">FAQ</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Help</a></li>
+            <li><a href="#">Terms $ Conditions</a></li>
+            <li><a href="#">Contact</a></li>
+          </ul>
+        </div>
+        <div class="Shop-container">
+          <h2>Shop</h2>
+          <ul class="shop-ul">
+            <li><a href="#">Menu</a></li>
+            <li><a href="#">Kartta</a></li>
+            <li><a href="#">lorem</a></li>
+            <li><a href="#">lorem</a></li>
+          </ul>
+        </div>
+        <div class="contact-container">
+          <h2>Contact Us</h2>
+          <ul class="info">
+            <li>
+              <span><i class="fa fa-map-marker" aria-hidden="true"></i></span>
+              <span
+                >Helsinginkatu 1<br />
+                00010, Helsinki<br />FIN</span
+              >
+            </li>
+            <li>
+              <span><i class="fa fa-phone" aria-hidden="true"></i></span>
+              <p>
+                <a href="tel:+358123123123">+358 123 123 123</a><br />
+                <a href="tel:+358123123123">+358 123 123 123</a>
+              </p>
+            </li>
+            <li>
+              <span><i class="fa fa-envelope" aria-hidden="true"></i></span>
+              <p><a href="mailto:fakemail@fake.com">fakemail@fake.com</a></p>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
