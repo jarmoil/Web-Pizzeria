@@ -12,15 +12,61 @@
     <link rel="stylesheet" href="./style.css" />
   </head>
   <body class="homepage-body">
-    <header>
-      <!-- Header ja nav tänne ku valmis-->
+    <header id="header">
+      <div id="logo">MyShop</div>
+
+      <nav id="main-nav">
+        <a id="home-link" href="./homepage.html">Home</a>
+        <a id="shop-link" href="./menu.html">Menu</a>
+        <!-- Ei ole contact sivua vielä-->
+        <a id="contact-link" href="#">Contact</a>
+      </nav>
+
+      <div id="header-actions">
+        <button id="cart-btn">
+          Cart
+          <span id="cart-count">3</span>
+        </button>
+        <button id="signin-btn">Sign In</button>
+      </div>
     </header>
+
+    <div id="signin-modal" class="modal-overlay hidden">
+      <div id="signin-box" class="modal-box">
+        <button id="signin-close" class="close-btn">&times;</button>
+        <div id="signin-heading">
+          <span>Sign In</span>
+        </div>
+        <input id="signin-email" type="email" placeholder="Email" />
+        <input id="signin-password" type="password" placeholder="Password" />
+        <button id="signin-submit-btn">Login</button>
+        <p>
+          Don't have an account?
+          <a href="./signUp.html"><button id="signup-btn">Sign Up</button></a>
+        </p>
+      </div>
+    </div>
+
+    <div id="cart-dropdown" class="cart-dropdown hidden">
+      <div id="cart-box">
+        <button id="cart-close" class="close-btn">&times;</button>
+        <h2>Your Cart</h2>
+        <ul id="cart-items">
+          <li id="cart-item1"><span>Item 1</span><span>$10</span></li>
+          <li id="cart-item2"><span>Item 2</span><span>$15</span></li>
+        </ul>
+        <div id="cart-total"><span>Total:</span><span>$25</span></div>
+        <button id="cart-checkout-btn">Checkout</button>
+      </div>
+    </div>
     <main id="homepage-main-wrapper">
       <section id="homepage-hero" class="homepage-section">
         <div class="homepage-hero-content">
           <h1>Tervetuloa Pápán Pizzeriaan!</h1>
           <p>Herkullista pizzaa vuodesta 2001 asti</p>
-          <button class="homepage-menu-button">Katso menu</button>
+          <a href="./menu.html"
+            ><button class="homepage-menu-button">Katso menu</button></a
+          >
         </div>
       </section>
 
@@ -200,86 +246,142 @@
         </div>
       </section>
     </main>
+    <!-- Kopioin nyt vaan ton footerin tänne, pitäisi javascriptillä tehdä, jos haluaa tehdä siistimmin-->
     <footer>
-      <!-- Kopioin nyt vaan ton footerin tänne, pitäisi javascriptillä tehdä, jos haluaa tehdä siistimmin-->
-      <footer>
-        <div class="footer-container">
-          <div class="about-us-container">
-            <h2 class="footer-h2">About Us</h2>
-            <p>
-              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Aut
-              incidunt ratione quia? Mollitia, explicabo, error quae non dolorem
-              nulla reiciendis molestiae exercitationem accusamus, quasi id
-              omnis voluptate debitis voluptatibus quam.
-            </p>
-            <ul class="footer-ul">
-              <li>
-                <a href="https://www.facebook.com"
-                  ><i class="fa fa-facebook" aria-hidden="true"></i
-                ></a>
-              </li>
-              <li>
-                <a href="https://x.com"
-                  ><i class="fa fa-twitter" aria-hidden="true"></i
-                ></a>
-              </li>
-              <li>
-                <a href="https://www.instagram.com"
-                  ><i class="fa fa-instagram" aria-hidden="true"></i
-                ></a>
-              </li>
-              <li>
-                <a href="https://www.youtube.com"
-                  ><i class="fa fa-youtube-play" aria-hidden="true"></i
-                ></a>
-              </li>
-            </ul>
-          </div>
-          <div class="quicklink-container">
-            <h2>Quick Links</h2>
-            <ul class="quicklink-ul">
-              <li><a href="#">About</a></li>
-              <li><a href="#">FAQ</a></li>
-              <li><a href="#">Privacy Policy</a></li>
-              <li><a href="#">Help</a></li>
-              <li><a href="#">Terms $ Conditions</a></li>
-              <li><a href="#">Contact</a></li>
-            </ul>
-          </div>
-          <div class="Shop-container">
-            <h2>Shop</h2>
-            <ul class="shop-ul">
-              <li><a href="#">Menu</a></li>
-              <li><a href="#">Kartta</a></li>
-              <li><a href="#">lorem</a></li>
-              <li><a href="#">lorem</a></li>
-            </ul>
-          </div>
-          <div class="contact-container">
-            <h2>Contact Us</h2>
-            <ul class="info">
-              <li>
-                <span><i class="fa fa-map-marker" aria-hidden="true"></i></span>
-                <span
-                  >Helsinginkatu 1<br />
-                  00010, Helsinki<br />FIN</span
-                >
-              </li>
-              <li>
-                <span><i class="fa fa-phone" aria-hidden="true"></i></span>
-                <p>
-                  <a href="tel:+358123123123">+358 123 123 123</a><br />
-                  <a href="tel:+358123123123">+358 123 123 123</a>
-                </p>
-              </li>
-              <li>
-                <span><i class="fa fa-envelope" aria-hidden="true"></i></span>
-                <p><a href="mailto:fakemail@fake.com">fakemail@fake.com</a></p>
-              </li>
-            </ul>
-          </div>
+      <div class="footer-container">
+        <div class="about-us-container">
+          <h2 class="footer-h2">About Us</h2>
+          <p>
+            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Aut
+            incidunt ratione quia? Mollitia, explicabo, error quae non dolorem
+            nulla reiciendis molestiae exercitationem accusamus, quasi id omnis
+            voluptate debitis voluptatibus quam.
+          </p>
+          <ul class="footer-ul">
+            <li>
+              <a href="https://www.facebook.com"
+                ><i class="fa fa-facebook" aria-hidden="true"></i
+              ></a>
+            </li>
+            <li>
+              <a href="https://x.com"
+                ><i class="fa fa-twitter" aria-hidden="true"></i
+              ></a>
+            </li>
+            <li>
+              <a href="https://www.instagram.com"
+                ><i class="fa fa-instagram" aria-hidden="true"></i
+              ></a>
+            </li>
+            <li>
+              <a href="https://www.youtube.com"
+                ><i class="fa fa-youtube-play" aria-hidden="true"></i
+              ></a>
+            </li>
+          </ul>
         </div>
-      </footer>
+        <div class="quicklink-container">
+          <h2>Quick Links</h2>
+          <ul class="quicklink-ul">
+            <li><a href="#">About</a></li>
+            <li><a href="#">FAQ</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Help</a></li>
+            <li><a href="#">Terms $ Conditions</a></li>
+            <li><a href="#">Contact</a></li>
+          </ul>
+        </div>
+        <div class="Shop-container">
+          <h2>Shop</h2>
+          <ul class="shop-ul">
+            <li><a href="#">Menu</a></li>
+            <li><a href="#">Kartta</a></li>
+            <li><a href="#">lorem</a></li>
+            <li><a href="#">lorem</a></li>
+          </ul>
+        </div>
+        <div class="contact-container">
+          <h2>Contact Us</h2>
+          <ul class="info">
+            <li>
+              <span><i class="fa fa-map-marker" aria-hidden="true"></i></span>
+              <span
+                >Helsinginkatu 1<br />
+                00010, Helsinki<br />FIN</span
+              >
+            </li>
+            <li>
+              <span><i class="fa fa-phone" aria-hidden="true"></i></span>
+              <p>
+                <a href="tel:+358123123123">+358 123 123 123</a><br />
+                <a href="tel:+358123123123">+358 123 123 123</a>
+              </p>
+            </li>
+            <li>
+              <span><i class="fa fa-envelope" aria-hidden="true"></i></span>
+              <p><a href="mailto:fakemail@fake.com">fakemail@fake.com</a></p>
+            </li>
+          </ul>
+        </div>
+      </div>
     </footer>
+
+    <script>
+      //scripti tähän väliaikaisesti koska tuli ongelmia vastaan saamaan tämä sama toimii controllerin kautta
+      document.addEventListener('DOMContentLoaded', () => {
+        const signinModal = document.getElementById('signin-modal');
+        const signinBtn = document.getElementById('signin-btn');
+        const signinClose = document.getElementById('signin-close');
+        const signupBtn = document.getElementById('signup-btn');
+        const cartBtn = document.getElementById('cart-btn');
+        const cartDropdown = document.getElementById('cart-dropdown');
+        const cartClose = document.getElementById('cart-close');
+
+        signinBtn.addEventListener('click', () => {
+          signinModal.classList.remove('hidden');
+        });
+
+        signinClose.addEventListener('click', () => {
+          signinModal.classList.add('hidden');
+        });
+
+        signupBtn.addEventListener('click', () => {
+          alert('Redirect to Sign Up page or show Sign Up Modal');
+          signinModal.classList.add('hidden');
+        });
+
+        cartBtn.addEventListener('mouseenter', () => {
+          cartDropdown.classList.remove('hidden');
+        });
+
+        cartBtn.addEventListener('mouseleave', () => {
+          cartDropdown.classList.add('hidden');
+        });
+
+        cartDropdown.addEventListener('mouseenter', () => {
+          cartDropdown.classList.remove('hidden');
+        });
+
+        cartDropdown.addEventListener('mouseleave', () => {
+          cartDropdown.classList.add('hidden');
+        });
+
+        cartClose.addEventListener('click', () => {
+          cartDropdown.classList.add('hidden');
+        });
+
+        signinModal.addEventListener('click', (e) => {
+          if (e.target === signinModal) {
+            signinModal.classList.add('hidden');
+          }
+        });
+
+        cartDropdown.addEventListener('click', (e) => {
+          if (e.target === cartDropdown) {
+            cartDropdown.classList.add('hidden');
+          }
+        });
+      });
+    </script>
   </body>
 </html>

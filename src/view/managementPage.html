@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Pápá's Pizzeria</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
     <link rel="stylesheet" href="./style.css" />
   </head>
   <body>
@@ -12,8 +16,9 @@
       <div id="logo">MyShop</div>
 
       <nav id="main-nav">
-        <a id="home-link" href="#">Home</a>
-        <a id="shop-link" href="#">Shop</a>
+        <a id="home-link" href="./homepage.html">Home</a>
+        <a id="shop-link" href="./menu.html">Menu</a>
+        <!-- Ei ole contact sivua vielä-->
         <a id="contact-link" href="#">Contact</a>
       </nav>
 
@@ -35,7 +40,10 @@
         <input id="signin-email" type="email" placeholder="Email" />
         <input id="signin-password" type="password" placeholder="Password" />
         <button id="signin-submit-btn">Login</button>
-        <p>Don't have an account? <button id="signup-btn">Sign Up</button></p>
+        <p>
+          Don't have an account?
+          <a href="./signUp.html"><button id="signup-btn">Sign Up</button></a>
+        </p>
       </div>
     </div>
 
@@ -53,7 +61,8 @@
     </div>
 
     <main class="managementPage-main-wrapper">
-      <!-- Erillinen navigointi näille admin/employee "työkaluille", jos osioista tulee pitkiä ja isoja.-->
+      <!-- Erillinen navigointi näille admin/employee "työkaluille", jos osioista tulee pitkiä ja isoja.
+       Voi ottaa pois, jos on turha-->
       <nav class="managementPage-sidebar">
         <ul class="managementPage-sidebar-menu">
           <li>
@@ -107,6 +116,7 @@
       </div>
     </main>
 
+    <!-- Kopioin nyt vaan ton footerin tänne, pitäisi javascriptillä tehdä, jos haluaa tehdä siistimmin-->
     <footer>
       <div class="footer-container">
         <div class="about-us-container">
@@ -185,5 +195,63 @@
         </div>
       </div>
     </footer>
+
+    <script>
+      //scripti tähän väliaikaisesti koska tuli ongelmia vastaan saamaan tämä sama toimii controllerin kautta
+      document.addEventListener('DOMContentLoaded', () => {
+        const signinModal = document.getElementById('signin-modal');
+        const signinBtn = document.getElementById('signin-btn');
+        const signinClose = document.getElementById('signin-close');
+        const signupBtn = document.getElementById('signup-btn');
+        const cartBtn = document.getElementById('cart-btn');
+        const cartDropdown = document.getElementById('cart-dropdown');
+        const cartClose = document.getElementById('cart-close');
+
+        signinBtn.addEventListener('click', () => {
+          signinModal.classList.remove('hidden');
+        });
+
+        signinClose.addEventListener('click', () => {
+          signinModal.classList.add('hidden');
+        });
+
+        signupBtn.addEventListener('click', () => {
+          alert('Redirect to Sign Up page or show Sign Up Modal');
+          signinModal.classList.add('hidden');
+        });
+
+        cartBtn.addEventListener('mouseenter', () => {
+          cartDropdown.classList.remove('hidden');
+        });
+
+        cartBtn.addEventListener('mouseleave', () => {
+          cartDropdown.classList.add('hidden');
+        });
+
+        cartDropdown.addEventListener('mouseenter', () => {
+          cartDropdown.classList.remove('hidden');
+        });
+
+        cartDropdown.addEventListener('mouseleave', () => {
+          cartDropdown.classList.add('hidden');
+        });
+
+        cartClose.addEventListener('click', () => {
+          cartDropdown.classList.add('hidden');
+        });
+
+        signinModal.addEventListener('click', (e) => {
+          if (e.target === signinModal) {
+            signinModal.classList.add('hidden');
+          }
+        });
+
+        cartDropdown.addEventListener('click', (e) => {
+          if (e.target === cartDropdown) {
+            cartDropdown.classList.add('hidden');
+          }
+        });
+      });
+    </script>
   </body>
 </html>
