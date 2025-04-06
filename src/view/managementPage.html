@@ -11,7 +11,7 @@
     />
     <link rel="stylesheet" href="./style.css" />
   </head>
-  <body class="homepage-body">
+  <body>
     <header id="header">
       <div id="logo">MyShop</div>
 
@@ -59,191 +59,63 @@
         <button id="cart-checkout-btn">Checkout</button>
       </div>
     </div>
-    <main id="homepage-main-wrapper">
-      <section id="homepage-hero" class="homepage-section">
-        <div class="homepage-hero-content">
-          <h1>Tervetuloa Pápán Pizzeriaan!</h1>
-          <p>Herkullista pizzaa vuodesta 2001 asti</p>
-          <a href="./menu.html" class="homepage-menu-button">Katso menu</a>
-        </div>
-      </section>
 
-      <section id="homepage-about" class="homepage-section">
-        <div class="homepage-about-grid">
-          <div class="homepage-about-text">
-            <h2>Meidän taustamme</h2>
-            <p>
-              Olemme tehneet käsintehtyjä pizzoja kotimaisilla aineksilla
-              vuodesta....
-            </p>
-          </div>
-          <div class="homepage-about-image">
-            <img src="../../public/images/pizza-oven.jpg" alt="Pizza oven" />
-          </div>
-        </div>
-      </section>
+    <main class="managementPage-main-wrapper">
+      <!-- Erillinen navigointi näille admin/employee "työkaluille", jos osioista tulee pitkiä ja isoja.
+       Voi ottaa pois, jos on turha-->
+      <nav class="managementPage-sidebar">
+        <ul class="managementPage-sidebar-menu">
+          <li>
+            <a href="#menu-management" class="managementPage-sidebar-link"
+              >Menun hallinta</a
+            >
+          </li>
+          <li>
+            <a href="#order-management" class="managementPage-sidebar-link"
+              >Tilausten hallinta</a
+            >
+          </li>
+          <li>
+            <a href="#user-management" class="managementPage-sidebar-link"
+              >Käyttäjien hallinta</a
+            >
+          </li>
+          <li>
+            <a href="#review-moderation" class="managementPage-sidebar-link"
+              >Arvosteluiden hallinta</a
+            >
+          </li>
+        </ul>
+      </nav>
 
-      <section id="homepage-featured-pizza" class="homepage-section">
-        <h2>Viikon pizza</h2>
-        <div class="homepage-featured-grid">
-          <!-- Placeholder, jotta näkee ulkoasun-->
-          <div class="homepage-pizza-card">
-            <img
-              src="../../public/images/margerita-pizza.jpg"
-              alt="Featured pizza"
-            />
-            <h3 id="homepage-featured-pizza-name">Margherita</h3>
-            <p id="homepage-featured-pizza-description">
-              Perinteinen pizza, jossa on tomaattikastiketta, mozzarella-juustoa
-              ja tuoretta basilikaa.
-            </p>
-            <p id="homepage-featured-pizza-rating">⭐ 4.8 / 5</p>
-          </div>
-        </div>
-      </section>
+      <div class="managementPage-content">
+        <h1>HUOM. TÄMÄ SIVU VAIN ADMIN/EMPLOYEE KÄYTTÄJILLE</h1>
+        <section id="menu-management" class="managementPage-section">
+          <h2 class="managementPage-section-title">Menun hallinta</h2>
+          <p>Muokkaa menun tuotteita, hintoja ja kuvauksia</p>
+          <!-- Myöhemmin menun tuote muokkaus form tai joku-->
+        </section>
 
-      <section id="homepage-ratings" class="homepage-section">
-        <h2>Asiakkaiden arvostelut</h2>
-        <div class="homepage-review-form">
-          <h3>Jätä ravintola-arvostelu</h3>
-          <form class="homepage-review-form-content">
-            <textarea
-              placeholder="Kerro kokemuksestasi ravintolassamme..."
-              maxlength="500"
-              rows="4"
-              required
-            ></textarea>
-            <button type="submit" class="homepage-review-submit-btn">
-              Lähetä arvostelu
-            </button>
-          </form>
-        </div>
-        <div class="homepage-ratings-controls">
-          <label for="homepage-ratings-sort">Suodata:</label>
-          <select id="homepage-ratings-sort" name="sort">
-            <option value="newest">Uusimmat</option>
-            <option value="most-liked">Suosituimmat</option>
-            <option value="oldest">Vanhimmat</option>
-          </select>
-        </div>
+        <section id="order-management" class="managementPage-section">
+          <h2 class="managementPage-section-title">Tilausten hallinta</h2>
+          <p>Hallinnoi asiakastilauksia ja toimituksia</p>
+          <!-- Tilausten hallinta form tai joku-->
+        </section>
 
-        <div class="homepage-ratings-scroll">
-          <!-- Placeholder-->
-          <div class="homepage-rating-card">
-            <p class="homepage-rating-card-text">
-              "Pizza oli todella herkullista ja palvelu oli erinomaista!"
-            </p>
-            <div class="homepage-rating-meta">
-              <span class="homepage-rating-user">- Anna</span>
-              <button
-                class="homepage-rating-like-btn"
-                aria-label="Like this review"
-              >
-                <span class="like-emoji">👍</span>
-                <span class="like-count">12</span>
-              </button>
-              <span class="homepage-rating-date">2025-04-03</span>
-            </div>
-          </div>
+        <section id="user-management" class="managementPage-section">
+          <h2 class="managementPage-section-title">Käyttäjien hallinta</h2>
+          <p>Hallinnoi käyttäjätilejä</p>
+          <!-- Käyttäjien hallinta form tai joku-->
+        </section>
 
-          <div class="homepage-rating-card">
-            <p class="homepage-rating-card-text">
-              "Pizza oli todella herkullista ja palvelu oli erinomaista!"
-            </p>
-            <div class="homepage-rating-meta">
-              <span class="homepage-rating-user">- Anna</span>
-              <button
-                class="homepage-rating-like-btn"
-                aria-label="Like this review"
-              >
-                <span class="like-emoji">👍</span>
-                <span class="like-count">12</span>
-              </button>
-              <span class="homepage-rating-date">2025-04-03</span>
-            </div>
-          </div>
-
-          <div class="homepage-rating-card">
-            <p class="homepage-rating-card-text">
-              "Pizza oli todella herkullista ja palvelu oli erinomaista!"
-            </p>
-            <div class="homepage-rating-meta">
-              <span class="homepage-rating-user">- Anna</span>
-              <button
-                class="homepage-rating-like-btn"
-                aria-label="Like this review"
-              >
-                <span class="like-emoji">👍</span>
-                <span class="like-count">12</span>
-              </button>
-              <span class="homepage-rating-date">2025-04-03</span>
-            </div>
-          </div>
-
-          <!-- tässä on kopioituna noita cardeja, jotta saan havainnollistettua ulkoasun-->
-          <!-- Lisätään .homepage-rating-card dynaamisesti myöhemmin-->
-        </div>
-      </section>
-
-      <section id="homepage-gallery" class="homepage-section">
-        <!-- Tähän javascriptillä niin, että voi click-and-drag tota koko sectionia, nyt vähä scuffed scrollilla-->
-        <!-- myös joku modal kun painaa kuvaa, niin saa kuvan silleen isoksi-->
-        <h2>Kuvagalleria</h2>
-        <div class="homepage-gallery-grid">
-          <div class="homepage-gallery-column">
-            <img
-              src="../../public/images/galleria-kuva1.jpg"
-              alt="Pizza dough"
-            />
-            <img
-              src="../../public/images/galleria-kuva2.jpg"
-              alt="Pepperoni pizza"
-            />
-          </div>
-          <div class="homepage-gallery-column">
-            <img
-              src="../../public/images/galleria-kuva3.jpg"
-              alt="Pizza slice"
-            />
-            <img
-              src="../../public/images/galleria-kuva4.jpg"
-              alt="Fresh ingredients"
-            />
-          </div>
-          <div class="homepage-gallery-column">
-            <img
-              src="../../public/images/galleria-kuva5.jpg"
-              alt="Restaurant glasses"
-            />
-            <img
-              src="../../public/images/galleria-kuva6.jpg"
-              alt="Viiksivallu"
-            />
-          </div>
-        </div>
-      </section>
-
-      <section id="homepage-hours-location" class="homepage-section">
-        <div class="homepage-hours-location-grid">
-          <div class="homepage-hours">
-            <h3>Aukioloajat</h3>
-            <ul>
-              <li>Ma-Pe: 11:00 - 22:00</li>
-              <li>La: 12:00 - 23:00</li>
-              <li>Su: 12:00 - 21:00</li>
-            </ul>
-          </div>
-          <div class="homepage-map">
-            <h3>Osoite</h3>
-            <p>
-              Pápán Pizzeria, Helsinginkatu 1<br />
-              00010, Helsinki<br />FIN
-            </p>
-            <p>TÄHÄN TULEE LEAFLET KARTTA</p>
-          </div>
-        </div>
-      </section>
+        <section id="review-moderation" class="managementPage-section">
+          <h2 class="managementPage-section-title">Arvosteluiden hallinta</h2>
+          <p>Hallinnoi asiakasarvosteluja, moderointi</p>
+          <!-- Arvosteluiden hallinta form tai joku-->
+        </section>
+      </div>
     </main>
+
     <!-- Kopioin nyt vaan ton footerin tänne, pitäisi javascriptillä tehdä, jos haluaa tehdä siistimmin-->
     <footer>
       <div class="footer-container">
@@ -294,7 +166,7 @@
           <ul class="shop-ul">
             <li><a href="./menu.html">Menu</a></li>
             <li>
-              <a href="#homepage-hours-location">Kartta</a>
+              <a href="./homepage.html#homepage-hours-location">Kartta</a>
             </li>
             <li><a href="#">lorem</a></li>
             <li><a href="#">lorem</a></li>
