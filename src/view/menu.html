@@ -42,7 +42,7 @@
         <button id="signin-submit-btn">Login</button>
         <p>
           Don't have an account?
-          <a href="./signUp.html"><button id="signup-btn">Sign Up</button></a>
+          <button id="signup-btn">Sign Up</button>
         </p>
       </div>
     </div>
@@ -184,7 +184,7 @@
           </div>
         </div>
 
-        <article class="menu-card" id="menu-card-1">
+        <article class="menu-card">
           <img
             src="../../public/images/margerita-pizza.jpg"
             alt="Margerita pizza"
@@ -206,7 +206,7 @@
           </div>
         </article>
 
-        <article class="menu-card" id="menu-card-1">
+        <article class="menu-card">
           <img
             src="../../public/images/margerita-pizza.jpg"
             alt="Margerita pizza"
@@ -228,7 +228,7 @@
           </div>
         </article>
 
-        <article class="menu-card" id="menu-card-1">
+        <article class="menu-card">
           <img
             src="../../public/images/margerita-pizza.jpg"
             alt="Margerita pizza"
@@ -250,7 +250,7 @@
           </div>
         </article>
 
-        <article class="menu-card" id="menu-card-1">
+        <article class="menu-card">
           <img
             src="../../public/images/margerita-pizza.jpg"
             alt="Margerita pizza"
@@ -352,89 +352,90 @@
         </div>
       </div>
     </footer>
-  </body>
-  <!-- Pieni javascripti ton modalin avaamiselle, jotta näkee sen idean / ulkoasun, tämä pois myöhemmin-->
-  <script>
-    const signinModal = document.getElementById('signin-modal');
-    const signinBtn = document.getElementById('signin-btn');
-    const signinClose = document.getElementById('signin-close');
-    const signupBtn = document.getElementById('signup-btn');
-    const cartBtn = document.getElementById('cart-btn');
-    const cartDropdown = document.getElementById('cart-dropdown');
-    const cartClose = document.getElementById('cart-close');
 
-    signinBtn.addEventListener('click', () => {
-      signinModal.classList.remove('hidden');
-    });
+    <!-- Pieni javascripti ton modalin avaamiselle, jotta näkee sen idean / ulkoasun, tämä pois myöhemmin-->
+    <script>
+      const signinModal = document.getElementById('signin-modal');
+      const signinBtn = document.getElementById('signin-btn');
+      const signinClose = document.getElementById('signin-close');
+      const signupBtn = document.getElementById('signup-btn');
+      const cartBtn = document.getElementById('cart-btn');
+      const cartDropdown = document.getElementById('cart-dropdown');
+      const cartClose = document.getElementById('cart-close');
 
-    signinClose.addEventListener('click', () => {
-      signinModal.classList.add('hidden');
-    });
+      signinBtn.addEventListener('click', () => {
+        signinModal.classList.remove('hidden');
+      });
 
-    signupBtn.addEventListener('click', () => {
-      alert('Redirect to Sign Up page or show Sign Up Modal');
-      signinModal.classList.add('hidden');
-    });
-
-    cartBtn.addEventListener('mouseenter', () => {
-      cartDropdown.classList.remove('hidden');
-    });
-
-    cartBtn.addEventListener('mouseleave', () => {
-      cartDropdown.classList.add('hidden');
-    });
-
-    cartDropdown.addEventListener('mouseenter', () => {
-      cartDropdown.classList.remove('hidden');
-    });
-
-    cartDropdown.addEventListener('mouseleave', () => {
-      cartDropdown.classList.add('hidden');
-    });
-
-    cartClose.addEventListener('click', () => {
-      cartDropdown.classList.add('hidden');
-    });
-
-    signinModal.addEventListener('click', (e) => {
-      if (e.target === signinModal) {
+      signinClose.addEventListener('click', () => {
         signinModal.classList.add('hidden');
-      }
-    });
+      });
 
-    cartDropdown.addEventListener('click', (e) => {
-      if (e.target === cartDropdown) {
+      signupBtn.addEventListener('click', () => {
+        alert('Redirect to Sign Up page or show Sign Up Modal');
+        signinModal.classList.add('hidden');
+      });
+
+      cartBtn.addEventListener('mouseenter', () => {
+        cartDropdown.classList.remove('hidden');
+      });
+
+      cartBtn.addEventListener('mouseleave', () => {
         cartDropdown.classList.add('hidden');
-      }
-    });
-
-    document.addEventListener('DOMContentLoaded', () => {
-      document.querySelectorAll('[data-modal-target]').forEach((button) => {
-        button.addEventListener('click', () => {
-          const modalId = button.getAttribute('data-modal-target');
-          const modal = document.getElementById(modalId);
-          if (modal) {
-            modal.style.display = 'flex';
-          }
-        });
       });
 
-      document.querySelectorAll('.menu-modal-close').forEach((button) => {
-        button.addEventListener('click', () => {
-          const modal = button.closest('.menu-modal');
-          if (modal) {
-            modal.style.display = 'none';
-          }
-        });
+      cartDropdown.addEventListener('mouseenter', () => {
+        cartDropdown.classList.remove('hidden');
       });
 
-      document.querySelectorAll('.menu-modal').forEach((modal) => {
-        modal.addEventListener('click', (e) => {
-          if (e.target === modal) {
-            modal.style.display = 'none';
-          }
+      cartDropdown.addEventListener('mouseleave', () => {
+        cartDropdown.classList.add('hidden');
+      });
+
+      cartClose.addEventListener('click', () => {
+        cartDropdown.classList.add('hidden');
+      });
+
+      signinModal.addEventListener('click', (e) => {
+        if (e.target === signinModal) {
+          signinModal.classList.add('hidden');
+        }
+      });
+
+      cartDropdown.addEventListener('click', (e) => {
+        if (e.target === cartDropdown) {
+          cartDropdown.classList.add('hidden');
+        }
+      });
+
+      document.addEventListener('DOMContentLoaded', () => {
+        document.querySelectorAll('[data-modal-target]').forEach((button) => {
+          button.addEventListener('click', () => {
+            const modalId = button.getAttribute('data-modal-target');
+            const modal = document.getElementById(modalId);
+            if (modal) {
+              modal.style.display = 'flex';
+            }
+          });
+        });
+
+        document.querySelectorAll('.menu-modal-close').forEach((button) => {
+          button.addEventListener('click', () => {
+            const modal = button.closest('.menu-modal');
+            if (modal) {
+              modal.style.display = 'none';
+            }
+          });
+        });
+
+        document.querySelectorAll('.menu-modal').forEach((modal) => {
+          modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+              modal.style.display = 'none';
+            }
+          });
         });
       });
-    });
-  </script>
+    </script>
+  </body>
 </html>

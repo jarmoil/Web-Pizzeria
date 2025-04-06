@@ -355,6 +355,7 @@ footer {
 }
 
 .homepage-menu-button {
+  display: inline-block;
   padding: 1rem 2rem;
   font-size: 1.1rem;
   font-weight: 600;
@@ -367,8 +368,7 @@ footer {
   text-transform: uppercase;
   letter-spacing: 1px;
   margin-top: 2rem;
-  position: relative;
-  overflow: hidden;
+  text-decoration: none;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
 
