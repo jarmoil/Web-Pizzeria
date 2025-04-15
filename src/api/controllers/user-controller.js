@@ -1,9 +1,10 @@
+import jwt from 'jsonwebtoken';
+import bcrypt from 'bcrypt';
 import {
   listAllUsers,
   findUserById,
   addUser,
   updateUser,
-  removeUser
 } from '../models/user-model.js';
 
 const getUsers = async (req, res) => {
@@ -28,9 +29,32 @@ const putUser = async (req, res) => {
   res.status(result ? 200 : 404).json(result || { error: 'User not found' });
 };
 
+const loginUser = async (req, res) => {
+  const { user_email, user_password } = req.body;
+  const user = await findUserByEmail(user_email);
+
+  if (!user) return res.status(401).json({ error: 'Invalid credentials' });
+
+  const isMatch = await bcrypt.compare(user_password, user.user_password);
+  if (!isMatch) return res.status(401).json({ error: 'Invalid credentials' });
+
+  // Generate JWT token
+  const token = jwt.sign(
+    {
+      user_id: user.user_id,
+      user_email: user.user_email,
+      role: user.role,
+    },
+    process.env.JWT_SECRET,
+    { expiresIn: '2h' }
+  );
+
+  res.json({ token });
+};
+
 /*const deleteUser = async (req, res) => {
   const result = await removeUser(req.params.id);
   res.status(result ? 200 : 404).json(result || { error: 'User not found' });
 };*/
 
-export { getUsers, getUserById, postUser, putUser, deleteUser };
+export { getUsers, getUserById, postUser, putUser, loginUser };
