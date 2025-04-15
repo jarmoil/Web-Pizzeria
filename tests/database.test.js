@@ -18,8 +18,6 @@ describe('Database Connection Tests', () => {
   afterAll(async () => {
     if (connection) {
       await connection.end();
-      // Add a small delay to ensure connection is fully closed
-      await new Promise((resolve) => setTimeout(resolve, 1000));
     }
   });
 
