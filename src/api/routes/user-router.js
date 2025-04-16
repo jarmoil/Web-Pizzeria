@@ -7,10 +7,26 @@ import {
   loginUser,
 } from '../controllers/user-controller.js';
 
+import {
+  authenticateToken,
+  requireAdmin,
+  checkOwnershipOrAdmin,
+} from '../middleware/auth-middleware.js';
+
 const userRouter = express.Router();
 
-userRouter.route('/').get(getUsers).post(postUser);
-userRouter.route('/:id').get(getUserById).put(putUser);//.delete(deleteUser);
 userRouter.post('/login', loginUser);
+userRouter.post('/', postUser);
+
+userRouter.use(authenticateToken);
+
+userRouter.get('/', requireAdmin, getUsers);
+
+userRouter
+  .route('/:id')
+  .get(checkOwnershipOrAdmin, getUserById)
+  .put(checkOwnershipOrAdmin, putUser);
+  //.delete(requireAdmin deleteUser);
+
 
 export default userRouter;

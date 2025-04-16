@@ -5,6 +5,7 @@ import {
   findUserById,
   addUser,
   updateUser,
+  findUserByEmail,
 } from '../models/user-model.js';
 
 const getUsers = async (req, res) => {
@@ -33,12 +34,16 @@ const loginUser = async (req, res) => {
   const { user_email, user_password } = req.body;
   const user = await findUserByEmail(user_email);
 
-  if (!user) return res.status(401).json({ error: 'Invalid credentials' });
+  if (!user) {
+    return res.status(401).json({ error: 'Invalid credentials (no such user)' });
+  }
 
-  const isMatch = await bcrypt.compare(user_password, user.user_password);
-  if (!isMatch) return res.status(401).json({ error: 'Invalid credentials' });
+  const isMatch = await bcrypt.compare(user_password, user.password);
 
-  // Generate JWT token
+  if (!isMatch) {
+    return res.status(401).json({ error: 'Invalid credentials (wrong password)' });
+  }
+
   const token = jwt.sign(
     {
       user_id: user.user_id,
@@ -57,4 +62,4 @@ const loginUser = async (req, res) => {
   res.status(result ? 200 : 404).json(result || { error: 'User not found' });
 };*/
 
-export { getUsers, getUserById, postUser, putUser, loginUser };
+export { getUsers, getUserById, postUser, putUser, loginUser, updateUser };
