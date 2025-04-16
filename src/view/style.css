@@ -4,6 +4,9 @@
   box-sizing: border-box;
   font-family: 'Poppins', sans-serif;
 }
+#map {
+  height: 280px;
+}
 
 /* ------------ SignUp HTML Section ------------ */
 .signUp-container {
