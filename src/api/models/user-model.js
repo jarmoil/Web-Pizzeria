@@ -1,16 +1,7 @@
-import mysql from 'mysql2/promise';
 import dotenv from 'dotenv';
+import pool from '../../db/connection.js';
 import bcrypt from 'bcrypt';
 dotenv.config();
-
-const pool = mysql.createPool({
-  host: process.env.DB_HOST,
-  user: process.env.DB_USER,
-  password: process.env.DB_PASSWORD,
-  database: process.env.DB_NAME,
-  connectionLimit: process.env.DB_CONNECTION_LIMIT ? parseInt(process.env.DB_CONNECTION_LIMIT) : 10
-});
-
 
 export const listAllUsers = async () => {
   const [rows] = await pool.query('SELECT * FROM user_accounts');
