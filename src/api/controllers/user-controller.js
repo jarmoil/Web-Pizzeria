@@ -25,6 +25,49 @@ const postUser = async (req, res) => {
     : res.sendStatus(400);
 };
 
+const registerUser = async (req, res) => {
+  const { user_name, user_email, user_password, phone_number, user_address, profile_picture } = req.body;
+
+  try {
+    const user = await addUser({
+      user_name,
+      user_email,
+      user_password,
+      phone_number,
+      user_address,
+      profile_picture,
+      role: 'user' // regular users are always registered as 'user'
+    });
+    res.status(201).json({ message: 'User registered successfully.', user });
+  } catch (err) {
+    console.error(err);
+    res.status(400).json({ error: err.message });
+  }
+};
+
+const registerEmployee = async (req, res) => {
+  const { user_name, user_email, user_password, phone_number, user_address, profile_picture } = req.body;
+
+  // Only admins can register employees
+  const role = 'employee'; // admin-only role
+
+  try {
+    const user = await addUser({
+      user_name,
+      user_email,
+      user_password,
+      phone_number,
+      user_address,
+      profile_picture,
+      role
+    });
+    res.status(201).json({ message: 'Employee created successfully.', user });
+  } catch (err) {
+    console.error(err);
+    res.status(400).json({ error: err.message });
+  }
+};
+
 const putUser = async (req, res) => {
   const result = await updateUser(req.params.id, req.body);
   res.status(result ? 200 : 404).json(result || { error: 'User not found' });
@@ -62,4 +105,4 @@ const loginUser = async (req, res) => {
   res.status(result ? 200 : 404).json(result || { error: 'User not found' });
 };*/
 
-export { getUsers, getUserById, postUser, putUser, loginUser, updateUser };
+export { getUsers, getUserById, postUser, putUser, loginUser, updateUser, registerUser, registerEmployee };
