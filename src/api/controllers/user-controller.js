@@ -36,7 +36,7 @@ const registerUser = async (req, res) => {
       phone_number,
       user_address,
       profile_picture,
-      role: 'user' // regular users are always registered as 'user'
+      role: 'customer' // regular users are always registered as 'customer'
     });
     res.status(201).json({ message: 'User registered successfully.', user });
   } catch (err) {
