@@ -10,6 +10,18 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
     />
     <link rel="stylesheet" href="./style.css" />
+    <script src="../model/leaflet.js" defer></script>
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+      integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+      crossorigin=""
+    />
+    <script
+      src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+      integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+      crossorigin=""
+    ></script>
   </head>
   <body class="homepage-body">
     <header id="header">
@@ -21,6 +33,7 @@
         <a id="managementPage-link" href="./managementPage.html"
           >Management Page</a
         >
+        <a id="location-link" href="#homepage-hours-location">Location</a>
       </nav>
 
       <div id="header-actions">
@@ -244,7 +257,7 @@
               Pápán Pizzeria, Helsinginkatu 1<br />
               00010, Helsinki<br />FIN
             </p>
-            <p>TÄHÄN TULEE LEAFLET KARTTA</p>
+            <div id="map"></div>
           </div>
         </div>
       </section>
@@ -299,7 +312,7 @@
           <ul class="shop-ul">
             <li><a href="./menu.html">Menu</a></li>
             <li>
-              <a href="#homepage-hours-location">Kartta</a>
+              <a href="https://maps.app.goo.gl/wQysyjJVeuQwDkeS6">Kartta</a>
             </li>
             <li><a href="#">lorem</a></li>
             <li><a href="#">lorem</a></li>
@@ -310,9 +323,9 @@
           <ul class="info">
             <li>
               <span><i class="fa fa-map-marker" aria-hidden="true"></i></span>
-              <span
+              <a href="https://maps.app.goo.gl/wQysyjJVeuQwDkeS6"
                 >Helsinginkatu 1<br />
-                00010, Helsinki<br />FIN</span
+                00010, Helsinki<br />FIN</a
               >
             </li>
             <li>
@@ -324,7 +337,7 @@
             </li>
             <li>
               <span><i class="fa fa-envelope" aria-hidden="true"></i></span>
-              <p><a href="mailto:fakemail@fake.com">fakemail@fake.com</a></p>
+              <p><a href="mailto:Papas@pizzeria.com">Papas@pizzeria.com</a></p>
             </li>
           </ul>
         </div>
