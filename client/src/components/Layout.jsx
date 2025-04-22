@@ -22,14 +22,6 @@ const Layout = () => {
                         </li>
                     </ul>
 
-                    {/* <nav id="main-nav">
-                        <a id="home-link" href="./homepage.html">Home</a>
-                        <a id="shop-link" href="./menu.html">Menu</a>
-                        <a id="managementPage-link" href="./managementPage.html"
-                        >Management Page</a>
-                        <a id="location-link" href="#homepage-hours-location">Location</a>
-                    </nav> */}
-
                     <div id="header-actions">
                         <button id="cart-btn">
                         Cart
