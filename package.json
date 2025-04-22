@@ -4,9 +4,12 @@
   "type": "module",
   "main": "src/app.js",
   "scripts": {
-    "dev": "nodemon src/app.js",
     "test": "jest --detectOpenHandles --forceExit",
-    "test:watch": "jest --watchAll"
+    "test:watch": "jest --watchAll",
+    "server": "cd server && nodemon src/app.js",
+    "client": "cd client && vite",
+    "build": "cd client && vite build",
+    "preview": "cd client && vite preview"
   },
   "jest": {
     "testEnvironment": "node",
@@ -20,7 +23,13 @@
     "@eslint/js": "^9.22.0",
     "eslint": "^9.22.0",
     "globals": "^16.0.0",
-    "nodemon": "^3.1.9"
+    "nodemon": "^3.1.9",
+    "@types/react": "^19.0.10",
+    "@types/react-dom": "^19.0.4",
+    "@vitejs/plugin-react-swc": "^3.8.0",
+    "eslint-plugin-react-hooks": "^5.2.0",
+    "eslint-plugin-react-refresh": "^0.4.19",
+    "vite": "^6.3.1"
   },
   "dependencies": {
     "bcrypt": "^5.1.1",
@@ -28,6 +37,8 @@
     "express": "^5.1.0",
     "jest": "^29.7.0",
     "jsonwebtoken": "^9.0.2",
-    "mysql2": "^3.14.0"
+    "mysql2": "^3.14.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
   }
 }
