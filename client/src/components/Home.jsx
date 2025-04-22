@@ -5,7 +5,6 @@ const Home = () => {
     <>
         <div className="homepage">
             <div className="homepage-body">
-                <header id="header"></header>
 
 
 

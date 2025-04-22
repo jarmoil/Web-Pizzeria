@@ -5,6 +5,8 @@ import Menu from './components/Menu'
 import ManagementPage from './components/ManagementPage'
 import Location from './components/Location'
 import { Route, Routes } from 'react-router-dom'
+import ForgotPassword from './components/ForgotPassword'
+import SignUp from './components/SignUp'
 
 function App() {
   return (
@@ -15,6 +17,8 @@ function App() {
             <Route path="/menu" element={<Menu />} />
             <Route path="/managementPage" element={<ManagementPage />} />
             <Route path="/location" element={<Location />} />
+            <Route path="/forgotPassword" element={<ForgotPassword />} />
+            <Route path="/signup" element={<SignUp />} />
 
           </Route>
         </Routes>
