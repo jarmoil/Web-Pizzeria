@@ -13,7 +13,7 @@ let reviewId, userToken, adminToken, testUserId, testAdminId;
 beforeAll(async () => {
   const [userInsert] = await db.query(
     'INSERT INTO user_accounts (name, email, password, role) VALUES (?, ?, ?, ?)',
-    ['testuser', 'testuser@email.com', 'password', 'customer']
+    ['testuser2', 'testuser@email.com', 'password', 'customer']
   );
   testUserId = userInsert.insertId;
   userToken = jwt.sign(
@@ -23,7 +23,7 @@ beforeAll(async () => {
 
   const [adminInsert] = await db.query(
     'INSERT INTO user_accounts (name, email, password, role) VALUES (?, ?, ?, ?)',
-    ['testadmin', 'testadmin@email.com', 'password', 'admin']
+    ['testadmin2', 'testadmin@email.com', 'password', 'admin']
   );
   testAdminId = adminInsert.insertId;
   adminToken = jwt.sign(
@@ -47,8 +47,8 @@ beforeAll(async () => {
 afterAll(async () => {
   await db.query('DELETE FROM order_item_reviews');
   await db.query('DELETE FROM user_accounts WHERE name IN (?, ?)', [
-    'testUser',
-    'testAdmin',
+    'testUser2',
+    'testAdmin2',
   ]);
   await db.query('DELETE FROM menu WHERE pizza_id = ?', [1]);
   await db.end();

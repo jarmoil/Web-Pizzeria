@@ -20,7 +20,7 @@ describe('Database Connection Tests', () => {
 
   // Cleanup - close connection after all tests
   afterAll(async () => {
-    if (connection) {
+    if (connection && connection.end) {
       await connection.end();
     }
   });
@@ -37,7 +37,7 @@ describe('Database Connection Tests', () => {
   test('should be able to insert and delete test data', async () => {
     // Test data
     const testPizza = {
-      name: 'Test Pizza',
+      name: 'Testailu Pizza',
       description: 'Test Description',
       price: 10.99,
       image_url: 'test.jpg',
