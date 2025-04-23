@@ -1,3 +1,5 @@
+import MyMapComponent from "./MyMapComponent";
+
 const HoursLocationSection = () => {
     return (
       <section id="homepage-hours-location" className="homepage-section">
@@ -16,7 +18,7 @@ const HoursLocationSection = () => {
               Pápán Pizzeria, Helsinginkatu 1<br />
               00010, Helsinki<br />FIN
             </p>
-            <div id="map"></div>
+            <MyMapComponent />
           </div>
         </div>
       </section>

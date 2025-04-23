@@ -11,17 +11,13 @@ const Home = () => {
     <>
         <div className="homepage">
             <div className="homepage-body">
-
-
                 <main id="homepage-main-wrapper">
-
-                <HeroSection />
-                <AboutSection />
-                <FeaturedPizzaSection />
-                <RatingsSection />
-                <GallerySection />
-                <HoursLocationSection />
-
+                    <HeroSection />
+                    <AboutSection />
+                    <FeaturedPizzaSection />
+                    <RatingsSection />
+                    <GallerySection />
+                    <HoursLocationSection />
                 </main>
                 <Footer />
             </div>
