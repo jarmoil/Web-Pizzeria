@@ -6,7 +6,7 @@ import db from '../server/src/db/connection.js';
 
 dotenv.config();
 
-let reviewId, userToken, adminToken, testUserId, testAdminId;
+let reviewId, userToken, adminToken, testUserId, testAdminId, testPizzaId;
 
 // Luo testi adminin ja testi käyttäjän, kirjautuu sisään niillä (Ei testaa hashausta, testi tietokannassa myös voi olla null
 // arvoina osoite yms)
@@ -32,16 +32,16 @@ beforeAll(async () => {
   );
 
   // Luodaan testi pizza myös tässä samalla, joka poistetaan testin lopussa
-  await db.query(
-    'INSERT INTO menu (pizza_id, pizza_name, pizza_description, price, image_url) VALUES (?, ?, ?, ?, ?)',
+  const [pizzaInsert] = await db.query(
+    'INSERT INTO menu (pizza_name, pizza_description, price, image_url) VALUES (?, ?, ?, ?)',
     [
-      1,
       'Test Pizza',
       'Test Pizza Description',
       10.0,
       'https://images.unsplash.com/photo-1708649360542-db4f0762bd9c?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
     ]
   );
+  testPizzaId = pizzaInsert.insertId;
 });
 
 afterAll(async () => {
@@ -50,7 +50,7 @@ afterAll(async () => {
     'testUser2',
     'testAdmin2',
   ]);
-  await db.query('DELETE FROM menu WHERE pizza_id = ?', [1]);
+  await db.query('DELETE FROM menu WHERE pizza_id = ?', [testPizzaId]);
   await db.end();
 });
 
@@ -64,7 +64,7 @@ describe('Order Item Reviews API', () => {
   test('POST /api/v1/order-item-reviews fails without token', async () => {
     const res = await request(app)
       .post('/api/v1/order-item-reviews')
-      .send({order_item_id: 1, rating: 5, comment: 'No token test'});
+      .send({order_item_id: testPizzaId, rating: 5, comment: 'No token test'});
     expect(res.statusCode).toBe(401);
   });
 
@@ -72,7 +72,11 @@ describe('Order Item Reviews API', () => {
     const res = await request(app)
       .post('/api/v1/order-item-reviews')
       .set('Authorization', `Bearer ${userToken}`)
-      .send({order_item_id: 1, rating: 10, comment: 'Invalid rating'});
+      .send({
+        order_item_id: testPizzaId,
+        rating: 10,
+        comment: 'Invalid rating',
+      });
     expect(res.statusCode).toBe(400);
     expect(res.body).toHaveProperty('error');
   });
@@ -81,7 +85,7 @@ describe('Order Item Reviews API', () => {
     const res = await request(app)
       .post('/api/v1/order-item-reviews')
       .set('Authorization', `Bearer ${userToken}`)
-      .send({order_item_id: 1, rating: 4, comment: 'Nice pizza'});
+      .send({order_item_id: testPizzaId, rating: 4, comment: 'Nice pizza'});
 
     expect(res.statusCode).toBe(201);
     expect(res.body).toHaveProperty('order_item_review_id');
