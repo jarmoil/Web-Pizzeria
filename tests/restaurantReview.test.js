@@ -87,7 +87,7 @@ describe('Restaurant Reviews API', () => {
 
   test('DELETE /api/v1/restaurant-reviews/:id should fail if wrong user', async () => {
     const wrongUserToken = jwt.sign(
-      {user_id: 999, role: 'customer'},
+      {user_id: 1, role: 'customer'},
       process.env.JWT_SECRET
     );
 

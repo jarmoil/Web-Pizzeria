@@ -4,7 +4,7 @@
   "type": "module",
   "main": "src/app.js",
   "scripts": {
-    "test": "set NODE_ENV=test&& node --experimental-vm-modules node_modules/jest/bin/jest.js",
+    "test": "set NODE_ENV=test&& node --experimental-vm-modules node_modules/jest/bin/jest.js --verbose",
     "test:watch": "jest --watchAll",
     "server": "cd server && nodemon src/app.js",
     "client": "cd client && vite",
