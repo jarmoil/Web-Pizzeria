@@ -294,7 +294,7 @@ footer {
       rgba(255, 255, 255, 0.9),
       rgba(255, 255, 255, 0.9)
     ),
-    url('../../public/images/pizza-pattern-bg.jpg') repeat;
+    url('/images/pizza-pattern-bg.jpg') repeat;
   background-attachment: fixed;
   min-height: 100vh;
 }
@@ -334,7 +334,7 @@ footer {
   align-items: center;
   justify-content: center;
   text-align: center;
-  background: url('../../public/images/hero-picture.jpg') no-repeat center
+  background: url('/images/hero-picture.jpg') no-repeat center
     center;
   background-size: cover;
   background-position: center;
@@ -793,7 +793,7 @@ footer {
       rgba(255, 255, 255, 0.9),
       rgba(255, 255, 255, 0.9)
     ),
-    url('../../public/images/pizza-pattern-bg.jpg') repeat;
+    url('/images/pizza-pattern-bg.jpg') repeat;
   background-attachment: fixed;
   min-height: 100vh;
 }
@@ -1357,7 +1357,7 @@ footer {
       rgba(255, 255, 255, 0.9),
       rgba(255, 255, 255, 0.9)
     ),
-    url('../../public/images/pizza-pattern-bg.jpg') repeat;
+    url('/images/pizza-pattern-bg.jpg') repeat;
   background-attachment: fixed;
 }
 
