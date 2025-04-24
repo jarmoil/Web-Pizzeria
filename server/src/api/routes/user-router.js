@@ -17,19 +17,25 @@ import {
 
 const userRouter = express.Router();
 
-
+// Public routes
 userRouter.post('/login', loginUser);
 userRouter.post('/register', registerUser);
 
+// Authenticated routes
 userRouter.use(authenticateToken);
-userRouter.post('/register-employee', authenticateToken, requireRole('admin'), registerEmployee);
-userRouter.get('/', requireAdmin, getUsers);
 
+// Employee routes (only admins can register employees)
+userRouter.post('/register-employee', requireRole('admin'), registerEmployee);
+
+// Admin routes (only admins can view all users)
+userRouter.get('/', requireRole('admin'), getUsers);
+
+// Routes that require user ownership or admin role
 userRouter
   .route('/:id')
   .get(checkOwnershipOrAdmin, getUserById)
   .put(checkOwnershipOrAdmin, putUser);
-  //.delete(requireAdmin deleteUser);
-
+// You can add delete route if needed
+// .delete(requireAdmin, deleteUser);
 
 export default userRouter;

@@ -4,7 +4,7 @@
   "type": "module",
   "main": "src/app.js",
   "scripts": {
-    "test": "jest --detectOpenHandles --forceExit",
+    "test": "set NODE_ENV=test&& node --experimental-vm-modules node_modules/jest/bin/jest.js --verbose --detectOpenHandles --forceExit",
     "test:watch": "jest --watchAll",
     "server": "cd server && nodemon src/app.js",
     "client": "cd client && vite",
@@ -42,7 +42,8 @@
     "mysql2": "^3.14.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "react-router-dom": "^7.5.1",
+    "supertest": "^7.1.0"
     "react-leaflet": "^5.0.0",
-    "react-router-dom": "^7.5.1"
   }
 }

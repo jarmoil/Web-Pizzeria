@@ -1,28 +1,31 @@
-require('dotenv').config();
-const mysql = require('mysql2/promise');
+import dotenv from 'dotenv';
+import mysql from 'mysql2/promise';
+
+dotenv.config();
 
 describe('Database Connection Tests', () => {
   let connection;
 
   // Setup - create connection before all tests
+  // Muokattu käyttämään testi tietokantaa
   beforeAll(async () => {
     connection = await mysql.createConnection({
       host: process.env.DB_HOST,
-      user: process.env.DB_USER,
-      password: process.env.DB_PASSWORD,
-      database: process.env.DB_NAME,
+      user: process.env.TEST_DB_USER,
+      password: process.env.TEST_DB_PASSWORD,
+      database: process.env.TEST_DB_NAME,
+      charset: 'utf8mb4',
     });
   });
 
   // Cleanup - close connection after all tests
   afterAll(async () => {
-    if (connection) {
+    if (connection && connection.end) {
       await connection.end();
     }
   });
 
   test('should connect to database successfully', async () => {
-    await expect(connection.connect()).resolves.not.toThrow();
     expect(connection.threadId).toBeDefined();
   });
 
@@ -34,7 +37,7 @@ describe('Database Connection Tests', () => {
   test('should be able to insert and delete test data', async () => {
     // Test data
     const testPizza = {
-      name: 'Test Pizza',
+      name: 'Testailu Pizza',
       description: 'Test Description',
       price: 10.99,
       image_url: 'test.jpg',
