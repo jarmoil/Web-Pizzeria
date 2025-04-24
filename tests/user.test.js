@@ -80,6 +80,16 @@ describe('POST /api/v1/users/register', () => {
 
     expect(res.statusCode).toBe(400); // Assuming validation error
   });
+
+  test('should return 404 when user does not exist', async () => {
+    const nonExistentUserId = 'non-existent-id'; // replace with a valid format if needed
+    const res = await request(app)
+      .get(`/api/v1/users/${nonExistentUserId}`)
+      .set('Authorization', `Bearer ${userToken}`);
+
+    expect(res.statusCode).toBe(404);
+    expect(res.body).toHaveProperty('error', 'User not found');
+  });
 });
 
 describe('POST /api/v1/users/login', () => {
