@@ -37,7 +37,6 @@ afterAll(async () => {
   await db.query('DELETE FROM restaurant_reviews');
   await db.query('DELETE FROM user_accounts WHERE name = "testuser"');
   await db.query('DELETE FROM user_accounts WHERE name = "testadmin"');
-  await db.query('ALTER TABLE user_accounts AUTO_INCREMENT = 5');
   await db.end();
 });
 

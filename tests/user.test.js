@@ -47,11 +47,11 @@ beforeAll(async () => {
 // Cleanup after tests
 afterAll(async () => {
   // Clean up by deleting the test users
-  await db.query('DELETE FROM user_accounts WHERE user_id IN (?, ?)', [
-    userId,
-    adminId,
+  await db.query('DELETE FROM user_accounts WHERE name IN (?, ?, ?)', [
+    'adminuser',
+    'newuser',
+    'updateduser',
   ]);
-  await db.query('ALTER TABLE user_accounts AUTO_INCREMENT = 5');
 });
 
 describe('POST /api/v1/users/register', () => {

@@ -2,8 +2,7 @@ import express from 'express';
 import dotenv from 'dotenv';
 import api from './api/index.js';
 import uploadRoutes from './api/routes/upload-router.js';
-
-const hostname = '127.0.0.1';
+import errorHandler from './api/middleware/error-middleware.js';
 
 dotenv.config();
 
@@ -20,9 +19,6 @@ app.use('/uploads', express.static('uploads'));
 // Register upload routes
 app.use('/api/v1', uploadRoutes);
 
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log(`🚀 Server running on http://${hostname}:${PORT}`);
-});
+app.use(errorHandler);
 
 export default app;

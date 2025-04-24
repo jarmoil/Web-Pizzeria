@@ -4,9 +4,8 @@
   "type": "module",
   "main": "src/app.js",
   "scripts": {
-    "test": "set NODE_ENV=test&& node --experimental-vm-modules node_modules/jest/bin/jest.js --verbose --detectOpenHandles --forceExit",
-    "test:watch": "jest --watchAll",
-    "server": "cd server && nodemon src/app.js",
+    "test": "set NODE_ENV=test&& node --experimental-vm-modules node_modules/jest/bin/jest.js --verbose --detectOpenHandles --forceExit --runInBand",
+    "server": "cd server && nodemon src/server.js",
     "client": "cd client && vite",
     "build": "cd client && vite build",
     "preview": "cd client && vite preview"
