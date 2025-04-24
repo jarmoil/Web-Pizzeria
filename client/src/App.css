@@ -294,7 +294,7 @@ footer {
       rgba(255, 255, 255, 0.9),
       rgba(255, 255, 255, 0.9)
     ),
-    url('../../public/images/pizza-pattern-bg.jpg') repeat;
+    url('/images/pizza-pattern-bg.jpg') repeat;
   background-attachment: fixed;
   min-height: 100vh;
 }
@@ -334,7 +334,7 @@ footer {
   align-items: center;
   justify-content: center;
   text-align: center;
-  background: url('../../public/images/hero-picture.jpg') no-repeat center
+  background: url('/images/hero-picture.jpg') no-repeat center
     center;
   background-size: cover;
   background-position: center;
@@ -423,7 +423,7 @@ footer {
 }
 
 .homepage-pizza-card {
-  background: #fff;
+  background: #000000;
   border-radius: 12px;
   overflow: hidden;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
@@ -512,7 +512,7 @@ footer {
   gap: 1rem;
   margin-bottom: 1.5rem;
   padding: 0.5rem;
-  background: #f7f7f7;
+  background: #000000;
   border-radius: 8px;
 }
 
@@ -573,7 +573,7 @@ footer {
 
 .homepage-rating-card {
   flex: 0 0 auto;
-  background-color: #f7f7f7;
+  background-color: #000000;
   padding: 1rem;
   border-radius: 12px;
   scroll-snap-align: start;
@@ -700,7 +700,7 @@ footer {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 2rem;
-  background: #f9f9f9;
+  background: #000000;
   padding: 2rem;
   border-radius: 12px;
 }
@@ -712,7 +712,7 @@ footer {
 
 .homepage-hours li {
   padding: 0.5rem 0;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid #ffffff;
 }
 
 .homepage-map {
@@ -793,7 +793,7 @@ footer {
       rgba(255, 255, 255, 0.9),
       rgba(255, 255, 255, 0.9)
     ),
-    url('../../public/images/pizza-pattern-bg.jpg') repeat;
+    url('/images/pizza-pattern-bg.jpg') repeat;
   background-attachment: fixed;
   min-height: 100vh;
 }
@@ -1114,25 +1114,36 @@ footer {
   font-size: 1.8rem;
 }
 
-#main-nav {
+header nav {
   display: flex;
   justify-content: center;
   flex-grow: 1;
 }
 
-#main-nav a {
+header nav a {
   color: white;
   margin-right: 15px;
   text-decoration: none;
   font-size: 1.2rem;
 }
 
-#main-nav a:hover {
+
+header nav a:hover {
   text-decoration: underline;
 }
 
-#header-actions {
-  display: flex;
+header #header-actions button {
+  background-color: #646cff;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+header #header-actions button:hover {
+  background-color: #535bf2;
 }
 
 #cart-btn,
@@ -1321,14 +1332,19 @@ footer {
 }
 
 @media (max-width: 768px) {
-  #header {
+  header {
     flex-direction: column;
     text-align: center;
   }
 
-  #main-nav {
+  header nav {
     margin-top: 10px;
     margin-bottom: 10px;
+  }
+
+  header #header-actions {
+    flex-direction: column;
+    gap: 0.5rem;
   }
 
   #cart-btn,
@@ -1357,7 +1373,7 @@ footer {
       rgba(255, 255, 255, 0.9),
       rgba(255, 255, 255, 0.9)
     ),
-    url('../../public/images/pizza-pattern-bg.jpg') repeat;
+    url('/images/pizza-pattern-bg.jpg') repeat;
   background-attachment: fixed;
 }
 

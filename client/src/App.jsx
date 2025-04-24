@@ -20,6 +20,14 @@ function App() {
             <Route path="/forgotPassword" element={<ForgotPassword />} />
             <Route path="/signup" element={<SignUp />} />
 
+            {/* Additional routes for other pages */}
+            <Route path="/about" element={<div>About Page</div>} />
+            <Route path="/faq" element={<div>FAQ Page</div>} />
+            <Route path="/privacy-policy" element={<div>Privacy Policy Page</div>} />
+            <Route path="/help" element={<div>Help Page</div>} />
+            <Route path="/terms-conditions" element={<div>Terms & Conditions Page</div>} />
+            <Route path="/contact" element={<div>Contact Page</div>} />
+
           </Route>
         </Routes>
     </div>
