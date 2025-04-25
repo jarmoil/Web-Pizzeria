@@ -3,18 +3,25 @@ import {
   getReviews,
   getReview,
   postReview,
-  deleteReview
+  deleteReview,
 } from '../controllers/restaurant_reviews-controller.js';
-import { authenticateToken } from '../middleware/auth-middleware.js';
+
+import {
+  validateCreateReview,
+  validateReviewIdParam,
+} from '../middleware/validation/restaurantReviews-validator.js';
+import {authenticateToken} from '../middleware/auth-middleware.js';
 
 const router = express.Router();
 
-router.route('/')
+router
+  .route('/')
   .get(getReviews)
-  .post(authenticateToken, postReview); // only logged in users can post
+  .post(authenticateToken, validateCreateReview, postReview); // only logged in users can post
 
-router.route('/:id')
-  .get(getReview)
-  .delete(authenticateToken, deleteReview); // only author or admin can delete
+router
+  .route('/:id')
+  .get(validateReviewIdParam, getReview)
+  .delete(authenticateToken, validateReviewIdParam, deleteReview); // only author or admin can delete
 
 export default router;

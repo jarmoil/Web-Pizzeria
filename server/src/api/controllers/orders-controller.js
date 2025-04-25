@@ -11,13 +11,9 @@ import {
 import {getItemById} from '../models/menu-model.js';
 
 // Luo uusi tilaus
-const createOrderC = async (req, res) => {
+const createOrderC = async (req, res, next) => {
   const user_id = req.user.user_id;
   const {address, items} = req.body;
-
-  if (!items || !Array.isArray(items) || items.length === 0) {
-    return res.status(400).json({error: 'No Items provided'});
-  }
 
   try {
     let total_price = 0;
@@ -25,10 +21,11 @@ const createOrderC = async (req, res) => {
     // Validoi itemit ja laske summa
     for (const item of items) {
       const pizza = await getItemById(item.pizza_id);
-      if (!pizza)
-        return res
-          .status(400)
-          .json({error: `Pizza ID ${item.pizza_id} not found`});
+      if (!pizza) {
+        const err = new Error(`Pizza ID ${item.pizza_id} not found`);
+        err.status = 400;
+        return next(err);
+      }
 
       total_price += pizza.price * item.quantity;
     }
@@ -46,39 +43,40 @@ const createOrderC = async (req, res) => {
     }
     res.status(201).json({message: 'Order created', order_id});
   } catch (error) {
-    console.error(error);
-    res.status(500).json({error: 'Failed to create order'});
+    next(error);
   }
 };
 
 // Hae kaikki tilaukset (admin ja employee)
-const getAllOrdersC = async (req, res) => {
+const getAllOrdersC = async (req, res, next) => {
   try {
     const orders = await getAllOrders();
     res.json(orders);
   } catch (error) {
-    console.error(error);
-    res.status(500).json({error: 'Failed to fetch orders'});
+    next(error);
   }
 };
 
 // Hae tietty tilaus itemien kanssa (admin ja employee)
-const getOrderByIdC = async (req, res) => {
+const getOrderByIdC = async (req, res, next) => {
   const order_id = req.params.id;
 
   try {
     const order = await getOrderWithItems(order_id);
-    if (!order) return res.status(404).json({error: 'Order not found'});
+    if (!order) {
+      const err = new Error('Order not found');
+      err.status = 404;
+      return next(err);
+    }
 
     res.json(order);
   } catch (error) {
-    console.error(error);
-    res.status(500).json({error: 'Failed to fetch order'});
+    next(error);
   }
 };
 
 // Asiakas hakee oman tilauksensa
-const getOwnOrderC = async (req, res) => {
+const getOwnOrderC = async (req, res, next) => {
   const user_id = req.user.user_id;
 
   try {
@@ -86,7 +84,9 @@ const getOwnOrderC = async (req, res) => {
     const orders = await getOrdersByUserId(user_id);
 
     if (!orders || orders.length === 0) {
-      return res.status(404).json({error: 'No orders found for this user'});
+      const err = new Error('No orders found for this user');
+      err.status = 404;
+      return next(err);
     }
 
     const ordersItems = await Promise.all(
@@ -95,58 +95,59 @@ const getOwnOrderC = async (req, res) => {
 
     res.json(ordersItems);
   } catch (error) {
-    console.error(error);
-    res.status(500).json({error: 'Failed to fetch orders'});
+    next(error);
   }
 };
 
 // Päivitä tilauksen status (admin ja employee)
-const updateOrderStatusC = async (req, res) => {
+const updateOrderStatusC = async (req, res, next) => {
   const order_id = req.params.id;
   const {order_status} = req.body;
 
-  const allowedStatuses = ['pending', 'processing', 'completed', 'cancelled'];
-
-  if (!allowedStatuses.includes(order_status)) {
-    return res.status(400).json({error: 'Invalid status value'});
-  }
-
   try {
     const order = await getOrderById(order_id);
-    if (!order) return res.status(404).json({error: 'Order not found'});
+    if (!order) {
+      const err = new Error('Order not found');
+      err.status = 404;
+      return next(err);
+    }
 
     await updateOrderStatus(order_id, order_status);
     res.json({message: `Order status updated to ${order_status}`});
   } catch (error) {
-    console.error(error);
-    res.status(500).json({error: 'Failed to update order status'});
+    next(error);
   }
 };
 
 // Asiakas peruu tilauksensa
-const cancelOwnOrderC = async (req, res) => {
+const cancelOwnOrderC = async (req, res, next) => {
   const user_id = req.user.user_id;
   const order_id = req.params.id;
 
   try {
     const order = await getOrderById(order_id);
-    if (!order) return res.status(404).json({error: 'Order not found'});
+    if (!order) {
+      const err = new Error('Order not found');
+      err.status = 404;
+      return next(err);
+    }
 
     if (order.user_id !== user_id) {
-      return res
-        .status(403)
-        .json({error: 'Not authorized to cancel this order'});
+      const err = new Error('Not authorized to cancel this order');
+      err.status = 403;
+      return next(err);
     }
 
     if (order.order_status === 'cancelled') {
-      return res.status(400).json({error: 'Order is already cancelled'});
+      const err = new Error('Order is already cancelled');
+      err.status = 400;
+      return next(err);
     }
 
     await updateOrderStatus(order_id, 'cancelled');
     res.json({message: 'Order cancelled successfully'});
   } catch (error) {
-    console.error(error);
-    res.status(500).json({error: 'Failed to cancel order'});
+    next(error);
   }
 };
 

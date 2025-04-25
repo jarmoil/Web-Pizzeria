@@ -8,9 +8,13 @@ import {
   getOwnOrderC,
   cancelOwnOrderC,
 } from '../controllers/orders-controller.js';
+import {
+  validateCreateOrder,
+  validateOrderIdParam,
+  validateUpdateOrderStatus,
+} from '../middleware/validation/orders-validator.js';
 
 import {authenticateToken, requireRole} from '../middleware/auth-middleware.js';
-
 import {checkOwnOrderOrAdmin} from '../middleware/resource-middleware.js';
 
 const ordersRouter = express.Router();
@@ -22,12 +26,13 @@ ordersRouter.get('/my', authenticateToken, checkOwnOrderOrAdmin, getOwnOrderC);
 ordersRouter.put(
   '/:id/cancel',
   authenticateToken,
+  validateOrderIdParam,
   checkOwnOrderOrAdmin,
   cancelOwnOrderC
 );
 
 // Luo tilaus
-ordersRouter.post('/', authenticateToken, createOrderC);
+ordersRouter.post('/', authenticateToken, validateCreateOrder, createOrderC);
 // Hae kaikki tilaukset
 ordersRouter.get(
   '/',
@@ -40,6 +45,7 @@ ordersRouter.get(
   '/:id',
   authenticateToken,
   requireRole('admin', 'employee'),
+  validateOrderIdParam,
   getOrderByIdC
 );
 // Päivitä tilauksen status
@@ -47,6 +53,8 @@ ordersRouter.put(
   '/:id/status',
   authenticateToken,
   requireRole('admin', 'employee'),
+  validateOrderIdParam,
+  validateUpdateOrderStatus,
   updateOrderStatusC
 );
 

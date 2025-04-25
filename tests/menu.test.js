@@ -8,24 +8,25 @@ dotenv.config();
 
 let menuId, userToken, adminToken, testUserId, testAdminId;
 
+const createTestUser = async (role) => {
+  const [userInsert] = await db.query(
+    'INSERT INTO user_accounts (name, email, password, role) VALUES (?, ?, ?, ?)',
+    [`test${role}`, `test${role}@email.com`, 'password', role]
+  );
+  return userInsert.insertId;
+};
+
 // Luo testi adminin ja testi käyttäjän, kirjautuu sisään niillä (Ei testaa hashausta, testi tietokannassa myös voi olla null
 // arvoina osoite yms)
 beforeAll(async () => {
-  const [userInsert] = await db.query(
-    'INSERT INTO user_accounts (name, email, password, role) VALUES (?, ?, ?, ?)',
-    ['testuser3', 'testuser@email.com', 'password', 'customer']
-  );
-  testUserId = userInsert.insertId;
+  testUserId = await createTestUser('customer');
+  testAdminId = await createTestUser('admin');
+
   userToken = jwt.sign(
     {user_id: testUserId, role: 'customer'},
     process.env.JWT_SECRET
   );
 
-  const [adminInsert] = await db.query(
-    'INSERT INTO user_accounts (name, email, password, role) VALUES (?, ?, ?, ?)',
-    ['testadmin3', 'testadmin@email.com', 'password', 'admin']
-  );
-  testAdminId = adminInsert.insertId;
   adminToken = jwt.sign(
     {user_id: testAdminId, role: 'admin'},
     process.env.JWT_SECRET
@@ -35,16 +36,66 @@ beforeAll(async () => {
 afterAll(async () => {
   console.log(menuId);
   await db.query('DELETE FROM menu WHERE pizza_id = ?', [menuId]);
-  await db.query('DELETE FROM user_accounts WHERE name = "testuser3"');
-  await db.query('DELETE FROM user_accounts WHERE name = "testadmin3"');
+  await db.query('DELETE FROM user_accounts WHERE user_id IN (?, ?)', [
+    testUserId,
+    testAdminId,
+  ]);
   await db.end();
 });
 
 describe('Menu API', () => {
-  test('GET /api/v1/menu should return array', async () => {
+  test('GET /api/v1/menu should return an array of items', async () => {
     const res = await request(app).get('/api/v1/menu');
     expect(res.statusCode).toBe(200);
     expect(Array.isArray(res.body)).toBe(true);
+  });
+
+  test('POST /api/v1/menu - should reject missing fields', async () => {
+    const res = await request(app)
+      .post('/api/v1/menu')
+      .set('Authorization', `Bearer ${adminToken}`)
+      .send({
+        name: '',
+        description: '',
+        price: '-9',
+        image: '',
+      });
+
+    expect(res.statusCode).toBe(400);
+    expect(res.body).toHaveProperty('errors');
+    expect(Array.isArray(res.body.errors)).toBe(true);
+  });
+
+  test('POST /api/v1/menu should reject SQL injection in name field', async () => {
+    const res = await request(app)
+      .post('/api/v1/menu')
+      .set('Authorization', `Bearer ${adminToken}`)
+      .send({
+        name: "user' OR 1=1 --",
+        description: 'A tasty pizza',
+        price: 10.5,
+        image: 'http://example.com/image.jpg',
+      });
+
+    expect(res.statusCode).toBe(400);
+    expect(res.body.errors).toBeDefined();
+    expect(res.body.errors[0].msg).toMatch(/Invalid characters/);
+  });
+
+  test('POST /api/v1/menu should reject XSS in description field', async () => {
+    const res = await request(app)
+      .post('/api/v1/menu')
+      .set('Authorization', `Bearer ${adminToken}`)
+      .send({
+        name: 'Safe Name',
+        description: '<script>alert("xss")</script>',
+        price: 10.99,
+        image: 'http://example.com/image.jpg',
+      });
+
+    expect(res.statusCode).toBe(400);
+    expect(res.body.errors).toBeDefined();
+    expect(res.body.errors[0].msg).toMatch(/Description is required/);
   });
 
   test('POST /api/v1/menu - add a new menu item (admin)', async () => {

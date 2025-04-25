@@ -8,24 +8,44 @@ import {
   findUserByEmail,
 } from '../models/user-model.js';
 
-const getUsers = async (req, res) => {
-  const users = await listAllUsers();
-  res.json(users);
+const getUsers = async (req, res, next) => {
+  try {
+    const users = await listAllUsers();
+    res.json(users);
+  } catch (error) {
+    next(error);
+  }
 };
 
-const getUserById = async (req, res) => {
-  const user = await findUserById(req.params.id);
-  user ? res.json(user) : res.sendStatus(404);
+const getUserById = async (req, res, next) => {
+  try {
+    const user = await findUserById(req.params.id);
+    if (!user) {
+      const error = new Error('User not found');
+      error.status = 404;
+      return next(error);
+    }
+    res.json(user);
+  } catch (error) {
+    next(error);
+  }
 };
 
-const postUser = async (req, res) => {
-  const result = await addUser(req.body);
-  result?.user_id
-    ? res.status(201).json({message: 'New user added.', result})
-    : res.sendStatus(400);
+const postUser = async (req, res, next) => {
+  try {
+    const result = await addUser(req.body);
+    if (!result || !result.user_id) {
+      const error = new Error('Failed to create user');
+      error.status = 400;
+      return next(error);
+    }
+    res.status(201).json({message: 'New user added.', result});
+  } catch (error) {
+    next(error);
+  }
 };
 
-const registerUser = async (req, res) => {
+const registerUser = async (req, res, next) => {
   const {
     user_name,
     user_email,
@@ -34,16 +54,6 @@ const registerUser = async (req, res) => {
     user_address,
     profile_picture,
   } = req.body;
-
-  if (
-    !user_name ||
-    !user_email ||
-    !user_password ||
-    !phone_number ||
-    !user_address
-  ) {
-    return res.status(400).json({error: 'Missing required fields'});
-  }
 
   try {
     const user = await addUser({
@@ -72,12 +82,11 @@ const registerUser = async (req, res) => {
       token, // Send the token back with the user data
     });
   } catch (err) {
-    console.error(err);
-    res.status(400).json({error: err.message});
+    next(err); // Pass the error to the next handler
   }
 };
 
-const registerEmployee = async (req, res) => {
+const registerEmployee = async (req, res, next) => {
   const {
     user_name,
     user_email,
@@ -87,7 +96,6 @@ const registerEmployee = async (req, res) => {
     profile_picture,
   } = req.body;
 
-  // Only admins can register employees
   const role = 'employee'; // admin-only role
 
   try {
@@ -102,49 +110,59 @@ const registerEmployee = async (req, res) => {
     });
     res.status(201).json({message: 'Employee created successfully.', user});
   } catch (err) {
-    console.error(err);
-    res.status(400).json({error: err.message});
+    next(err);
   }
 };
 
-const putUser = async (req, res) => {
-  const result = await updateUser(req.params.id, req.body);
-  res.status(result ? 200 : 404).json(result || {error: 'User not found'});
+const putUser = async (req, res, next) => {
+  try {
+    const result = await updateUser(req.params.id, req.body);
+    if (!result) {
+      const error = new Error('User not found');
+      error.status = 404;
+      return next(error);
+    }
+    res.status(200).json(result);
+  } catch (error) {
+    next(error);
+  }
 };
 
-const loginUser = async (req, res) => {
+const loginUser = async (req, res, next) => {
   const {user_email, user_password} = req.body;
-  const user = await findUserByEmail(user_email);
 
-  if (!user) {
-    return res.status(401).json({error: 'Invalid credentials (no such user)'});
+  try {
+    const user = await findUserByEmail(user_email);
+
+    if (!user) {
+      const error = new Error('Invalid credentials (no such user)');
+      error.status = 401;
+      return next(error);
+    }
+
+    const isMatch = await bcrypt.compare(user_password, user.password);
+
+    if (!isMatch) {
+      const error = new Error('Invalid credentials (wrong password)');
+      error.status = 401;
+      return next(error);
+    }
+
+    const token = jwt.sign(
+      {
+        user_id: user.user_id,
+        user_email: user.user_email,
+        role: user.role,
+      },
+      process.env.JWT_SECRET,
+      {expiresIn: '2h'}
+    );
+
+    res.json({token});
+  } catch (error) {
+    next(error);
   }
-
-  const isMatch = await bcrypt.compare(user_password, user.password);
-
-  if (!isMatch) {
-    return res
-      .status(401)
-      .json({error: 'Invalid credentials (wrong password)'});
-  }
-
-  const token = jwt.sign(
-    {
-      user_id: user.user_id,
-      user_email: user.user_email,
-      role: user.role,
-    },
-    process.env.JWT_SECRET,
-    {expiresIn: '2h'}
-  );
-
-  res.json({token});
 };
-
-/*const deleteUser = async (req, res) => {
-  const result = await removeUser(req.params.id);
-  res.status(result ? 200 : 404).json(result || { error: 'User not found' });
-};*/
 
 export {
   getUsers,
