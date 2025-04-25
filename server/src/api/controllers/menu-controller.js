@@ -32,11 +32,6 @@ const getMenuItemById = async (req, res, next) => {
 
 const addMenuItem = async (req, res, next) => {
   const {name, description, price, image} = req.body;
-  if (!name || !description || !price || !image) {
-    const error = new Error('Missing required fields.');
-    error.status = 400;
-    return next(error);
-  }
   try {
     const item = await insertItem({name, description, price, image});
     res.status(201).json({message: 'Menu item added.', item});

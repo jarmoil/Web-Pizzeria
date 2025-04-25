@@ -47,6 +47,56 @@ describe('Menu API', () => {
     expect(Array.isArray(res.body)).toBe(true);
   });
 
+  test('POST /api/v1/menu - should reject missing fields', async () => {
+    const res = await request(app)
+      .post('/api/v1/menu')
+      .set('Authorization', `Bearer ${adminToken}`)
+      .send({
+        name: '',
+        description: '',
+        price: '-9',
+        image: '',
+      });
+
+    expect(res.statusCode).toBe(400);
+    expect(res.body).toHaveProperty('errors');
+    expect(Array.isArray(res.body.errors)).toBe(true);
+  });
+
+  test('should reject SQL injection attempts in name field when adding a new menu item', async () => {
+    const res = await request(app)
+      .post('/api/v1/menu')
+      .set('Authorization', `Bearer ${adminToken}`)
+      .send({
+        name: "user' OR 1=1 --",
+        description: 'A tasty pizza',
+        price: 10.5,
+        image: 'http://example.com/image.jpg',
+      });
+
+    expect(res.statusCode).toBe(400);
+    expect(res.body.errors).toBeDefined();
+    expect(res.body.errors[0].msg).toBe(
+      'Name can only contain letters, numbers, spaces, dashes, and underscores'
+    );
+  });
+
+  test('should reject XSS attempt in description field when adding a new menu item', async () => {
+    const res = await request(app)
+      .post('/api/v1/menu')
+      .set('Authorization', `Bearer ${adminToken}`)
+      .send({
+        name: 'Safe Name',
+        description: '<script>alert("xss")</script>',
+        price: 10.99,
+        image: 'http://example.com/image.jpg',
+      });
+
+    expect(res.statusCode).toBe(400);
+    expect(res.body.errors).toBeDefined();
+    expect(res.body.errors.length).toBeGreaterThan(0);
+  });
+
   test('POST /api/v1/menu - add a new menu item (admin)', async () => {
     const res = await request(app)
       .post('/api/v1/menu')
