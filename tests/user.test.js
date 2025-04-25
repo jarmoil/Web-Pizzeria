@@ -17,7 +17,7 @@ beforeAll(async () => {
     user_password: 'password123',
     phone_number: '1234567890',
     user_address: 'Test Address, City',
-    profile_picture: 'testpic.jpg',
+    profile_picture: 'https://testimage.jpg',
     role: 'customer',
   });
   userId = userResponse.body.user.user_id;
@@ -80,6 +80,33 @@ describe('POST /api/v1/users/register', () => {
 
     expect(res.statusCode).toBe(400); // Assuming validation error
   });
+});
+
+test('should reject SQL injection or XSS payloads', async () => {
+  const res = await request(app).post('/api/v1/users/register').send({
+    user_name: "Robert'); DROP TABLE user_accounts;--",
+    user_email: 'xss@test.com<script>alert(1)</script>',
+    user_password: 'password123',
+    phone_number: '+358401234567',
+    user_address: '123 Main St<script>alert(1)</script>',
+    profile_picture: 'javascript:alert(1)', // not a URL
+  });
+
+  expect(res.statusCode).toBe(400); // Fails validation
+});
+
+test('should fail validation with bad email and short name', async () => {
+  const res = await request(app).post('/api/v1/users/register').send({
+    user_name: 'a',
+    user_email: 'not-an-email',
+    user_password: 'pass',
+    phone_number: 'invalid-phone',
+    user_address: '',
+    profile_picture: 'https://ok.com/image.jpg',
+  });
+
+  expect(res.statusCode).toBe(400);
+  expect(res.body.errors.length).toBeGreaterThanOrEqual(3); // at least email, name, address
 });
 
 describe('POST /api/v1/users/login', () => {

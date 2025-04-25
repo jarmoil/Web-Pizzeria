@@ -15,17 +15,28 @@ import {
   requireRole,
 } from '../middleware/auth-middleware.js';
 
+import {
+  userValidator,
+  validateUserIdParam,
+  loginValidator,
+} from '../middleware/validation/user-validator.js';
+
 const userRouter = express.Router();
 
 // Public routes
-userRouter.post('/login', loginUser);
-userRouter.post('/register', registerUser);
+userRouter.post('/login', loginValidator, loginUser);
+userRouter.post('/register', userValidator, registerUser);
 
 // Authenticated routes
 userRouter.use(authenticateToken);
 
 // Employee routes (only admins can register employees)
-userRouter.post('/register-employee', requireRole('admin'), registerEmployee);
+userRouter.post(
+  '/register-employee',
+  requireRole('admin'),
+  userValidator,
+  registerEmployee
+);
 
 // Admin routes (only admins can view all users)
 userRouter.get('/', requireRole('admin'), getUsers);
@@ -33,8 +44,8 @@ userRouter.get('/', requireRole('admin'), getUsers);
 // Routes that require user ownership or admin role
 userRouter
   .route('/:id')
-  .get(checkOwnershipOrAdmin, getUserById)
-  .put(checkOwnershipOrAdmin, putUser);
+  .get(checkOwnershipOrAdmin, validateUserIdParam, getUserById)
+  .put(checkOwnershipOrAdmin, validateUserIdParam, putUser);
 // You can add delete route if needed
 // .delete(requireAdmin, deleteUser);
 

@@ -55,18 +55,6 @@ const registerUser = async (req, res, next) => {
     profile_picture,
   } = req.body;
 
-  if (
-    !user_name ||
-    !user_email ||
-    !user_password ||
-    !phone_number ||
-    !user_address
-  ) {
-    const error = new Error('Missing required fields');
-    error.status = 400;
-    return next(error);
-  }
-
   try {
     const user = await addUser({
       user_name,
