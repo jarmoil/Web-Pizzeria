@@ -15,12 +15,6 @@ const createOrderC = async (req, res, next) => {
   const user_id = req.user.user_id;
   const {address, items} = req.body;
 
-  if (!items || !Array.isArray(items) || items.length === 0) {
-    const err = new Error('No items provided');
-    err.status = 400;
-    return next(err);
-  }
-
   try {
     let total_price = 0;
 
@@ -109,14 +103,6 @@ const getOwnOrderC = async (req, res, next) => {
 const updateOrderStatusC = async (req, res, next) => {
   const order_id = req.params.id;
   const {order_status} = req.body;
-
-  const allowedStatuses = ['pending', 'processing', 'completed', 'cancelled'];
-
-  if (!allowedStatuses.includes(order_status)) {
-    const err = new Error('Invalid status value');
-    err.status = 400;
-    return next(err);
-  }
 
   try {
     const order = await getOrderById(order_id);

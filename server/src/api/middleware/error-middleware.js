@@ -6,6 +6,8 @@ const errorHandler = (err, req, res, next) => {
 
   res.status(statusCode).json({
     error: message,
+
+    // Stack pois sitten, kun ollaan saatu tehtyä koodi loppuun
     stack: err.stack,
   });
 };
