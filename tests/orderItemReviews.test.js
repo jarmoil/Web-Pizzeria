@@ -96,9 +96,7 @@ describe('Order Item Reviews API', () => {
 
     expect(res.statusCode).toBe(400);
     expect(res.body.errors).toBeDefined();
-    expect(res.body.errors[0].msg).toMatch(
-      /Comment can only contain letters, numbers, spaces, dashes, underscores and commas/
-    );
+    expect(res.body.errors[0].msg).toMatch(/Invalid characters/);
   });
 
   test('POST /api/v1/order-item-reviews rejects XSS attempt in comment', async () => {

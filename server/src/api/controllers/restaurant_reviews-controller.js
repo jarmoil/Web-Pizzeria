@@ -36,23 +36,8 @@ const postReview = async (req, res, next) => {
   try {
     const review = await createReview({user_id, rating, comment});
     res.status(201).json(review);
-  } catch (err) {
-    console.error('Error while creating review:', err);
-
-    // Match the check constraint failure by message
-    if (
-      err.message &&
-      err.message.includes('CONSTRAINT') &&
-      err.message.includes('rating_range')
-    ) {
-      const error = new Error('Rating must be between 1 and 5.');
-      error.status = 400;
-      return next(error);
-    } else {
-      const error = new Error('Server error while submitting review.');
-      error.status = 500;
-      return next(error);
-    }
+  } catch (error) {
+    next(error);
   }
 };
 

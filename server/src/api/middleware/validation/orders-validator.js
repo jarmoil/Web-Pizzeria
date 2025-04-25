@@ -8,9 +8,7 @@ const validateCreateOrder = [
     .notEmpty()
     .withMessage('Address is required')
     .matches(/^[a-zA-Z0-9\s\-_,]+$/)
-    .withMessage(
-      'Address can only contain letters, numbers, spaces, dashes, underscores and commas'
-    )
+    .withMessage('Invalid characters')
     .escape()
     .stripLow(),
   body('items')

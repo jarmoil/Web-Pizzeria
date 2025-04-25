@@ -56,6 +56,44 @@ describe('Restaurant Reviews API', () => {
     expect(res.statusCode).toBe(401);
   });
 
+  test('POST /api/v1/restaurant-reviews should fail with invalid rating', async () => {
+    const res = await request(app)
+      .post('/api/v1/restaurant-reviews')
+      .set('Authorization', `Bearer ${userToken}`)
+      .send({rating: 0, comment: 'Invalid rating test'});
+
+    expect(res.statusCode).toBe(400);
+    expect(res.body.errors[0].msg).toBe('Rating must be between 1 and 5');
+  });
+
+  // Test for SQL Injection attempt
+  test('POST /api/v1/restaurant-reviews should reject SQL injection in comment', async () => {
+    const res = await request(app)
+      .post('/api/v1/restaurant-reviews')
+      .set('Authorization', `Bearer ${userToken}`)
+      .send({
+        rating: 5,
+        comment: "'; DROP TABLE restaurant_reviews; --",
+      });
+
+    expect(res.statusCode).toBe(400);
+    expect(res.body.errors[0].msg).toMatch(/Invalid characters/);
+  });
+
+  // Test for XSS attack attempt
+  test('POST /api/v1/restaurant-reviews should reject XSS in comment', async () => {
+    const res = await request(app)
+      .post('/api/v1/restaurant-reviews')
+      .set('Authorization', `Bearer ${userToken}`)
+      .send({
+        rating: 5,
+        comment: '<script>alert("XSS Attack")</script>',
+      });
+
+    expect(res.statusCode).toBe(400);
+    expect(res.body.errors[0].msg).toMatch(/Comment is required/);
+  });
+
   test('POST /api/v1/restaurant-reviews should create review', async () => {
     const res = await request(app)
       .post('/api/v1/restaurant-reviews')

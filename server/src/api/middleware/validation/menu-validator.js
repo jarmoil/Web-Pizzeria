@@ -8,9 +8,7 @@ const validateMenuItemCreation = [
     .notEmpty()
     .withMessage('Name is required')
     .matches(/^[a-zA-Z0-9\s\-_]+$/)
-    .withMessage(
-      'Name can only contain letters, numbers, spaces, dashes, and underscores'
-    )
+    .withMessage('Invalid characters')
     .escape()
     .stripLow(),
   body('description')
@@ -18,9 +16,7 @@ const validateMenuItemCreation = [
     .notEmpty()
     .withMessage('Description is required')
     .matches(/^[a-zA-Z0-9\s\-_]+$/)
-    .withMessage(
-      'Name can only contain letters, numbers, spaces, dashes, and underscores'
-    )
+    .withMessage('Invalid characters')
     .escape()
     .stripLow(),
   body('price')

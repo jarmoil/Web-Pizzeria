@@ -76,9 +76,7 @@ describe('Menu API', () => {
 
     expect(res.statusCode).toBe(400);
     expect(res.body.errors).toBeDefined();
-    expect(res.body.errors[0].msg).toMatch(
-      /Name can only contain letters, numbers, spaces, dashes, and underscores/
-    );
+    expect(res.body.errors[0].msg).toMatch(/Invalid characters/);
   });
 
   test('should reject XSS attempt in description field when adding a new menu item', async () => {

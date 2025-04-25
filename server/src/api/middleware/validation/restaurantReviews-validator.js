@@ -1,11 +1,8 @@
 import {body, param} from 'express-validator';
 import {handleValidationErrors, sanitizeInput} from './shared.js';
 
-const validateCreateOrderItemReview = [
+const validateCreateReview = [
   sanitizeInput(['comment']),
-  body('order_item_id')
-    .isInt()
-    .withMessage('Order item ID must be a valid integer '),
   body('rating')
     .isInt({min: 1, max: 5})
     .withMessage('Rating must be between 1 and 5'),
@@ -22,9 +19,9 @@ const validateCreateOrderItemReview = [
   handleValidationErrors,
 ];
 
-const validateOrderItemReviewIdParam = [
-  param('id').isInt().withMessage('Invalid order ID'),
+const validateReviewIdParam = [
+  param('id').isInt().withMessage('Invalid review ID'),
   handleValidationErrors,
 ];
 
-export {validateCreateOrderItemReview, validateOrderItemReviewIdParam};
+export {validateCreateReview, validateReviewIdParam};
