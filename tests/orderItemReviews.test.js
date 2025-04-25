@@ -8,30 +8,15 @@ dotenv.config();
 
 let reviewId, userToken, adminToken, testUserId, testAdminId, testPizzaId;
 
-// Luo testi adminin ja testi käyttäjän, kirjautuu sisään niillä (Ei testaa hashausta, testi tietokannassa myös voi olla null
-// arvoina osoite yms)
-beforeAll(async () => {
+const createTestUser = async (role) => {
   const [userInsert] = await db.query(
     'INSERT INTO user_accounts (name, email, password, role) VALUES (?, ?, ?, ?)',
-    ['testuser2', 'testuser@email.com', 'password', 'customer']
+    [`test${role}`, `test${role}@email.com`, 'password', role]
   );
-  testUserId = userInsert.insertId;
-  userToken = jwt.sign(
-    {user_id: testUserId, role: 'customer'},
-    process.env.JWT_SECRET
-  );
+  return userInsert.insertId;
+};
 
-  const [adminInsert] = await db.query(
-    'INSERT INTO user_accounts (name, email, password, role) VALUES (?, ?, ?, ?)',
-    ['testadmin2', 'testadmin@email.com', 'password', 'admin']
-  );
-  testAdminId = adminInsert.insertId;
-  adminToken = jwt.sign(
-    {user_id: testAdminId, role: 'admin'},
-    process.env.JWT_SECRET
-  );
-
-  // Luodaan testi pizza myös tässä samalla, joka poistetaan testin lopussa
+const createTestPizza = async () => {
   const [pizzaInsert] = await db.query(
     'INSERT INTO menu (pizza_name, pizza_description, price, image_url) VALUES (?, ?, ?, ?)',
     [
@@ -41,14 +26,32 @@ beforeAll(async () => {
       'https://images.unsplash.com/photo-1708649360542-db4f0762bd9c?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
     ]
   );
-  testPizzaId = pizzaInsert.insertId;
+  return pizzaInsert.insertId;
+};
+
+// Luo testi adminin ja testi käyttäjän, kirjautuu sisään niillä (Ei testaa hashausta, testi tietokannassa myös voi olla null
+// arvoina osoite yms)
+beforeAll(async () => {
+  testUserId = await createTestUser('customer');
+  testAdminId = await createTestUser('admin');
+
+  userToken = jwt.sign(
+    {user_id: testUserId, role: 'customer'},
+    process.env.JWT_SECRET
+  );
+  adminToken = jwt.sign(
+    {user_id: testAdminId, role: 'admin'},
+    process.env.JWT_SECRET
+  );
+
+  testPizzaId = await createTestPizza();
 });
 
 afterAll(async () => {
   await db.query('DELETE FROM order_item_reviews');
-  await db.query('DELETE FROM user_accounts WHERE name IN (?, ?)', [
-    'testUser2',
-    'testAdmin2',
+  await db.query('DELETE FROM user_accounts WHERE user_id IN (?, ?)', [
+    testUserId,
+    testAdminId,
   ]);
   await db.query('DELETE FROM menu WHERE pizza_id = ?', [testPizzaId]);
   await db.end();
@@ -83,7 +86,7 @@ describe('Order Item Reviews API', () => {
   });
 
   test('POST /api/v1/order-item-reviews rejects SQL injection attempt in comment', async () => {
-    const maliciousComment = "'; DROP TABLE order_item_reviews; --"; // SQL injection attempt
+    const maliciousComment = "'; DROP TABLE order_item_reviews; --";
 
     const res = await request(app)
       .post('/api/v1/order-item-reviews')
@@ -100,7 +103,7 @@ describe('Order Item Reviews API', () => {
   });
 
   test('POST /api/v1/order-item-reviews rejects XSS attempt in comment', async () => {
-    const maliciousComment = '<script>alert("XSS")</script>'; // XSS attempt
+    const maliciousComment = '<script>alert("XSS")</script>';
 
     const res = await request(app)
       .post('/api/v1/order-item-reviews')

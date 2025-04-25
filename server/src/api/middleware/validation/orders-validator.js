@@ -15,7 +15,10 @@ const validateCreateOrder = [
     .isArray({min: 1})
     .withMessage('At least one item is required')
     .custom((items) => {
-      return items.every((item) => item.pizza_id && item.quantity);
+      return (
+        Array.isArray(items) &&
+        items.every((item) => item.pizza_id && item.quantity)
+      );
     })
     .withMessage('Each item must have pizza_id and quantity'),
   body('items.*.pizza_id')

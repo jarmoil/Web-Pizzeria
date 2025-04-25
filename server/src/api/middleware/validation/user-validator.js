@@ -1,6 +1,10 @@
 import {body, param} from 'express-validator';
 import {handleValidationErrors, sanitizeInput} from './shared.js';
 
+// Uudelleen käytettävät sallitut regexit
+const nameRegex = /^[a-zA-Z0-9\s\-_,]+$/;
+const phoneRegex = /^\+?[1-9]\d{1,14}$/;
+
 const userValidator = [
   sanitizeInput(['user_name', 'user_email', 'user_address']),
 
@@ -10,7 +14,7 @@ const userValidator = [
     .withMessage('User name is required')
     .isLength({min: 3})
     .withMessage('User name must be at least 3 characters long')
-    .matches(/^[a-zA-Z0-9\s\-_,]+$/)
+    .matches(nameRegex)
     .withMessage('Invalid characters')
     .escape()
     .stripLow(),
@@ -26,15 +30,13 @@ const userValidator = [
     .isLength({min: 6})
     .withMessage('Password must be at least 6 characters long'),
 
-  body('phone_number')
-    .matches(/^\+?[1-9]\d{1,14}$/)
-    .withMessage('Invalid phone number'),
+  body('phone_number').matches(phoneRegex).withMessage('Invalid phone number'),
 
   body('user_address')
     .trim()
     .notEmpty()
     .withMessage('User address is required')
-    .matches(/^[a-zA-Z0-9\s\-_,]+$/)
+    .matches(nameRegex)
     .withMessage('Invalid characters')
     .escape()
     .stripLow(),

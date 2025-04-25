@@ -164,11 +164,6 @@ const loginUser = async (req, res, next) => {
   }
 };
 
-/*const deleteUser = async (req, res) => {
-  const result = await removeUser(req.params.id);
-  res.status(result ? 200 : 404).json(result || { error: 'User not found' });
-};*/
-
 export {
   getUsers,
   getUserById,

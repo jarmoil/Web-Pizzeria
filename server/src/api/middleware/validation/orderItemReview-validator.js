@@ -5,7 +5,7 @@ const validateCreateOrderItemReview = [
   sanitizeInput(['comment']),
   body('order_item_id')
     .isInt()
-    .withMessage('Order item ID must be a valid integer '),
+    .withMessage('Order item ID must be a valid integer'),
   body('rating')
     .isInt({min: 1, max: 5})
     .withMessage('Rating must be between 1 and 5'),
@@ -23,7 +23,7 @@ const validateCreateOrderItemReview = [
 ];
 
 const validateOrderItemReviewIdParam = [
-  param('id').isInt().withMessage('Invalid order ID'),
+  param('id').isInt().withMessage('Invalid order item review ID'),
   handleValidationErrors,
 ];
 
