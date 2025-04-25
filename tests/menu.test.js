@@ -76,8 +76,8 @@ describe('Menu API', () => {
 
     expect(res.statusCode).toBe(400);
     expect(res.body.errors).toBeDefined();
-    expect(res.body.errors[0].msg).toBe(
-      'Name can only contain letters, numbers, spaces, dashes, and underscores'
+    expect(res.body.errors[0].msg).toMatch(
+      /Name can only contain letters, numbers, spaces, dashes, and underscores/
     );
   });
 
@@ -94,7 +94,7 @@ describe('Menu API', () => {
 
     expect(res.statusCode).toBe(400);
     expect(res.body.errors).toBeDefined();
-    expect(res.body.errors.length).toBeGreaterThan(0);
+    expect(res.body.errors[0].msg).toMatch(/Description is required/);
   });
 
   test('POST /api/v1/menu - add a new menu item (admin)', async () => {

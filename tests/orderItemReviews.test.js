@@ -78,7 +78,44 @@ describe('Order Item Reviews API', () => {
         comment: 'Invalid rating',
       });
     expect(res.statusCode).toBe(400);
-    expect(res.body).toHaveProperty('error');
+    expect(res.body.errors).toBeDefined();
+    expect(res.body.errors.length).toBeGreaterThan(0);
+  });
+
+  test('POST /api/v1/order-item-reviews rejects SQL injection attempt in comment', async () => {
+    const maliciousComment = "'; DROP TABLE order_item_reviews; --"; // SQL injection attempt
+
+    const res = await request(app)
+      .post('/api/v1/order-item-reviews')
+      .set('Authorization', `Bearer ${userToken}`)
+      .send({
+        order_item_id: testPizzaId,
+        rating: 5,
+        comment: maliciousComment,
+      });
+
+    expect(res.statusCode).toBe(400);
+    expect(res.body.errors).toBeDefined();
+    expect(res.body.errors[0].msg).toMatch(
+      /Comment can only contain letters, numbers, spaces, dashes, underscores and commas/
+    );
+  });
+
+  test('POST /api/v1/order-item-reviews rejects XSS attempt in comment', async () => {
+    const maliciousComment = '<script>alert("XSS")</script>'; // XSS attempt
+
+    const res = await request(app)
+      .post('/api/v1/order-item-reviews')
+      .set('Authorization', `Bearer ${userToken}`)
+      .send({
+        order_item_id: testPizzaId,
+        rating: 5,
+        comment: maliciousComment,
+      });
+
+    expect(res.statusCode).toBe(400);
+    expect(res.body.errors).toBeDefined();
+    expect(res.body.errors[0].msg).toMatch(/Comment is required/);
   });
 
   test('POST /api/v1/order-item-reviews creates a review', async () => {

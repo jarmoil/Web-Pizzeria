@@ -9,7 +9,7 @@ const validateCreateOrder = [
     .withMessage('Address is required')
     .matches(/^[a-zA-Z0-9\s\-_,]+$/)
     .withMessage(
-      'Name can only contain letters, numbers, spaces, dashes, and underscores'
+      'Address can only contain letters, numbers, spaces, dashes, underscores and commas'
     )
     .escape()
     .stripLow(),

@@ -9,11 +9,6 @@ export const postOrderItemReview = async (req, res, next) => {
   const user_id = req.user.user_id; // from token
   const {order_item_id, rating, comment} = req.body;
 
-  if (!rating || rating < 1 || rating > 5) {
-    const error = new Error('Rating must be between 1 and 5.');
-    error.status = 400;
-    return next(error);
-  }
   try {
     const review = await createOrderItemReview({
       user_id,
