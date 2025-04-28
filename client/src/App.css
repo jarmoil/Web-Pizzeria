@@ -30,8 +30,8 @@
   background-size: cover;
   background-position: center;
 }
-input[type='emailtext'],
-input[type='passwordtext'] {
+input[type='email'],
+input[type='password'] {
   width: 100%;
   padding: 15px;
   margin: 5px 0 22px 0;
@@ -41,7 +41,7 @@ input[type='passwordtext'] {
 }
 
 input[type='text']:focus,
-input[type='passwordtext']:focus {
+input[type='password']:focus {
   background-color: #ddd;
   outline: none;
 }
