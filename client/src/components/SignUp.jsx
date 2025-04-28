@@ -1,5 +1,6 @@
 const SignUp = () => {
   return (
+
     <section id="signUp-section">
       <form action="">
         <div className="signUp-container">
@@ -8,6 +9,15 @@ const SignUp = () => {
             Please fill in this form to create an account.
           </p>
           <hr id="signUp-container-hr" />
+
+          <label id="signUp-container-label" htmlFor="user_name"><b>Username</b></label>
+          <input
+            type="text"
+            placeholder="Enter Username"
+            name="user_name"
+            id="user_name"
+            required
+          />
 
           <label id="signUp-container-label" htmlFor="email"><b>Email</b></label>
           <input

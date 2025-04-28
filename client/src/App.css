@@ -30,6 +30,7 @@
   background-size: cover;
   background-position: center;
 }
+input[type='text'],
 input[type='email'],
 input[type='password'] {
   width: 100%;
