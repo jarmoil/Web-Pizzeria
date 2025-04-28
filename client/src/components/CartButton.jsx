@@ -1,4 +1,17 @@
-const CartButton = ({ isVisible, onClose }) => {
+import React from 'react';
+import {useCart} from '../context/CartContext';
+import CartItem from './CartItem';
+import CartTotal from './CartTotal';
+
+const CartButton = ({isVisible, onClose}) => {
+  const {cart, increaseQuantity, decreaseQuantity, removeFromCart} = useCart();
+
+  // Calculate total price of all items in the cart
+  const totalPrice = cart.reduce(
+    (total, pizza) => total + pizza.price * pizza.quantity,
+    0
+  );
+
   return (
     isVisible && (
       <div id="cart-dropdown" className="cart-dropdown">
@@ -8,19 +21,21 @@ const CartButton = ({ isVisible, onClose }) => {
           </button>
           <h2>Your Cart</h2>
           <ul id="cart-items">
-            <li id="cart-item1">
-              <span>Item 1</span>
-              <span>$10</span>
-            </li>
-            <li id="cart-item2">
-              <span>Item 2</span>
-              <span>$15</span>
-            </li>
+            {cart.length === 0 ? (
+              <li>Your cart is empty</li>
+            ) : (
+              cart.map((pizza) => (
+                <CartItem
+                  key={pizza.pizza_id}
+                  pizza={pizza}
+                  increaseQuantity={increaseQuantity}
+                  decreaseQuantity={decreaseQuantity}
+                  removeFromCart={removeFromCart}
+                />
+              ))
+            )}
           </ul>
-          <div id="cart-total">
-            <span>Total:</span>
-            <span>$25</span>
-          </div>
+          <CartTotal totalPrice={totalPrice} />
           <button id="cart-checkout-btn">Checkout</button>
         </div>
       </div>
