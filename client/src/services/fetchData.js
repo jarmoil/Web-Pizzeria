@@ -1,7 +1,7 @@
 // Funktio datan fetchaamisella, jälleenkäytettävä
 
 export const fetchData = async (url, options = {}) => {
-  const baseUrl = import.meta.env.VITE_API_URL || 'http://localhost:3000';
+  const baseUrl = import.meta.env.VITE_API_URL || 'http://localhost:3000/';
   const fullUrl = baseUrl + url;
 
   const response = await fetch(fullUrl, options);
