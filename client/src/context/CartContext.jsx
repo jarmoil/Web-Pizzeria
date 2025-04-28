@@ -95,7 +95,6 @@ const CartProvider = ({children}) => {
   );
 };
 
-// Custom hook to use the CartContext
 const useCart = () => {
   const context = useContext(CartContext);
   if (!context) {

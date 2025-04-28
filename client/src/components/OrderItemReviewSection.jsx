@@ -27,7 +27,7 @@ const OrderItemReviewSection = ({reviews, averageRating, loading, error}) => {
               </li>
             ))
           ) : (
-            <p>No reviews yet for this pizza.</p> // Display message when no reviews are available
+            <p>No reviews yet for this pizza.</p>
           )}
         </ul>
       </div>

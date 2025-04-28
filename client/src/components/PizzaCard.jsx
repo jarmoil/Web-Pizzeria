@@ -1,22 +1,25 @@
 import React, {useState} from 'react';
 import {useCart} from '../context/CartContext';
-import ReviewModal from './ReviewModal'; // Import the ReviewModal component
+import ReviewModal from './ReviewModal';
+import formatPrice from '../utils/formatPrice.js';
+import useOrderItemReviews from '../hooks/useOrderItemReviews.js';
 
 const PizzaCard = ({pizza}) => {
   const {addToCart} = useCart();
   const [isReviewModalOpen, setIsReviewModalOpen] = useState(false);
+  const {averageRating, reviewsCount} = useOrderItemReviews(pizza.pizza_id);
 
   const handleAddToCart = () => {
-    addToCart(pizza); // Add pizza to the cart
+    addToCart(pizza);
     console.log('Pizza added to cart:', pizza);
   };
 
   const handleClick = () => {
-    setIsReviewModalOpen(true); // Open the modal when button is clicked
+    setIsReviewModalOpen(true);
   };
 
   const handleCloseModal = () => {
-    setIsReviewModalOpen(false); // Close the modal
+    setIsReviewModalOpen(false);
   };
 
   return (
@@ -30,27 +33,24 @@ const PizzaCard = ({pizza}) => {
         <h3 className="menu-card-title">{pizza.pizza_name}</h3>
         <p className="menu-card-description">{pizza.pizza_description}</p>
         <div className="menu-card-rating">
-          <span className="menu-card-rating-stars">⭐ 4.5</span>
-          <span className="menu-card-rating-count">(37 reviews)</span>
+          <span className="menu-card-rating-stars">
+            ⭐ {averageRating.toFixed(1)}
+          </span>
+          <span className="menu-card-rating-count">
+            ({reviewsCount} reviews)
+          </span>
         </div>
-        <div className="menu-card-price">{pizza.price} €</div>
+        <div className="menu-card-price">{formatPrice(pizza.price)}</div>
         <button className="menu-card-button-add" onClick={handleAddToCart}>
           Lisää ostoskoriin
         </button>
 
-        <button
-          className="menu-card-button-reviews"
-          onClick={handleClick} // Open the reviews modal
-        >
+        <button className="menu-card-button-reviews" onClick={handleClick}>
           Katso arvostelut
         </button>
 
-        {/* Render the ReviewModal when open */}
         {isReviewModalOpen && (
-          <ReviewModal
-            pizzaId={pizza.pizza_id} // Pass pizzaId to fetch specific reviews
-            onClose={handleCloseModal} // Pass close function to close modal
-          />
+          <ReviewModal pizzaId={pizza.pizza_id} onClose={handleCloseModal} />
         )}
       </div>
     </div>

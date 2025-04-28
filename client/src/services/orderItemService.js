@@ -1,6 +1,5 @@
 import {fetchData} from './fetchData.js';
 
-// Fetch reviews for a specific pizza
 const getReviews = async (pizzaId) => {
   try {
     const response = await fetchData(
@@ -9,7 +8,7 @@ const getReviews = async (pizzaId) => {
     return response;
   } catch (error) {
     console.error('Error fetching reviews:', error);
-    throw error; // Propagate the error for higher level handling
+    throw error;
   }
 };
 

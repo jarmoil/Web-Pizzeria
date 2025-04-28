@@ -1,9 +1,9 @@
 import React from 'react';
-import useOrderItemReviews from '../hooks/useOrderItemReviews'; // Assuming the hook is in this path
+import useOrderItemReviews from '../hooks/useOrderItemReviews';
 import OrderItemReviewSection from './OrderItemReviewSection';
 
 const ReviewModal = ({pizzaId, onClose}) => {
-  const {reviews, averageRating, loading, error} = useOrderItemReviews(pizzaId); // Fetch reviews for the specific pizza
+  const {reviews, averageRating, loading, error} = useOrderItemReviews(pizzaId);
 
   return (
     <div className="reviews-modal">
@@ -13,7 +13,6 @@ const ReviewModal = ({pizzaId, onClose}) => {
         </button>
         <h2>Arvostelut: Pizza {pizzaId}</h2>
 
-        {/* Pass reviews to the section */}
         <OrderItemReviewSection
           reviews={reviews}
           averageRating={averageRating}

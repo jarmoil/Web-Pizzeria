@@ -6,7 +6,6 @@ import CartTotal from './CartTotal';
 const CartButton = ({isVisible, onClose}) => {
   const {cart, increaseQuantity, decreaseQuantity, removeFromCart} = useCart();
 
-  // Calculate total price of all items in the cart
   const totalPrice = cart.reduce(
     (total, pizza) => total + pizza.price * pizza.quantity,
     0
