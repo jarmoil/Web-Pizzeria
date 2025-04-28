@@ -1,4 +1,4 @@
-import {body, param} from 'express-validator';
+import {body, param, query} from 'express-validator';
 import {handleValidationErrors, sanitizeInput} from './shared.js';
 
 const validateCreateOrderItemReview = [
@@ -22,9 +22,18 @@ const validateCreateOrderItemReview = [
   handleValidationErrors,
 ];
 
+const validateOrderItemReviewPizzaIdParam = [
+  query('pizza_id').isInt().withMessage('Invalid order item review PIZZA ID'),
+  handleValidationErrors,
+];
+
 const validateOrderItemReviewIdParam = [
   param('id').isInt().withMessage('Invalid order item review ID'),
   handleValidationErrors,
 ];
 
-export {validateCreateOrderItemReview, validateOrderItemReviewIdParam};
+export {
+  validateCreateOrderItemReview,
+  validateOrderItemReviewIdParam,
+  validateOrderItemReviewPizzaIdParam,
+};

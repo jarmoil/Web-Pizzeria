@@ -334,8 +334,7 @@ footer {
   align-items: center;
   justify-content: center;
   text-align: center;
-  background: url('/images/hero-picture.jpg') no-repeat center
-    center;
+  background: url('/images/hero-picture.jpg') no-repeat center center;
   background-size: cover;
   background-position: center;
   padding: 2rem;
@@ -1121,12 +1120,11 @@ header nav {
 }
 
 header nav a {
-  color: white;
+  color: black;
   margin-right: 15px;
   text-decoration: none;
   font-size: 1.2rem;
 }
-
 
 header nav a:hover {
   text-decoration: underline;

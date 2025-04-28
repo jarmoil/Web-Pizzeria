@@ -1,53 +1,57 @@
-import { Link, Outlet } from "react-router-dom";
-import { useState } from "react";
-import SignInButton from "./SignInButton";
-import CartButton from "./CartButton";
+import {Link, Outlet} from 'react-router-dom';
+import {useState} from 'react';
+import {useCart} from '../context/CartContext';
+import SignInButton from './SignInButton';
+import CartButton from './CartButton';
 
 const Layout = () => {
-    const [isCartVisible, setCartVisible] = useState(false);
-    const [isSignInVisible, setSignInVisible] = useState(false);
+  const [isCartVisible, setCartVisible] = useState(false);
+  const [isSignInVisible, setSignInVisible] = useState(false);
 
-    const toggleCart = () => setCartVisible(!isCartVisible);
-    const toggleSignIn = () => setSignInVisible(!isSignInVisible);
+  const {cartCount} = useCart();
 
-    return(
-        <div>
-            <header>
-                <nav>
-                <div id="logo">MyShop</div>
+  const toggleCart = () => setCartVisible(!isCartVisible);
+  const toggleSignIn = () => setSignInVisible(!isSignInVisible);
 
-                    <ul>
-                        <li>
-                            <Link to="/">Home</Link>
-                        </li>
-                        <li>
-                            <Link to="/menu">Menu</Link>
-                        </li>
-                        <li>
-                            <Link to="/managementPage">Management Page</Link>
-                        </li>
-                        <li>
-                            <Link to="/location">Location</Link>
-                        </li>
-                    </ul>
+  return (
+    <div>
+      <header>
+        <nav>
+          <div id="logo">MyShop</div>
 
-                    <div id="header-actions">
-                        <button id="cart-btn" onClick={toggleCart}>
-                        Cart
-                        <span id="cart-count">3</span>
-                        </button>
-                        <button id="signin-btn" onClick={toggleSignIn}>Sign In</button>
-                    </div>
-                    <SignInButton isVisible={isSignInVisible} onClose={toggleSignIn} />
-                    <CartButton isVisible={isCartVisible} onClose={toggleCart} />
+          <ul>
+            <li>
+              <Link to="/">Home</Link>
+            </li>
+            <li>
+              <Link to="/menu">Menu</Link>
+            </li>
+            <li>
+              <Link to="/managementPage">Management Page</Link>
+            </li>
+            <li>
+              <Link to="/location">Location</Link>
+            </li>
+          </ul>
 
-                </nav>
-            </header>
-            <main>
-                <Outlet />
-            </main>
-        </div>
-    )
-}
+          <div id="header-actions">
+            <button id="cart-btn" onClick={toggleCart}>
+              Cart
+              <span id="cart-count">{cartCount}</span>
+            </button>
+            <button id="signin-btn" onClick={toggleSignIn}>
+              Sign In
+            </button>
+          </div>
+          <SignInButton isVisible={isSignInVisible} onClose={toggleSignIn} />
+          <CartButton isVisible={isCartVisible} onClose={toggleCart} />
+        </nav>
+      </header>
+      <main>
+        <Outlet />
+      </main>
+    </div>
+  );
+};
 
 export default Layout;

@@ -3,6 +3,7 @@ import {
   getOrderItemReviews,
   deleteOrderItemReview,
   findOrderItemReviewById,
+  getOrderItemReviewsByPizzaId,
 } from '../models/order_item_review-model.js';
 
 export const postOrderItemReview = async (req, res, next) => {
@@ -25,6 +26,20 @@ export const postOrderItemReview = async (req, res, next) => {
 export const fetchOrderItemReviews = async (req, res, next) => {
   try {
     const reviews = await getOrderItemReviews();
+    res.json(reviews);
+  } catch (err) {
+    next(err);
+  }
+};
+
+export const fetchOrderItemReviewsByPizzaId = async (req, res, next) => {
+  const {pizza_id} = req.query; // Get pizza_id from query params
+
+  try {
+    const reviews = await getOrderItemReviewsByPizzaId(pizza_id); // Fetch reviews filtered by pizza_id
+    if (reviews.length === 0) {
+      return res.json([]);
+    }
     res.json(reviews);
   } catch (err) {
     next(err);
