@@ -1,14 +1,17 @@
 import {Link, Outlet} from 'react-router-dom';
 import {useState} from 'react';
 import {useCart} from '../context/CartContext';
+import {useAuth} from '../hooks/useAuth';
 import SignInButton from './SignInButton';
 import CartButton from './CartButton';
+import LogoutButton from './LogoutButton';
 
 const Layout = () => {
   const [isCartVisible, setCartVisible] = useState(false);
   const [isSignInVisible, setSignInVisible] = useState(false);
 
   const {cartCount} = useCart();
+  const {user} = useAuth();
 
   const toggleCart = () => setCartVisible(!isCartVisible);
   const toggleSignIn = () => setSignInVisible(!isSignInVisible);
@@ -39,14 +42,25 @@ const Layout = () => {
               Cart
               <span id="cart-count">{cartCount}</span>
             </button>
-            <button id="signin-btn" onClick={toggleSignIn}>
-              Sign In
-            </button>
+
+            {user ? (
+              <>
+                <LogoutButton />
+              </>
+            ) : (
+              <button id="signin-btn" onClick={toggleSignIn}>
+                Sign In
+              </button>
+            )}
           </div>
-          <SignInButton isVisible={isSignInVisible} onClose={toggleSignIn} />
+
+          {!user && (
+            <SignInButton isVisible={isSignInVisible} onClose={toggleSignIn} />
+          )}
           <CartButton isVisible={isCartVisible} onClose={toggleCart} />
         </nav>
       </header>
+
       <main>
         <Outlet />
       </main>
