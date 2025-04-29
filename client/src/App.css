@@ -423,7 +423,7 @@ footer {
 }
 
 .homepage-pizza-card {
-  background: #000000;
+  background: #ffffff;
   border-radius: 12px;
   overflow: hidden;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
@@ -446,7 +446,7 @@ footer {
   padding: 1.5rem;
   border-radius: 12px;
   margin-bottom: 2rem;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 8px rgba(255, 255, 255, 0.1);
 }
 
 .homepage-review-form h3 {
@@ -512,7 +512,7 @@ footer {
   gap: 1rem;
   margin-bottom: 1.5rem;
   padding: 0.5rem;
-  background: #000000;
+  background: #ffffff;
   border-radius: 8px;
 }
 
@@ -573,7 +573,7 @@ footer {
 
 .homepage-rating-card {
   flex: 0 0 auto;
-  background-color: #000000;
+  background-color: #ffffff;
   padding: 1rem;
   border-radius: 12px;
   scroll-snap-align: start;
@@ -700,7 +700,7 @@ footer {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 2rem;
-  background: #000000;
+  background: #ffffff;
   padding: 2rem;
   border-radius: 12px;
 }
