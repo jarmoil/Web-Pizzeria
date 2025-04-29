@@ -11,7 +11,7 @@ const Layout = () => {
   const [isSignInVisible, setSignInVisible] = useState(false);
 
   const {cartCount} = useCart();
-  const {user} = useAuth();
+  const {user, role} = useAuth();
 
   const toggleCart = () => setCartVisible(!isCartVisible);
   const toggleSignIn = () => setSignInVisible(!isSignInVisible);
@@ -29,9 +29,11 @@ const Layout = () => {
             <li>
               <Link to="/menu">Menu</Link>
             </li>
+            {user && (role === 'admin' || role === 'employee') && (
             <li>
               <Link to="/managementPage">Management Page</Link>
             </li>
+            )}
             <li>
               <Link to="/location">Location</Link>
             </li>

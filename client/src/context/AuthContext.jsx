@@ -9,10 +9,24 @@ export const AuthProvider = ({children}) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
+  // Helper function to decode the JWT token
+  const decodeToken = (token) => {
+    try {
+      const payload = JSON.parse(atob(token.split('.')[1])); // Decode the payload
+      return payload;
+    } catch (err) {
+      console.error('Failed to decode token:', err);
+      return null;
+    }
+  };
+
   useEffect(() => {
     const token = getToken();
     if (token) {
-      setUser({token});
+      const decoded = decodeToken(token); // Decode the token
+      if (decoded) {
+        setUser({ token, role: decoded.role }); // Store the role in the user state
+      }
     }
   }, []);
 
@@ -20,9 +34,12 @@ export const AuthProvider = ({children}) => {
     setLoading(true);
     setError(null);
     try {
-      const {token, user} = await loginUser(credentials);
+      const { token } = await loginUser(credentials); // Get the token from the backend
       setToken(token);
-      setUser({...user, token});
+      const decoded = decodeToken(token); // Decode the token
+      if (decoded) {
+        setUser({ token, role: decoded.role }); // Store the role in the user state
+      }
     } catch (err) {
       setError(err.response?.data?.message || 'Login failed');
     } finally {

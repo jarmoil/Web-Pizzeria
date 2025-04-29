@@ -6,6 +6,7 @@ const useAuth = () => {
 
   return {
     token: user?.token,
+    role: user?.role, // Expose the role
     user,
     login,
     logout,
