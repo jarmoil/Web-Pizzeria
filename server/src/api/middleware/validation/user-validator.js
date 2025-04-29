@@ -30,7 +30,7 @@ const userValidator = [
     .isLength({min: 6})
     .withMessage('Password must be at least 6 characters long'),
 
-  body('phone_number').matches(phoneRegex).withMessage('Invalid phone number'),
+  /* body('phone_number').matches(phoneRegex).withMessage('Invalid phone number'),
 
   body('user_address')
     .trim()
@@ -39,7 +39,7 @@ const userValidator = [
     .matches(nameRegex)
     .withMessage('Invalid characters')
     .escape()
-    .stripLow(),
+    .stripLow(), */
 
   body('profile_picture')
     .optional()
