@@ -1,8 +1,29 @@
+import { useState } from 'react';
+import { handleRegistration } from '../services/registerLogic';
+
+
 const SignUp = () => {
+  const [formData, setFormData] = useState({
+    user_name: '',
+    email: '',
+    psw: '',
+    pswRepeat: '',
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    await handleRegistration(formData); // Call the external logic
+  };
+
   return (
 
     <section id="signUp-section">
-      <form action="">
+      <form onSubmit={handleSubmit}>
         <div className="signUp-container">
           <h1 id="signUp-container-h1">Register</h1>
           <p id="signUp-container-p">
@@ -16,6 +37,8 @@ const SignUp = () => {
             placeholder="Enter Username"
             name="user_name"
             id="user_name"
+            value={formData.user_name}
+            onChange={handleChange}
             required
           />
 
@@ -25,6 +48,8 @@ const SignUp = () => {
             placeholder="Enter Email"
             name="email"
             id="email"
+            value={formData.email}
+            onChange={handleChange}
             required
           />
 
@@ -34,6 +59,8 @@ const SignUp = () => {
             placeholder="Enter Password"
             name="psw"
             id="psw"
+            value={formData.psw}
+            onChange={handleChange}
             required
           />
 
@@ -41,11 +68,12 @@ const SignUp = () => {
           <input
             type="password"
             placeholder="Repeat Password"
-            name="psw-repeat"
+            name="pswRepeat"
             id="psw-repeat"
+            value={formData.pswRepeat}
+            onChange={handleChange}
             required
           />
-          <hr />
 
           <p id="signUp-container-terms-privacy">
             By creating an account you agree to our

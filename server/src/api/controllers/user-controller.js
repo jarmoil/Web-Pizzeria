@@ -50,9 +50,6 @@ const registerUser = async (req, res, next) => {
     user_name,
     user_email,
     user_password,
-    phone_number,
-    user_address,
-    profile_picture,
   } = req.body;
 
   try {
@@ -60,9 +57,6 @@ const registerUser = async (req, res, next) => {
       user_name,
       user_email,
       user_password,
-      phone_number,
-      user_address,
-      profile_picture,
       role: 'customer', // regular users are always registered as 'customer'
     });
 
