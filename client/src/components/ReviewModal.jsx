@@ -1,9 +1,11 @@
 import React from 'react';
 import useOrderItemReviews from '../hooks/useOrderItemReviews';
 import OrderItemReviewSection from './OrderItemReviewSection';
+import PostReviewForm from './PostReviewForm';
 
 const ReviewModal = ({pizzaId, onClose}) => {
-  const {reviews, averageRating, loading, error} = useOrderItemReviews(pizzaId);
+  const {reviews, averageRating, loading, error, postReview} =
+    useOrderItemReviews(pizzaId);
 
   return (
     <div className="reviews-modal">
@@ -19,6 +21,8 @@ const ReviewModal = ({pizzaId, onClose}) => {
           loading={loading}
           error={error}
         />
+
+        <PostReviewForm postReview={postReview} />
       </div>
     </div>
   );

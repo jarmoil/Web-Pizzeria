@@ -22,7 +22,7 @@ export const AuthProvider = ({children}) => {
     try {
       const {token, user} = await loginUser(credentials);
       setToken(token);
-      setUser(user);
+      setUser({...user, token});
     } catch (err) {
       setError(err.response?.data?.message || 'Login failed');
     } finally {
