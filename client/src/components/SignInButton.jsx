@@ -1,14 +1,29 @@
-import { useNavigate } from "react-router-dom";
+import {useState} from 'react';
+import {useNavigate} from 'react-router-dom';
+import {useAuth} from '../hooks/useAuth';
 
-const SignInButton = ({ isVisible, onClose }) => {
+const SignInButton = ({isVisible, onClose}) => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const {login, error, loading} = useAuth();
   const navigate = useNavigate();
 
+  const handleLogin = async () => {
+    try {
+      await login({email, password});
+      onClose();
+      window.location.reload();
+    } catch (err) {
+      console.error(err.message);
+    }
+  };
+
   const handleForgotPassword = () => {
-    navigate("/forgotPassword"); // Redirect to the ForgotPassword route
+    navigate('/forgotPassword');
   };
 
   const handleSignUp = () => {
-    navigate("/signup"); // Redirect to the SignUp route
+    navigate('/signup');
   };
 
   return (
@@ -21,11 +36,23 @@ const SignInButton = ({ isVisible, onClose }) => {
           <div id="signin-heading">
             <span>Sign In</span>
           </div>
-          <input id="signin-email" type="email" placeholder="Email" />
-          <input id="signin-password" type="password" placeholder="Password" />
+          <input
+            id="signin-email"
+            type="email"
+            placeholder="Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          <input
+            id="signin-password"
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
           <div className="remember-forgot">
             <label>
-              <input type="checkbox" />Remember me
+              <input type="checkbox" /> Remember me
             </label>
             <button
               type="button"
@@ -35,12 +62,19 @@ const SignInButton = ({ isVisible, onClose }) => {
               Forgot Password?
             </button>
           </div>
-          <button id="signin-submit-btn">Login</button>
+          <button
+            id="signin-submit-btn"
+            onClick={handleLogin}
+            disabled={loading}
+          >
+            {loading ? 'Logging in...' : 'Login'}
+          </button>
+          {error && <p className="error-message">{error}</p>}
           <p>
             Don't have an account?
-            <button type="button"
-            className="signup-btn"
-            onClick={handleSignUp}>Sign Up</button>
+            <button type="button" className="signup-btn" onClick={handleSignUp}>
+              Sign Up
+            </button>
           </p>
         </div>
       </div>

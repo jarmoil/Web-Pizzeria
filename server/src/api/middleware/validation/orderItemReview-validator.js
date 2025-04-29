@@ -1,6 +1,8 @@
 import {body, param, query} from 'express-validator';
 import {handleValidationErrors, sanitizeInput} from './shared.js';
 
+const SAFE_REGEX = /^[a-zA-Z0-9äöåÄÖÅ\s.,!?'"()\-–—:;]+$/u;
+
 const validateCreateOrderItemReview = [
   sanitizeInput(['comment']),
   body('order_item_id')
@@ -15,7 +17,7 @@ const validateCreateOrderItemReview = [
     .withMessage('Comment is required')
     .isString()
     .withMessage('Comment must be a valid string')
-    .matches(/^[a-zA-Z0-9\s\-_,]+$/)
+    .matches(SAFE_REGEX)
     .withMessage('Invalid characters')
     .escape()
     .stripLow(),

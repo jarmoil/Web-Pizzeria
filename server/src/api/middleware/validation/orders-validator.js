@@ -1,13 +1,15 @@
 import {body, param} from 'express-validator';
 import {handleValidationErrors, sanitizeInput} from './shared.js';
 
+const SAFE_REGEX = /^[a-zA-Z0-9äöåÄÖÅ\s.,!?'"()\-–—:;]+$/u;
+
 const validateCreateOrder = [
   sanitizeInput(['address']),
   body('address')
     .trim()
     .notEmpty()
     .withMessage('Address is required')
-    .matches(/^[a-zA-Z0-9\s\-_,]+$/)
+    .matches(SAFE_REGEX)
     .withMessage('Invalid characters')
     .escape()
     .stripLow(),

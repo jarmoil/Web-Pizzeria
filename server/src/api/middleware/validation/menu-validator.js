@@ -1,7 +1,7 @@
 import {body, param} from 'express-validator';
 import {handleValidationErrors, sanitizeInput} from './shared.js';
 
-const nameRegex = /^[a-zA-Z0-9\s\-_,]+$/;
+const SAFE_REGEX = /^[a-zA-Z0-9äöåÄÖÅ\s.,!?'"()\-–—:;]+$/u;
 
 const validateMenuItemCreation = [
   sanitizeInput(['name', 'description']),
@@ -9,7 +9,7 @@ const validateMenuItemCreation = [
     .trim()
     .notEmpty()
     .withMessage('Name is required')
-    .matches(nameRegex)
+    .matches(SAFE_REGEX)
     .withMessage('Invalid characters')
     .escape()
     .stripLow(),
@@ -17,7 +17,7 @@ const validateMenuItemCreation = [
     .trim()
     .notEmpty()
     .withMessage('Description is required')
-    .matches(nameRegex)
+    .matches(SAFE_REGEX)
     .withMessage('Invalid characters')
     .escape()
     .stripLow(),
