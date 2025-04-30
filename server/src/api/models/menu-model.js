@@ -12,6 +12,13 @@ const getItemById = async (id) => {
   return rows[0];
 };
 
+const getDailyPizza = async () => {
+  const [rows] = await db.execute(
+    'SELECT * FROM menu WHERE is_daily = 1 LIMIT 1'
+  );
+  return rows[0] || null;
+};
+
 const insertItem = async ({name, description, price, image}) => {
   const [result] = await db.execute(
     'INSERT INTO menu (pizza_name, pizza_description, price, image_url) VALUES (?, ?, ?, ?)',
@@ -33,15 +40,51 @@ const removeItemById = async (id) => {
   return result;
 };
 
-const editMenuItem = async (id, item) => {
-  const {name, description, price, image} = item;
+// Ei toiminut näköjään, että jos yrittää muuttaa vain yhtä saraketta. Asettaa muut sarakkeet null, mikä ei käy.
+// Niin pitää nyt vähän monimutkaistaa tätä funktiota, teen helper funktion tsekkaamaan, että onko se sarake mainittu bodyssa vai ei
 
-  const [result] = await db.query(
-    'UPDATE menu SET pizza_name = ?, pizza_description = ?, price = ?, image_url = ? WHERE pizza_id = ?',
-    [name, description, price, image, id]
-  );
+const buildUpdateQuery = (item) => {
+  const updates = [];
+  const values = [];
+
+  Object.keys(item).forEach((key) => {
+    if (item[key] !== undefined) {
+      updates.push(`${key} = ?`);
+      values.push(item[key]);
+    }
+  });
+
+  return {updates, values};
+};
+
+const editMenuItem = async (id, item) => {
+  // Jos is_daily on mainittu bodyssa, reset kaikki false eli 0
+  if ('is_daily' in item) {
+    await db.query('UPDATE menu SET is_daily = 0 WHERE pizza_id != ?', [id]);
+  }
+
+  // Kysely tehdään dynaamisesti annetuistea kentistä
+  const {updates, values} = buildUpdateQuery(item);
+
+  if (updates.length === 0) {
+    return null; // Ei päivityksiä
+  }
+
+  // Lisää pizza_id
+  values.push(id);
+
+  // SQL kyselyn rakennus
+  const sql = `UPDATE menu SET ${updates.join(', ')} WHERE pizza_id = ?`;
+
+  const [result] = await db.query(sql, values);
 
   return result.affectedRows > 0 ? {updated: true} : null;
 };
-
-export {getAllItems, getItemById, insertItem, removeItemById, editMenuItem};
+export {
+  getAllItems,
+  getItemById,
+  insertItem,
+  removeItemById,
+  editMenuItem,
+  getDailyPizza,
+};

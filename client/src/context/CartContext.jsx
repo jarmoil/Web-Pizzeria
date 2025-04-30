@@ -72,6 +72,10 @@ const CartProvider = ({children}) => {
 
   const cartCount = cart.length;
 
+  const clearCart = () => {
+    setCart([]);
+  };
+
   // Save cart to localStorage whenever it changes
   useEffect(() => {
     if (cart.length > 0) {
@@ -88,6 +92,7 @@ const CartProvider = ({children}) => {
         increaseQuantity,
         decreaseQuantity,
         cartCount,
+        clearCart,
       }}
     >
       {children}

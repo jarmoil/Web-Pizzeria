@@ -120,15 +120,16 @@ describe('Menu API', () => {
     expect(res.body).toHaveProperty('pizza_id', menuId);
   });
 
+  // Muutin nimet PUT, jotta täsmää sql sarakkeen nimeä. Saattaa aiheuttaa hämmennystä
   test('PUT /api/v1/menu/:id - update menu item (admin)', async () => {
     const res = await request(app)
       .put(`/api/v1/menu/${menuId}`)
       .set('Authorization', `Bearer ${adminToken}`)
       .send({
-        name: 'Test Pizza',
-        description: 'A test pizza item',
+        pizza_name: 'Test Pizza',
+        pizza_description: 'A test pizza item',
         price: 9.99,
-        image: 'http://example.com/testpizza.png',
+        image_url: 'http://example.com/testpizza.png',
       });
 
     expect(res.statusCode).toBe(200);

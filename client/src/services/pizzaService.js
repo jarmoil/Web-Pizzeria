@@ -4,4 +4,8 @@ const getAllPizzas = async () => {
   return fetchData('api/v1/menu');
 };
 
-export {getAllPizzas};
+const getDailyPizza = async () => {
+  return fetchData('api/v1/menu/daily');
+};
+
+export {getAllPizzas, getDailyPizza};
