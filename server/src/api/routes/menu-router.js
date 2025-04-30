@@ -5,17 +5,18 @@ import {
   addMenuItem,
   deleteMenuItem,
   updateMenuItem,
+  getDailyMenuItem,
 } from '../controllers/menu-controller.js';
 import {authenticateToken, requireRole} from '../middleware/auth-middleware.js';
 import {
   validateMenuIdParam,
   validateMenuItemCreation,
-  validateMenuItemUpdate,
 } from '../middleware/validation/menu-validator.js';
 
 const menuRouter = express.Router();
 
 menuRouter.get('/', getAllMenuItems);
+menuRouter.get('/daily', getDailyMenuItem);
 menuRouter.get('/:id', validateMenuIdParam, getMenuItemById);
 menuRouter.post(
   '/',
@@ -28,7 +29,6 @@ menuRouter.put(
   '/:id',
   authenticateToken,
   requireRole('admin', 'employee'),
-  validateMenuItemUpdate,
   updateMenuItem
 ); // admin or employee only
 menuRouter.delete(

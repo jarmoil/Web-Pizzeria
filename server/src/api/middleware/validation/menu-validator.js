@@ -29,11 +29,11 @@ const validateMenuItemCreation = [
   handleValidationErrors,
 ];
 
-const validateMenuItemUpdate = [...validateMenuItemCreation];
+// const validateMenuItemUpdate = [...validateMenuItemCreation];
 
 const validateMenuIdParam = [
   param('id').isInt().withMessage('Invalid menu item ID'),
   handleValidationErrors,
 ];
 
-export {validateMenuItemCreation, validateMenuItemUpdate, validateMenuIdParam};
+export {validateMenuItemCreation, validateMenuIdParam};

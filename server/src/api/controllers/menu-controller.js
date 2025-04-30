@@ -4,6 +4,7 @@ import {
   insertItem,
   removeItemById,
   editMenuItem,
+  getDailyPizza,
 } from '../models/menu-model.js';
 
 const getAllMenuItems = async (req, res, next) => {
@@ -24,6 +25,19 @@ const getMenuItemById = async (req, res, next) => {
       const error = new Error('Menu item not found');
       error.status = 404;
       next(error);
+    }
+  } catch (err) {
+    next(err);
+  }
+};
+
+const getDailyMenuItem = async (req, res, next) => {
+  try {
+    const pizza = await getDailyPizza();
+    if (pizza) {
+      res.json(pizza);
+    } else {
+      res.status(404).json({message: 'No daily pizza set.'});
     }
   } catch (err) {
     next(err);
@@ -79,4 +93,5 @@ export {
   addMenuItem,
   deleteMenuItem,
   updateMenuItem,
+  getDailyMenuItem,
 };
