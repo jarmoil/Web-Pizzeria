@@ -28,6 +28,16 @@ export const useCheckout = () => {
       return;
     }
 
+    if (!token) {
+      setFeedback({
+        message:
+          'You need to be logged in to place an order. Please log in or sign up.',
+        type: 'error',
+      });
+      autoClearFeedback();
+      return;
+    }
+
     const totalPrice = cart.reduce(
       (total, pizza) => total + pizza.price * pizza.quantity,
       0
