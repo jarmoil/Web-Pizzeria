@@ -1,6 +1,6 @@
 import './App.css';
 import Layout from './components/Layout';
-import Home from './components/Home';
+import FrontPage from './pages/FrontPage';
 import ManagementPage from './components/ManagementPage';
 import Location from './components/Location';
 import {Route, Routes} from 'react-router-dom';
@@ -16,7 +16,7 @@ function App() {
       <AuthProvider>
         <Routes>
           <Route element={<Layout />}>
-            <Route path="/" element={<Home />} />
+            <Route path="/" element={<FrontPage />} />
             <Route path="/menu" element={<MenuPage />} />
             <Route
               path="/managementPage"
