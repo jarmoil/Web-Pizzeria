@@ -13,8 +13,12 @@ const getItemById = async (id) => {
 };
 
 const getDailyPizza = async () => {
+  const weekday = new Date()
+    .toLocaleDateString('en-US', {weekday: 'short'})
+    .toLowerCase();
   const [rows] = await db.execute(
-    'SELECT * FROM menu WHERE is_daily = 1 LIMIT 1'
+    'SELECT * FROM menu WHERE daily_weekday = ? LIMIT 1',
+    [weekday]
   );
   return rows[0] || null;
 };
@@ -59,8 +63,13 @@ const buildUpdateQuery = (item) => {
 
 const editMenuItem = async (id, item) => {
   // Jos is_daily on mainittu bodyssa, reset kaikki false eli 0
-  if ('is_daily' in item) {
-    await db.query('UPDATE menu SET is_daily = 0 WHERE pizza_id != ?', [id]);
+  if ('daily_weekday' in item) {
+    const weekday = item.daily_weekday;
+    // Resettaa aikaisempi daily pizza
+    await db.query(
+      'UPDATE menu SET daily_weekday = NULL WHERE daily_weekday = ?',
+      [weekday]
+    );
   }
 
   // Kysely tehdään dynaamisesti annetuistea kentistä
@@ -80,6 +89,7 @@ const editMenuItem = async (id, item) => {
 
   return result.affectedRows > 0 ? {updated: true} : null;
 };
+
 export {
   getAllItems,
   getItemById,

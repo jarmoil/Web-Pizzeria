@@ -73,6 +73,18 @@ const updateMenuItem = async (req, res, next) => {
   const {id} = req.params;
   const updatedItem = req.body;
 
+  // Pieni validointi tähän
+  if (
+    updatedItem.daily_weekday &&
+    !['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'].includes(
+      updatedItem.daily_weekday
+    )
+  ) {
+    const error = new Error('Invalid weekday for daily pizza.');
+    error.status = 400;
+    return next(error);
+  }
+
   try {
     const result = await editMenuItem(id, updatedItem);
     if (result) {
