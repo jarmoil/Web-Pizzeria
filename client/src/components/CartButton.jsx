@@ -9,6 +9,7 @@ import {useCheckout} from '../hooks/useCheckout';
 const CartButton = ({isVisible, onClose}) => {
   const {cart, increaseQuantity, decreaseQuantity, removeFromCart} = useCart();
   const [address, setAddress] = useState('');
+  const [isPickup, setIsPickup] = useState(false);
   const {handleCheckout, feedback, loading} = useCheckout();
 
   const totalPrice = cart.reduce(
@@ -34,10 +35,27 @@ const CartButton = ({isVisible, onClose}) => {
           />
         </ul>
         <CartTotal totalPrice={totalPrice} />
-        <AddressInput address={address} setAddress={setAddress} />
+
+        <div className="pickup-option">
+          <label>
+            <input
+              type="checkbox"
+              checked={isPickup}
+              onChange={(e) => setIsPickup(e.target.checked)}
+            />
+            Pick up from restaurant (no delivery)
+          </label>
+        </div>
+
+        <AddressInput
+          address={address}
+          setAddress={setAddress}
+          disabled={isPickup}
+        />
+
         <button
           id="cart-checkout-btn"
-          onClick={() => handleCheckout(address)}
+          onClick={() => handleCheckout(address, isPickup)}
           disabled={loading}
         >
           {loading ? 'Processing...' : 'Checkout'}

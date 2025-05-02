@@ -9,7 +9,7 @@ export const useCheckout = () => {
 
   const token = localStorage.getItem('authToken');
 
-  const handleCheckout = async (address) => {
+  const handleCheckout = async (address, isPickup) => {
     if (cart.length === 0) {
       setFeedback({
         message: 'Your cart is empty. Add items before checkout.',
@@ -19,7 +19,7 @@ export const useCheckout = () => {
       return;
     }
 
-    if (!address.trim()) {
+    if (!isPickup && !address.trim()) {
       setFeedback({
         message: 'Please provide a delivery address.',
         type: 'error',
@@ -47,7 +47,7 @@ export const useCheckout = () => {
     setFeedback({message: null, type: null});
 
     try {
-      await createOrder(address, cart, totalPrice, token);
+      await createOrder(address, cart, totalPrice, isPickup, token);
       setFeedback({
         message: 'Your order has been placed successfully!',
         type: 'success',

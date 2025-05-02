@@ -2,10 +2,17 @@ import db from '../../db/connection.js';
 
 // Luo tilaus, haetaan user_id requestista, kokonaishinta lasketaan ja käyttäjältä tulee osoite
 // total_price = items { pizza.price * item.quantity}
-const createOrder = async ({user_id, total_price, address}) => {
+const createOrder = async ({
+  user_id,
+  total_price,
+  address,
+  is_pickup = false,
+}) => {
+  const finalAddress = is_pickup ? null : address;
+
   const [result] = await db.execute(
-    `INSERT INTO orders (user_id, total_price, address) VALUES (?, ?, ?)`,
-    [user_id, total_price, address]
+    `INSERT INTO orders (user_id, total_price, address, is_pickup) VALUES (?, ?, ?, ?)`,
+    [user_id, total_price, finalAddress, is_pickup]
   );
   return result.insertId;
 };

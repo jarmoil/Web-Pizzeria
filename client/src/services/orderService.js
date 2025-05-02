@@ -1,9 +1,16 @@
 import {fetchData} from './fetchData';
 
-export const createOrder = async (address, cartItems, totalPrice, token) => {
+export const createOrder = async (
+  address,
+  cartItems,
+  totalPrice,
+  isPickup,
+  token
+) => {
   try {
     const orderData = {
       address,
+      is_pickup: isPickup,
       items: cartItems.map((item) => ({
         pizza_id: item.pizza_id,
         quantity: item.quantity,

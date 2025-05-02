@@ -13,7 +13,7 @@ import {getItemById} from '../models/menu-model.js';
 // Luo uusi tilaus
 const createOrderC = async (req, res, next) => {
   const user_id = req.user.user_id;
-  const {address, items} = req.body;
+  const {address, items, is_pickup = false} = req.body;
 
   try {
     let total_price = 0;
@@ -30,7 +30,12 @@ const createOrderC = async (req, res, next) => {
       total_price += pizza.price * item.quantity;
     }
 
-    const order_id = await createOrder({user_id, total_price, address});
+    const order_id = await createOrder({
+      user_id,
+      total_price,
+      address,
+      is_pickup,
+    });
 
     for (const item of items) {
       const pizza = await getItemById(item.pizza_id);
