@@ -74,13 +74,27 @@ const getOrderWithItems = async (order_id) => {
 
 // Hae kaikki tilaukset adminia ja työntekijää varten
 const getAllOrders = async () => {
-  const [rows] = await db.execute(
+  const [orders] = await db.execute(
     `SELECT o.*, u.email as user_email
      FROM orders o
      JOIN user_accounts u ON o.user_id = u.user_id
      ORDER BY o.created_at DESC`
   );
-  return rows;
+
+  const ordersWithItems = await Promise.all(
+    orders.map(async (order) => {
+      const [itemRows] = await db.execute(
+        `SELECT oi.order_item_id, oi.pizza_id, m.pizza_name, oi.quantity, oi.price_per_unit
+         FROM order_items oi
+         JOIN menu m ON oi.pizza_id = m.pizza_id
+         WHERE oi.order_id = ?`,
+        [order.order_id]
+      );
+      return {...order, items: itemRows};
+    })
+  );
+
+  return ordersWithItems;
 };
 
 // Hae käyttäjän kaikki tilaukset

@@ -2,40 +2,41 @@ import {useState, useEffect} from 'react';
 import {fetchBusStops} from '../services/hslService.js';
 
 const useBusStops = (lat, lon, radius = 100) => {
-  const [busStops, setBusStops] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [state, setState] = useState({
+    busStops: [],
+    loading: true,
+    error: null,
+  });
 
   useEffect(() => {
     if (!lat || !lon) return;
 
     const fetchData = async () => {
+      setState((prev) => ({...prev, loading: true}));
       try {
-        setLoading(true);
         const stopsData = await fetchBusStops(lat, lon, radius);
-
-        const parsedStops = stopsData.map(({node}) => ({
-          name: node.stop.name,
-          vehicleMode: node.stop.vehicleMode,
-          code: node.stop.code,
-          lat: node.stop.lat,
-          lon: node.stop.lon,
-          distance: node.distance,
+        const parsedStops = stopsData.map(({node: {stop, distance}}) => ({
+          name: stop.name,
+          vehicleMode: stop.vehicleMode,
+          code: stop.code,
+          lat: stop.lat,
+          lon: stop.lon,
+          distance,
         }));
-
-        setBusStops(parsedStops);
-      } catch (err) {
-        console.log(err);
-        setError('Failed to fetch bus stops');
-      } finally {
-        setLoading(false);
+        setState({busStops: parsedStops, loading: false, error: null});
+      } catch {
+        setState((prev) => ({
+          ...prev,
+          error: 'Failed to fetch bus stops',
+          loading: false,
+        }));
       }
     };
 
     fetchData();
   }, [lat, lon, radius]);
 
-  return {busStops, loading, error};
+  return state;
 };
 
 export default useBusStops;
