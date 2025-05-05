@@ -1218,8 +1218,7 @@ header #header-actions button:hover {
 }
 
 #cart-btn,
-#signin-btn,
-#signup-btn {
+#signin-btn {
   margin-left: 10px;
   padding: 10px 20px;
   border: none;
@@ -1229,10 +1228,33 @@ header #header-actions button:hover {
   font-size: 1rem;
   border-radius: 5px;
 }
+.signup-btn {
+  margin-left: auto;
+  padding: 8px 16px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  background-color: #5f6160;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.signup-btn:hover {
+  background-color: #000000;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.signup-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
 
 #cart-btn:hover,
-#signin-btn:hover,
-#signup-btn:hover {
+#signin-btn:hover {
   background-color: #ff5a4f;
 }
 
@@ -1271,14 +1293,35 @@ header #header-actions button:hover {
   display: none;
 }
 
-#signin-box,
-#cart-box {
-  position: relative;
+.cart-dropdown.visible {
+  display: block;
+}
+.signin-box {
   background-color: #fff;
+  color: initial;
   padding: 20px;
-  width: 300px;
+  width: 90%;
+  max-width: 400px;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  position: relative;
+}
+#cart-box {
+  background-color: #fff;
+  padding: 20px;
+  width: 90%;
+  max-width: 500px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  position: relative;
+  overflow-y: auto;
+  max-height: 80vh;
+}
+#cart-box h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 1.5rem;
+  color: #333;
 }
 
 #signin-close,
@@ -1293,6 +1336,7 @@ header #header-actions button:hover {
   color: #333;
 }
 
+
 #signin-close:hover,
 #cart-close:hover {
   color: #ff6f61;
@@ -1301,27 +1345,58 @@ header #header-actions button:hover {
 #signin-heading {
   text-align: center;
   margin-bottom: 20px;
+  font-size: 1.5rem;
+  color: #333;
+}
+.signin-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px; /* Add spacing between form elements */
 }
 
 #signin-email,
-#signin-password,
-#signin-submit-btn,
-#cart-checkout-btn {
+#signin-password {
   width: 100%;
   padding: 10px;
-  margin: 10px 0;
   border: 1px solid #ddd;
   border-radius: 5px;
+  font-size: 1rem;
+  color: #333;
+}
+#signin-email:focus,
+#signin-password:focus {
+  outline: none;
+  border-color: #04aa6d; /* Highlight border on focus */
 }
 
-#signin-submit-btn,
+#signin-submit-btn {
+  width: 100%;
+  padding: 10px;
+  background-color: #04aa6d;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+.signin-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.9rem;
+  color: #000;
+  margin-top: 15px;
+}
 #cart-checkout-btn {
   background-color: #ff6f61;
   color: white;
   cursor: pointer;
 }
 
-#signin-submit-btn:hover,
+#signin-submit-btn:hover {
+  background-color: #038857;
+}
 #cart-checkout-btn:hover {
   background-color: #ff5a4f;
 }
@@ -1330,13 +1405,14 @@ header #header-actions button:hover {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: 13px;
+  font-size: 0.9rem;
   margin-top: 10px;
 }
 
 .remember-forgot label {
-  padding-right: 5px;
-  color: #333;
+  font-size: 0.9rem;
+  color: #000;
+  font-weight: normal;
 }
 
 .remember-forgot a {
@@ -1347,59 +1423,150 @@ header #header-actions button:hover {
 .remember-forgot a:hover {
   text-decoration: underline;
 }
+#cart-items {
+  font-style: italic;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  max-height: 300px;
+  overflow-y: auto;
+  gap: 15px;
+  display: flex;
+  flex-direction: column;
+}
+.cart-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid #ddd;
+}
 
 #cart-items li {
   display: flex;
   justify-content: space-between;
   padding: 10px 0;
   border-bottom: 1px solid #ddd;
+  color: #000000;
 }
 
-#cart-total {
+.cart-total {
   display: flex;
   justify-content: space-between;
   margin-top: 20px;
   font-weight: bold;
+  font-size: 1.2rem;
+  color: #333;
 }
 
 #cart-checkout-btn {
-  background-color: #4caf50;
+  width: 100%;
+  padding: 10px;
+  margin-top: 20px;
+  background-color: #04aa6d;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
 }
 
 #cart-checkout-btn:hover {
-  background-color: #45a049;
+  background-color: #038857;
 }
 
-.cart-dropdown {
-  position: absolute;
-  top: 60px;
-  left: 0;
-  width: 300px;
-  padding: 15px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  border-radius: 8px;
-  background-color: white;
-  display: none;
-  z-index: 1001;
-}
-
-.cart-dropdown.visible {
-  display: block;
-}
-
-#signup-btn {
-  display: inline-block;
-  padding: 5px 10px;
+.pickup-option{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+  padding: 10px;
   font-size: 1rem;
-  background-color: #ff6f61;
+  color:#000000
+}
+.address-input{
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 1rem;
+  color: #000000;
+}
+.quantity-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #000000;
+}
+.quantity-controls button {
+  background-color: #04aa6d;
   color: white;
   border: none;
-  cursor: pointer;
   border-radius: 5px;
+  padding: 5px 10px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  margin: 0 5px;
 }
 
-#signup-btn:hover {
-  background-color: #ff5a4f;
+.quantity-controls button:hover {
+  background-color: #038857;
+  transform: scale(1.1);
+}
+
+.quantity-controls button:active {
+  transform: scale(1);
+}
+
+/* Remove Button */
+.remove-btn {
+  background-color: #e74c3c;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 15px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  margin-top: 10px;
+}
+
+.remove-btn:hover {
+  background-color: #c0392b;
+  transform: scale(1.1);
+}
+
+.remove-btn:active {
+  transform: scale(1);
+}
+/* Forgot Password Button Styles */
+.forgot-password-btn {
+  padding: 8px 16px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  background-color: #5f6160;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+}
+
+.forgot-password-btn:hover {
+  background-color: #000000;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.forgot-password-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+#signin-submit-btn {
+  margin-top: 20px;
 }
 
 @media (max-width: 768px) {
@@ -1424,10 +1591,46 @@ header #header-actions button:hover {
     margin-top: 10px;
   }
 
-  #signin-box,
+  .signin-box {
+    width: 90%;
+    max-width: 300px;
+    padding: 15px;
+  }
+  #signin-heading {
+    font-size: 1.2rem;
+  }
+
+  #signin-box p {
+    color: #000 !important; /* Force the font color to black */
+    font-size: 0.9rem;
+    margin-top: 10px;
+    text-align: center;
+  }
+
+  #signin-email,
+  #signin-password {
+    font-size: 0.9rem;
+  }
+
+  #signin-submit-btn {
+    font-size: 0.9rem;
+  }
   #cart-box {
     width: 80%;
     max-width: 400px;
+  }
+  .cart-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .quantity-controls {
+    gap: 5px;
+  }
+
+  .quantity-controls button,
+  .remove-btn {
+    padding: 5px 8px;
+    font-size: 0.9rem;
   }
 }
 
