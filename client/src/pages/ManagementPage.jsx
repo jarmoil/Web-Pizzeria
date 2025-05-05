@@ -1,4 +1,5 @@
 import MenuManagement from '../components/MenuManagement';
+import OrderManagement from '../components/OrderManagement';
 
 const ManagementPage = () => {
   return (
@@ -10,11 +11,17 @@ const ManagementPage = () => {
               Menu Management
             </a>
           </li>
+          <li>
+            <a href="#order-management" className="managementPage-sidebar-link">
+              Order Management
+            </a>
+          </li>
         </ul>
       </nav>
 
       <div className="managementPage-content">
         <MenuManagement />
+        <OrderManagement />
       </div>
     </main>
   );
