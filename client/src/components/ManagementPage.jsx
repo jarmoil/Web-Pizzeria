@@ -27,11 +27,8 @@ const ManagementPage = () => {
             </nav>
 
         <div className="managementPage-content">
-            <h1>HUOM. TÄMÄ SIVU VAIN ADMIN/EMPLOYEE KÄYTTÄJILLE</h1>
-            <h2>
-            Tämä sivu ja navigaatio piilotetaan ja laitetaan pääsyt roolin
-            perusteella. Suojataan routes, oikeudet yms.
-            </h2>
+            <h1>HALLINTAPANEELI</h1>
+
             <section id="menu-management" className="managementPage-section">
                 <h2 className="managementPage-section-title">Menun hallinta</h2>
                 <p>Muokkaa menun tuotteita, hintoja ja kuvauksia</p>
