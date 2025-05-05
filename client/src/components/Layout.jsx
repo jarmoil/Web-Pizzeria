@@ -2,9 +2,9 @@ import {Link, Outlet} from 'react-router-dom';
 import {useState} from 'react';
 import {useCart} from '../context/CartContext';
 import {useAuth} from '../hooks/useAuth';
-import SignInButton from './SignInButton';
-import CartButton from './CartButton';
-import LogoutButton from './LogoutButton';
+import SignInButton from './user/SignInButton';
+import CartButton from './cart/CartButton';
+import LogoutButton from './user/LogoutButton';
 
 const Layout = () => {
   const [isCartVisible, setCartVisible] = useState(false);

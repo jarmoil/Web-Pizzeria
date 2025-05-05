@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
-import {useCart} from '../context/CartContext';
-import ReviewModal from './ReviewModal';
-import formatPrice from '../utils/formatPrice.js';
-import useOrderItemReviews from '../hooks/useOrderItemReviews.js';
+import {useCart} from '../../context/CartContext.jsx';
+import ReviewModal from '../ReviewModal.jsx';
+import formatPrice from '../../utils/formatPrice.js';
+import useOrderItemReviews from '../../hooks/useOrderItemReviews.js';
 
 const PizzaCard = ({pizza}) => {
   const {addToCart} = useCart();

@@ -1,6 +1,6 @@
 import React from 'react';
 import usePizzas from '../hooks/usePizzas';
-import PizzaCard from '../components/PizzaCard';
+import PizzaCard from '../components/menu/PizzaCard';
 
 const MenuPage = () => {
   const {pizzas, loading, error} = usePizzas();

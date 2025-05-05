@@ -1,4 +1,4 @@
-import MenuManagement from '../components/MenuManagement';
+import MenuManagement from '../components/menu/MenuManagement';
 import OrderManagement from '../components/OrderManagement';
 import ReviewManagement from '../components/ReviewManagement';
 import UserManagement from '../components/UserManagement';

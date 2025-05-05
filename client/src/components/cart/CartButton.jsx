@@ -1,10 +1,10 @@
 import React, {useState} from 'react';
-import {useCart} from '../context/CartContext';
+import {useCart} from '../../context/CartContext';
 import CartItemsList from './CartItemsList';
 import CartTotal from './CartTotal';
-import AddressInput from './AddressInput';
-import FeedbackMessage from './FeedbackMessage';
-import {useCheckout} from '../hooks/useCheckout';
+import AddressInput from '../shared/AddressInput';
+import FeedbackMessage from '../shared/FeedbackMessage';
+import {useCheckout} from '../../hooks/useCheckout';
 
 const CartButton = ({isVisible, onClose}) => {
   const {cart, increaseQuantity, decreaseQuantity, removeFromCart} = useCart();

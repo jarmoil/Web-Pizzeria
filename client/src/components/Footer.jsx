@@ -1,5 +1,13 @@
 import { Link } from "react-router-dom";
 
+const SocialLink = ({ href, icon }) => (
+  <li>
+    <a href={href} target="_blank" rel="noopener noreferrer">
+      <i className={`fab ${icon}`} aria-hidden="true"></i>
+    </a>
+  </li>
+);
+
 const Footer = () => {
   return (
     <>
@@ -12,26 +20,13 @@ const Footer = () => {
               Lorem ipsum dolor, sit amet consectetur adipisicing elit. Aut incidunt ratione quia? Mollitia, explicabo, error quae non dolorem nulla reiciendis molestiae exercitationem accusamus, quasi id omnis voluptate debitis voluptatibus quam.
             </p>
             <ul className="footer-ul">
-              <li>
-                <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer">
-                  <i className="fab fa-facebook" aria-hidden="true"></i>
-                </a>
-              </li>
-              <li>
-                <a href="https://x.com" target="_blank" rel="noopener noreferrer">
-                  <i className="fab fa-twitter" aria-hidden="true"></i>
-                </a>
-              </li>
-              <li>
-                <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer">
-                  <i className="fab fa-instagram" aria-hidden="true"></i>
-                </a>
-              </li>
-              <li>
-                <a href="https://www.youtube.com" target="_blank" rel="noopener noreferrer">
-                  <i className="fab fa-youtube" aria-hidden="true"></i>
-                </a>
-              </li>
+              <SocialLink href="https://www.facebook.com" icon="fa-facebook" />
+              <SocialLink href="https://x.com" icon="fa-twitter" />
+              <SocialLink href="https://www.instagram.com" icon="fa-instagram" />
+              <SocialLink href="https://www.youtube.com" icon="fa-youtube" />
+              <SocialLink href="https://www.linkedin.com" icon="fa-linkedin" />
+              <SocialLink href="https://www.tiktok.com" icon="fa-tiktok" />
+              <SocialLink href="https://www.pinterest.com" icon="fa-pinterest" />
             </ul>
           </div>
 

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { handleRegistration } from '../services/registerLogic';
+import { handleRegistration } from '../../services/registerLogic';
 
 
 const SignUp = () => {

@@ -1,7 +1,7 @@
 import {useState} from 'react';
-import useRestaurantReviews from '../hooks/useRestaurantReviews';
-import {useAuth} from '../hooks/useAuth';
-import StarRating from './StarRating';
+import useRestaurantReviews from '../../hooks/useRestaurantReviews';
+import {useAuth} from '../../hooks/useAuth';
+import StarRating from '../StarRating';
 
 const RatingsSection = () => {
   const {user} = useAuth();

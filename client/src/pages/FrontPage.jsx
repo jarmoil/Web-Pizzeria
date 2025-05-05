@@ -1,10 +1,10 @@
 import React from 'react';
-import HeroSection from '../components/HeroSection';
-import AboutSection from '../components/AboutSection';
-import FeaturedPizzaSection from '../components/FeaturedPizzaSection';
-import RatingsSection from '../components/RatingsSection';
-import GallerySection from '../components/GallerySection';
-import HoursLocationSection from '../components/HoursLocationSection';
+import HeroSection from '../components/sections/HeroSection';
+import AboutSection from '../components/sections/AboutSection';
+import FeaturedPizzaSection from '../components/sections/FeaturedPizzaSection';
+import RatingsSection from '../components/sections/RatingsSection';
+import GallerySection from '../components/sections/GallerySection';
+import HoursLocationSection from '../components/sections/HoursLocationSection';
 import Footer from '../components/Footer';
 
 const FrontPage = () => {

@@ -1,7 +1,7 @@
 import React from 'react';
 import useOrderItemReviews from '../hooks/useOrderItemReviews';
-import OrderItemReviewSection from './OrderItemReviewSection';
-import PostReviewForm from './PostReviewForm';
+import OrderItemReviewSection from './sections/OrderItemReviewSection';
+import PostReviewForm from './menu/PostReviewForm';
 
 const ReviewModal = ({pizzaId, onClose}) => {
   const {reviews, averageRating, loading, error, postReview} =

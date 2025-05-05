@@ -1,6 +1,6 @@
 import {useState} from 'react';
 import {useNavigate} from 'react-router-dom';
-import {useAuth} from '../hooks/useAuth';
+import {useAuth} from '../../hooks/useAuth';
 
 const SignInButton = ({isVisible, onClose}) => {
   const [email, setEmail] = useState('');

@@ -1,4 +1,4 @@
-import MyMapComponent from "./MyMapComponent";
+import MyMapComponent from "../MyMapComponent";
 
 const HoursLocationSection = () => {
     return (

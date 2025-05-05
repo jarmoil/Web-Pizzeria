@@ -1,6 +1,6 @@
 import {useState} from 'react';
-import useMenuManagement from '../hooks/useMenuManagement';
-import {useAuth} from '../hooks/useAuth';
+import useMenuManagement from '../../hooks/useMenuManagement';
+import {useAuth} from '../../hooks/useAuth';
 
 const WEEKDAYS = {
   mon: 'Maanantai',

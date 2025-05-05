@@ -1,5 +1,5 @@
 import React from 'react';
-import usePizzas from '../hooks/usePizzas';
+import usePizzas from '../../hooks/usePizzas';
 
 const FeaturedPizzaSection = () => {
   const {pizzas, loading, error} = usePizzas({daily: true});

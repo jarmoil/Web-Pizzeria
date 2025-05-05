@@ -4,11 +4,11 @@ import FrontPage from './pages/FrontPage';
 import ManagementPage from './pages/ManagementPage';
 import Location from './components/Location';
 import {Route, Routes} from 'react-router-dom';
-import ForgotPassword from './components/ForgotPassword';
-import SignUp from './components/SignUp';
+import ForgotPassword from './components/user/ForgotPassword';
+import SignUp from './components/user/SignUp';
 import MenuPage from './pages/menuPage';
 import {AuthProvider} from './context/AuthContext';
-import ProtectedRoute from './components/ProtectedRoute';
+import ProtectedRoute from './components/shared/ProtectedRoute';
 
 function App() {
   return (

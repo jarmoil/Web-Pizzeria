@@ -1,6 +1,6 @@
 // ProtectedRoute.jsx
 import {Navigate} from 'react-router';
-import {useUserContext} from '../hooks/contextHooks';
+import {useUserContext} from '../../hooks/contextHooks';
 
 const ProtectedRoute = ({children, requiredRoles}) => {
   const {user} = useUserContext();
