@@ -749,40 +749,72 @@ footer {
 /* Hours & Location Section */
 .homepage-hours-location-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 2rem;
-  background: #ffffff;
-  padding: 2rem;
-  border-radius: 12px;
+  grid-template-columns: 1fr 3fr;
+  gap: 3rem;
+  background: #f9f9f9;
+  padding: 4rem;
+  border-radius: 16px;
+  margin: 2rem auto;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
 }
 
+/* Styling for the hours list */
 .homepage-hours ul {
   list-style: none;
   margin-top: 1rem;
+  padding: 0;
 }
 
 .homepage-hours li {
-  padding: 0.5rem 0;
-  border-bottom: 1px solid #ffffff;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid #ddd;
+  font-size: 1rem;
+  color: #333;
 }
 
+/* Styling for the map */
 .homepage-map {
-  min-height: 300px;
+  min-height: 500px;
+  width: 100%;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  position: relative;
+}
+
+
+.homepage-map::before {
+  content: "Loading map...";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 1.2rem;
+  color: #666;
+  display: none;
 }
 
 /* Responsive Design */
 @media (max-width: 1024px) {
-  #homepage-main-wrapper {
-    gap: 3rem;
-    padding: 1.5rem;
+  .homepage-hours-location-grid {
+    grid-template-columns: 1fr;
+    padding: 2rem;
   }
 
-  .homepage-section {
-    padding: 0 1rem;
+  .homepage-map {
+    min-height: 400px;
   }
 }
 
 @media (max-width: 768px) {
+  .homepage-hours li {
+    font-size: 0.9rem;
+  }
+
+  .homepage-map {
+    min-height: 300px;
+  }
+
   #homepage-hero {
     min-height: 60vh;
   }
