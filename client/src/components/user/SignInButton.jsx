@@ -33,35 +33,35 @@ const SignInButton = ({isVisible, onClose}) => {
           <button id="signin-close" className="close-btn" onClick={onClose}>
             &times;
           </button>
-            <h2 id="signin-heading">Sign In</h2>
-            <form id="signin-form" class="signin-form">
-              <input
-                id="signin-email"
-                type="email"
-                placeholder="Email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-              />
-              <input
-                id="signin-password"
-                type="password"
-                placeholder="Password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
-            </form>
-            <div className="remember-forgot">
-              <label>
-                <input type="checkbox" /> Remember me
-              </label>
-              <button
-                type="button"
-                className="forgot-password-btn"
-                onClick={handleForgotPassword}
-              >
-                Forgot Password?
-              </button>
-            </div>
+          <h2 id="signin-heading">Sign In</h2>
+          <form id="signin-form" className="signin-form">
+            <input
+              id="signin-email"
+              type="email"
+              placeholder="Email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+            <input
+              id="signin-password"
+              type="password"
+              placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </form>
+          <div className="remember-forgot">
+            <label>
+              <input type="checkbox" /> Remember me
+            </label>
+            <button
+              type="button"
+              className="forgot-password-btn"
+              onClick={handleForgotPassword}
+            >
+              Forgot Password?
+            </button>
+          </div>
           <button
             id="signin-submit-btn"
             onClick={handleLogin}
@@ -73,7 +73,11 @@ const SignInButton = ({isVisible, onClose}) => {
           <p className="signin-footer">
             Don't have an account?
             <span className="signup-container">
-              <button type="button" className="signup-btn" onClick={handleSignUp}>
+              <button
+                type="button"
+                className="signup-btn"
+                onClick={handleSignUp}
+              >
                 Sign Up
               </button>
             </span>
