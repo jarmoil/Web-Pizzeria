@@ -1,6 +1,8 @@
 import {useState, useEffect, useCallback} from 'react';
-import {getReviews as getAllRestaurantReviews} from '../services/restaurantReviewService';
-import {deleteRestaurantReview} from '../services/restaurantReviewService';
+import {
+  getReviews as getAllRestaurantReviews,
+  deleteRestaurantReview,
+} from '../services/restaurantReviewService';
 import {
   getAllItemReviews,
   deleteItemReview,
@@ -13,8 +15,8 @@ const useReviewManagement = (token) => {
   const [error, setError] = useState(null);
 
   const fetchReviews = useCallback(async () => {
+    setLoading(true);
     try {
-      setLoading(true);
       const [itemData, restaurantData] = await Promise.all([
         getAllItemReviews(token),
         getAllRestaurantReviews(),
@@ -22,8 +24,7 @@ const useReviewManagement = (token) => {
       setItemReviews(itemData);
       setRestaurantReviews(restaurantData);
       setError(null);
-    } catch (err) {
-      console.error('Error fetching reviews:', err);
+    } catch {
       setError('Failed to load reviews');
     } finally {
       setLoading(false);
@@ -34,9 +35,8 @@ const useReviewManagement = (token) => {
     try {
       await deleteItemReview(reviewId, token);
       await fetchReviews();
-    } catch (err) {
-      console.error('Failed to delete item review:', err);
-      throw err;
+    } catch {
+      setError('Failed to delete item review');
     }
   };
 
@@ -44,9 +44,8 @@ const useReviewManagement = (token) => {
     try {
       await deleteRestaurantReview(reviewId, token);
       await fetchReviews();
-    } catch (err) {
-      console.error('Failed to delete restaurant review:', err);
-      throw err;
+    } catch {
+      setError('Failed to delete restaurant review');
     }
   };
 

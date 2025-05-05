@@ -12,8 +12,7 @@ const usePizzas = ({daily = false} = {}) => {
       const data = daily ? await getDailyPizza() : await getAllPizzas();
       setPizzas(daily ? [data] : data);
       setError(null);
-    } catch (err) {
-      console.error(err);
+    } catch {
       setError(`Failed to fetch ${daily ? 'daily pizza' : 'pizzas'}`);
     } finally {
       setLoading(false);

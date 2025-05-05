@@ -1,13 +1,13 @@
 import {useState} from 'react';
 import {createOrder} from '../services/orderService';
 import {useCart} from '../context/CartContext';
+import {useAuth} from './useAuth';
 
 export const useCheckout = () => {
   const {cart, clearCart} = useCart();
+  const {token} = useAuth();
   const [loading, setLoading] = useState(false);
   const [feedback, setFeedback] = useState({message: null, type: null});
-
-  const token = localStorage.getItem('authToken');
 
   const handleCheckout = async (address, isPickup) => {
     if (cart.length === 0) {
@@ -54,9 +54,9 @@ export const useCheckout = () => {
       });
       clearCart();
     } catch (err) {
-      console.error(err);
       setFeedback({
-        message: 'Order creation failed: ' + err.message,
+        message: 'Failed to create order',
+        err,
         type: 'error',
       });
     } finally {
@@ -66,14 +66,8 @@ export const useCheckout = () => {
   };
 
   const autoClearFeedback = () => {
-    setTimeout(() => {
-      setFeedback({message: null, type: null});
-    }, 3000);
+    setTimeout(() => setFeedback({message: null, type: null}), 3000);
   };
 
-  return {
-    loading,
-    feedback,
-    handleCheckout,
-  };
+  return {loading, feedback, handleCheckout};
 };

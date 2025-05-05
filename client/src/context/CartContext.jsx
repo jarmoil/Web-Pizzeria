@@ -1,39 +1,37 @@
-import React, {createContext, useContext, useState, useEffect} from 'react';
+import React, {createContext, useContext, useState} from 'react';
 
 const CartContext = createContext();
+const CART_STORAGE_KEY = 'cart';
 
 const CartProvider = ({children}) => {
   const [cart, setCart] = useState(() => {
-    const savedCart = localStorage.getItem('cart');
+    const savedCart = localStorage.getItem(CART_STORAGE_KEY);
     return savedCart ? JSON.parse(savedCart) : [];
   });
 
+  const updateCart = (newCart) => {
+    setCart(newCart);
+    localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(newCart));
+  };
+
   const addToCart = (pizza) => {
     const existingPizza = cart.find((item) => item.pizza_id === pizza.pizza_id);
-    if (existingPizza) {
-      setCart(
-        cart.map((item) =>
+    const newCart = existingPizza
+      ? cart.map((item) =>
           item.pizza_id === pizza.pizza_id
             ? {...item, quantity: item.quantity + 1}
             : item
         )
-      );
-    } else {
-      setCart([...cart, {...pizza, quantity: 1}]);
-    }
-    console.log('Cart after adding pizza:', cart);
+      : [...cart, {...pizza, quantity: 1}];
+    updateCart(newCart);
   };
 
   const removeFromCart = (pizzaId) => {
-    const updatedCart = cart.filter((pizza) => pizza.pizza_id !== pizzaId);
-
-    setCart(updatedCart);
-
-    localStorage.setItem('cart', JSON.stringify(updatedCart));
+    updateCart(cart.filter((pizza) => pizza.pizza_id !== pizzaId));
   };
 
   const increaseQuantity = (pizzaId) => {
-    setCart(
+    updateCart(
       cart.map((pizza) =>
         pizza.pizza_id === pizzaId
           ? {...pizza, quantity: pizza.quantity + 1}
@@ -43,31 +41,20 @@ const CartProvider = ({children}) => {
   };
 
   const decreaseQuantity = (pizzaId) => {
-    setCart((prevCart) => {
-      const updatedCart = prevCart.map((pizza) =>
+    const newCart = cart
+      .map((pizza) =>
         pizza.pizza_id === pizzaId
-          ? {...pizza, quantity: pizza.quantity > 1 ? pizza.quantity - 1 : 0}
+          ? {...pizza, quantity: pizza.quantity - 1}
           : pizza
-      );
-
-      const filteredCart = updatedCart.filter((pizza) => pizza.quantity > 0);
-
-      localStorage.setItem('cart', JSON.stringify(filteredCart));
-
-      return filteredCart;
-    });
+      )
+      .filter((pizza) => pizza.quantity > 0);
+    updateCart(newCart);
   };
-
-  const cartCount = cart.length;
 
   const clearCart = () => {
     setCart([]);
-    localStorage.removeItem('cart');
+    localStorage.removeItem(CART_STORAGE_KEY);
   };
-
-  useEffect(() => {
-    localStorage.setItem('cart', JSON.stringify(cart));
-  }, [cart]);
 
   return (
     <CartContext.Provider
@@ -77,7 +64,7 @@ const CartProvider = ({children}) => {
         removeFromCart,
         increaseQuantity,
         decreaseQuantity,
-        cartCount,
+        cartCount: cart.length,
         clearCart,
       }}
     >

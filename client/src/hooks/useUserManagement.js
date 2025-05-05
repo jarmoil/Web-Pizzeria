@@ -11,14 +11,13 @@ const useUserManagement = (token) => {
   const [error, setError] = useState(null);
 
   const fetchUsers = useCallback(async () => {
+    setLoading(true);
     try {
-      setLoading(true);
-      const data = await getAllUsers(token);
-      setUsers(data);
+      const fetchedUsers = await getAllUsers(token);
+      setUsers(fetchedUsers);
       setError(null);
     } catch (err) {
-      setError('Failed to fetch users');
-      console.error('Error fetching users:', err);
+      setError('Failed to fetch users', err);
     } finally {
       setLoading(false);
     }
@@ -29,8 +28,7 @@ const useUserManagement = (token) => {
       await updateUser(userId, userData, token);
       await fetchUsers();
     } catch (err) {
-      setError('Failed to update user');
-      throw err;
+      setError('Failed to update user', err);
     }
   };
 
@@ -39,8 +37,7 @@ const useUserManagement = (token) => {
       await registerEmployee(employeeData, token);
       await fetchUsers();
     } catch (err) {
-      setError('Failed to register employee');
-      throw err;
+      setError('Failed to register employee', err);
     }
   };
 
