@@ -13,7 +13,6 @@ const ReviewModal = ({pizzaId, onClose}) => {
         <button className="reviews-modal-close" onClick={onClose}>
           ×
         </button>
-        <h2>Arvostelut: Pizza {pizzaId}</h2>
 
         <OrderItemReviewSection
           reviews={reviews}
