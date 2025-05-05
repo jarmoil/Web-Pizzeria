@@ -1202,6 +1202,11 @@ header nav a {
 header nav a:hover {
   text-decoration: underline;
 }
+#header-actions {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
 
 header #header-actions button {
   background-color: #646cff;
