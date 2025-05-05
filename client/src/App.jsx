@@ -1,7 +1,7 @@
 import './App.css';
 import Layout from './components/Layout';
 import FrontPage from './pages/FrontPage';
-import ManagementPage from './components/ManagementPage';
+import ManagementPage from './pages/ManagementPage';
 import Location from './components/Location';
 import {Route, Routes} from 'react-router-dom';
 import ForgotPassword from './components/ForgotPassword';
