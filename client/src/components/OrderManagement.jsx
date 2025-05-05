@@ -43,10 +43,7 @@ const OrderManagement = () => {
       <div className="order-details">
         <p>Email: {order.user_email}</p>
         <p>Total: €{order.total_price}</p>
-        <p>
-          Delivery:{' '}
-          {order.is_pickup ? 'Pickup' : `Delivery to: ${order.address}`}
-        </p>
+        <p>Delivery: {order.is_pickup ? 'Pickup' : order.address}</p>
         <p>Date: {new Date(order.created_at).toLocaleString()}</p>
       </div>
       <div className="order-items">

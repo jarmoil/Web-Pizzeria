@@ -31,7 +31,12 @@ const deleteReviewById = async (id, user) => {
   );
   const review = rows[0];
 
-  if (!review || (review.user_id !== user.user_id && user.role !== 'admin'))
+  if (
+    !review ||
+    (review.user_id !== user.user_id &&
+      user.role !== 'admin' &&
+      user.role !== 'employee')
+  )
     return false;
 
   await db.query(

@@ -1,5 +1,6 @@
 import MenuManagement from '../components/MenuManagement';
 import OrderManagement from '../components/OrderManagement';
+import ReviewManagement from '../components/ReviewManagement';
 import UserManagement from '../components/UserManagement';
 import {useAuth} from '../hooks/useAuth';
 
@@ -21,6 +22,14 @@ const ManagementPage = () => {
               Order Management
             </a>
           </li>
+          <li>
+            <a
+              href="#review-management"
+              className="managementPage-sidebar-link"
+            >
+              Review Management
+            </a>
+          </li>
           {isAdmin && (
             <li>
               <a
@@ -37,6 +46,7 @@ const ManagementPage = () => {
       <div className="managementPage-content">
         <MenuManagement />
         <OrderManagement />
+        <ReviewManagement />
         {isAdmin && <UserManagement />}
       </div>
     </main>

@@ -15,7 +15,12 @@ export const createOrderItemReview = async ({
 };
 
 export const getOrderItemReviews = async () => {
-  const [rows] = await db.query('SELECT * FROM order_item_reviews');
+  const [rows] = await db.query(`
+    SELECT r.*, m.pizza_name, m.pizza_id, u.name as reviewer_name
+    FROM order_item_reviews r
+    JOIN menu m ON r.pizza_id = m.pizza_id
+    JOIN user_accounts u ON r.user_id = u.user_id
+    ORDER BY r.created_at DESC`);
   return rows;
 };
 
@@ -29,7 +34,13 @@ export const findOrderItemReviewById = async (id) => {
 
 export const getOrderItemReviewsByPizzaId = async (pizza_id) => {
   const [rows] = await db.query(
-    'SELECT * FROM order_item_reviews WHERE pizza_id = ?',
+    `
+    SELECT r.*, m.pizza_name, u.name as reviewer_name
+    FROM order_item_reviews r
+    JOIN menu m ON r.pizza_id = m.pizza_id
+    JOIN user_accounts u ON r.user_id = u.user_id
+    WHERE r.pizza_id = ?
+    ORDER BY r.created_at DESC`,
     [pizza_id]
   );
   return rows;
