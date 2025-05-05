@@ -58,7 +58,11 @@ export const deleteOrderItemReviewController = async (req, res, next) => {
       return next(error);
     }
 
-    if (review.user_id !== loggedInUserId && userRole !== 'admin') {
+    if (
+      review.user_id !== loggedInUserId &&
+      userRole !== 'admin' &&
+      userRole !== 'employee'
+    ) {
       const error = new Error('Not authorized to delete this review');
       error.status = 403;
       return next(error);
