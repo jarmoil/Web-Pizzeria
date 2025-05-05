@@ -23,17 +23,22 @@ const getDailyPizza = async () => {
   return rows[0] || null;
 };
 
-const insertItem = async ({name, description, price, image}) => {
+const insertItem = async ({
+  pizza_name,
+  pizza_description,
+  price,
+  image_url,
+}) => {
   const [result] = await db.execute(
     'INSERT INTO menu (pizza_name, pizza_description, price, image_url) VALUES (?, ?, ?, ?)',
-    [name, description, price, image]
+    [pizza_name, pizza_description, price, image_url]
   );
   return {
     menu_item_id: result.insertId,
-    name,
-    description,
+    pizza_name,
+    pizza_description,
     price,
-    image,
+    image_url,
   };
 };
 

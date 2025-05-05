@@ -46,7 +46,5 @@ userRouter
   .route('/:id')
   .get(checkOwnershipOrAdmin, validateUserIdParam, getUserById)
   .put(checkOwnershipOrAdmin, validateUserIdParam, putUser);
-// You can add delete route if needed
-// .delete(requireAdmin, deleteUser);
 
 export default userRouter;

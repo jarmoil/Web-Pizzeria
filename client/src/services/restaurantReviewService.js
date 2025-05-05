@@ -31,4 +31,19 @@ const postReviewService = async ({comment, rating, token}) => {
   }
 };
 
-export {getReviews, postReviewService};
+const deleteRestaurantReview = async (reviewId, token) => {
+  try {
+    const response = await fetchData(`api/v1/restaurant-reviews/${reviewId}`, {
+      method: 'DELETE',
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    return response;
+  } catch (error) {
+    console.error('Error deleting restaurant review:', error);
+    throw error;
+  }
+};
+
+export {getReviews, postReviewService, deleteRestaurantReview};

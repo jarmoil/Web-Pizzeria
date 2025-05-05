@@ -55,10 +55,10 @@ describe('Menu API', () => {
       .post('/api/v1/menu')
       .set('Authorization', `Bearer ${adminToken}`)
       .send({
-        name: '',
-        description: '',
+        pizza_name: '',
+        pizza_description: '',
         price: '-9',
-        image: '',
+        image_url: '',
       });
 
     expect(res.statusCode).toBe(400);
@@ -71,10 +71,10 @@ describe('Menu API', () => {
       .post('/api/v1/menu')
       .set('Authorization', `Bearer ${adminToken}`)
       .send({
-        name: "user' OR 1=1 --",
-        description: 'A tasty pizza',
+        pizza_name: "user' OR 1=1 --",
+        pizza_description: 'A tasty pizza',
         price: 10.5,
-        image: 'http://example.com/image.jpg',
+        image_url: 'http://example.com/image.jpg',
       });
 
     expect(res.statusCode).toBe(400);
@@ -87,10 +87,10 @@ describe('Menu API', () => {
       .post('/api/v1/menu')
       .set('Authorization', `Bearer ${adminToken}`)
       .send({
-        name: 'Safe Name',
-        description: '<script>alert("xss")</script>',
+        pizza_name: 'Safe Name',
+        pizza_description: '<script>alert("xss")</script>',
         price: 10.99,
-        image: 'http://example.com/image.jpg',
+        image_url: 'http://example.com/image.jpg',
       });
 
     expect(res.statusCode).toBe(400);
@@ -103,10 +103,10 @@ describe('Menu API', () => {
       .post('/api/v1/menu')
       .set('Authorization', `Bearer ${adminToken}`)
       .send({
-        name: 'Test Pizza',
-        description: 'A test pizza item',
+        pizza_name: 'Test Pizza',
+        pizza_description: 'A test pizza item',
         price: 9.99,
-        image: 'http://example.com/testpizza.png',
+        image_url: 'http://example.com/testpizza.png',
       });
 
     expect(res.statusCode).toBe(201);

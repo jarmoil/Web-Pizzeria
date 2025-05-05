@@ -24,6 +24,7 @@ const OrderItemReviewSection = ({reviews, averageRating, loading, error}) => {
                   </span>
                 </div>
                 <p className="review-comment">{review.comment}</p>
+                <span className="review-author">- {review.reviewer_name}</span>
               </li>
             ))
           ) : (

@@ -1,21 +1,65 @@
+import {fetchData} from './fetchData';
+
 export const registerUser = async (userData) => {
   try {
-    const response = await fetch('http://127.0.0.1:3000/api/v1/users/register', {
+    const response = await fetchData('api/v1/users/register', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(userData),
     });
-
-    if (!response.ok) {
-      const errorData = await response.json();
-      throw new Error(errorData.message || 'Registration failed');
-    }
-
-    const data = await response.json();
-    return data; // Return the response data
+    return response;
   } catch (error) {
-    throw new Error(error.message); // Throw the error to be handled by the caller
+    console.error('Error registering user:', error);
+    throw error;
+  }
+};
+
+export const getAllUsers = async (token) => {
+  try {
+    const response = await fetchData('api/v1/users', {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    return response;
+  } catch (error) {
+    console.error('Error fetching users:', error);
+    throw error;
+  }
+};
+
+export const updateUser = async (userId, userData, token) => {
+  try {
+    const response = await fetchData(`api/v1/users/${userId}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(userData),
+    });
+    return response;
+  } catch (error) {
+    console.error('Error updating user:', error);
+    throw error;
+  }
+};
+
+export const registerEmployee = async (employeeData, token) => {
+  try {
+    const response = await fetchData('api/v1/users/register-employee', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(employeeData),
+    });
+    return response;
+  } catch (error) {
+    console.error('Error registering employee:', error);
+    throw error;
   }
 };

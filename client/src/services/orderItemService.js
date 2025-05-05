@@ -33,4 +33,33 @@ const postReviewService = async ({pizzaId, rating, comment, token}) => {
   }
 };
 
-export {getReviews, postReviewService};
+const getAllItemReviews = async (token) => {
+  try {
+    const response = await fetchData('api/v1/order-item-reviews', {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    return response;
+  } catch (error) {
+    console.error('Error fetching all reviews:', error);
+    throw error;
+  }
+};
+
+const deleteItemReview = async (reviewId, token) => {
+  try {
+    const response = await fetchData(`api/v1/order-item-reviews/${reviewId}`, {
+      method: 'DELETE',
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    return response;
+  } catch (error) {
+    console.error('Error deleting item review:', error);
+    throw error;
+  }
+};
+
+export {getReviews, postReviewService, deleteItemReview, getAllItemReviews};

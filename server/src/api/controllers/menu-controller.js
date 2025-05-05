@@ -45,9 +45,14 @@ const getDailyMenuItem = async (req, res, next) => {
 };
 
 const addMenuItem = async (req, res, next) => {
-  const {name, description, price, image} = req.body;
+  const {pizza_name, pizza_description, price, image_url} = req.body;
   try {
-    const item = await insertItem({name, description, price, image});
+    const item = await insertItem({
+      pizza_name,
+      pizza_description,
+      price,
+      image_url,
+    });
     res.status(201).json({message: 'Menu item added.', item});
   } catch (err) {
     next(err);

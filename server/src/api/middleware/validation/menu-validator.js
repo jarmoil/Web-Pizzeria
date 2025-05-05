@@ -4,8 +4,8 @@ import {handleValidationErrors, sanitizeInput} from './shared.js';
 const SAFE_REGEX = /^[a-zA-Z0-9äöåÄÖÅ\s.,!?'"()\-–—:;]+$/u;
 
 const validateMenuItemCreation = [
-  sanitizeInput(['name', 'description']),
-  body('name')
+  sanitizeInput(['pizza_name', 'pizza_description']),
+  body('pizza_name')
     .trim()
     .notEmpty()
     .withMessage('Name is required')
@@ -13,7 +13,7 @@ const validateMenuItemCreation = [
     .withMessage('Invalid characters')
     .escape()
     .stripLow(),
-  body('description')
+  body('pizza_description')
     .trim()
     .notEmpty()
     .withMessage('Description is required')
@@ -25,7 +25,7 @@ const validateMenuItemCreation = [
     // Enimmäishinta asetettu estämään input erroreita
     .isFloat({min: 0, max: 1000})
     .withMessage('Price must be a non-negative number or max 1000'),
-  body('image').trim().isURL().withMessage('Image must be a valid URL'),
+  body('image_url').trim().isURL().withMessage('Image must be a valid URL'),
   handleValidationErrors,
 ];
 
