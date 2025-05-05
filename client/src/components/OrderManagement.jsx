@@ -41,6 +41,7 @@ const OrderManagement = () => {
         </span>
       </div>
       <div className="order-details">
+        <p>Email: {order.user_email}</p>
         <p>Total: €{order.total_price}</p>
         <p>
           Delivery:{' '}
