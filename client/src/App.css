@@ -26,8 +26,7 @@
   align-items: center;
   width: 100%;
   height: 100vh;
-  background: url('/images/plain-smooth-green-wall-texture.jpg')
-    no-repeat;
+  background: url('/images/plain-smooth-green-wall-texture.jpg') no-repeat;
   background-size: cover;
   background-position: center;
 }
@@ -90,8 +89,7 @@ input[type='password']:focus {
   align-items: center;
   width: 100%;
   height: 100vh;
-  background: url('/images/plain-smooth-green-wall-texture.jpg')
-    no-repeat;
+  background: url('/images/plain-smooth-green-wall-texture.jpg') no-repeat;
   background-size: cover;
   background-position: center;
 }
@@ -782,9 +780,8 @@ footer {
   position: relative;
 }
 
-
 .homepage-map::before {
-  content: "Loading map...";
+  content: 'Loading map...';
   position: absolute;
   top: 50%;
   left: 50%;
@@ -1282,7 +1279,7 @@ footer {
   transform: translateY(0);
 }
 .reviews-modal-close {
-  position:relative;
+  position: relative;
   margin: auto;
   top: -5px;
   right: 10px;
@@ -1437,7 +1434,8 @@ header #header-actions button:hover {
   border: none;
   border-radius: 4px;
   cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+  transition: background-color 0.3s ease, transform 0.2s ease,
+    box-shadow 0.2s ease;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
@@ -1534,7 +1532,6 @@ header #header-actions button:hover {
   cursor: pointer;
   color: #333;
 }
-
 
 #signin-close:hover,
 #cart-close:hover {
@@ -1674,16 +1671,16 @@ header #header-actions button:hover {
   background-color: #038857;
 }
 
-.pickup-option{
+.pickup-option {
   display: flex;
   align-items: center;
   gap: 10px;
   margin-bottom: 10px;
   padding: 10px;
   font-size: 1rem;
-  color:#000000
+  color: #000000;
 }
-.address-input{
+.address-input {
   width: 100%;
   padding: 10px;
   border: 1px solid #ddd;
@@ -1749,9 +1746,9 @@ header #header-actions button:hover {
   border: none;
   border-radius: 4px;
   cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+  transition: background-color 0.3s ease, transform 0.2s ease,
+    box-shadow 0.2s ease;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-
 }
 
 .forgot-password-btn:hover {
@@ -2148,6 +2145,249 @@ header #header-actions button:hover {
   background: #038857;
 }
 
+/* Account page styling */
+
+.account-page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+  color: #333;
+}
+
+/* Account Info Section */
+.account-info-section {
+  background: white;
+  border-radius: 12px;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.account-header {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.profile-image {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid #04aa6d;
+}
+
+.account-details {
+  display: grid;
+  gap: 1rem;
+}
+
+.account-details p {
+  font-size: 1.1rem;
+  margin: 0.5rem 0;
+  display: grid;
+  grid-template-columns: 150px 1fr;
+  align-items: center;
+}
+
+.account-details strong {
+  color: #666;
+}
+
+/* Form Styling */
+.edit-form {
+  display: grid;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.form-group {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.form-group label {
+  font-weight: 500;
+  color: #666;
+}
+
+.form-group input {
+  padding: 0.75rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 1rem;
+  width: 100%;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: #04aa6d;
+  box-shadow: 0 0 0 2px rgba(4, 170, 109, 0.1);
+}
+
+/* Button Styles */
+.btn {
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-edit {
+  background: #04aa6d;
+  color: white;
+}
+
+.btn-edit:hover {
+  background: #038857;
+  transform: translateY(-2px);
+}
+
+.btn-cancel {
+  background: #dc3545;
+  color: white;
+}
+
+.btn-cancel:hover {
+  background: #c82333;
+  transform: translateY(-2px);
+}
+
+/* Orders Section */
+.orders-section {
+  background: white;
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.orders-section h2 {
+  color: #333;
+  margin-bottom: 1.5rem;
+  font-size: 1.5rem;
+}
+
+.orders-grid {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.order-card {
+  border: 1px solid #eee;
+  border-radius: 8px;
+  padding: 1.5rem;
+  transition: transform 0.2s ease;
+}
+
+.order-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.order-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.status {
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.status.pending {
+  background: #fff3cd;
+  color: #856404;
+}
+
+.status.processing {
+  background: #cce5ff;
+  color: #004085;
+}
+
+.status.completed {
+  background: #d4edda;
+  color: #155724;
+}
+
+.status.cancelled {
+  background: #f8d7da;
+  color: #721c24;
+}
+
+.order-details {
+  margin: 1rem 0;
+  padding: 1rem;
+  background: #f8f9fa;
+  border-radius: 8px;
+}
+
+.order-details p {
+  margin: 0.5rem 0;
+  color: #666;
+}
+
+.order-items {
+  margin-top: 1rem;
+}
+
+.order-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid #eee;
+}
+
+.cancel-button {
+  width: 100%;
+  padding: 0.75rem;
+  margin-top: 1rem;
+  background: #dc3545;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.cancel-button:hover {
+  background: #c82333;
+  transform: translateY(-2px);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .account-page {
+    padding: 1rem;
+  }
+
+  .account-header {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .account-details p {
+    grid-template-columns: 1fr;
+    gap: 0.25rem;
+  }
+
+  .order-card {
+    padding: 1rem;
+  }
+
+  .order-header {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+}
+
 /* Responsive adjustments */
 @media (max-width: 768px) {
   .order-sections {
@@ -2395,3 +2635,63 @@ header #header-actions button:hover {
 }
 
 /* ------------ End managementPage section ------------ */
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  padding: 1rem;
+}
+
+.modal-content {
+  background-color: #fff;
+  padding: 2rem;
+  width: 90%;
+  max-width: 600px;
+  border-radius: 12px;
+  position: relative;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  overflow-y: auto; /* Allow scrolling if content overflows */
+  max-height: 80vh; /* Limit the height to 80% of the viewport */
+}
+
+.modal-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  font-size: 1.5rem;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.modal-close:hover {
+  color: #e74c3c;
+}
+/* Media query for smaller screens */
+@media (max-width: 768px) {
+  .modal-content {
+    width: 95%; /* Increase width for smaller screens */
+    max-width: 400px; /* Reduce the maximum width */
+    padding: 1rem; /* Adjust padding */
+  }
+
+  .modal-close {
+    font-size: 1.2rem; /* Adjust close button size */
+  }
+}
+
+@media (max-width: 480px) {
+  .modal-content {
+    width: 100%; /* Full width for very small screens */
+    max-width: 350px; /* Further reduce the maximum width */
+    padding: 0.75rem; /* Adjust padding */
+  }
+}
