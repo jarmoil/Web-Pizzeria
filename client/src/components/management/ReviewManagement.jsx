@@ -1,5 +1,5 @@
-import {useAuth} from '../hooks/useAuth';
-import useReviewManagement from '../hooks/useReviewManagement';
+import {useAuth} from '../../hooks/useAuth';
+import useReviewManagement from '../../hooks/useReviewManagement';
 
 const ReviewManagement = () => {
   const {user} = useAuth();

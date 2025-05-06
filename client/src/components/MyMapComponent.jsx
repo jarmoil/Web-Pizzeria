@@ -6,7 +6,7 @@ import {useEffect, useState} from 'react';
 import {calculateDistance} from '../utils/calculateDistance';
 
 const busStopIcon = new L.Icon({
-  iconUrl: '../../public/images/stop.svg',
+  iconUrl: 'images/stop.svg',
   iconSize: [25, 25],
   iconAnchor: [12, 25],
   popupAnchor: [0, -25],

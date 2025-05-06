@@ -1,5 +1,5 @@
-import useOrderManagement from '../hooks/useOrderManagement';
-import {useAuth} from '../hooks/useAuth';
+import useOrderManagement from '../../hooks/useOrderManagement';
+import {useAuth} from '../../hooks/useAuth';
 
 const ORDER_STATUSES = {
   pending: 'Pending',
