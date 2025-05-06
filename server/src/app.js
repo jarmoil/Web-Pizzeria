@@ -25,8 +25,8 @@ app.use('/api/v1', api);
 // Middleware to serve static files (e.g., uploaded images)
 app.use('/uploads', express.static('uploads'));
 
-app.use('/docs', express.static(path.join(rootDir, 'docs')));
-app.use('/jsdocs', express.static(path.join(rootDir, 'jsdoc')));
+app.use('/api/v1/docs', express.static(path.join(rootDir, 'docs')));
+app.use('/api/v1/jsdocs', express.static(path.join(rootDir, 'jsdoc')));
 
 // Register upload routes
 app.use('/api/v1', uploadRoutes);
