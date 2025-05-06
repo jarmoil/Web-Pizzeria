@@ -1,9 +1,9 @@
-import {useContext} from 'react';
+import {useState} from 'react';
 import {useAuth} from '../../hooks/useAuth';
 import useAccountManagement from '../hooks/useAccountManagement';
 
 const AccountDetails = () => {
-  const { user } = useContext(AuthContext);
+  const { user } = useAuth();
   const userId = user?.user_id;
   const token = user?.token;
 
