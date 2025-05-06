@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Home</title>
+    <title>JSDoc: Source: components/sections/FeaturedPizzaSection.jsx</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,32 +17,53 @@
 
 <div id="main">
 
-    <h1 class="page-title">Home</h1>
+    <h1 class="page-title">Source: components/sections/FeaturedPizzaSection.jsx</h1>
 
     
 
 
 
     
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React from 'react';
+import usePizzas from '../../hooks/usePizzas';
 
+/**
+ * FeaturedPizzaSection component for displaying the pizza of the day.
+ * Fetches and displays the daily featured pizza, including its name, description, price, and image.
+ *
+ * @returns {JSX.Element} The "Pizza of the Day" section of the homepage.
+ */
+const FeaturedPizzaSection = () => {
+  const {pizzas, loading, error} = usePizzas({daily: true});
+  const pizza = pizzas[0];
 
-    <h3> </h3>
+  return (
+    &lt;section id="homepage-featured-pizza" className="homepage-section">
+      &lt;h2>Päivän pizza&lt;/h2>
+      &lt;div className="homepage-featured-grid">
+        {loading &amp;&amp; &lt;p>Ladataan...&lt;/p>}
+        {error &amp;&amp; &lt;p className="error">{error}&lt;/p>}
+        {!loading &amp;&amp; !error &amp;&amp; pizza &amp;&amp; (
+          &lt;div className="homepage-pizza-card">
+            &lt;img src={pizza.image_url} alt={pizza.pizza_name} />
+            &lt;h3 id="homepage-featured-pizza-name">{pizza.pizza_name}&lt;/h3>
+            &lt;p id="homepage-featured-pizza-description">
+              {pizza.pizza_description}
+            &lt;/p>
+            &lt;p id="homepage-featured-pizza-price">€{pizza.price}&lt;/p>
+          &lt;/div>
+        )}
+      &lt;/div>
+    &lt;/section>
+  );
+};
 
-
-
-
-
-
-
-
-
-
-    
-
-
-
-
-
+export default FeaturedPizzaSection;
+</code></pre>
+        </article>
+    </section>
 
 
 

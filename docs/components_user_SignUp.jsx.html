@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Home</title>
+    <title>JSDoc: Source: components/user/SignUp.jsx</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,32 +17,141 @@
 
 <div id="main">
 
-    <h1 class="page-title">Home</h1>
+    <h1 class="page-title">Source: components/user/SignUp.jsx</h1>
 
     
 
 
 
     
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import { useState } from 'react';
+import { handleRegistration } from '../../services/registerLogic';
 
+/**
+ * SignUp component for displaying a registration form.
+ * Allows users to create an account by filling in their username, email, and password.
+ *
+ * @returns {JSX.Element} The "Sign Up" section with a registration form.
+ */
+const SignUp = () => {
+    /**
+   * State for managing the form data.
+   * @type {Object}
+   * @property {string} user_name - The username entered by the user.
+   * @property {string} email - The email address entered by the user.
+   * @property {string} psw - The password entered by the user.
+   * @property {string} pswRepeat - The repeated password entered by the user.
+   */
+  const [formData, setFormData] = useState({
+    user_name: '',
+    email: '',
+    psw: '',
+    pswRepeat: '',
+  });
 
-    <h3> </h3>
+  /**
+   * Handles changes to the form inputs.
+   *
+   * @param {React.ChangeEvent&lt;HTMLInputElement>} e - The input change event.
+   */
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
 
+  /**
+   * Handles the form submission.
+   * Calls the external `handleRegistration` function with the form data.
+   *
+   * @param {React.FormEvent&lt;HTMLFormElement>} e - The form submission event.
+   * @returns {Promise&lt;void>}
+   */
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    await handleRegistration(formData); // Call the external logic
+  };
 
+  return (
 
+    &lt;section id="signUp-section">
+      &lt;form onSubmit={handleSubmit}>
+        &lt;div className="signUp-container">
+          &lt;h1 id="signUp-container-h1">Register&lt;/h1>
+          &lt;p id="signUp-container-p">
+            Please fill in this form to create an account.
+          &lt;/p>
+          &lt;hr id="signUp-container-hr" />
 
+          &lt;label id="signUp-container-label" htmlFor="user_name">&lt;b>Username&lt;/b>&lt;/label>
+          &lt;input
+            type="text"
+            placeholder="Enter Username"
+            name="user_name"
+            id="user_name"
+            value={formData.user_name}
+            onChange={handleChange}
+            required
+          />
 
+          &lt;label id="signUp-container-label" htmlFor="email">&lt;b>Email&lt;/b>&lt;/label>
+          &lt;input
+            type="email"
+            placeholder="Enter Email"
+            name="email"
+            id="email"
+            value={formData.email}
+            onChange={handleChange}
+            required
+          />
 
+          &lt;label id="signUp-container-label" htmlFor="psw">&lt;b>Password&lt;/b>&lt;/label>
+          &lt;input
+            type="password"
+            placeholder="Enter Password"
+            name="psw"
+            id="psw"
+            value={formData.psw}
+            onChange={handleChange}
+            required
+          />
 
+          &lt;label id="signUp-container-label" htmlFor="psw-repeat">&lt;b>Repeat Password&lt;/b>&lt;/label>
+          &lt;input
+            type="password"
+            placeholder="Repeat Password"
+            name="pswRepeat"
+            id="psw-repeat"
+            value={formData.pswRepeat}
+            onChange={handleChange}
+            required
+          />
 
+          &lt;p id="signUp-container-terms-privacy">
+            By creating an account you agree to our
+            &lt;a id="signUp-container-terms-privacy-a" href="#">Terms &amp; Privacy&lt;/a>.
+          &lt;/p>
+          &lt;button type="submit" className="signUp-container-registerbtn">
+            Register
+          &lt;/button>
+        &lt;/div>
 
+        &lt;div className="signUp-container-signIn-container">
+          &lt;p id="signUp-container-signIn-container-p">
+            Already have an account?
+            &lt;a id="signUp-container-signIn-container-a" href="signin.html">Sign in&lt;/a>.
+          &lt;/p>
+        &lt;/div>
+      &lt;/form>
+    &lt;/section>
+  );
+};
 
-    
-
-
-
-
-
+export default SignUp;
+</code></pre>
+        </article>
+    </section>
 
 
 

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Home</title>
+    <title>JSDoc: Source: components/management/ReviewManagement.jsx</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,32 +17,152 @@
 
 <div id="main">
 
-    <h1 class="page-title">Home</h1>
+    <h1 class="page-title">Source: components/management/ReviewManagement.jsx</h1>
 
     
 
 
 
     
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import {useAuth} from '../../hooks/useAuth';
+import useReviewManagement from '../../hooks/useReviewManagement';
 
+/**
+ * ReviewManagement component for managing customer reviews.
+ * Displays menu item reviews and restaurant reviews, and allows deleting reviews.
+ *
+ * @returns {JSX.Element} The review management interface.
+ */
+const ReviewManagement = () => {
+  const {user} = useAuth();
+  const {
+    itemReviews,
+    restaurantReviews,
+    loading,
+    error,
+    deleteItemReview,
+    deleteRestaurantReview,
+  } = useReviewManagement(user?.token);
 
-    <h3> </h3>
+  if (loading) return &lt;div>Loading reviews...&lt;/div>;
+  if (error) return &lt;div>Error: {error}&lt;/div>;
 
+  /**
+   * Handles the deletion of a menu item review.
+   *
+   * @param {number} reviewId - The ID of the menu item review to delete.
+   * @returns {Promise&lt;void>}
+   */
+  const handleDeleteItemReview = async (reviewId) => {
+    if (window.confirm('Are you sure you want to delete this review?')) {
+      try {
+        await deleteItemReview(reviewId);
+      } catch (err) {
+        console.error('Failed to delete review:', err);
+      }
+    }
+  };
 
+  /**
+   * Handles the deletion of a restaurant review.
+   *
+   * @param {number} reviewId - The ID of the restaurant review to delete.
+   * @returns {Promise&lt;void>}
+   */
+  const handleDeleteRestaurantReview = async (reviewId) => {
+    if (window.confirm('Are you sure you want to delete this review?')) {
+      try {
+        await deleteRestaurantReview(reviewId);
+      } catch (err) {
+        console.error('Failed to delete review:', err);
+      }
+    }
+  };
 
+  return (
+    &lt;section id="review-management" className="managementPage-section">
+      &lt;h2 className="managementPage-section-title">Review Management&lt;/h2>
 
+      &lt;div className="review-sections">
+        {/* Menu Item Reviews */}
+        &lt;div className="menu-item-reviews">
+          &lt;h3>Menu Item Reviews&lt;/h3>
+          &lt;div className="review-list">
+            {itemReviews.map((review) => (
+              &lt;div key={review.item_review_id} className="review-card">
+                &lt;div className="review-header">
+                  &lt;span className="review-rating">
+                    Rating: {review.rating}★
+                  &lt;/span>
+                  &lt;span className="review-date">
+                    {new Date(review.created_at).toLocaleDateString()}
+                  &lt;/span>
+                &lt;/div>
+                &lt;h4 className="review-pizza-name">
+                  Pizza: {review.pizza_name}
+                &lt;/h4>
+                &lt;p className="review-comment">{review.comment}&lt;/p>
+                &lt;span className="review-author">
+                  By: {review.reviewer_name}
+                &lt;/span>
+                &lt;div className="review-footer">
+                  &lt;button
+                    onClick={() =>
+                      handleDeleteItemReview(review.item_review_id)
+                    }
+                    className="delete-review-btn"
+                  >
+                    Delete Review
+                  &lt;/button>
+                &lt;/div>
+              &lt;/div>
+            ))}
+          &lt;/div>
+        &lt;/div>
 
+        {/* Restaurant Reviews */}
+        &lt;div className="restaurant-reviews">
+          &lt;h3>Restaurant Reviews&lt;/h3>
+          &lt;div className="review-list">
+            {restaurantReviews.map((review) => (
+              &lt;div key={review.restaurant_review_id} className="review-card">
+                &lt;div className="review-header">
+                  &lt;span className="review-rating">
+                    Rating: {review.rating}★
+                  &lt;/span>
+                  &lt;span className="review-date">
+                    {new Date(review.created_at).toLocaleDateString()}
+                  &lt;/span>
+                &lt;/div>
+                &lt;p className="review-comment">{review.comment}&lt;/p>
+                &lt;span className="homepage-rating-user">
+                  - {review.username}
+                &lt;/span>
+                &lt;div className="review-footer">
+                  &lt;button
+                    onClick={() =>
+                      handleDeleteRestaurantReview(review.restaurant_review_id)
+                    }
+                    className="delete-review-btn"
+                  >
+                    Delete Review
+                  &lt;/button>
+                &lt;/div>
+              &lt;/div>
+            ))}
+          &lt;/div>
+        &lt;/div>
+      &lt;/div>
+    &lt;/section>
+  );
+};
 
-
-
-
-
-    
-
-
-
-
-
+export default ReviewManagement;
+</code></pre>
+        </article>
+    </section>
 
 
 

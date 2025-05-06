@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Home</title>
+    <title>JSDoc: Source: components/menu/PostReviewForm.jsx</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,32 +17,120 @@
 
 <div id="main">
 
-    <h1 class="page-title">Home</h1>
+    <h1 class="page-title">Source: components/menu/PostReviewForm.jsx</h1>
 
     
 
 
 
     
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React, {useState} from 'react';
+import {useAuth} from '../../hooks/useAuth';
 
+/**
+ * PostReviewForm component for submitting a review.
+ * Allows authenticated users to rate and comment on a pizza.
+ *
+ * @param {Object} props - Component props.
+ * @param {Function} props.postReview - Function to handle posting the review.
+ * @returns {JSX.Element} The review submission form or a message prompting the user to log in.
+ */
+const PostReviewForm = ({postReview}) => {
+  const {user, token} = useAuth();
 
-    <h3> </h3>
+  /**
+   * Rating value for the review.
+   * @type {number}
+   */
+  const [rating, setRating] = useState(5);
 
+  /**
+   * Comment text for the review.
+   * @type {string}
+   */
+  const [comment, setComment] = useState('');
 
+  /**
+   * Indicates whether the form is currently submitting.
+   * @type {boolean}
+   */
+  const [submitting, setSubmitting] = useState(false);
 
+  /**
+   * Error message for failed submission.
+   * @type {string|null}
+   */
+  const [error, setError] = useState(null);
 
+  /**
+   * Handles the form submission to post a review.
+   *
+   * @param {React.FormEvent&lt;HTMLFormElement>} e - The form submission event.
+   * @returns {Promise&lt;void>}
+   */
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (!user) return;
 
+    try {
+      setSubmitting(true);
+      await postReview({rating, comment, token});
+      setComment('');
+      setRating(5);
+      setError(null);
+    } catch (err) {
+      console.error(err);
+      setError('Failed to submit review');
+    } finally {
+      setSubmitting(false);
+    }
+  };
 
+  if (!user) {
+    return (
+      &lt;div className="review-form-disabled">
+        &lt;button disabled className="disabled-review-btn">
+          Log in to post reviews
+        &lt;/button>
+      &lt;/div>
+    );
+  }
 
+  return (
+    &lt;form onSubmit={handleSubmit} className="post-review-form">
+      &lt;label>
+        Rating:
+        &lt;select
+          value={rating}
+          onChange={(e) => setRating(Number(e.target.value))}
+        >
+          {[5, 4, 3, 2, 1].map((r) => (
+            &lt;option key={r} value={r}>
+              {r}
+            &lt;/option>
+          ))}
+        &lt;/select>
+      &lt;/label>
+      &lt;textarea
+        value={comment}
+        onChange={(e) => setComment(e.target.value)}
+        placeholder="Write your review..."
+        required
+      />
+      &lt;button type="submit" disabled={submitting}>
+        {submitting ? 'Posting...' : 'Post Review'}
+      &lt;/button>
+      {error &amp;&amp; &lt;p className="error-message">{error}&lt;/p>}
+    &lt;/form>
+  );
+};
 
-
-
-    
-
-
-
-
-
+export default PostReviewForm;
+</code></pre>
+        </article>
+    </section>
 
 
 

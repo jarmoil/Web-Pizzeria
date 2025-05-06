@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Home</title>
+    <title>JSDoc: Source: hooks/contextHooks.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,32 +17,39 @@
 
 <div id="main">
 
-    <h1 class="page-title">Home</h1>
+    <h1 class="page-title">Source: hooks/contextHooks.js</h1>
 
     
 
 
 
     
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import {useContext} from 'react';
+import {AuthContext} from '../context/AuthContext';
 
+/**
+ * Custom hook for accessing the authentication context.
+ * Provides access to authentication-related data and functions.
+ * Throws an error if used outside of an `AuthProvider`.
+ *
+ * @returns {Object} The authentication context value.
+ * @throws {Error} If the hook is used outside of an `AuthProvider`.
+ */
+const useUserContext = () => {
+  const context = useContext(AuthContext);
+  if (!context) {
+    throw new Error('useAuthContext must be used within an UserProvider');
+  }
 
-    <h3> </h3>
+  return context;
+};
 
-
-
-
-
-
-
-
-
-
-    
-
-
-
-
-
+export {useUserContext};
+</code></pre>
+        </article>
+    </section>
 
 
 

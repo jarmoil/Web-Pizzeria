@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Home</title>
+    <title>JSDoc: Source: services/fetchData.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,32 +17,49 @@
 
 <div id="main">
 
-    <h1 class="page-title">Home</h1>
+    <h1 class="page-title">Source: services/fetchData.js</h1>
 
     
 
 
 
     
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>
+/**
+ * Logs in a user by sending their email and password to the server.
+ *
+ * @param {Object} credentials - The user's login credentials.
+ * @param {string} credentials.email - The user's email address.
+ * @param {string} credentials.password - The user's password.
+ * @returns {Promise&lt;Object>} The response data from the server, including the authentication token if successful.
+ * @throws {Error} If the login request fails.
+ */
+export const fetchData = async (url, options = {}) => {
+  const baseUrl =
+    window.location.hostname === 'localhost'
+      ? 'http://localhost:3000/'
+      : import.meta.env.VITE_API_URL;
+  const fullUrl = baseUrl + url;
 
+  const response = await fetch(fullUrl, options);
+  const json = await response.json();
 
-    <h3> </h3>
+  if (!response.ok) {
+    console.error('API error:', fullUrl, json);
+    throw new Error(
+      json.message
+        ? `${json.message}, koodi:${response.status}`
+        : `Error ${response.status}`
+    );
+  }
 
-
-
-
-
-
-
-
-
-
-    
-
-
-
-
-
+  return json;
+};
+</code></pre>
+        </article>
+    </section>
 
 
 

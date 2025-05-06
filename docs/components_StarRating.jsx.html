@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Home</title>
+    <title>JSDoc: Source: components/StarRating.jsx</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,32 +17,45 @@
 
 <div id="main">
 
-    <h1 class="page-title">Home</h1>
+    <h1 class="page-title">Source: components/StarRating.jsx</h1>
 
     
 
 
 
     
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * StarRating component for displaying a star-based rating system.
+ * Allows users to select a rating by clicking on a star.
+ *
+ * @param {Object} props - Component props.
+ * @param {number} props.rating - The current rating value (1-5).
+ * @param {Function} props.onRatingChange - Callback function to handle rating changes.
+ * @returns {JSX.Element} The star rating component.
+ */
+const StarRating = ({rating, onRatingChange}) => {
+  return (
+    &lt;div className="star-rating">
+      {[1, 2, 3, 4, 5].map((star) => (
+        &lt;button
+          key={star}
+          type="button"
+          className={`star ${star &lt;= rating ? 'active' : ''}`}
+          onClick={() => onRatingChange(star)}
+        >
+          ⭐
+        &lt;/button>
+      ))}
+    &lt;/div>
+  );
+};
 
-
-    <h3> </h3>
-
-
-
-
-
-
-
-
-
-
-    
-
-
-
-
-
+export default StarRating;
+</code></pre>
+        </article>
+    </section>
 
 
 

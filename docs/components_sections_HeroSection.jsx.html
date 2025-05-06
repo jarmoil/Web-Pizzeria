@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Home</title>
+    <title>JSDoc: Source: components/sections/HeroSection.jsx</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,32 +17,39 @@
 
 <div id="main">
 
-    <h1 class="page-title">Home</h1>
+    <h1 class="page-title">Source: components/sections/HeroSection.jsx</h1>
 
     
 
 
 
     
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import { Link } from "react-router-dom";
 
+/**
+ * HeroSection component for displaying the homepage hero section.
+ * Includes a welcome message, a brief description, and a button linking to the menu.
+ *
+ * @returns {JSX.Element} The "Hero" section of the homepage.
+ */
+const HeroSection = () => {
+    return (
+      &lt;section id="homepage-hero" className="homepage-section">
+        &lt;div className="homepage-hero-content">
+          &lt;h1>Tervetuloa Pápán Pizzeriaan!&lt;/h1>
+          &lt;p>Herkullista pizzaa vuodesta 2001 asti&lt;/p>
+          &lt;Link to="/menu" className="homepage-menu-button">Katso menu&lt;/Link>
+        &lt;/div>
+      &lt;/section>
+    );
+  };
 
-    <h3> </h3>
-
-
-
-
-
-
-
-
-
-
-    
-
-
-
-
-
+  export default HeroSection;
+</code></pre>
+        </article>
+    </section>
 
 
 

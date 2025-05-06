@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Home</title>
+    <title>JSDoc: Source: pages/ManagementPage.jsx</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,32 +17,81 @@
 
 <div id="main">
 
-    <h1 class="page-title">Home</h1>
+    <h1 class="page-title">Source: pages/ManagementPage.jsx</h1>
 
     
 
 
 
     
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import MenuManagement from '../components/management/MenuManagement';
+import OrderManagement from '../components/management/OrderManagement';
+import ReviewManagement from '../components/management/ReviewManagement';
+import UserManagement from '../components/management/UserManagement';
+import {useAuth} from '../hooks/useAuth';
 
+/**
+ * ManagementPage component for rendering the management interface of the application.
+ * Includes sections for managing menus, orders, reviews, and users (admin-only).
+ * Displays a sidebar for navigation and dynamically renders content based on the user's role.
+ *
+ * @returns {JSX.Element} The management page layout with its sections.
+ */
+const ManagementPage = () => {
+  const {user} = useAuth();
+  const isAdmin = user?.role === 'admin';
 
-    <h3> </h3>
+  return (
+    &lt;main className="managementPage-main-wrapper">
+      &lt;nav className="managementPage-sidebar">
+        &lt;ul className="managementPage-sidebar-menu">
+          &lt;li>
+            &lt;a href="#menu-management" className="managementPage-sidebar-link">
+              Menu Management
+            &lt;/a>
+          &lt;/li>
+          &lt;li>
+            &lt;a href="#order-management" className="managementPage-sidebar-link">
+              Order Management
+            &lt;/a>
+          &lt;/li>
+          &lt;li>
+            &lt;a
+              href="#review-management"
+              className="managementPage-sidebar-link"
+            >
+              Review Management
+            &lt;/a>
+          &lt;/li>
+          {isAdmin &amp;&amp; (
+            &lt;li>
+              &lt;a
+                href="#user-management"
+                className="managementPage-sidebar-link"
+              >
+                User Management
+              &lt;/a>
+            &lt;/li>
+          )}
+        &lt;/ul>
+      &lt;/nav>
 
+      &lt;div className="managementPage-content">
+        &lt;MenuManagement />
+        &lt;OrderManagement />
+        &lt;ReviewManagement />
+        {isAdmin &amp;&amp; &lt;UserManagement />}
+      &lt;/div>
+    &lt;/main>
+  );
+};
 
-
-
-
-
-
-
-
-
-    
-
-
-
-
-
+export default ManagementPage;
+</code></pre>
+        </article>
+    </section>
 
 
 

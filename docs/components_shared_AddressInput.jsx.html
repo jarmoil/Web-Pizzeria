@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Home</title>
+    <title>JSDoc: Source: components/shared/AddressInput.jsx</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,32 +17,45 @@
 
 <div id="main">
 
-    <h1 class="page-title">Home</h1>
+    <h1 class="page-title">Source: components/shared/AddressInput.jsx</h1>
 
     
 
 
 
     
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React from 'react';
 
+/**
+ * AddressInput component for entering a delivery address.
+ * Provides a text input field for users to input their delivery address.
+ *
+ * @param {Object} props - Component props.
+ * @param {string} props.address - The current value of the delivery address.
+ * @param {Function} props.setAddress - Function to update the delivery address.
+ * @param {boolean} [props.disabled=false] - Whether the input field is disabled.
+ * @returns {JSX.Element} The address input field.
+ */
+const AddressInput = ({address, setAddress, disabled = false}) => (
+  &lt;div className="address-input">
+    &lt;label htmlFor="delivery-address">Delivery Address&lt;/label>
+    &lt;input
+      type="text"
+      id="delivery-address"
+      value={address}
+      onChange={(e) => setAddress(e.target.value)}
+      placeholder="Enter delivery address"
+      disabled={disabled}
+    />
+  &lt;/div>
+);
 
-    <h3> </h3>
-
-
-
-
-
-
-
-
-
-
-    
-
-
-
-
-
+export default AddressInput;
+</code></pre>
+        </article>
+    </section>
 
 
 

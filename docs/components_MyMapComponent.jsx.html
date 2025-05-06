@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Home</title>
+    <title>JSDoc: Source: components/MyMapComponent.jsx</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,32 +17,165 @@
 
 <div id="main">
 
-    <h1 class="page-title">Home</h1>
+    <h1 class="page-title">Source: components/MyMapComponent.jsx</h1>
 
     
 
 
 
     
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import {MapContainer, TileLayer, Marker, Popup} from 'react-leaflet';
+import 'leaflet/dist/leaflet.css';
+import L from 'leaflet';
+import useBusStops from '../hooks/useBusStops';
+import {useEffect, useState} from 'react';
+import {calculateDistance} from '../utils/calculateDistance';
 
+/**
+ * Custom Leaflet icon for bus stops.
+ * @constant
+ * @type {L.Icon}
+ */
+const busStopIcon = new L.Icon({
+  iconUrl: 'images/stop.svg',
+  iconSize: [25, 25],
+  iconAnchor: [12, 25],
+  popupAnchor: [0, -25],
+});
 
-    <h3> </h3>
+// Fix for default marker icons not showing
+delete L.Icon.Default.prototype._getIconUrl;
+L.Icon.Default.mergeOptions({
+  iconRetinaUrl:
+    'https://unpkg.com/leaflet@1.7.1/dist/images/marker-icon-2x.png',
+  iconUrl: 'https://unpkg.com/leaflet@1.7.1/dist/images/marker-icon.png',
+  shadowUrl: 'https://unpkg.com/leaflet@1.7.1/dist/images/marker-shadow.png',
+});
 
+/**
+ * MyMapComponent component for displaying a map with the restaurant's location and nearby bus stops.
+ * Calculates the user's distance to the restaurant and displays it in a popup.
+ *
+ * @returns {JSX.Element} A map with the restaurant's location, nearby bus stops, and distance information.
+ */
+const MyMapComponent = () => {
+    /**
+   * State for storing the calculated distance from the user to the restaurant.
+   * @type {string|null}
+   */
+  const [distance, setDistance] = useState(null);
 
+  /**
+   * Coordinates of the restaurant.
+   * @constant
+   * @type {number[]}
+   */
+  const restaurantLocation = [60.18789408213458, 24.959844440006883]; // Restaurant coordinates
 
+  /**
+   * Fetches nearby bus stops using the `useBusStops` hook.
+   * @type {Object}
+   * @property {Object[]} busStops - Array of nearby bus stops.
+   * @property {boolean} loading - Indicates if the bus stops are being loaded.
+   * @property {string|null} error - Error message if loading fails.
+   */
+  const {busStops, loading, error} = useBusStops(
+    restaurantLocation[0],
+    restaurantLocation[1],
+    300
+  );
 
+  /**
+   * Calculates the distance between the user's location and the restaurant.
+   * Uses the browser's geolocation API to get the user's coordinates.
+   */
+  useEffect(() => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const userLat = position.coords.latitude;
+          const userLon = position.coords.longitude;
 
+          // Calculate the distance
+          const dist = calculateDistance(
+            userLat,
+            userLon,
+            restaurantLocation[0],
+            restaurantLocation[1]
+          );
+          setDistance(dist.toFixed(2)); // Round to 2 decimal places
+        },
+        (error) => {
+          console.error('Error getting location:', error);
+          setDistance('Unable to determine location');
+        }
+      );
+    } else {
+      setDistance('Geolocation not supported');
+    }
+  }, []);
 
+  return (
+    &lt;MapContainer
+      center={restaurantLocation}
+      zoom={15}
+      style={{height: '300px', width: '100%'}}
+    >
+      &lt;TileLayer
+        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+        attribution='&amp;copy; &lt;a href="https://www.openstreetmap.org/copyright">OpenStreetMap&lt;/a> contributors'
+      />
+      &lt;Marker position={restaurantLocation}>
+        &lt;Popup>
+          &lt;div>
+            &lt;strong>Pápán Pizzeria&lt;/strong>
+            &lt;br />
+            Helsinginkatu 1&lt;br />
+            00010, Helsinki
+            &lt;br />
+            FIN
+            &lt;br />
+            {distance !== null ? (
+              &lt;span>Distance: {distance} km&lt;/span>
+            ) : (
+              &lt;span>Calculating distance...&lt;/span>
+            )}
+          &lt;/div>
+        &lt;/Popup>
+      &lt;/Marker>
 
+      {/* Show loading/error or bus stops */}
+      {loading &amp;&amp; &lt;div>Loading bus stops...&lt;/div>}
+      {error &amp;&amp; &lt;div>{error}&lt;/div>}
+      {!loading &amp;&amp;
+        busStops.length > 0 &amp;&amp;
+        busStops.map((stop, index) => (
+          &lt;Marker
+            key={index}
+            position={[stop.lat, stop.lon]}
+            icon={busStopIcon}
+          >
+            &lt;Popup>
+              &lt;strong>{stop.name}&lt;/strong>
+              &lt;br />
+              Code: {stop.code}
+              &lt;br />
+              Distance: {stop.distance} meters
+              &lt;br />
+              Vehicle: {stop.vehicleMode}
+            &lt;/Popup>
+          &lt;/Marker>
+        ))}
+    &lt;/MapContainer>
+  );
+};
 
-
-
-    
-
-
-
-
-
+export default MyMapComponent;
+</code></pre>
+        </article>
+    </section>
 
 
 

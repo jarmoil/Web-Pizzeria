@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Home</title>
+    <title>JSDoc: Source: App.jsx</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,32 +17,78 @@
 
 <div id="main">
 
-    <h1 class="page-title">Home</h1>
+    <h1 class="page-title">Source: App.jsx</h1>
 
     
 
 
 
     
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import './App.css';
+import Layout from './components/Layout';
+import FrontPage from './pages/FrontPage';
+import ManagementPage from './pages/ManagementPage';
+import Location from './components/Location';
+import {Route, Routes} from 'react-router-dom';
+import ForgotPassword from './components/user/ForgotPassword';
+import SignUp from './components/user/SignUp';
+import MenuPage from './pages/MenuPage';
+import {AuthProvider} from './context/AuthContext';
+import ProtectedRoute from './components/shared/ProtectedRoute';
 
+/**
+ * The main application component that defines the structure and routing of the app.
+ * Includes routes for various pages such as the front page, menu, management page, and more.
+ * Wraps the application in the `AuthProvider` to provide authentication context.
+ *
+ * @returns {JSX.Element} The main application layout with routing.
+ */
+function App() {
+  return (
+    &lt;div className="App">
+      &lt;AuthProvider>
+        &lt;Routes>
+          &lt;Route element={&lt;Layout />}>
+            &lt;Route path="/" element={&lt;FrontPage />} />
+            &lt;Route path="/menu" element={&lt;MenuPage />} />
+            &lt;Route
+              path="/managementPage"
+              element={
+                &lt;ProtectedRoute>
+                  &lt;ManagementPage />
+                &lt;/ProtectedRoute>
+              }
+            />
+            &lt;Route path="/location" element={&lt;Location />} />
+            &lt;Route path="/forgotPassword" element={&lt;ForgotPassword />} />
+            &lt;Route path="/signup" element={&lt;SignUp />} />
 
-    <h3> </h3>
+            {/* Additional routes for other pages */}
+            &lt;Route path="/about" element={&lt;div>About Page&lt;/div>} />
+            &lt;Route path="/faq" element={&lt;div>FAQ Page&lt;/div>} />
+            &lt;Route
+              path="/privacy-policy"
+              element={&lt;div>Privacy Policy Page&lt;/div>}
+            />
+            &lt;Route path="/help" element={&lt;div>Help Page&lt;/div>} />
+            &lt;Route
+              path="/terms-conditions"
+              element={&lt;div>Terms &amp; Conditions Page&lt;/div>}
+            />
+            &lt;Route path="/contact" element={&lt;div>Contact Page&lt;/div>} />
+          &lt;/Route>
+        &lt;/Routes>
+      &lt;/AuthProvider>
+    &lt;/div>
+  );
+}
 
-
-
-
-
-
-
-
-
-
-    
-
-
-
-
-
+export default App;
+</code></pre>
+        </article>
+    </section>
 
 
 

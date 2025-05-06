@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Home</title>
+    <title>JSDoc: Source: components/Footer.jsx</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,32 +17,119 @@
 
 <div id="main">
 
-    <h1 class="page-title">Home</h1>
+    <h1 class="page-title">Source: components/Footer.jsx</h1>
 
     
 
 
 
     
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import { Link } from "react-router-dom";
 
+/**
+ * SocialLink component for rendering a social media link.
+ *
+ * @param {Object} props - Component props.
+ * @param {string} props.href - The URL of the social media page.
+ * @param {string} props.icon - The icon class for the social media platform.
+ * @returns {JSX.Element} A list item containing a social media link.
+ */
+const SocialLink = ({ href, icon }) => (
+  &lt;li>
+    &lt;a href={href} target="_blank" rel="noopener noreferrer">
+      &lt;i className={`fab ${icon}`} aria-hidden="true">&lt;/i>
+    &lt;/a>
+  &lt;/li>
+);
 
-    <h3> </h3>
+/**
+ * Footer component for displaying the footer section of the website.
+ * Includes sections for "About Us," "Quick Links," "Shop," and "Contact Us."
+ *
+ * @returns {JSX.Element} The footer section of the website.
+ */
+const Footer = () => {
+  return (
+    &lt;>
+      &lt;footer>
+        &lt;div className="footer-container">
+          {/* About Us Section */}
+          &lt;div className="about-us-container">
+            &lt;h2 className="footer-h2">About Us&lt;/h2>
+            &lt;p>
+              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Aut incidunt ratione quia? Mollitia, explicabo, error quae non dolorem nulla reiciendis molestiae exercitationem accusamus, quasi id omnis voluptate debitis voluptatibus quam.
+            &lt;/p>
+            &lt;ul className="footer-ul">
+              &lt;SocialLink href="https://www.facebook.com" icon="fa-facebook" />
+              &lt;SocialLink href="https://x.com" icon="fa-twitter" />
+              &lt;SocialLink href="https://www.instagram.com" icon="fa-instagram" />
+              &lt;SocialLink href="https://www.youtube.com" icon="fa-youtube" />
+              &lt;SocialLink href="https://www.linkedin.com" icon="fa-linkedin" />
+              &lt;SocialLink href="https://www.tiktok.com" icon="fa-tiktok" />
+              &lt;SocialLink href="https://www.pinterest.com" icon="fa-pinterest" />
+            &lt;/ul>
+          &lt;/div>
 
+          {/* Quick Links Section */}
+          &lt;div className="quicklink-container">
+            &lt;h2>Quick Links&lt;/h2>
+            &lt;ul className="quicklink-ul">
+              &lt;li>&lt;Link to="/about">About&lt;/Link>&lt;/li>
+              &lt;li>&lt;Link to="/faq">FAQ&lt;/Link>&lt;/li>
+              &lt;li>&lt;Link to="/privacy-policy">Privacy Policy&lt;/Link>&lt;/li>
+              &lt;li>&lt;Link to="/help">Help&lt;/Link>&lt;/li>
+              &lt;li>&lt;Link to="/terms-conditions">Terms &amp; Conditions&lt;/Link>&lt;/li>
+              &lt;li>&lt;Link to="/contact">Contact&lt;/Link>&lt;/li>
+            &lt;/ul>
+          &lt;/div>
 
+          {/* Shop Section */}
+          &lt;div className="shop-container">
+            &lt;h2>Shop&lt;/h2>
+            &lt;ul className="shop-ul">
+              &lt;li>&lt;Link to="/menu">Menu&lt;/Link>&lt;/li>
+              &lt;li>
+                &lt;a href="https://maps.app.goo.gl/wQysyjJVeuQwDkeS6" target="_blank" rel="noopener noreferrer">Kartta&lt;/a>
+              &lt;/li>
+            &lt;/ul>
+          &lt;/div>
 
+          {/* Contact Section */}
+          &lt;div className="contact-container">
+            &lt;h2>Contact Us&lt;/h2>
+            &lt;ul className="info">
+              &lt;li>
+                &lt;span>&lt;i className="fa fa-map-marker" aria-hidden="true">&lt;/i>&lt;/span>
+                &lt;a href="https://maps.app.goo.gl/wQysyjJVeuQwDkeS6" target="_blank" rel="noopener noreferrer">
+                  Helsinginkatu 1&lt;br />
+                  00010, Helsinki&lt;br />FIN
+                &lt;/a>
+              &lt;/li>
+              &lt;li>
+                &lt;span>&lt;i className="fa fa-phone" aria-hidden="true">&lt;/i>&lt;/span>
+                &lt;p>
+                  &lt;a href="tel:+358123123123">+358 123 123 123&lt;/a>&lt;br />
+                  &lt;a href="tel:+358123123123">+358 123 123 123&lt;/a>
+                &lt;/p>
+              &lt;/li>
+              &lt;li>
+                &lt;span>&lt;i className="fa fa-envelope" aria-hidden="true">&lt;/i>&lt;/span>
+                &lt;p>&lt;a href="mailto:Papas@pizzeria.com">Papas@pizzeria.com&lt;/a>&lt;/p>
+              &lt;/li>
+            &lt;/ul>
+          &lt;/div>
+        &lt;/div>
+      &lt;/footer>
+    &lt;/>
+  );
+};
 
-
-
-
-
-
-
-    
-
-
-
-
-
+export default Footer;
+</code></pre>
+        </article>
+    </section>
 
 
 

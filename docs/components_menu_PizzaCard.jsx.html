@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Home</title>
+    <title>JSDoc: Source: components/menu/PizzaCard.jsx</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,32 +17,101 @@
 
 <div id="main">
 
-    <h1 class="page-title">Home</h1>
+    <h1 class="page-title">Source: components/menu/PizzaCard.jsx</h1>
 
     
 
 
 
     
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React, {useState} from 'react';
+import {useCart} from '../../context/CartContext.jsx';
+import ReviewModal from '../ReviewModal.jsx';
+import formatPrice from '../../utils/formatPrice.js';
+import useOrderItemReviews from '../../hooks/useOrderItemReviews.js';
 
+/**
+ * PizzaCard component for displaying a pizza item.
+ * Includes details such as the pizza's name, description, price, and rating.
+ * Allows users to add the pizza to the cart or view reviews.
+ *
+ * @param {Object} props - Component props.
+ * @param {Object} props.pizza - The pizza object containing details about the pizza.
+ * @param {number} props.pizza.pizza_id - Unique ID of the pizza.
+ * @param {string} props.pizza.pizza_name - Name of the pizza.
+ * @param {string} props.pizza.pizza_description - Description of the pizza.
+ * @param {string} props.pizza.image_url - URL of the pizza's image.
+ * @param {number} props.pizza.price - Price of the pizza.
+ * @returns {JSX.Element} A card displaying the pizza details.
+ */
+const PizzaCard = ({pizza}) => {
+  const {addToCart} = useCart();
+  const [isReviewModalOpen, setIsReviewModalOpen] = useState(false);
+  const {averageRating, reviewsCount} = useOrderItemReviews(pizza.pizza_id);
 
-    <h3> </h3>
+  /**
+   * Handles adding the pizza to the cart.
+   */
+  const handleAddToCart = () => {
+    addToCart(pizza);
+    console.log('Pizza added to cart:', pizza);
+  };
 
+  /**
+   * Opens the review modal.
+   */
+  const handleClick = () => {
+    setIsReviewModalOpen(true);
+  };
 
+  /**
+   * Closes the review modal.
+   */
+  const handleCloseModal = () => {
+    setIsReviewModalOpen(false);
+  };
 
+  return (
+    &lt;div className="menu-card">
+      &lt;img
+        src={pizza.image_url}
+        alt={pizza.pizza_name}
+        className="menu-card-image"
+      />
+      &lt;div className="menu-card-content">
+        &lt;h3 className="menu-card-title">{pizza.pizza_name}&lt;/h3>
+        &lt;p className="menu-card-description">{pizza.pizza_description}&lt;/p>
+        &lt;div className="menu-card-rating">
+          &lt;span className="menu-card-rating-stars">
+            ⭐ {averageRating.toFixed(1)}
+          &lt;/span>
+          &lt;span className="menu-card-rating-count">
+            ({reviewsCount} reviews)
+          &lt;/span>
+        &lt;/div>
+        &lt;div className="menu-card-price">{formatPrice(pizza.price)}&lt;/div>
+        &lt;button className="menu-card-button-add" onClick={handleAddToCart}>
+          Lisää ostoskoriin
+        &lt;/button>
 
+        &lt;button className="menu-card-button-reviews" onClick={handleClick}>
+          Katso arvostelut
+        &lt;/button>
 
+        {isReviewModalOpen &amp;&amp; (
+          &lt;ReviewModal pizzaId={pizza.pizza_id} onClose={handleCloseModal} />
+        )}
+      &lt;/div>
+    &lt;/div>
+  );
+};
 
-
-
-
-
-    
-
-
-
-
-
+export default PizzaCard;
+</code></pre>
+        </article>
+    </section>
 
 
 
