@@ -1,6 +1,6 @@
 import {useState} from 'react';
 import {useAuth} from '../../hooks/useAuth';
-import useAccountManagement from '../hooks/useAccountManagement';
+import useAccountManagement from '../../hooks/useAccountManagement';
 
 const AccountDetails = () => {
   const { user } = useAuth();
