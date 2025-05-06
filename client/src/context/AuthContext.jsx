@@ -21,7 +21,15 @@ export const AuthProvider = ({children}) => {
     const token = getToken();
     if (token) {
       const decoded = decodeToken(token);
-      decoded && setUser({token, role: decoded.role});
+      if (decoded) {
+        setUser({
+          token,
+          user_id: decoded.user_id,
+          name: decoded.name,
+          email: decoded.email,
+          role: decoded.role,
+        });
+      }
     }
   }, []);
 
@@ -31,7 +39,15 @@ export const AuthProvider = ({children}) => {
       const {token} = await loginUser(credentials);
       setToken(token);
       const decoded = decodeToken(token);
-      decoded && setUser({token, role: decoded.role});
+      if (decoded) {
+        setUser({
+          token,
+          user_id: decoded.user_id,
+          name: decoded.name,
+          email: decoded.email,
+          role: decoded.role,
+        });
+      }
     } catch (err) {
       setError(err.response?.data?.message || 'Login failed');
     } finally {

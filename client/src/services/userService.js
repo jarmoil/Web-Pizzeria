@@ -30,6 +30,20 @@ export const getAllUsers = async (token) => {
   }
 };
 
+export const getUserInfo = async (token) => {
+  try {
+    const response = await fetchData(`api/v1/users/${userId}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    return response;
+  } catch (error) {
+    console.error('Error fetching users:', error);
+    throw error;
+  }
+};
+
 export const updateUser = async (userId, userData, token) => {
   try {
     const response = await fetchData(`api/v1/users/${userId}`, {
