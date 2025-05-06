@@ -749,40 +749,72 @@ footer {
 /* Hours & Location Section */
 .homepage-hours-location-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 2rem;
-  background: #ffffff;
-  padding: 2rem;
-  border-radius: 12px;
+  grid-template-columns: 1fr 3fr;
+  gap: 3rem;
+  background: #f9f9f9;
+  padding: 4rem;
+  border-radius: 16px;
+  margin: 2rem auto;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
 }
 
+/* Styling for the hours list */
 .homepage-hours ul {
   list-style: none;
   margin-top: 1rem;
+  padding: 0;
 }
 
 .homepage-hours li {
-  padding: 0.5rem 0;
-  border-bottom: 1px solid #ffffff;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid #ddd;
+  font-size: 1rem;
+  color: #333;
 }
 
+/* Styling for the map */
 .homepage-map {
-  min-height: 300px;
+  min-height: 500px;
+  width: 100%;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  position: relative;
+}
+
+
+.homepage-map::before {
+  content: "Loading map...";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 1.2rem;
+  color: #666;
+  display: none;
 }
 
 /* Responsive Design */
 @media (max-width: 1024px) {
-  #homepage-main-wrapper {
-    gap: 3rem;
-    padding: 1.5rem;
+  .homepage-hours-location-grid {
+    grid-template-columns: 1fr;
+    padding: 2rem;
   }
 
-  .homepage-section {
-    padding: 0 1rem;
+  .homepage-map {
+    min-height: 400px;
   }
 }
 
 @media (max-width: 768px) {
+  .homepage-hours li {
+    font-size: 0.9rem;
+  }
+
+  .homepage-map {
+    min-height: 300px;
+  }
+
   #homepage-hero {
     min-height: 60vh;
   }
@@ -865,11 +897,12 @@ footer {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  transition: transform 0.2s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .menu-card:hover {
   transform: translateY(-4px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
 }
 
 /* Menu item image styles */
@@ -877,47 +910,68 @@ footer {
   width: 100%;
   height: 200px;
   object-fit: cover;
+  border-bottom: 1px solid #ddd;
 }
 
 /* Menu item content */
 .menu-card-content {
-  padding: 1rem;
+  padding: 1.5rem;
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 1rem;
 }
 
 .menu-card-title {
-  font-size: 1.25rem;
+  font-size: 1.5rem;
   font-weight: bold;
+  margin: 0;
 }
 
 .menu-card-description {
-  font-size: 0.95rem;
+  font-size: 1rem;
   color: #555;
+  line-height: 1.5;
+  margin: 0;
+}
+.menu-card-rating {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1rem;
+  color: #ffcc00;
+}
+
+.menu-card-rating-count {
+  font-size: 0.9rem;
+  color: #666;
 }
 
 .menu-card-price {
-  font-size: 1.1rem;
+  font-size: 1.2rem;
   font-weight: bold;
   color: #e74c3c;
 }
 
-.menu-card-button-add {
-  margin-top: auto;
-  padding: 0.5rem;
-  background-color: #4ac67d;
-  color: white;
+.menu-card-button-add,
+.menu-card-button-reviews {
+  padding: 10px 20px;
+  font-size: 1rem;
+  font-weight: 500;
   border: none;
-  border-radius: 8px;
+  border-radius: 5px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.menu-card-button-add {
+  background-color: #04aa6d; /* Green background for the Add to Cart button */
+  color: white; /* White text */
 }
 
 .menu-card-button-add:hover {
   background-color: #3bbf6b;
   scale: 1.05;
-  rotate: -2deg;
+  rotate: -1deg;
 }
 
 .menu-card-button-add:active {
@@ -944,8 +998,8 @@ footer {
 .menu-card-button-reviews {
   width: 100%;
   padding: 0.75rem;
-  background-color: #f5f5f5;
-  color: #444;
+  background-color: #646cff;
+  color: white;
   border: none;
   border-top: 1px solid #eee;
   cursor: pointer;
@@ -954,8 +1008,8 @@ footer {
 }
 
 .menu-card-button-reviews:hover {
-  background-color: #e8e8e8;
-  color: #038857;
+  background-color: #535bf2;
+  transform: translateY(-2px);
 }
 
 .menu-card-button-reviews:active {
@@ -1147,7 +1201,147 @@ footer {
 .menu-review-submit-btn:active {
   transform: translateY(0);
 }
+/* Post Review Form Styles */
+.post-review-form {
+  background: #ffffff;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  max-width: 600px;
+  margin: 2rem auto;
+  flex-direction: column;
+  gap: 1.5rem;
+}
 
+.post-review-form h3 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.post-review-form textarea {
+  width: 100%;
+  padding: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 1rem;
+  resize: vertical;
+  font-family: inherit;
+}
+
+.post-review-form textarea:focus {
+  outline: none;
+  border-color: #04aa6d;
+  box-shadow: 0 0 4px rgba(4, 170, 109, 0.3);
+}
+
+.post-review-form .rating-container {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.post-review-form .rating-container label {
+  font-size: 1.2rem;
+  color: #ddd;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.post-review-form .rating-container label:hover,
+.post-review-form .rating-container label:hover ~ label,
+.post-review-form .rating-container input:checked ~ label {
+  color: #f5b301;
+}
+
+.post-review-form .rating-container input {
+  display: none;
+}
+
+.post-review-form button {
+  padding: 0.75rem 1.5rem;
+  background-color: #04aa6d;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.post-review-form button:hover {
+  background-color: #038857;
+  transform: translateY(-2px);
+}
+
+.post-review-form button:active {
+  transform: translateY(0);
+}
+.reviews-modal-close {
+  position:relative;
+  margin: auto;
+  top: -5px;
+  right: 10px;
+  font-size: 1.5rem;
+  background: transparent;
+  background-color: rgb(199, 49, 49);
+  border: none;
+  cursor: pointer;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+  color: #333;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  padding: 30px;
+}
+
+.reviews-modal-close:hover {
+  background-color: rgba(231, 76, 60, 0.1);
+  color: #e74c3c;
+  transform: scale(1.1);
+}
+
+.reviews-modal-close:active {
+  transform: scale(0.95);
+}
+.order-item-review-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  background-color: #f9f9f9;
+  border-bottom: 1px solid #ddd;
+  border-radius: 8px 8px 0 0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.order-item-review-header p {
+  font-size: 1rem;
+  font-weight: 400;
+  color: #333;
+  margin: 0;
+}
+.customer-reviews-title {
+  font-size: 1rem;
+  font-weight: bold;
+  color: #333;
+  text-align: center;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  border-bottom: 2px solid #04aa6d;
+  display: inline-block;
+  padding-bottom: 0.5rem;
+}
 /* ------------ End Menu Section ------------ */
 
 /* ------------ Header Section ------------ */
@@ -1202,6 +1396,11 @@ header nav a {
 header nav a:hover {
   text-decoration: underline;
 }
+#header-actions {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
 
 header #header-actions button {
   background-color: #646cff;
@@ -1218,8 +1417,7 @@ header #header-actions button:hover {
 }
 
 #cart-btn,
-#signin-btn,
-#signup-btn {
+#signin-btn {
   margin-left: 10px;
   padding: 10px 20px;
   border: none;
@@ -1229,10 +1427,33 @@ header #header-actions button:hover {
   font-size: 1rem;
   border-radius: 5px;
 }
+.signup-btn {
+  margin-left: auto;
+  padding: 8px 16px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  background-color: #5f6160;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.signup-btn:hover {
+  background-color: #000000;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.signup-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
 
 #cart-btn:hover,
-#signin-btn:hover,
-#signup-btn:hover {
+#signin-btn:hover {
   background-color: #ff5a4f;
 }
 
@@ -1271,14 +1492,35 @@ header #header-actions button:hover {
   display: none;
 }
 
-#signin-box,
-#cart-box {
-  position: relative;
+.cart-dropdown.visible {
+  display: block;
+}
+.signin-box {
   background-color: #fff;
+  color: initial;
   padding: 20px;
-  width: 300px;
+  width: 90%;
+  max-width: 400px;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  position: relative;
+}
+#cart-box {
+  background-color: #fff;
+  padding: 20px;
+  width: 90%;
+  max-width: 500px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  position: relative;
+  overflow-y: auto;
+  max-height: 80vh;
+}
+#cart-box h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 1.5rem;
+  color: #333;
 }
 
 #signin-close,
@@ -1293,6 +1535,7 @@ header #header-actions button:hover {
   color: #333;
 }
 
+
 #signin-close:hover,
 #cart-close:hover {
   color: #ff6f61;
@@ -1301,27 +1544,58 @@ header #header-actions button:hover {
 #signin-heading {
   text-align: center;
   margin-bottom: 20px;
+  font-size: 1.5rem;
+  color: #333;
+}
+.signin-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px; /* Add spacing between form elements */
 }
 
 #signin-email,
-#signin-password,
-#signin-submit-btn,
-#cart-checkout-btn {
+#signin-password {
   width: 100%;
   padding: 10px;
-  margin: 10px 0;
   border: 1px solid #ddd;
   border-radius: 5px;
+  font-size: 1rem;
+  color: #333;
+}
+#signin-email:focus,
+#signin-password:focus {
+  outline: none;
+  border-color: #04aa6d; /* Highlight border on focus */
 }
 
-#signin-submit-btn,
+#signin-submit-btn {
+  width: 100%;
+  padding: 10px;
+  background-color: #04aa6d;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+.signin-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.9rem;
+  color: #000;
+  margin-top: 15px;
+}
 #cart-checkout-btn {
   background-color: #ff6f61;
   color: white;
   cursor: pointer;
 }
 
-#signin-submit-btn:hover,
+#signin-submit-btn:hover {
+  background-color: #038857;
+}
 #cart-checkout-btn:hover {
   background-color: #ff5a4f;
 }
@@ -1330,13 +1604,14 @@ header #header-actions button:hover {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: 13px;
+  font-size: 0.9rem;
   margin-top: 10px;
 }
 
 .remember-forgot label {
-  padding-right: 5px;
-  color: #333;
+  font-size: 0.9rem;
+  color: #000;
+  font-weight: normal;
 }
 
 .remember-forgot a {
@@ -1347,59 +1622,150 @@ header #header-actions button:hover {
 .remember-forgot a:hover {
   text-decoration: underline;
 }
+#cart-items {
+  font-style: italic;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  max-height: 300px;
+  overflow-y: auto;
+  gap: 15px;
+  display: flex;
+  flex-direction: column;
+}
+.cart-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid #ddd;
+}
 
 #cart-items li {
   display: flex;
   justify-content: space-between;
   padding: 10px 0;
   border-bottom: 1px solid #ddd;
+  color: #000000;
 }
 
-#cart-total {
+.cart-total {
   display: flex;
   justify-content: space-between;
   margin-top: 20px;
   font-weight: bold;
+  font-size: 1.2rem;
+  color: #333;
 }
 
 #cart-checkout-btn {
-  background-color: #4caf50;
+  width: 100%;
+  padding: 10px;
+  margin-top: 20px;
+  background-color: #04aa6d;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
 }
 
 #cart-checkout-btn:hover {
-  background-color: #45a049;
+  background-color: #038857;
 }
 
-.cart-dropdown {
-  position: absolute;
-  top: 60px;
-  left: 0;
-  width: 300px;
-  padding: 15px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  border-radius: 8px;
-  background-color: white;
-  display: none;
-  z-index: 1001;
-}
-
-.cart-dropdown.visible {
-  display: block;
-}
-
-#signup-btn {
-  display: inline-block;
-  padding: 5px 10px;
+.pickup-option{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+  padding: 10px;
   font-size: 1rem;
-  background-color: #ff6f61;
+  color:#000000
+}
+.address-input{
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 1rem;
+  color: #000000;
+}
+.quantity-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #000000;
+}
+.quantity-controls button {
+  background-color: #04aa6d;
   color: white;
   border: none;
-  cursor: pointer;
   border-radius: 5px;
+  padding: 5px 10px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  margin: 0 5px;
 }
 
-#signup-btn:hover {
-  background-color: #ff5a4f;
+.quantity-controls button:hover {
+  background-color: #038857;
+  transform: scale(1.1);
+}
+
+.quantity-controls button:active {
+  transform: scale(1);
+}
+
+/* Remove Button */
+.remove-btn {
+  background-color: #e74c3c;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 15px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  margin-top: 10px;
+}
+
+.remove-btn:hover {
+  background-color: #c0392b;
+  transform: scale(1.1);
+}
+
+.remove-btn:active {
+  transform: scale(1);
+}
+/* Forgot Password Button Styles */
+.forgot-password-btn {
+  padding: 8px 16px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  background-color: #5f6160;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+}
+
+.forgot-password-btn:hover {
+  background-color: #000000;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.forgot-password-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+#signin-submit-btn {
+  margin-top: 20px;
 }
 
 @media (max-width: 768px) {
@@ -1424,10 +1790,46 @@ header #header-actions button:hover {
     margin-top: 10px;
   }
 
-  #signin-box,
+  .signin-box {
+    width: 90%;
+    max-width: 300px;
+    padding: 15px;
+  }
+  #signin-heading {
+    font-size: 1.2rem;
+  }
+
+  #signin-box p {
+    color: #000 !important; /* Force the font color to black */
+    font-size: 0.9rem;
+    margin-top: 10px;
+    text-align: center;
+  }
+
+  #signin-email,
+  #signin-password {
+    font-size: 0.9rem;
+  }
+
+  #signin-submit-btn {
+    font-size: 0.9rem;
+  }
   #cart-box {
     width: 80%;
     max-width: 400px;
+  }
+  .cart-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .quantity-controls {
+    gap: 5px;
+  }
+
+  .quantity-controls button,
+  .remove-btn {
+    padding: 5px 8px;
+    font-size: 0.9rem;
   }
 }
 
@@ -1842,11 +2244,16 @@ header #header-actions button:hover {
 }
 
 .review-list {
+  list-style: none;
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 1.5rem;
   max-height: 600px;
   overflow-y: auto;
+  padding: 1rem;
+  background: #f9f9f9;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .review-card {
@@ -1859,12 +2266,14 @@ header #header-actions button:hover {
 .review-header {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 0.5rem;
+  align-items: center;
+  margin-bottom: 1rem;
 }
 
 .review-rating {
+  font-size: 1.2rem;
   color: #f4b400;
-  font-weight: 500;
+  font-weight: bold;
 }
 
 .review-date {
@@ -1873,14 +2282,16 @@ header #header-actions button:hover {
 }
 
 .review-comment {
+  font-size: 1rem;
   color: #333;
-  margin: 0.5rem 0;
+  line-height: 1.5;
+  margin-bottom: 1rem;
 }
 
 .review-footer {
   display: flex;
   justify-content: flex-end;
-  margin-top: 1rem;
+  gap: 1rem;
 }
 
 .delete-review-btn {
@@ -1888,9 +2299,9 @@ header #header-actions button:hover {
   color: white;
   border: none;
   padding: 0.5rem 1rem;
-  border-radius: 4px;
+  border-radius: 8px;
   cursor: pointer;
-  transition: background-color 0.2s;
+  transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 .delete-review-btn:hover {
@@ -1965,6 +2376,21 @@ header #header-actions button:hover {
 
   .managementPage-section {
     margin: 0.75rem;
+  }
+  .review-list {
+    padding: 1rem; /* Adjust padding for smaller screens */
+  }
+
+  .review-card {
+    padding: 1rem; /* Adjust padding for smaller screens */
+  }
+
+  .review-rating {
+    font-size: 1rem; /* Adjust font size for smaller screens */
+  }
+
+  .review-date {
+    font-size: 0.8rem; /* Adjust font size for smaller screens */
   }
 }
 

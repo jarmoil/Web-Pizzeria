@@ -28,28 +28,28 @@ const SignInButton = ({isVisible, onClose}) => {
 
   return (
     isVisible && (
-      <div id="signin-modal" className="modal-overlay">
-        <div id="signin-box" className="modal-box">
+      <div id="signin-modal" className="signin-modal">
+        <div id="signin-box" className="signin-box">
           <button id="signin-close" className="close-btn" onClick={onClose}>
             &times;
           </button>
-          <div id="signin-heading">
-            <span>Sign In</span>
-          </div>
-          <input
-            id="signin-email"
-            type="email"
-            placeholder="Email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          <input
-            id="signin-password"
-            type="password"
-            placeholder="Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
+          <h2 id="signin-heading">Sign In</h2>
+          <form id="signin-form" className="signin-form">
+            <input
+              id="signin-email"
+              type="email"
+              placeholder="Email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+            <input
+              id="signin-password"
+              type="password"
+              placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </form>
           <div className="remember-forgot">
             <label>
               <input type="checkbox" /> Remember me
@@ -70,11 +70,17 @@ const SignInButton = ({isVisible, onClose}) => {
             {loading ? 'Logging in...' : 'Login'}
           </button>
           {error && <p className="error-message">{error}</p>}
-          <p>
+          <p className="signin-footer">
             Don't have an account?
-            <button type="button" className="signup-btn" onClick={handleSignUp}>
-              Sign Up
-            </button>
+            <span className="signup-container">
+              <button
+                type="button"
+                className="signup-btn"
+                onClick={handleSignUp}
+              >
+                Sign Up
+              </button>
+            </span>
           </p>
         </div>
       </div>
