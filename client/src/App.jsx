@@ -9,6 +9,7 @@ import SignUp from './components/user/SignUp';
 import MenuPage from './pages/menuPage';
 import {AuthProvider} from './context/AuthContext';
 import ProtectedRoute from './components/shared/ProtectedRoute';
+import AccountPage from './pages/AccountPage';
 
 function App() {
   return (
@@ -23,6 +24,14 @@ function App() {
               element={
                 <ProtectedRoute>
                   <ManagementPage />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/accountPage"
+              element={
+                <ProtectedRoute>
+                  <AccountPage />
                 </ProtectedRoute>
               }
             />

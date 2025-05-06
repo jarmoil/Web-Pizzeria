@@ -48,7 +48,6 @@ const ManagementPage = () => {
         <MenuManagement />
         <OrderManagement />
         <ReviewManagement />
-        <AccountManagement />
         {isAdmin && <UserManagement />}
       </div>
     </main>

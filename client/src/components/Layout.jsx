@@ -34,6 +34,11 @@ const Layout = () => {
               <Link to="/managementPage">Management Page</Link>
             </li>
             )}
+            {user && (role === 'admin' || role === 'employee' || role === 'customer') && (
+            <li>
+              <Link to="/accountPage">Account Page</Link>
+            </li>
+            )}
             <li>
               <Link to="/location">Location</Link>
             </li>

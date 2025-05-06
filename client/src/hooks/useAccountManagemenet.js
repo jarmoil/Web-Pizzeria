@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react';
-import { getUserInfo } from '../services/userService';
+import {useState, useEffect} from 'react';
+import {getUserInfo} from '../services/userService';
 
 const useAccountManagement = (token, userId) => {
   const [userInfo, setUserInfo] = useState(null);
@@ -8,11 +8,16 @@ const useAccountManagement = (token, userId) => {
 
   useEffect(() => {
     const fetchUser = async () => {
-      if (!token || !userId) return;
+      if (!token || !userId) {
+        setLoading(false);
+        return;
+      }
 
       try {
-        const data = await getUserInfo(token, userId);
+        const data = await getUserInfo(userId, token);
+        console.log(data);
         setUserInfo(data);
+        setError(null);
       } catch (err) {
         console.error('Failed to load user info:', err);
         setError('Failed to load user info');
@@ -24,9 +29,7 @@ const useAccountManagement = (token, userId) => {
     fetchUser();
   }, [token, userId]);
 
-  return { userInfo,
-    loading,
-    error };
+  return {userInfo, loading, error};
 };
 
 export default useAccountManagement;
