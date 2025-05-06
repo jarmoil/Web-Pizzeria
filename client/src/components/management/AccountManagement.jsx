@@ -109,76 +109,99 @@ const AccountManagement = () => {
   if (erroro) return <div>Error: {erroro}</div>;
 
   return (
-    <div>
-      <h2>Account Info</h2>
-      <img
-        src={
-          formData.profile_picture?.startsWith('http')
-            ? formData.profile_picture
-            : `/uploads/${formData.profile_picture}`
-        }
-        alt="Profile"
-        style={{width: '150px', borderRadius: '50%', objectFit: 'cover'}}
-      />
+    <div className="account-page">
+      <section className="account-info-section">
+        <div className="account-header">
+          <img
+            className="profile-image"
+            src={
+              formData.profile_picture?.startsWith('http')
+                ? formData.profile_picture
+                : `/uploads/${formData.profile_picture}`
+            }
+            alt="Profile"
+          />
 
-      {!isEditing ? (
-        <>
-          <p>Name: {formData.name}</p>
-          <p>Email: {formData.email}</p>
-          <p>Phone Number: {formData.phone_number}</p>
-          <p>Address: {formData.address}</p>
-          <button onClick={() => setIsEditing(true)}>Edit</button>
-        </>
-      ) : (
-        <form onSubmit={handleSubmit} style={{marginTop: '1rem'}}>
-          <div>
-            <label>Name:</label>
-            <input name="name" value={formData.name} onChange={handleChange} />
-          </div>
-          <div>
-            <label>Email:</label>
-            <input
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-            />
-          </div>
-          <div>
-            <label>Phone Number:</label>
-            <input
-              name="phone_number"
-              value={formData.phone_number}
-              onChange={handleChange}
-            />
-          </div>
-          <div>
-            <label>Address:</label>
-            <input
-              name="address"
-              value={formData.address}
-              onChange={handleChange}
-            />
-          </div>
-          <div>
-            <label>Profile Picture URL:</label>
-            <input
-              name="profile_picture"
-              value={formData.profile_picture}
-              onChange={handleChange}
-            />
-          </div>
-          <button type="submit" style={{marginTop: '1rem'}}>
-            Save
-          </button>
-          <button
-            type="button"
-            onClick={() => setIsEditing(false)}
-            style={{marginLeft: '1rem'}}
-          >
-            Cancel
-          </button>
-        </form>
-      )}
+          {!isEditing ? (
+            <div className="account-details">
+              <p>
+                <strong>Name:</strong> {formData.name}
+              </p>
+              <p>
+                <strong>Email:</strong> {formData.email}
+              </p>
+              <p>
+                <strong>Phone:</strong>{' '}
+                {formData.phone_number || 'Not provided'}
+              </p>
+              <p>
+                <strong>Address:</strong> {formData.address || 'Not provided'}
+              </p>
+              <button
+                className="btn btn-edit"
+                onClick={() => setIsEditing(true)}
+              >
+                Edit Profile
+              </button>
+            </div>
+          ) : (
+            <form className="edit-form" onSubmit={handleSubmit}>
+              <div className="form-group">
+                <label>Name:</label>
+                <input
+                  name="name"
+                  value={formData.name}
+                  onChange={handleChange}
+                />
+              </div>
+              <div className="form-group">
+                <label>Email:</label>
+                <input
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                />
+              </div>
+              <div className="form-group">
+                <label>Phone Number:</label>
+                <input
+                  name="phone_number"
+                  value={formData.phone_number}
+                  onChange={handleChange}
+                />
+              </div>
+              <div className="form-group">
+                <label>Address:</label>
+                <input
+                  name="address"
+                  value={formData.address}
+                  onChange={handleChange}
+                />
+              </div>
+              <div className="form-group">
+                <label>Profile Picture URL:</label>
+                <input
+                  name="profile_picture"
+                  value={formData.profile_picture}
+                  onChange={handleChange}
+                />
+              </div>
+              <div className="button-group">
+                <button type="submit" className="btn btn-edit">
+                  Save Changes
+                </button>
+                <button
+                  type="button"
+                  className="btn btn-cancel"
+                  onClick={() => setIsEditing(false)}
+                >
+                  Cancel
+                </button>
+              </div>
+            </form>
+          )}
+        </div>
+      </section>
 
       <section className="orders-section">
         <h2>My Orders</h2>
