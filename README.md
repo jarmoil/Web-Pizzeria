@@ -155,6 +155,15 @@ JWT_SECRET=Yourgeneratedstring
 TEST_DB_USER=yourtestuser
 TEST_DB_PASSWORD=yourtestuserpassword
 TEST_DB_NAME=test-pizzeriadb
+NODE_ENV=test
+```
+
+- Create .env file in the client directory
+- Search for the apikey here https://www.hsl.fi/avoindata
+- Fill all the placeholders here:
+
+```env
+VITE_HSL_API_KEY=yourapikey
 ```
 
 ### Running the Application
