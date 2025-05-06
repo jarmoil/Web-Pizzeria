@@ -2,6 +2,7 @@ import React from 'react';
 import useOrderItemReviews from '../hooks/useOrderItemReviews';
 import OrderItemReviewSection from './sections/OrderItemReviewSection';
 import PostReviewForm from './menu/PostReviewForm';
+import ReactDOM from 'react-dom';
 
 /**
  * ReviewModal component for displaying a modal with pizza reviews and a form to post a new review.
@@ -16,11 +17,11 @@ const ReviewModal = ({pizzaId, onClose}) => {
   const {reviews, averageRating, loading, error, postReview} =
     useOrderItemReviews(pizzaId);
 
-  return (
-    <div className="reviews-modal">
-      <div className="reviews-modal-content">
-        <button className="reviews-modal-close" onClick={onClose}>
-          ×
+  return ReactDOM.createPortal(
+    <div className="modal">
+      <div className="modal-content">
+        <button className="modal-close" onClick={onClose}>
+          &times;
         </button>
 
         <OrderItemReviewSection
@@ -32,7 +33,8 @@ const ReviewModal = ({pizzaId, onClose}) => {
 
         <PostReviewForm postReview={postReview} />
       </div>
-    </div>
+    </div>,
+    document.body // Render the modal directly under <body>
   );
 };
 
