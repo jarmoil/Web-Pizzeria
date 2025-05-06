@@ -2647,6 +2647,7 @@ header #header-actions button:hover {
   justify-content: center;
   align-items: center;
   z-index: 1000;
+  padding: 1rem;
 }
 
 .modal-content {
@@ -2656,6 +2657,9 @@ header #header-actions button:hover {
   max-width: 600px;
   border-radius: 12px;
   position: relative;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  overflow-y: auto; /* Allow scrolling if content overflows */
+  max-height: 80vh; /* Limit the height to 80% of the viewport */
 }
 
 .modal-close {
@@ -2670,4 +2674,24 @@ header #header-actions button:hover {
 
 .modal-close:hover {
   color: #e74c3c;
+}
+/* Media query for smaller screens */
+@media (max-width: 768px) {
+  .modal-content {
+    width: 95%; /* Increase width for smaller screens */
+    max-width: 400px; /* Reduce the maximum width */
+    padding: 1rem; /* Adjust padding */
+  }
+
+  .modal-close {
+    font-size: 1.2rem; /* Adjust close button size */
+  }
+}
+
+@media (max-width: 480px) {
+  .modal-content {
+    width: 100%; /* Full width for very small screens */
+    max-width: 350px; /* Further reduce the maximum width */
+    padding: 0.75rem; /* Adjust padding */
+  }
 }
