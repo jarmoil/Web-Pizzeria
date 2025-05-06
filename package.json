@@ -8,11 +8,15 @@
     "server": "cd server && nodemon src/server.js",
     "client": "cd client && vite",
     "build": "cd client && vite build",
-    "preview": "cd client && vite preview"
+    "preview": "cd client && vite preview",
+    "e2e": "set NODE_ENV=test&& npx playwright test"
   },
   "jest": {
     "testEnvironment": "node",
-    "testTimeout": 30000
+    "testTimeout": 30000,
+    "testPathIgnorePatterns": [
+      "/e2e/"
+    ]
   },
   "keywords": [],
   "author": "",

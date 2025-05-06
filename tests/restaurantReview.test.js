@@ -33,9 +33,12 @@ beforeAll(async () => {
   );
 });
 
-// Testauksen jälkeen poistaa kaikki restaurant reviews, testi käyttäjät ja resettaa AUTO_INCREMENTin alkuperäiseen
+// Testauksen jälkeen poistaa restaurant reviews, testi käyttäjät ja resettaa AUTO_INCREMENTin alkuperäiseen
 afterAll(async () => {
-  await db.query('DELETE FROM restaurant_reviews');
+  // Only delete review created by test user
+  await db.query('DELETE FROM restaurant_reviews WHERE user_id = ?', [
+    testUserId,
+  ]);
   await db.query('DELETE FROM user_accounts WHERE user_id IN (?, ?)', [
     testUserId,
     testAdminId,
@@ -44,11 +47,10 @@ afterAll(async () => {
 });
 
 describe('Restaurant Reviews API', () => {
-  test('GET /api/v1/restaurant-reviews should return empty array', async () => {
+  test('GET /api/v1/restaurant-reviews should return array', async () => {
     const res = await request(app).get('/api/v1/restaurant-reviews');
     expect(res.statusCode).toBe(200);
     expect(Array.isArray(res.body)).toBe(true);
-    expect(res.body.length).toBe(0);
   });
 
   test('POST /api/v1/restaurant-reviews should fail without token', async () => {

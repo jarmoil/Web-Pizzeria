@@ -1,13 +1,25 @@
-js-template
+# Web-Pizzeria
+
+## Setup
 
 Run npm install to get dependencies
 
-Might need to install playwright and browsers before running e2e tests
+### Database Setup
 
-Launch back-end: npm run server
+1. Production database: web-pizzeriadb
+2. Test database: test-pizzeriadb
+   - To refresh test database:
+     1. Export production database from phpMyAdmin
+     2. Drop all tables from test database
+     3. Import the SQL file to test database
 
-Launch front-end: npm run client
+### Running the Application
 
-Launch integration tests: npm test
+- Launch back-end: npm run server
+- Launch front-end: npm run client
 
-Launch e2e tests: npx playwright test
+### Testing
+
+- Launch integration tests: npm test
+- Launch e2e tests: npm run e2e
+  - Might need to install playwright and browsers before running e2e tests
