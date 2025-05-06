@@ -23,3 +23,4 @@ Run npm install to get dependencies
 - Launch integration tests: npm test
 - Launch e2e tests: npm run e2e
   - Might need to install playwright and browsers before running e2e tests
+  - npx playwright install
