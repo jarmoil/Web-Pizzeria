@@ -8,7 +8,7 @@ const ProtectedRoute = ({ children, requiredRoles }) => {
   if (loading) {
     return <p>Loading...</p>; // Show a loading indicator while checking authentication
   }
-  
+
 /**
  * ProtectedRoute component for restricting access to certain routes.
  * Redirects users to the homepage if they are not logged in, or to an unauthorized page if they lack the required roles.
@@ -18,8 +18,6 @@ const ProtectedRoute = ({ children, requiredRoles }) => {
  * @param {string[]} [props.requiredRoles] - An optional array of roles required to access the route.
  * @returns {JSX.Element} The child components if access is granted, or a redirect if access is denied.
  */
-const ProtectedRoute = ({children, requiredRoles}) => {
-  const {user} = useUserContext();
 
   if (!user) {
     return <Navigate to="/" />;

@@ -27,13 +27,6 @@ export const AuthProvider = ({children}) => {
 
   const [loading, setLoading] = useState(true);
 
-
-  /**
-   * State for managing the loading state during authentication operations.
-   * @type {boolean}
-   */
-  const [loading, setLoading] = useState(false);
-
   /**
    * State for storing error messages related to authentication.
    * @type {string|null}
