@@ -2,7 +2,7 @@ import {useState} from 'react';
 import {useAuth} from '../../hooks/useAuth';
 import useAccountManagement from '../../hooks/useAccountManagement';
 
-const AccountDetails = () => {
+const AccountManagement = () => {
   const { user } = useAuth();
   const userId = user?.user_id;
   const token = user?.token;
@@ -24,3 +24,5 @@ const AccountDetails = () => {
     </div>
   );
 };
+
+export default AccountManagement;
