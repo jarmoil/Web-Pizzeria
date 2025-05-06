@@ -17,7 +17,7 @@ export const AuthContext = createContext();
  * @returns {JSX.Element} The authentication context provider.
  */
 export const AuthProvider = ({children}) => {
-    /**
+  /**
    * State for storing the current user.
    * @type {Object|null}
    * @property {string} token - The authentication token of the user.
@@ -25,6 +25,10 @@ export const AuthProvider = ({children}) => {
    */
   const [user, setUser] = useState(null);
 
+  /**
+   * State for tracking whether authentication-related operations are in progress.
+   * @type {boolean}
+   */
   const [loading, setLoading] = useState(true);
 
   /**

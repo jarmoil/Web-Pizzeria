@@ -48,6 +48,14 @@ export const getAllUsers = async (token) => {
 };
 
 
+/**
+ * Fetches information for a specific user.
+ *
+ * @param {number} userId - The ID of the user to fetch.
+ * @param {string} token - The authentication token for the request.
+ * @returns {Promise<Object>} A promise that resolves to the user's information.
+ * @throws {Error} If the request fails.
+ */
 export const getUserInfo = async (userId, token) => {
   try {
     const response = await fetchData(`api/v1/users/${userId}`, {

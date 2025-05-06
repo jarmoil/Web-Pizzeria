@@ -2,12 +2,29 @@ import { useState, useEffect } from 'react';
 import { useAuth } from '../../hooks/useAuth';
 import useAccountManagement from '../../hooks/useAccountManagemenet';
 
+/**
+ * AccountManagement component for managing and updating user account information.
+ * Displays user information and allows editing of account details such as name, email, phone number, address, and profile picture.
+ *
+ * @component
+ * @returns {JSX.Element} The account management interface.
+ */
 const AccountManagement = () => {
   const { user } = useAuth();
   const userId = user?.user_id;
   const token = user?.token;
 
   const { userInfo, loading, error, updateAccount } = useAccountManagement(token, userId);
+
+  /**
+   * State for managing the form data.
+   * @type {Object}
+   * @property {string} name - The user's name.
+   * @property {string} email - The user's email address.
+   * @property {string} phone_number - The user's phone number.
+   * @property {string} address - The user's address.
+   * @property {string} profile_picture - The URL of the user's profile picture.
+   */
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -15,9 +32,16 @@ const AccountManagement = () => {
     address: '',
     profile_picture: ''
   });
+
+  /**
+   * State for managing whether the form is in editing mode.
+   * @type {boolean}
+   */
   const [isEditing, setIsEditing] = useState(false);
 
-  // Fill the form with the current user info when it's fetched
+  /**
+   * Fills the form with the current user information when it is fetched.
+   */
   useEffect(() => {
     if (userInfo) {
       setFormData({
@@ -30,11 +54,24 @@ const AccountManagement = () => {
     }
   }, [userInfo]);
 
+  /**
+   * Handles changes to the form inputs.
+   *
+   * @param {Object} e - The event object.
+   * @param {string} e.target.name - The name of the input field.
+   * @param {string} e.target.value - The value of the input field.
+   */
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
+  /**
+   * Handles the form submission to update user account information.
+   *
+   * @param {Object} e - The event object.
+   * @returns {Promise<void>} Resolves when the update is complete.
+   */
   const handleSubmit = async (e) => {
     e.preventDefault();
 

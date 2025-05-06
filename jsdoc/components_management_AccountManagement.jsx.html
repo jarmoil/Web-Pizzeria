@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: components/ReviewModal.jsx</title>
+    <title>JSDoc: Source: components/management/AccountManagement.jsx</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: components/ReviewModal.jsx</h1>
+    <h1 class="page-title">Source: components/management/AccountManagement.jsx</h1>
 
     
 
@@ -26,45 +26,164 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>import React from 'react';
-import useOrderItemReviews from '../hooks/useOrderItemReviews';
-import OrderItemReviewSection from './sections/OrderItemReviewSection';
-import PostReviewForm from './menu/PostReviewForm';
+            <pre class="prettyprint source linenums"><code>import { useState, useEffect } from 'react';
+import { useAuth } from '../../hooks/useAuth';
+import useAccountManagement from '../../hooks/useAccountManagemenet';
 
 /**
- * ReviewModal component for displaying a modal with pizza reviews and a form to post a new review.
- * Fetches reviews for a specific pizza and allows users to submit their own reviews.
+ * AccountManagement component for managing and updating user account information.
+ * Displays user information and allows editing of account details such as name, email, phone number, address, and profile picture.
  *
- * @param {Object} props - Component props.
- * @param {number} props.pizzaId - The ID of the pizza for which reviews are displayed.
- * @param {Function} props.onClose - Function to close the modal.
- * @returns {JSX.Element} The review modal with reviews and a review submission form.
+ * @component
+ * @returns {JSX.Element} The account management interface.
  */
-const ReviewModal = ({pizzaId, onClose}) => {
-  const {reviews, averageRating, loading, error, postReview} =
-    useOrderItemReviews(pizzaId);
+const AccountManagement = () => {
+  const { user } = useAuth();
+  const userId = user?.user_id;
+  const token = user?.token;
+
+  const { userInfo, loading, error, updateAccount } = useAccountManagement(token, userId);
+
+  /**
+   * State for managing the form data.
+   * @type {Object}
+   * @property {string} name - The user's name.
+   * @property {string} email - The user's email address.
+   * @property {string} phone_number - The user's phone number.
+   * @property {string} address - The user's address.
+   * @property {string} profile_picture - The URL of the user's profile picture.
+   */
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    phone_number: '',
+    address: '',
+    profile_picture: ''
+  });
+
+  /**
+   * State for managing whether the form is in editing mode.
+   * @type {boolean}
+   */
+  const [isEditing, setIsEditing] = useState(false);
+
+  /**
+   * Fills the form with the current user information when it is fetched.
+   */
+  useEffect(() => {
+    if (userInfo) {
+      setFormData({
+        name: userInfo.name || '',
+        email: userInfo.email || '',
+        phone_number: userInfo.phone_number || '',
+        address: userInfo.address || '',
+        profile_picture: userInfo.profile_picture || ''
+      });
+    }
+  }, [userInfo]);
+
+  /**
+   * Handles changes to the form inputs.
+   *
+   * @param {Object} e - The event object.
+   * @param {string} e.target.name - The name of the input field.
+   * @param {string} e.target.value - The value of the input field.
+   */
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
+  };
+
+  /**
+   * Handles the form submission to update user account information.
+   *
+   * @param {Object} e - The event object.
+   * @returns {Promise&lt;void>} Resolves when the update is complete.
+   */
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    // Ensure all form fields are included in the object, whether changed or not
+    const updatedData = {
+      user_name: formData.name || userInfo.name, // Default to original if no change
+      user_email: formData.email || userInfo.email, // Default to original if no change
+      phone_number: formData.phone_number || userInfo.phone_number, // Default to original if no change
+      user_address: formData.address || userInfo.address, // Default to original if no change
+      profile_picture: formData.profile_picture || userInfo.profile_picture // Default to original if no change
+    };
+
+    console.log('Updated Data to send:', updatedData);  // Debug here
+
+    try {
+      await updateAccount(updatedData); // Send updated data to API
+      setIsEditing(false);  // Exit editing mode after successful update
+      alert('Profile updated successfully!');
+
+      // Refresh the page after successful update
+      window.location.reload();
+    } catch (err) {
+      console.error('Failed to update account:', err);
+      alert('An error occurred while updating your profile.');
+    }
+  };
+
+  if (loading) return &lt;p>Loading account info...&lt;/p>;
+  if (error) return &lt;p>{error}&lt;/p>;
 
   return (
-    &lt;div className="reviews-modal">
-      &lt;div className="reviews-modal-content">
-        &lt;button className="reviews-modal-close" onClick={onClose}>
-          ×
-        &lt;/button>
+    &lt;div>
+      &lt;h2>Account Info&lt;/h2>
+      &lt;img
+        src={
+          formData.profile_picture?.startsWith('http')
+            ? formData.profile_picture
+            : `/uploads/${formData.profile_picture}`
+        }
+        alt="Profile"
+        style={{ width: '150px', borderRadius: '50%', objectFit: 'cover' }}
+      />
 
-        &lt;OrderItemReviewSection
-          reviews={reviews}
-          averageRating={averageRating}
-          loading={loading}
-          error={error}
-        />
-
-        &lt;PostReviewForm postReview={postReview} />
-      &lt;/div>
+      {!isEditing ? (
+        &lt;>
+          &lt;p>Name: {formData.name}&lt;/p>
+          &lt;p>Email: {formData.email}&lt;/p>
+          &lt;p>Phone Number: {formData.phone_number}&lt;/p>
+          &lt;p>Address: {formData.address}&lt;/p>
+          &lt;button onClick={() => setIsEditing(true)}>Edit&lt;/button>
+        &lt;/>
+      ) : (
+        &lt;form onSubmit={handleSubmit} style={{ marginTop: '1rem' }}>
+          &lt;div>
+            &lt;label>Name:&lt;/label>
+            &lt;input name="name" value={formData.name} onChange={handleChange} />
+          &lt;/div>
+          &lt;div>
+            &lt;label>Email:&lt;/label>
+            &lt;input name="email" value={formData.email} onChange={handleChange} />
+          &lt;/div>
+          &lt;div>
+            &lt;label>Phone Number:&lt;/label>
+            &lt;input name="phone_number" value={formData.phone_number} onChange={handleChange} />
+          &lt;/div>
+          &lt;div>
+            &lt;label>Address:&lt;/label>
+            &lt;input name="address" value={formData.address} onChange={handleChange} />
+          &lt;/div>
+          &lt;div>
+            &lt;label>Profile Picture URL:&lt;/label>
+            &lt;input name="profile_picture" value={formData.profile_picture} onChange={handleChange} />
+          &lt;/div>
+          &lt;button type="submit" style={{ marginTop: '1rem' }}>Save&lt;/button>
+          &lt;button type="button" onClick={() => setIsEditing(false)} style={{ marginLeft: '1rem' }}>
+            Cancel
+          &lt;/button>
+        &lt;/form>
+      )}
     &lt;/div>
   );
 };
 
-export default ReviewModal;
+export default AccountManagement;
 </code></pre>
         </article>
     </section>

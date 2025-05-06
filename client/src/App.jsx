@@ -16,6 +16,7 @@ import AccountPage from './pages/AccountPage';
  * Includes routes for various pages such as the front page, menu, management page, and more.
  * Wraps the application in the `AuthProvider` to provide authentication context.
  *
+ * @component
  * @returns {JSX.Element} The main application layout with routing.
  */
 function App() {
