@@ -1,5 +1,5 @@
 import {useState, useEffect} from 'react';
-import {getUserInfo} from '../services/userService';
+import {getUserInfo, updateUser} from '../services/userService';
 
 const useAccountManagement = (token, userId) => {
   const [userInfo, setUserInfo] = useState(null);
@@ -15,7 +15,6 @@ const useAccountManagement = (token, userId) => {
 
       try {
         const data = await getUserInfo(userId, token);
-        console.log(data);
         setUserInfo(data);
         setError(null);
       } catch (err) {
@@ -29,7 +28,17 @@ const useAccountManagement = (token, userId) => {
     fetchUser();
   }, [token, userId]);
 
-  return {userInfo, loading, error};
+  const updateAccount = async (updatedData) => {
+    try {
+      await updateUser(userId, updatedData, token);
+      setUserInfo({...userInfo, ...updatedData});
+    } catch (err) {
+      console.error('Failed to update user:', err);
+      setError('Failed to update user info');
+    }
+  };
+
+  return { userInfo, loading, error, updateAccount };
 };
 
 export default useAccountManagement;

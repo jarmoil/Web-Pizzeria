@@ -2,7 +2,6 @@ import MenuManagement from '../components/management/MenuManagement';
 import OrderManagement from '../components/management/OrderManagement';
 import ReviewManagement from '../components/management/ReviewManagement';
 import UserManagement from '../components/management/UserManagement';
-import AccountManagement from '../components/management/AccountManagement';
 import {useAuth} from '../hooks/useAuth';
 
 const ManagementPage = () => {
