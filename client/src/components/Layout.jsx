@@ -14,7 +14,7 @@ import LogoutButton from './user/LogoutButton';
  * @returns {JSX.Element} The main layout of the application.
  */
 const Layout = () => {
-    /**
+  /**
    * State to manage the visibility of the cart modal.
    * @type {boolean}
    */
@@ -43,7 +43,7 @@ const Layout = () => {
     <div>
       <header>
         <nav>
-          <div id="logo">MyShop</div>
+          <div id="logo">Pápá's</div>
 
           <ul>
             <li>
@@ -53,15 +53,18 @@ const Layout = () => {
               <Link to="/menu">Menu</Link>
             </li>
             {user && (role === 'admin' || role === 'employee') && (
-            <li>
-              <Link to="/managementPage">Management Page</Link>
-            </li>
+              <li>
+                <Link to="/managementPage">Management Page</Link>
+              </li>
             )}
-            {user && (role === 'admin' || role === 'employee' || role === 'customer') && (
-            <li>
-              <Link to="/accountPage">Account Page</Link>
-            </li>
-            )}
+            {user &&
+              (role === 'admin' ||
+                role === 'employee' ||
+                role === 'customer') && (
+                <li>
+                  <Link to="/accountPage">Profile</Link>
+                </li>
+              )}
             <li>
               <Link to="/location">Location</Link>
             </li>
