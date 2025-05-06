@@ -6,7 +6,7 @@ export const AuthContext = createContext();
 
 export const AuthProvider = ({children}) => {
   const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   const decodeToken = (token) => {
@@ -25,10 +25,11 @@ export const AuthProvider = ({children}) => {
         setUser({
           token,
           user_id: decoded.user_id,
-          role: decoded.role
+          role: decoded.role,
         });
       }
     }
+    setLoading(false);
   }, []);
 
   const login = async (credentials) => {
