@@ -1,0 +1,17 @@
+{
+  "name": "Pápás Pizzeria API",
+  "version": "1.0.0",
+  "description": "API documentation for Pápás Pizzeria API",
+  "title": "Pápás pizzeria API documentation",
+  "url": "/api/v1",
+  "header": {
+    "title": "Pápás pizzeria API documentation",
+    "content": "<p>Pápás pizzeria API documentation</p>"
+  },
+  "template": {
+    "withCompare": true,
+    "withGenerator": true
+  },
+  "exclude": ["node_modules/", "uploads/"],
+  "files": ["server/src/api/routes/*.js", "server/src/api/controllers/*.js"]
+}

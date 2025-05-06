@@ -4,6 +4,12 @@ import cors from 'cors';
 import api from './api/index.js';
 import uploadRoutes from './api/routes/upload-router.js';
 import errorHandler from './api/middleware/error-middleware.js';
+import path from 'path';
+import {fileURLToPath} from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const rootDir = path.join(__dirname, '..', '..');
 
 dotenv.config();
 
@@ -18,6 +24,8 @@ app.use('/api/v1', api);
 
 // Middleware to serve static files (e.g., uploaded images)
 app.use('/uploads', express.static('uploads'));
+
+app.use('/docs', express.static(path.join(rootDir, 'docs')));
 
 // Register upload routes
 app.use('/api/v1', uploadRoutes);
