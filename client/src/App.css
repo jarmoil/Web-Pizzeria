@@ -2737,3 +2737,64 @@ header #header-actions button:hover {
     padding: 0.75rem; /* Adjust padding */
   }
 }
+
+/* Location Page Styles */
+
+/* Location Page Styles */
+.location-page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.location-page h1 {
+  color: #333;
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.location-page p {
+  color: #666;
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+}
+
+.location-page iframe {
+  max-width: 100%;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  margin-bottom: 2rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .location-page {
+    padding: 1rem;
+  }
+
+  .location-page h1 {
+    font-size: 2rem;
+  }
+
+  .location-page p {
+    font-size: 1rem;
+  }
+
+  .location-page iframe {
+    height: 300px;
+  }
+}
+
+@media (max-width: 480px) {
+  .location-page h1 {
+    font-size: 1.75rem;
+  }
+
+  .location-page iframe {
+    height: 250px;
+  }
+}
