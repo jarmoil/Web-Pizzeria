@@ -92,16 +92,70 @@ front-end: /jsdocs
 
 ## Setupping this project to run it on your own PC
 
-Run npm install to get dependencies
+Run "npm install" in the IDE terminal opened in the project's directory to get dependencies
 
 ### Database Setup
 
 1. Production database: web-pizzeriadb
+
+- Run the web-pizzeriadb.sql file in the dbsetup directory
+- Run this code snippet with your password for your future admin account to hash your admin account's password:
+
+```js
+const bcrypt = require('bcrypt');
+const password = 'yourAdminPassword'; // replace with the real password
+const Rounds = 16;
+
+bcrypt.hash(password, saltRounds, function (err, hash) {
+  if (err) throw err;
+  console.log('Hashed password:', hash);
+});
+```
+
+- Then put your information and hashed password in this query and run it:
+
+```sql
+INSERT INTO `user_accounts` (`user_id`, `name`, `email`, `password`, `phone_number`, `address`, `profile_picture`, `role`) VALUES
+(1, 'yourname', 'email', 'hashedpassword', 'phone number', 'address', 'picture url','admin')
+```
+
 2. Test database: test-pizzeriadb
-   - To refresh test database:
-     1. Export production database from phpMyAdmin
-     2. Drop all tables from test database
-     3. Import the SQL file to test database
+
+- Run the test-pizzeriadb.sql file in the dbsetup directory
+- Do the same above or just put the same sql query you did already
+
+### JWT_SECRET generation
+
+This will be needed in .env setup
+
+- Run the code below in node running the file you put this in:
+  - node example.js
+
+```js
+const crypto = require('crypto');
+
+const jwtSecret = crypto.randomBytes(32).toString('hex');
+
+console.log('JWT Secret:', jwtSecret);
+```
+
+### .env setup
+
+- Create .env file in the project's directory and in the client directory
+- Fill all the placeholders here (project's directory .env):
+
+```env
+DB_HOST=yourdbhost
+DB_USER=yourdbuser
+DB_PASSWORD=yourdbuserpassword
+DB_NAME=web-pizzeriadb
+DB_CONNECTION_LIMIT=10
+PORT=3000
+JWT_SECRET=Yourgeneratedstring
+TEST_DB_USER=yourtestuser
+TEST_DB_PASSWORD=yourtestuserpassword
+TEST_DB_NAME=test-pizzeriadb
+```
 
 ### Running the Application
 
