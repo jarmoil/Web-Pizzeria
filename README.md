@@ -160,7 +160,30 @@ TEST_DB_NAME=test-pizzeriadb
 ### Running the Application
 
 - Launch back-end: npm run server
-- Launch front-end: npm run client
+- Launch front-end: npm run
+
+### How To Use the Application
+
+Make sure you did everything above
+
+For normal use without admin pages:
+Without signing up you can't do more than just viewing the home, menu and location pages.
+
+1. Signing up and logging in
+
+- Press button sign in and then sign up to create an account and then sign in using your information
+- Now you have all possible functions for normal customer account, press all buttons and try to order everything and edit account in account managemenet or write review.
+
+2. Using admin account
+
+- Sign in with your admin account you created separately
+- You can do everything a customer account can do but you can also delete reviews. You can add, edit or remove all the items on the menu, alter accounts and create employee accounts. Everything is on a separate page, just sign in and you'll see it.
+
+3. Using employee account
+
+Make sure you have created employee account using admin account.
+
+- You can try edit, add or delete items on the menu and delete reviews but you can't add new accounts or alter them.
 
 ### Testing
 
