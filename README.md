@@ -112,7 +112,7 @@ bcrypt.hash(password, saltRounds, function (err, hash) {
 });
 ```
 
-- Then put your information and hashed password in this query and run it:
+- Then put your information and hashed password in this queryn into values and run it:
 
 ```sql
 INSERT INTO `user_accounts` (`user_id`, `name`, `email`, `password`, `phone_number`, `address`, `profile_picture`, `role`) VALUES
