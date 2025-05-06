@@ -4,6 +4,14 @@ website url:
 
 http://10.120.32.83/
 
+apiDoc:
+
+http://10.120.32.83/docs/
+
+JSDoc:
+
+http://10.120.32.83/jsdocs/
+
 Palautelomake:
 
 https://docs.google.com/forms/d/e/1FAIpQLSe-VyBSF2xMaW6-3DJgHMge0h5ttv6PVYzDBhEbpsFvQN1U4A/viewform
