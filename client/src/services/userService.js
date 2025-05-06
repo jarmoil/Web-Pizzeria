@@ -30,7 +30,7 @@ export const getAllUsers = async (token) => {
   }
 };
 
-export const getUserInfo = async (token) => {
+export const getUserInfo = async (userId, token) => {
   try {
     const response = await fetchData(`api/v1/users/${userId}`, {
       headers: {
