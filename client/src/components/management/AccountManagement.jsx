@@ -1,6 +1,7 @@
-import { useState, useEffect } from 'react';
-import { useAuth } from '../../hooks/useAuth';
+import {useState, useEffect} from 'react';
+import {useAuth} from '../../hooks/useAuth';
 import useAccountManagement from '../../hooks/useAccountManagemenet';
+import useOwnOrders from '../../hooks/useOwnOrders';
 
 /**
  * AccountManagement component for managing and updating user account information.
@@ -10,11 +11,14 @@ import useAccountManagement from '../../hooks/useAccountManagemenet';
  * @returns {JSX.Element} The account management interface.
  */
 const AccountManagement = () => {
-  const { user } = useAuth();
+  const {user} = useAuth();
   const userId = user?.user_id;
   const token = user?.token;
-
-  const { userInfo, loading, error, updateAccount } = useAccountManagement(token, userId);
+  const {userInfo, loading, error, updateAccount} = useAccountManagement(
+    token,
+    userId
+  );
+  const {orders, loadingo, erroro, cancelOrder} = useOwnOrders(user?.token);
 
   /**
    * State for managing the form data.
@@ -30,7 +34,7 @@ const AccountManagement = () => {
     email: '',
     phone_number: '',
     address: '',
-    profile_picture: ''
+    profile_picture: '',
   });
 
   /**
@@ -49,7 +53,7 @@ const AccountManagement = () => {
         email: userInfo.email || '',
         phone_number: userInfo.phone_number || '',
         address: userInfo.address || '',
-        profile_picture: userInfo.profile_picture || ''
+        profile_picture: userInfo.profile_picture || '',
       });
     }
   }, [userInfo]);
@@ -62,8 +66,8 @@ const AccountManagement = () => {
    * @param {string} e.target.value - The value of the input field.
    */
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
+    const {name, value} = e.target;
+    setFormData((prev) => ({...prev, [name]: value}));
   };
 
   /**
@@ -81,14 +85,14 @@ const AccountManagement = () => {
       user_email: formData.email || userInfo.email, // Default to original if no change
       phone_number: formData.phone_number || userInfo.phone_number, // Default to original if no change
       user_address: formData.address || userInfo.address, // Default to original if no change
-      profile_picture: formData.profile_picture || userInfo.profile_picture // Default to original if no change
+      profile_picture: formData.profile_picture || userInfo.profile_picture, // Default to original if no change
     };
 
-    console.log('Updated Data to send:', updatedData);  // Debug here
+    console.log('Updated Data to send:', updatedData); // Debug here
 
     try {
       await updateAccount(updatedData); // Send updated data to API
-      setIsEditing(false);  // Exit editing mode after successful update
+      setIsEditing(false); // Exit editing mode after successful update
       alert('Profile updated successfully!');
 
       // Refresh the page after successful update
@@ -101,6 +105,8 @@ const AccountManagement = () => {
 
   if (loading) return <p>Loading account info...</p>;
   if (error) return <p>{error}</p>;
+  if (loadingo) return <div>Loading...</div>;
+  if (erroro) return <div>Error: {erroro}</div>;
 
   return (
     <div>
@@ -112,7 +118,7 @@ const AccountManagement = () => {
             : `/uploads/${formData.profile_picture}`
         }
         alt="Profile"
-        style={{ width: '150px', borderRadius: '50%', objectFit: 'cover' }}
+        style={{width: '150px', borderRadius: '50%', objectFit: 'cover'}}
       />
 
       {!isEditing ? (
@@ -124,33 +130,101 @@ const AccountManagement = () => {
           <button onClick={() => setIsEditing(true)}>Edit</button>
         </>
       ) : (
-        <form onSubmit={handleSubmit} style={{ marginTop: '1rem' }}>
+        <form onSubmit={handleSubmit} style={{marginTop: '1rem'}}>
           <div>
             <label>Name:</label>
             <input name="name" value={formData.name} onChange={handleChange} />
           </div>
           <div>
             <label>Email:</label>
-            <input name="email" value={formData.email} onChange={handleChange} />
+            <input
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
+            />
           </div>
           <div>
             <label>Phone Number:</label>
-            <input name="phone_number" value={formData.phone_number} onChange={handleChange} />
+            <input
+              name="phone_number"
+              value={formData.phone_number}
+              onChange={handleChange}
+            />
           </div>
           <div>
             <label>Address:</label>
-            <input name="address" value={formData.address} onChange={handleChange} />
+            <input
+              name="address"
+              value={formData.address}
+              onChange={handleChange}
+            />
           </div>
           <div>
             <label>Profile Picture URL:</label>
-            <input name="profile_picture" value={formData.profile_picture} onChange={handleChange} />
+            <input
+              name="profile_picture"
+              value={formData.profile_picture}
+              onChange={handleChange}
+            />
           </div>
-          <button type="submit" style={{ marginTop: '1rem' }}>Save</button>
-          <button type="button" onClick={() => setIsEditing(false)} style={{ marginLeft: '1rem' }}>
+          <button type="submit" style={{marginTop: '1rem'}}>
+            Save
+          </button>
+          <button
+            type="button"
+            onClick={() => setIsEditing(false)}
+            style={{marginLeft: '1rem'}}
+          >
             Cancel
           </button>
         </form>
       )}
+
+      <section className="orders-section">
+        <h2>My Orders</h2>
+        {orders.length === 0 ? (
+          <p>Loading orders</p>
+        ) : (
+          <div className="orders-grid">
+            {orders.map((order) => (
+              <div key={order.order_id} className="order-card">
+                <div className="order-header">
+                  <h3>Order #{order.order_id}</h3>
+                  <span className={`status ${order.order_status}`}>
+                    {order.order_status}
+                  </span>
+                </div>
+
+                <div className="order-details">
+                  <p>Total: €{order.total_price}</p>
+                  <p>Type: {order.is_pickup ? 'Pickup' : 'Delivery'}</p>
+                  {!order.is_pickup && <p>Address: {order.address}</p>}
+                  <p>Date: {new Date(order.created_at).toLocaleDateString()}</p>
+                </div>
+
+                <div className="order-items">
+                  <h4>Items:</h4>
+                  {order.items.map((item) => (
+                    <div key={item.order_item_id} className="order-item">
+                      <span>{item.pizza_name}</span>
+                      <span>x{item.quantity}</span>
+                    </div>
+                  ))}
+                </div>
+
+                {order.order_status === 'pending' && (
+                  <button
+                    onClick={() => cancelOrder(order.order_id)}
+                    className="cancel-button"
+                  >
+                    Cancel Order
+                  </button>
+                )}
+              </div>
+            ))}
+          </div>
+        )}
+      </section>
     </div>
   );
 };

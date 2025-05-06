@@ -48,6 +48,50 @@ export const createOrder = async (
 };
 
 /**
+ * Fetches orders for the currently logged in user.
+ *
+ * @param {string} token - The authentication token for the request.
+ * @returns {Promise<Object[]>} A promise that resolves to an array of user's orders.
+ * @throws {Error} If the request fails.
+ */
+export const getOwnOrders = async (token) => {
+  try {
+    const response = await fetchData('api/v1/orders/my', {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    return response;
+  } catch (error) {
+    console.error('Error fetching own orders:', error);
+    throw error;
+  }
+};
+
+/**
+ * Cancels a specific order.
+ *
+ * @param {number} orderId - The ID of the order to cancel.
+ * @param {string} token - The authentication token for the request.
+ * @returns {Promise<Object>} A promise that resolves to the response data.
+ * @throws {Error} If the request fails.
+ */
+export const cancelOrder = async (orderId, token) => {
+  try {
+    const response = await fetchData(`api/v1/orders/${orderId}/cancel`, {
+      method: 'PUT',
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    return response;
+  } catch (error) {
+    console.error('Error canceling order:', error);
+    throw error;
+  }
+};
+
+/**
  * Fetches all orders.
  *
  * @param {string} token - The authentication token for the request.

@@ -28,7 +28,7 @@ const OrderItemReviewSection = ({reviews, averageRating, loading, error}) => {
       {error && <p className="error-message">{error}</p>}
 
       <div className="order-item-reviews">
-      <h2 class="customer-reviews-title">Customer Reviews</h2>
+        <h2 className="customer-reviews-title">Customer Reviews</h2>
         <ul className="review-list">
           {reviews.length > 0 ? (
             reviews.map((review) => (
