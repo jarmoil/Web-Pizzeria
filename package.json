@@ -9,7 +9,8 @@
     "client": "cd client && vite",
     "build": "cd client && vite build",
     "preview": "cd client && vite preview",
-    "e2e": "set NODE_ENV=test&& npx playwright test"
+    "e2e": "set NODE_ENV=test&& npx playwright test",
+    "apidoc": "apidoc -i server/src/api/ -o docs/"
   },
   "jest": {
     "testEnvironment": "node",
@@ -37,6 +38,7 @@
     "vite": "^6.3.1"
   },
   "dependencies": {
+    "apidoc": "^1.2.0",
     "bcrypt": "^5.1.1",
     "cors": "^2.8.5",
     "dotenv": "^16.5.0",
