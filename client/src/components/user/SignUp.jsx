@@ -108,13 +108,6 @@ const SignUp = () => {
             Register
           </button>
         </div>
-
-        <div className="signUp-container-signIn-container">
-          <p id="signUp-container-signIn-container-p">
-            Already have an account?
-            <a id="signUp-container-signIn-container-a" href="signin.html">Sign in</a>.
-          </p>
-        </div>
       </form>
     </section>
   );
