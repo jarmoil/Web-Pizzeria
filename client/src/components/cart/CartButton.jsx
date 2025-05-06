@@ -6,12 +6,25 @@ import AddressInput from '../shared/AddressInput';
 import FeedbackMessage from '../shared/FeedbackMessage';
 import {useCheckout} from '../../hooks/useCheckout';
 
+/**
+ * Renders the cart dropdown with a list of cart items, total price, and checkout options.
+ *
+ * @param {Object} props - Component props.
+ * @param {boolean} props.isVisible - Determines if the cart dropdown is visible.
+ * @param {Function} props.onClose - Function to close the cart dropdown.
+ * @returns {JSX.Element|null} The cart dropdown or `null` if not visible.
+ */
 const CartButton = ({isVisible, onClose}) => {
   const {cart, increaseQuantity, decreaseQuantity, removeFromCart} = useCart();
   const [address, setAddress] = useState('');
   const [isPickup, setIsPickup] = useState(false);
   const {handleCheckout, feedback, loading} = useCheckout();
 
+  /**
+   * Calculates the total price of items in the cart.
+   *
+   * @type {number}
+   */
   const totalPrice = cart.reduce(
     (sum, item) => sum + item.price * item.quantity,
     0

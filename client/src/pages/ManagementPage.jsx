@@ -4,6 +4,13 @@ import ReviewManagement from '../components/management/ReviewManagement';
 import UserManagement from '../components/management/UserManagement';
 import {useAuth} from '../hooks/useAuth';
 
+/**
+ * ManagementPage component for rendering the management interface of the application.
+ * Includes sections for managing menus, orders, reviews, and users (admin-only).
+ * Displays a sidebar for navigation and dynamically renders content based on the user's role.
+ *
+ * @returns {JSX.Element} The management page layout with its sections.
+ */
 const ManagementPage = () => {
   const {user} = useAuth();
   const isAdmin = user?.role === 'admin';

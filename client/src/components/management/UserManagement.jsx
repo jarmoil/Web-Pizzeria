@@ -2,11 +2,32 @@ import {useState} from 'react';
 import {useAuth} from '../../hooks/useAuth';
 import useUserManagement from '../../hooks/useUserManagement';
 
+/**
+ * UserManagement component for managing users and employees.
+ * Allows registering new employees and editing user details.
+ *
+ * @returns {JSX.Element} The user management interface.
+ */
 const UserManagement = () => {
   const {user} = useAuth();
   const {users, loading, error, updateUser, registerEmployee} =
     useUserManagement(user?.token);
+
+  /**
+   * ID of the user being edited.
+   * @type {number|null}
+   */
   const [editingId, setEditingId] = useState(null);
+
+  /**
+   * Form data for registering a new employee.
+   * @type {Object}
+   * @property {string} user_name - Name of the employee.
+   * @property {string} user_email - Email of the employee.
+   * @property {string} user_password - Password for the employee.
+   * @property {string} phone_number - Phone number of the employee.
+   * @property {string} user_address - Address of the employee.
+   */
   const [employeeForm, setEmployeeForm] = useState({
     user_name: '',
     user_email: '',
@@ -14,6 +35,15 @@ const UserManagement = () => {
     phone_number: '',
     user_address: '',
   });
+
+  /**
+   * Form data for editing a user.
+   * @type {Object}
+   * @property {string} user_name - Name of the user.
+   * @property {string} user_email - Email of the user.
+   * @property {string} phone_number - Phone number of the user.
+   * @property {string} user_address - Address of the user.
+   */
   const [editForm, setEditForm] = useState({
     user_name: '',
     user_email: '',
@@ -21,6 +51,12 @@ const UserManagement = () => {
     user_address: '',
   });
 
+  /**
+   * Handles the submission of the employee registration form.
+   *
+   * @param {React.FormEvent<HTMLFormElement>} e - The form submission event.
+   * @returns {Promise<void>}
+   */
   const handleEmployeeSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -37,6 +73,12 @@ const UserManagement = () => {
     }
   };
 
+  /**
+   * Handles the submission of the user update form.
+   *
+   * @param {React.FormEvent<HTMLFormElement>} e - The form submission event.
+   * @returns {Promise<void>}
+   */
   const handleUpdateSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -53,6 +95,16 @@ const UserManagement = () => {
     }
   };
 
+  /**
+   * Populates the edit form with the selected user's data.
+   *
+   * @param {Object} user - The user object to edit.
+   * @param {number} user.user_id - The ID of the user.
+   * @param {string} user.name - The name of the user.
+   * @param {string} user.email - The email of the user.
+   * @param {string} [user.phone_number] - The phone number of the user.
+   * @param {string} [user.address] - The address of the user.
+   */
   const handleEdit = (user) => {
     setEditingId(user.user_id);
     setEditForm({

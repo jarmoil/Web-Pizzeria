@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: components/management/MenuManagement.jsx</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: components/management/MenuManagement.jsx</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import {useState} from 'react';
+import useMenuManagement from '../../hooks/useMenuManagement';
+import {useAuth} from '../../hooks/useAuth';
+
+
+/**
+ * Weekday labels for daily pizza selection.
+ * @constant
+ * @type {Object}
+ */
+const WEEKDAYS = {
+  mon: 'Maanantai',
+  tue: 'Tiistai',
+  wed: 'Keskiviikko',
+  thu: 'Torstai',
+  fri: 'Perjantai',
+  sat: 'Lauantai',
+  sun: 'Sunnuntai',
+};
+
+/**
+ * MenuManagement component for managing the pizza menu.
+ * Allows adding, editing, and deleting pizzas, as well as marking pizzas as daily specials.
+ *
+ * @returns {JSX.Element} The menu management interface.
+ */
+const MenuManagement = () => {
+  const {user} = useAuth();
+  const {pizzas, loading, error, addMenuItem, updateMenuItem, deleteMenuItem} =
+    useMenuManagement();
+
+  /**
+   * Form data for adding or editing a pizza.
+   * @type {Object}
+   * @property {string} name - Name of the pizza.
+   * @property {string} description - Description of the pizza.
+   * @property {string} price - Price of the pizza.
+   * @property {string} image - Image URL of the pizza.
+   * @property {string} daily_weekday - Weekday for daily pizza (optional).
+   */
+  const [formData, setFormData] = useState({
+    name: '',
+    description: '',
+    price: '',
+    image: '',
+    daily_weekday: '',
+  });
+
+  /**
+   * ID of the pizza being edited.
+   * @type {number|null}
+   */
+  const [editingId, setEditingId] = useState(null);
+
+  /**
+   * Handles form submission for adding or updating a pizza.
+   *
+   * @param {React.FormEvent&lt;HTMLFormElement>} e - The form submission event.
+   * @returns {Promise&lt;void>}
+   */
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      if (editingId) {
+        const updateData = {
+          pizza_name: formData.name,
+          pizza_description: formData.description,
+          price: parseFloat(formData.price),
+          image_url: formData.image,
+          daily_weekday: formData.daily_weekday || null,
+        };
+        await updateMenuItem(editingId, updateData, user.token);
+      } else {
+        const newPizzaData = {
+          pizza_name: formData.name,
+          pizza_description: formData.description,
+          price: Number(formData.price), // Ensure it's a number
+          image_url: formData.image,
+        };
+        console.log('Submitting new pizza:', newPizzaData); // Debug log
+        await addMenuItem(newPizzaData, user.token);
+      }
+      setFormData({
+        name: '',
+        description: '',
+        price: '',
+        image: '',
+        daily_weekday: '',
+      });
+      setEditingId(null);
+    } catch (err) {
+      console.error('Failed to save menu item:', err);
+      // Add more detailed error logging
+      if (err.response) {
+        console.error('Response data:', err.response.data);
+      }
+    }
+  };
+
+  /**
+   * Populates the form with data for editing a pizza.
+   *
+   * @param {Object} pizza - The pizza object to edit.
+   */
+  const handleEdit = (pizza) => {
+    setFormData({
+      name: pizza.pizza_name,
+      description: pizza.pizza_description,
+      price: pizza.price,
+      image: pizza.image_url,
+      daily_weekday: pizza.daily_weekday || '',
+    });
+    setEditingId(pizza.pizza_id);
+  };
+
+  /**
+   * Cancels the editing process and resets the form.
+   */
+  const handleCancelEdit = () => {
+    setFormData({
+      name: '',
+      description: '',
+      price: '',
+      image: '',
+      daily_weekday: '',
+    });
+    setEditingId(null);
+  };
+
+  /**
+   * Deletes a pizza from the menu.
+   *
+   * @param {number} id - The ID of the pizza to delete.
+   * @returns {Promise&lt;void>}
+   */
+  const handleDelete = async (id) => {
+    if (window.confirm('Are you sure you want to delete this item?')) {
+      try {
+        await deleteMenuItem(id, user.token);
+      } catch (err) {
+        console.error('Failed to delete menu item:', err);
+      }
+    }
+  };
+
+  if (loading) return &lt;div>Loading...&lt;/div>;
+  if (error) return &lt;div>Error: {error}&lt;/div>;
+
+  return (
+    &lt;section id="menu-management" className="managementPage-section">
+      &lt;h2 className="managementPage-section-title">Menu Management&lt;/h2>
+
+      &lt;form onSubmit={handleSubmit} className="menu-management-form">
+        &lt;input
+          type="text"
+          placeholder="Pizza Name"
+          value={formData.name}
+          onChange={(e) => setFormData({...formData, name: e.target.value})}
+          required
+        />
+        &lt;textarea
+          placeholder="Description"
+          value={formData.description}
+          onChange={(e) =>
+            setFormData({...formData, description: e.target.value})
+          }
+          required
+        />
+        &lt;input
+          type="number"
+          step="0.01"
+          placeholder="Price"
+          value={formData.price}
+          onChange={(e) => setFormData({...formData, price: e.target.value})}
+          required
+        />
+        &lt;input
+          type="text"
+          placeholder="Image URL"
+          value={formData.image}
+          onChange={(e) => setFormData({...formData, image: e.target.value})}
+          required
+        />
+        {editingId &amp;&amp; (
+          &lt;select
+            value={formData.daily_weekday || ''}
+            onChange={(e) =>
+              setFormData({...formData, daily_weekday: e.target.value})
+            }
+          >
+            &lt;option value="">Not a daily pizza&lt;/option>
+            {Object.entries(WEEKDAYS).map(([value, label]) => (
+              &lt;option key={value} value={value}>
+                {label}
+              &lt;/option>
+            ))}
+          &lt;/select>
+        )}
+        &lt;div className="form-buttons">
+          &lt;button type="submit">
+            {editingId ? 'Update Pizza' : 'Add New Pizza'}
+          &lt;/button>
+          {editingId &amp;&amp; (
+            &lt;button
+              type="button"
+              onClick={handleCancelEdit}
+              className="cancel-edit-btn"
+            >
+              Cancel Edit
+            &lt;/button>
+          )}
+        &lt;/div>
+      &lt;/form>
+
+      &lt;div className="menu-items-list">
+        {pizzas.map((pizza) => (
+          &lt;div key={pizza.pizza_id} className="menu-item-card">
+            &lt;img src={pizza.image_url} alt={pizza.pizza_name} />
+            &lt;h3>{pizza.pizza_name}&lt;/h3>
+            &lt;p>{pizza.pizza_description}&lt;/p>
+            &lt;p>€{pizza.price}&lt;/p>
+            {pizza.daily_weekday &amp;&amp; (
+              &lt;p className="menu-item-daily">
+                Päivän pizza: {WEEKDAYS[pizza.daily_weekday]}
+              &lt;/p>
+            )}
+            &lt;div className="menu-item-actions">
+              &lt;button onClick={() => handleEdit(pizza)}>Edit&lt;/button>
+              &lt;button onClick={() => handleDelete(pizza.pizza_id)}>
+                Delete
+              &lt;/button>
+            &lt;/div>
+          &lt;/div>
+        ))}
+      &lt;/div>
+    &lt;/section>
+  );
+};
+
+export default MenuManagement;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#AboutSection">AboutSection</a></li><li><a href="global.html#AddressInput">AddressInput</a></li><li><a href="global.html#App">App</a></li><li><a href="global.html#AuthContext">AuthContext</a></li><li><a href="global.html#AuthProvider">AuthProvider</a></li><li><a href="global.html#CartButton">CartButton</a></li><li><a href="global.html#CartItem">CartItem</a></li><li><a href="global.html#CartItemsList">CartItemsList</a></li><li><a href="global.html#CartProvider">CartProvider</a></li><li><a href="global.html#CartTotal">CartTotal</a></li><li><a href="global.html#FeaturedPizzaSection">FeaturedPizzaSection</a></li><li><a href="global.html#FeedbackMessage">FeedbackMessage</a></li><li><a href="global.html#Footer">Footer</a></li><li><a href="global.html#FrontPage">FrontPage</a></li><li><a href="global.html#GallerySection">GallerySection</a></li><li><a href="global.html#HeroSection">HeroSection</a></li><li><a href="global.html#HoursLocationSection">HoursLocationSection</a></li><li><a href="global.html#Layout">Layout</a></li><li><a href="global.html#Location">Location</a></li><li><a href="global.html#LogoutButton">LogoutButton</a></li><li><a href="global.html#ManagementPage">ManagementPage</a></li><li><a href="global.html#MenuManagement">MenuManagement</a></li><li><a href="global.html#MenuPage">MenuPage</a></li><li><a href="global.html#MyMapComponent">MyMapComponent</a></li><li><a href="global.html#ORDER_STATUSES">ORDER_STATUSES</a></li><li><a href="global.html#OrderItemReviewSection">OrderItemReviewSection</a></li><li><a href="global.html#OrderManagement">OrderManagement</a></li><li><a href="global.html#PizzaCard">PizzaCard</a></li><li><a href="global.html#PostReviewForm">PostReviewForm</a></li><li><a href="global.html#ProtectedRoute">ProtectedRoute</a></li><li><a href="global.html#RatingsSection">RatingsSection</a></li><li><a href="global.html#ReviewManagement">ReviewManagement</a></li><li><a href="global.html#ReviewModal">ReviewModal</a></li><li><a href="global.html#SignInButton">SignInButton</a></li><li><a href="global.html#SignUp">SignUp</a></li><li><a href="global.html#SocialLink">SocialLink</a></li><li><a href="global.html#StarRating">StarRating</a></li><li><a href="global.html#UserManagement">UserManagement</a></li><li><a href="global.html#WEEKDAYS">WEEKDAYS</a></li><li><a href="global.html#addMenuItem">addMenuItem</a></li><li><a href="global.html#busStopIcon">busStopIcon</a></li><li><a href="global.html#calculateAverageRating">calculateAverageRating</a></li><li><a href="global.html#calculateDistance">calculateDistance</a></li><li><a href="global.html#createOrder">createOrder</a></li><li><a href="global.html#deleteItemReview">deleteItemReview</a></li><li><a href="global.html#deleteMenuItem">deleteMenuItem</a></li><li><a href="global.html#deleteRestaurantReview">deleteRestaurantReview</a></li><li><a href="global.html#fetchBusStops">fetchBusStops</a></li><li><a href="global.html#fetchData">fetchData</a></li><li><a href="global.html#forgotPassword">forgotPassword</a></li><li><a href="global.html#formatPrice">formatPrice</a></li><li><a href="global.html#getAllItemReviews">getAllItemReviews</a></li><li><a href="global.html#getAllOrders">getAllOrders</a></li><li><a href="global.html#getAllPizzas">getAllPizzas</a></li><li><a href="global.html#getAllUsers">getAllUsers</a></li><li><a href="global.html#getDailyPizza">getDailyPizza</a></li><li><a href="global.html#getReviews">getReviews</a></li><li><a href="global.html#getToken">getToken</a></li><li><a href="global.html#handleRegistration">handleRegistration</a></li><li><a href="global.html#loginUser">loginUser</a></li><li><a href="global.html#postReviewService">postReviewService</a></li><li><a href="global.html#registerEmployee">registerEmployee</a></li><li><a href="global.html#registerUser">registerUser</a></li><li><a href="global.html#removeToken">removeToken</a></li><li><a href="global.html#setToken">setToken</a></li><li><a href="global.html#updateMenuItem">updateMenuItem</a></li><li><a href="global.html#updateOrderStatus">updateOrderStatus</a></li><li><a href="global.html#updateUser">updateUser</a></li><li><a href="global.html#useAuth">useAuth</a></li><li><a href="global.html#useBusStops">useBusStops</a></li><li><a href="global.html#useCart">useCart</a></li><li><a href="global.html#useCheckout">useCheckout</a></li><li><a href="global.html#useMenuManagement">useMenuManagement</a></li><li><a href="global.html#useOrderItemReviews">useOrderItemReviews</a></li><li><a href="global.html#useOrderManagement">useOrderManagement</a></li><li><a href="global.html#usePizzas">usePizzas</a></li><li><a href="global.html#useRestaurantReviews">useRestaurantReviews</a></li><li><a href="global.html#useReviewManagement">useReviewManagement</a></li><li><a href="global.html#useUserContext">useUserContext</a></li><li><a href="global.html#useUserManagement">useUserManagement</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Tue May 06 2025 16:35:42 GMT+0300 (Eastern European Summer Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

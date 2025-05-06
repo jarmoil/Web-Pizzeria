@@ -1,5 +1,19 @@
 import React from 'react';
 
+/**
+ * Renders a single cart item with controls to adjust quantity or remove the item.
+ *
+ * @param {Object} props - Component props.
+ * @param {Object} props.pizza - The pizza object representing the cart item.
+ * @param {number} props.pizza.pizza_id - Unique ID of the pizza.
+ * @param {string} props.pizza.pizza_name - Name of the pizza.
+ * @param {number} props.pizza.quantity - Quantity of the pizza in the cart.
+ * @param {number} props.pizza.price - Price of the pizza.
+ * @param {Function} props.increaseQuantity - Function to increase the quantity of the pizza.
+ * @param {Function} props.decreaseQuantity - Function to decrease the quantity of the pizza.
+ * @param {Function} props.removeFromCart - Function to remove the pizza from the cart.
+ * @returns {JSX.Element} A list item representing the cart item.
+ */
 const CartItem = ({
   pizza,
   increaseQuantity,

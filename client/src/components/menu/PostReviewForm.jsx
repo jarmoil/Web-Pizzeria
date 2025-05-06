@@ -1,13 +1,47 @@
 import React, {useState} from 'react';
 import {useAuth} from '../../hooks/useAuth';
 
+/**
+ * PostReviewForm component for submitting a review.
+ * Allows authenticated users to rate and comment on a pizza.
+ *
+ * @param {Object} props - Component props.
+ * @param {Function} props.postReview - Function to handle posting the review.
+ * @returns {JSX.Element} The review submission form or a message prompting the user to log in.
+ */
 const PostReviewForm = ({postReview}) => {
   const {user, token} = useAuth();
+
+  /**
+   * Rating value for the review.
+   * @type {number}
+   */
   const [rating, setRating] = useState(5);
+
+  /**
+   * Comment text for the review.
+   * @type {string}
+   */
   const [comment, setComment] = useState('');
+
+  /**
+   * Indicates whether the form is currently submitting.
+   * @type {boolean}
+   */
   const [submitting, setSubmitting] = useState(false);
+
+  /**
+   * Error message for failed submission.
+   * @type {string|null}
+   */
   const [error, setError] = useState(null);
 
+  /**
+   * Handles the form submission to post a review.
+   *
+   * @param {React.FormEvent<HTMLFormElement>} e - The form submission event.
+   * @returns {Promise<void>}
+   */
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!user) return;

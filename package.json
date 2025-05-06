@@ -9,7 +9,8 @@
     "client": "cd client && vite",
     "build": "cd client && vite build",
     "preview": "cd client && vite preview",
-    "e2e": "set NODE_ENV=test&& npx playwright test"
+    "e2e": "set NODE_ENV=test&& npx playwright test",
+    "apidoc": "apidoc -i server/src/api/ -o docs/"
   },
   "jest": {
     "testEnvironment": "node",
@@ -33,10 +34,12 @@
     "eslint-plugin-react-hooks": "^5.2.0",
     "eslint-plugin-react-refresh": "^0.4.19",
     "globals": "^16.0.0",
+    "jsdoc": "^4.0.4",
     "nodemon": "^3.1.9",
     "vite": "^6.3.1"
   },
   "dependencies": {
+    "apidoc": "^1.2.0",
     "bcrypt": "^5.1.1",
     "cors": "^2.8.5",
     "dotenv": "^16.5.0",

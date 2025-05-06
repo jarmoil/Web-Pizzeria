@@ -1,6 +1,12 @@
 import React from 'react';
 import usePizzas from '../../hooks/usePizzas';
 
+/**
+ * FeaturedPizzaSection component for displaying the pizza of the day.
+ * Fetches and displays the daily featured pizza, including its name, description, price, and image.
+ *
+ * @returns {JSX.Element} The "Pizza of the Day" section of the homepage.
+ */
 const FeaturedPizzaSection = () => {
   const {pizzas, loading, error} = usePizzas({daily: true});
   const pizza = pizzas[0];

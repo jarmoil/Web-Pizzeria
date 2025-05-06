@@ -1,0 +1,11 @@
+{
+  "source": {
+    "include": ["client/src"],
+    "includePattern": ".+\\.jsx?$",
+    "excludePattern": "(^|\\/|\\\\)_"
+  },
+  "opts": {
+    "destination": "./jsdoc",
+    "recurse": true
+  }
+}

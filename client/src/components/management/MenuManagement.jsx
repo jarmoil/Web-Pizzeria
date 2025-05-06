@@ -2,6 +2,12 @@ import {useState} from 'react';
 import useMenuManagement from '../../hooks/useMenuManagement';
 import {useAuth} from '../../hooks/useAuth';
 
+
+/**
+ * Weekday labels for daily pizza selection.
+ * @constant
+ * @type {Object}
+ */
 const WEEKDAYS = {
   mon: 'Maanantai',
   tue: 'Tiistai',
@@ -12,11 +18,26 @@ const WEEKDAYS = {
   sun: 'Sunnuntai',
 };
 
+/**
+ * MenuManagement component for managing the pizza menu.
+ * Allows adding, editing, and deleting pizzas, as well as marking pizzas as daily specials.
+ *
+ * @returns {JSX.Element} The menu management interface.
+ */
 const MenuManagement = () => {
   const {user} = useAuth();
   const {pizzas, loading, error, addMenuItem, updateMenuItem, deleteMenuItem} =
     useMenuManagement();
 
+  /**
+   * Form data for adding or editing a pizza.
+   * @type {Object}
+   * @property {string} name - Name of the pizza.
+   * @property {string} description - Description of the pizza.
+   * @property {string} price - Price of the pizza.
+   * @property {string} image - Image URL of the pizza.
+   * @property {string} daily_weekday - Weekday for daily pizza (optional).
+   */
   const [formData, setFormData] = useState({
     name: '',
     description: '',
@@ -25,8 +46,18 @@ const MenuManagement = () => {
     daily_weekday: '',
   });
 
+  /**
+   * ID of the pizza being edited.
+   * @type {number|null}
+   */
   const [editingId, setEditingId] = useState(null);
 
+  /**
+   * Handles form submission for adding or updating a pizza.
+   *
+   * @param {React.FormEvent<HTMLFormElement>} e - The form submission event.
+   * @returns {Promise<void>}
+   */
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -66,6 +97,11 @@ const MenuManagement = () => {
     }
   };
 
+  /**
+   * Populates the form with data for editing a pizza.
+   *
+   * @param {Object} pizza - The pizza object to edit.
+   */
   const handleEdit = (pizza) => {
     setFormData({
       name: pizza.pizza_name,
@@ -77,6 +113,9 @@ const MenuManagement = () => {
     setEditingId(pizza.pizza_id);
   };
 
+  /**
+   * Cancels the editing process and resets the form.
+   */
   const handleCancelEdit = () => {
     setFormData({
       name: '',
@@ -88,6 +127,12 @@ const MenuManagement = () => {
     setEditingId(null);
   };
 
+  /**
+   * Deletes a pizza from the menu.
+   *
+   * @param {number} id - The ID of the pizza to delete.
+   * @returns {Promise<void>}
+   */
   const handleDelete = async (id) => {
     if (window.confirm('Are you sure you want to delete this item?')) {
       try {

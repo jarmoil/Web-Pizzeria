@@ -1,8 +1,21 @@
 import { useState } from 'react';
 import { handleRegistration } from '../../services/registerLogic';
 
-
+/**
+ * SignUp component for displaying a registration form.
+ * Allows users to create an account by filling in their username, email, and password.
+ *
+ * @returns {JSX.Element} The "Sign Up" section with a registration form.
+ */
 const SignUp = () => {
+    /**
+   * State for managing the form data.
+   * @type {Object}
+   * @property {string} user_name - The username entered by the user.
+   * @property {string} email - The email address entered by the user.
+   * @property {string} psw - The password entered by the user.
+   * @property {string} pswRepeat - The repeated password entered by the user.
+   */
   const [formData, setFormData] = useState({
     user_name: '',
     email: '',
@@ -10,11 +23,23 @@ const SignUp = () => {
     pswRepeat: '',
   });
 
+  /**
+   * Handles changes to the form inputs.
+   *
+   * @param {React.ChangeEvent<HTMLInputElement>} e - The input change event.
+   */
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
 
+  /**
+   * Handles the form submission.
+   * Calls the external `handleRegistration` function with the form data.
+   *
+   * @param {React.FormEvent<HTMLFormElement>} e - The form submission event.
+   * @returns {Promise<void>}
+   */
   const handleSubmit = async (e) => {
     e.preventDefault();
     await handleRegistration(formData); // Call the external logic

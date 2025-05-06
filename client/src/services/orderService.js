@@ -1,5 +1,18 @@
 import {fetchData} from './fetchData';
 
+/**
+ * Creates a new order.
+ *
+ * @param {string} address - The delivery address for the order.
+ * @param {Object[]} cartItems - The items in the cart.
+ * @param {number} cartItems[].pizza_id - The ID of the pizza.
+ * @param {number} cartItems[].quantity - The quantity of the pizza.
+ * @param {number} totalPrice - The total price of the order.
+ * @param {boolean} isPickup - Indicates whether the order is for pickup or delivery.
+ * @param {string} token - The authentication token for the request.
+ * @returns {Promise<Object>} A promise that resolves to the response data.
+ * @throws {Error} If the request fails.
+ */
 export const createOrder = async (
   address,
   cartItems,
@@ -34,6 +47,13 @@ export const createOrder = async (
   }
 };
 
+/**
+ * Fetches all orders.
+ *
+ * @param {string} token - The authentication token for the request.
+ * @returns {Promise<Object[]>} A promise that resolves to an array of orders.
+ * @throws {Error} If the request fails.
+ */
 export const getAllOrders = async (token) => {
   try {
     const response = await fetchData('api/v1/orders', {
@@ -48,6 +68,15 @@ export const getAllOrders = async (token) => {
   }
 };
 
+/**
+ * Updates the status of an order.
+ *
+ * @param {number} orderId - The ID of the order to update.
+ * @param {string} status - The new status of the order (e.g., "pending", "completed").
+ * @param {string} token - The authentication token for the request.
+ * @returns {Promise<Object>} A promise that resolves to the response data.
+ * @throws {Error} If the request fails.
+ */
 export const updateOrderStatus = async (orderId, status, token) => {
   try {
     const response = await fetchData(`api/v1/orders/${orderId}/status`, {

@@ -7,6 +7,12 @@ import GallerySection from '../components/sections/GallerySection';
 import HoursLocationSection from '../components/sections/HoursLocationSection';
 import Footer from '../components/Footer';
 
+/**
+ * FrontPage component for rendering the homepage of the application.
+ * Includes sections such as Hero, About, Featured Pizza, Ratings, Gallery, Hours & Location, and Footer.
+ *
+ * @returns {JSX.Element} The homepage layout with all its sections.
+ */
 const FrontPage = () => {
   return (
     <>

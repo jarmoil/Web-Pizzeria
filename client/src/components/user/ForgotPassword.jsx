@@ -1,3 +1,10 @@
+/**
+ * ForgotPassword component for displaying a password recovery form.
+ * Allows users to input their email address to request a password reset.
+ * Currently, the functionality is not implemented and shows an alert.
+ *
+ * @returns {JSX.Element} The "Forgot Password" section with a form and a button.
+ */
 const forgotPassword = () => {
   return (
     <section id="forgotPassword-section">

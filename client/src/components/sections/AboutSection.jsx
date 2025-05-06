@@ -1,3 +1,9 @@
+/**
+ * AboutSection component for displaying information about the pizzeria.
+ * Includes a brief description of the pizzeria's background and an image.
+ *
+ * @returns {JSX.Element} The "About Us" section of the homepage.
+ */
 const AboutSection = () => {
     return (
       <section id="homepage-about" className="homepage-section">

@@ -1,5 +1,13 @@
 # Web-Pizzeria
 
+## Documentation
+
+Documentation for api and front-end can be found here:
+
+apiDoc: /docs
+
+front-end: /jsdocs
+
 ## Setup
 
 Run npm install to get dependencies

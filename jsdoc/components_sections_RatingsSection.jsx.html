@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: components/sections/RatingsSection.jsx</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: components/sections/RatingsSection.jsx</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import {useState} from 'react';
+import useRestaurantReviews from '../../hooks/useRestaurantReviews';
+import {useAuth} from '../../hooks/useAuth';
+import StarRating from '../StarRating';
+
+/**
+ * RatingsSection component for displaying and submitting restaurant reviews.
+ * Allows authenticated users to submit reviews and displays existing reviews with sorting options.
+ *
+ * @returns {JSX.Element} The "Ratings" section of the homepage.
+ */
+const RatingsSection = () => {
+  const {user} = useAuth();
+  const {reviews, loading, error, postReview} = useRestaurantReviews();
+
+  /**
+   * Comment text for the review being submitted.
+   * @type {string}
+   */
+  const [comment, setComment] = useState('');
+
+  /**
+   * Rating value for the review being submitted.
+   * @type {number}
+   */
+  const [rating, setRating] = useState(5);
+
+  /**
+   * Sort order for displaying reviews.
+   * Can be "newest" or "oldest".
+   * @type {string}
+   */
+  const [sortOrder, setSortOrder] = useState('newest');
+
+  /**
+   * Returns the reviews sorted by the selected sort order.
+   *
+   * @returns {Object[]} The sorted array of reviews.
+   */
+  const getSortedReviews = () => {
+    return [...reviews].sort((a, b) => {
+      const dateA = new Date(a.created_at);
+      const dateB = new Date(b.created_at);
+      return sortOrder === 'newest' ? dateB - dateA : dateA - dateB;
+    });
+  };
+
+  /**
+   * Handles the submission of a new review.
+   *
+   * @param {React.FormEvent&lt;HTMLFormElement>} e - The form submission event.
+   * @returns {Promise&lt;void>}
+   */
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      await postReview({
+        comment,
+        rating,
+        token: user.token,
+      });
+      setComment('');
+      setRating(5);
+    } catch (err) {
+      console.error('Failed to post review:', err);
+    }
+  };
+
+  if (loading) return &lt;div>Loading reviews...&lt;/div>;
+  if (error) return &lt;div>Error: {error}&lt;/div>;
+
+  return (
+    &lt;section id="homepage-ratings" className="homepage-section">
+      &lt;h2>Asiakkaiden arvostelut&lt;/h2>
+
+      {user ? (
+        &lt;div className="homepage-review-form">
+          &lt;h3>Jätä ravintola-arvostelu&lt;/h3>
+          &lt;form
+            className="homepage-review-form-content"
+            onSubmit={handleSubmit}
+          >
+            &lt;StarRating rating={rating} onRatingChange={setRating} />
+            &lt;textarea
+              maxLength="500"
+              rows="4"
+              required
+              value={comment}
+              onChange={(e) => setComment(e.target.value)}
+              placeholder="Kirjoita arvostelusi tähän..."
+            />
+            &lt;button type="submit" className="homepage-review-submit-btn">
+              Lähetä arvostelu
+            &lt;/button>
+          &lt;/form>
+        &lt;/div>
+      ) : (
+        &lt;p>Kirjaudu sisään jättääksesi arvostelun&lt;/p>
+      )}
+
+      &lt;div className="homepage-ratings-controls">
+        &lt;label htmlFor="homepage-ratings-sort">Suodata:&lt;/label>
+        &lt;select
+          id="homepage-ratings-sort"
+          name="sort"
+          value={sortOrder}
+          onChange={(e) => setSortOrder(e.target.value)}
+        >
+          &lt;option value="newest">Uusimmat&lt;/option>
+          &lt;option value="oldest">Vanhimmat&lt;/option>
+        &lt;/select>
+      &lt;/div>
+
+      &lt;div className="homepage-ratings-scroll">
+        {getSortedReviews().map((review) => (
+          &lt;div
+            key={review.restaurant_review_id}
+            className="homepage-rating-card"
+          >
+            &lt;div className="homepage-rating-stars">
+              {'⭐'.repeat(review.rating)}
+            &lt;/div>
+            &lt;p className="homepage-rating-card-text">"{review.comment}"&lt;/p>
+            &lt;div className="homepage-rating-meta">
+              &lt;span className="homepage-rating-user">- {review.username}&lt;/span>
+              &lt;span className="homepage-rating-date">
+                {new Date(review.created_at).toLocaleDateString()}
+              &lt;/span>
+            &lt;/div>
+          &lt;/div>
+        ))}
+      &lt;/div>
+    &lt;/section>
+  );
+};
+
+export default RatingsSection;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#AboutSection">AboutSection</a></li><li><a href="global.html#AddressInput">AddressInput</a></li><li><a href="global.html#App">App</a></li><li><a href="global.html#AuthContext">AuthContext</a></li><li><a href="global.html#AuthProvider">AuthProvider</a></li><li><a href="global.html#CartButton">CartButton</a></li><li><a href="global.html#CartItem">CartItem</a></li><li><a href="global.html#CartItemsList">CartItemsList</a></li><li><a href="global.html#CartProvider">CartProvider</a></li><li><a href="global.html#CartTotal">CartTotal</a></li><li><a href="global.html#FeaturedPizzaSection">FeaturedPizzaSection</a></li><li><a href="global.html#FeedbackMessage">FeedbackMessage</a></li><li><a href="global.html#Footer">Footer</a></li><li><a href="global.html#FrontPage">FrontPage</a></li><li><a href="global.html#GallerySection">GallerySection</a></li><li><a href="global.html#HeroSection">HeroSection</a></li><li><a href="global.html#HoursLocationSection">HoursLocationSection</a></li><li><a href="global.html#Layout">Layout</a></li><li><a href="global.html#Location">Location</a></li><li><a href="global.html#LogoutButton">LogoutButton</a></li><li><a href="global.html#ManagementPage">ManagementPage</a></li><li><a href="global.html#MenuManagement">MenuManagement</a></li><li><a href="global.html#MenuPage">MenuPage</a></li><li><a href="global.html#MyMapComponent">MyMapComponent</a></li><li><a href="global.html#ORDER_STATUSES">ORDER_STATUSES</a></li><li><a href="global.html#OrderItemReviewSection">OrderItemReviewSection</a></li><li><a href="global.html#OrderManagement">OrderManagement</a></li><li><a href="global.html#PizzaCard">PizzaCard</a></li><li><a href="global.html#PostReviewForm">PostReviewForm</a></li><li><a href="global.html#ProtectedRoute">ProtectedRoute</a></li><li><a href="global.html#RatingsSection">RatingsSection</a></li><li><a href="global.html#ReviewManagement">ReviewManagement</a></li><li><a href="global.html#ReviewModal">ReviewModal</a></li><li><a href="global.html#SignInButton">SignInButton</a></li><li><a href="global.html#SignUp">SignUp</a></li><li><a href="global.html#SocialLink">SocialLink</a></li><li><a href="global.html#StarRating">StarRating</a></li><li><a href="global.html#UserManagement">UserManagement</a></li><li><a href="global.html#WEEKDAYS">WEEKDAYS</a></li><li><a href="global.html#addMenuItem">addMenuItem</a></li><li><a href="global.html#busStopIcon">busStopIcon</a></li><li><a href="global.html#calculateAverageRating">calculateAverageRating</a></li><li><a href="global.html#calculateDistance">calculateDistance</a></li><li><a href="global.html#createOrder">createOrder</a></li><li><a href="global.html#deleteItemReview">deleteItemReview</a></li><li><a href="global.html#deleteMenuItem">deleteMenuItem</a></li><li><a href="global.html#deleteRestaurantReview">deleteRestaurantReview</a></li><li><a href="global.html#fetchBusStops">fetchBusStops</a></li><li><a href="global.html#fetchData">fetchData</a></li><li><a href="global.html#forgotPassword">forgotPassword</a></li><li><a href="global.html#formatPrice">formatPrice</a></li><li><a href="global.html#getAllItemReviews">getAllItemReviews</a></li><li><a href="global.html#getAllOrders">getAllOrders</a></li><li><a href="global.html#getAllPizzas">getAllPizzas</a></li><li><a href="global.html#getAllUsers">getAllUsers</a></li><li><a href="global.html#getDailyPizza">getDailyPizza</a></li><li><a href="global.html#getReviews">getReviews</a></li><li><a href="global.html#getToken">getToken</a></li><li><a href="global.html#handleRegistration">handleRegistration</a></li><li><a href="global.html#loginUser">loginUser</a></li><li><a href="global.html#postReviewService">postReviewService</a></li><li><a href="global.html#registerEmployee">registerEmployee</a></li><li><a href="global.html#registerUser">registerUser</a></li><li><a href="global.html#removeToken">removeToken</a></li><li><a href="global.html#setToken">setToken</a></li><li><a href="global.html#updateMenuItem">updateMenuItem</a></li><li><a href="global.html#updateOrderStatus">updateOrderStatus</a></li><li><a href="global.html#updateUser">updateUser</a></li><li><a href="global.html#useAuth">useAuth</a></li><li><a href="global.html#useBusStops">useBusStops</a></li><li><a href="global.html#useCart">useCart</a></li><li><a href="global.html#useCheckout">useCheckout</a></li><li><a href="global.html#useMenuManagement">useMenuManagement</a></li><li><a href="global.html#useOrderItemReviews">useOrderItemReviews</a></li><li><a href="global.html#useOrderManagement">useOrderManagement</a></li><li><a href="global.html#usePizzas">usePizzas</a></li><li><a href="global.html#useRestaurantReviews">useRestaurantReviews</a></li><li><a href="global.html#useReviewManagement">useReviewManagement</a></li><li><a href="global.html#useUserContext">useUserContext</a></li><li><a href="global.html#useUserManagement">useUserManagement</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Tue May 06 2025 16:35:42 GMT+0300 (Eastern European Summer Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

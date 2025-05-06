@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: components/sections/GallerySection.jsx</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: components/sections/GallerySection.jsx</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * GallerySection component for displaying a gallery of images.
+ * Includes multiple columns of images showcasing pizzas, ingredients, and the restaurant.
+ *
+ * @returns {JSX.Element} The "Gallery" section of the homepage.
+ */
+const GallerySection = () => {
+    return (
+      &lt;section id="homepage-gallery" className="homepage-section">
+        &lt;h2>Kuvagalleria&lt;/h2>
+        &lt;div className="homepage-gallery-grid">
+          &lt;div className="homepage-gallery-column">
+            &lt;img src="/images/galleria-kuva1.jpg" alt="Pizza dough" />
+            &lt;img src="/images/galleria-kuva2.jpg" alt="Pepperoni pizza" />
+          &lt;/div>
+          &lt;div className="homepage-gallery-column">
+            &lt;img src="/images/galleria-kuva3.jpg" alt="Pizza slice" />
+            &lt;img src="/images/galleria-kuva4.jpg" alt="Fresh ingredients" />
+          &lt;/div>
+          &lt;div className="homepage-gallery-column">
+            &lt;img src="/images/galleria-kuva5.jpg" alt="Restaurant glasses" />
+            &lt;img src="/images/galleria-kuva6.jpg" alt="Viiksivallu" />
+          &lt;/div>
+        &lt;/div>
+      &lt;/section>
+    );
+  };
+
+  export default GallerySection;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#AboutSection">AboutSection</a></li><li><a href="global.html#AddressInput">AddressInput</a></li><li><a href="global.html#App">App</a></li><li><a href="global.html#AuthContext">AuthContext</a></li><li><a href="global.html#AuthProvider">AuthProvider</a></li><li><a href="global.html#CartButton">CartButton</a></li><li><a href="global.html#CartItem">CartItem</a></li><li><a href="global.html#CartItemsList">CartItemsList</a></li><li><a href="global.html#CartProvider">CartProvider</a></li><li><a href="global.html#CartTotal">CartTotal</a></li><li><a href="global.html#FeaturedPizzaSection">FeaturedPizzaSection</a></li><li><a href="global.html#FeedbackMessage">FeedbackMessage</a></li><li><a href="global.html#Footer">Footer</a></li><li><a href="global.html#FrontPage">FrontPage</a></li><li><a href="global.html#GallerySection">GallerySection</a></li><li><a href="global.html#HeroSection">HeroSection</a></li><li><a href="global.html#HoursLocationSection">HoursLocationSection</a></li><li><a href="global.html#Layout">Layout</a></li><li><a href="global.html#Location">Location</a></li><li><a href="global.html#LogoutButton">LogoutButton</a></li><li><a href="global.html#ManagementPage">ManagementPage</a></li><li><a href="global.html#MenuManagement">MenuManagement</a></li><li><a href="global.html#MenuPage">MenuPage</a></li><li><a href="global.html#MyMapComponent">MyMapComponent</a></li><li><a href="global.html#ORDER_STATUSES">ORDER_STATUSES</a></li><li><a href="global.html#OrderItemReviewSection">OrderItemReviewSection</a></li><li><a href="global.html#OrderManagement">OrderManagement</a></li><li><a href="global.html#PizzaCard">PizzaCard</a></li><li><a href="global.html#PostReviewForm">PostReviewForm</a></li><li><a href="global.html#ProtectedRoute">ProtectedRoute</a></li><li><a href="global.html#RatingsSection">RatingsSection</a></li><li><a href="global.html#ReviewManagement">ReviewManagement</a></li><li><a href="global.html#ReviewModal">ReviewModal</a></li><li><a href="global.html#SignInButton">SignInButton</a></li><li><a href="global.html#SignUp">SignUp</a></li><li><a href="global.html#SocialLink">SocialLink</a></li><li><a href="global.html#StarRating">StarRating</a></li><li><a href="global.html#UserManagement">UserManagement</a></li><li><a href="global.html#WEEKDAYS">WEEKDAYS</a></li><li><a href="global.html#addMenuItem">addMenuItem</a></li><li><a href="global.html#busStopIcon">busStopIcon</a></li><li><a href="global.html#calculateAverageRating">calculateAverageRating</a></li><li><a href="global.html#calculateDistance">calculateDistance</a></li><li><a href="global.html#createOrder">createOrder</a></li><li><a href="global.html#deleteItemReview">deleteItemReview</a></li><li><a href="global.html#deleteMenuItem">deleteMenuItem</a></li><li><a href="global.html#deleteRestaurantReview">deleteRestaurantReview</a></li><li><a href="global.html#fetchBusStops">fetchBusStops</a></li><li><a href="global.html#fetchData">fetchData</a></li><li><a href="global.html#forgotPassword">forgotPassword</a></li><li><a href="global.html#formatPrice">formatPrice</a></li><li><a href="global.html#getAllItemReviews">getAllItemReviews</a></li><li><a href="global.html#getAllOrders">getAllOrders</a></li><li><a href="global.html#getAllPizzas">getAllPizzas</a></li><li><a href="global.html#getAllUsers">getAllUsers</a></li><li><a href="global.html#getDailyPizza">getDailyPizza</a></li><li><a href="global.html#getReviews">getReviews</a></li><li><a href="global.html#getToken">getToken</a></li><li><a href="global.html#handleRegistration">handleRegistration</a></li><li><a href="global.html#loginUser">loginUser</a></li><li><a href="global.html#postReviewService">postReviewService</a></li><li><a href="global.html#registerEmployee">registerEmployee</a></li><li><a href="global.html#registerUser">registerUser</a></li><li><a href="global.html#removeToken">removeToken</a></li><li><a href="global.html#setToken">setToken</a></li><li><a href="global.html#updateMenuItem">updateMenuItem</a></li><li><a href="global.html#updateOrderStatus">updateOrderStatus</a></li><li><a href="global.html#updateUser">updateUser</a></li><li><a href="global.html#useAuth">useAuth</a></li><li><a href="global.html#useBusStops">useBusStops</a></li><li><a href="global.html#useCart">useCart</a></li><li><a href="global.html#useCheckout">useCheckout</a></li><li><a href="global.html#useMenuManagement">useMenuManagement</a></li><li><a href="global.html#useOrderItemReviews">useOrderItemReviews</a></li><li><a href="global.html#useOrderManagement">useOrderManagement</a></li><li><a href="global.html#usePizzas">usePizzas</a></li><li><a href="global.html#useRestaurantReviews">useRestaurantReviews</a></li><li><a href="global.html#useReviewManagement">useReviewManagement</a></li><li><a href="global.html#useUserContext">useUserContext</a></li><li><a href="global.html#useUserManagement">useUserManagement</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Tue May 06 2025 16:35:42 GMT+0300 (Eastern European Summer Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

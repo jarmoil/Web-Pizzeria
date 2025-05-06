@@ -1,5 +1,11 @@
 import MyMapComponent from "../MyMapComponent";
 
+/**
+ * HoursLocationSection component for displaying the pizzeria's hours and location.
+ * Includes opening hours and a map showing the pizzeria's address.
+ *
+ * @returns {JSX.Element} The "Hours and Location" section of the homepage.
+ */
 const HoursLocationSection = () => {
     return (
       <section id="homepage-hours-location" className="homepage-section">

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: hooks/useMenuManagement.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: hooks/useMenuManagement.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import {useState} from 'react';
+import {
+  addMenuItem,
+  updateMenuItem,
+  deleteMenuItem,
+} from '../services/pizzaService';
+import usePizzas from './usePizzas';
+
+/**
+ * Custom hook for managing the menu items in the application.
+ * Provides functionality to add, update, and delete menu items, as well as access to the current list of pizzas.
+ *
+ * @returns {Object} An object containing:
+ * - `pizzas` {Object[]}: The current list of pizzas.
+ * - `loading` {boolean}: Indicates whether the menu data is being loaded.
+ * - `error` {string|null}: Error message if any operation fails.
+ * - `addMenuItem` {Function}: Function to add a new menu item.
+ * - `updateMenuItem` {Function}: Function to update an existing menu item.
+ * - `deleteMenuItem` {Function}: Function to delete a menu item.
+ */
+const useMenuManagement = () => {
+  const {pizzas, loading, error, fetchPizzas} = usePizzas();
+  const [managementError, setManagementError] = useState(null);
+
+  /**
+   * Adds a new menu item to the menu.
+   *
+   * @param {Object} menuData - The data for the new menu item.
+   * @param {string} token - The authentication token for the request.
+   * @throws {Error} If the operation fails or no token is provided.
+   */
+  const handleAddMenuItem = async (menuData, token) => {
+    try {
+      if (!token) {
+        throw new Error('No authentication token provided');
+      }
+      await addMenuItem(menuData, token);
+      await fetchPizzas();
+    } catch (error) {
+      console.error('Failed to add menu item:', error);
+      setManagementError('Failed to add menu item.');
+      throw error;
+    }
+  };
+
+  /**
+   * Updates an existing menu item.
+   *
+   * @param {number} id - The ID of the menu item to update.
+   * @param {Object} menuData - The updated data for the menu item.
+   * @param {string} token - The authentication token for the request.
+   * @throws {Error} If the operation fails.
+   */
+  const handleUpdateMenuItem = async (id, menuData, token) => {
+    try {
+      await updateMenuItem(id, menuData, token);
+      await fetchPizzas();
+    } catch (error) {
+      console.error('Failed to update menu item:', error);
+      setManagementError('Failed to update menu item.');
+      throw error;
+    }
+  };
+
+  /**
+   * Deletes a menu item from the menu.
+   *
+   * @param {number} id - The ID of the menu item to delete.
+   * @param {string} token - The authentication token for the request.
+   * @throws {Error} If the operation fails.
+   */
+  const handleDeleteMenuItem = async (id, token) => {
+    try {
+      await deleteMenuItem(id, token);
+      await fetchPizzas();
+    } catch (error) {
+      console.error('Failed to delete menu item:', error);
+      setManagementError('Failed to delete menu item.');
+      throw error;
+    }
+  };
+  return {
+    pizzas,
+    loading,
+    error: error || managementError,
+    addMenuItem: handleAddMenuItem,
+    updateMenuItem: handleUpdateMenuItem,
+    deleteMenuItem: handleDeleteMenuItem,
+  };
+};
+export default useMenuManagement;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#AboutSection">AboutSection</a></li><li><a href="global.html#AddressInput">AddressInput</a></li><li><a href="global.html#App">App</a></li><li><a href="global.html#AuthContext">AuthContext</a></li><li><a href="global.html#AuthProvider">AuthProvider</a></li><li><a href="global.html#CartButton">CartButton</a></li><li><a href="global.html#CartItem">CartItem</a></li><li><a href="global.html#CartItemsList">CartItemsList</a></li><li><a href="global.html#CartProvider">CartProvider</a></li><li><a href="global.html#CartTotal">CartTotal</a></li><li><a href="global.html#FeaturedPizzaSection">FeaturedPizzaSection</a></li><li><a href="global.html#FeedbackMessage">FeedbackMessage</a></li><li><a href="global.html#Footer">Footer</a></li><li><a href="global.html#FrontPage">FrontPage</a></li><li><a href="global.html#GallerySection">GallerySection</a></li><li><a href="global.html#HeroSection">HeroSection</a></li><li><a href="global.html#HoursLocationSection">HoursLocationSection</a></li><li><a href="global.html#Layout">Layout</a></li><li><a href="global.html#Location">Location</a></li><li><a href="global.html#LogoutButton">LogoutButton</a></li><li><a href="global.html#ManagementPage">ManagementPage</a></li><li><a href="global.html#MenuManagement">MenuManagement</a></li><li><a href="global.html#MenuPage">MenuPage</a></li><li><a href="global.html#MyMapComponent">MyMapComponent</a></li><li><a href="global.html#ORDER_STATUSES">ORDER_STATUSES</a></li><li><a href="global.html#OrderItemReviewSection">OrderItemReviewSection</a></li><li><a href="global.html#OrderManagement">OrderManagement</a></li><li><a href="global.html#PizzaCard">PizzaCard</a></li><li><a href="global.html#PostReviewForm">PostReviewForm</a></li><li><a href="global.html#ProtectedRoute">ProtectedRoute</a></li><li><a href="global.html#RatingsSection">RatingsSection</a></li><li><a href="global.html#ReviewManagement">ReviewManagement</a></li><li><a href="global.html#ReviewModal">ReviewModal</a></li><li><a href="global.html#SignInButton">SignInButton</a></li><li><a href="global.html#SignUp">SignUp</a></li><li><a href="global.html#SocialLink">SocialLink</a></li><li><a href="global.html#StarRating">StarRating</a></li><li><a href="global.html#UserManagement">UserManagement</a></li><li><a href="global.html#WEEKDAYS">WEEKDAYS</a></li><li><a href="global.html#addMenuItem">addMenuItem</a></li><li><a href="global.html#busStopIcon">busStopIcon</a></li><li><a href="global.html#calculateAverageRating">calculateAverageRating</a></li><li><a href="global.html#calculateDistance">calculateDistance</a></li><li><a href="global.html#createOrder">createOrder</a></li><li><a href="global.html#deleteItemReview">deleteItemReview</a></li><li><a href="global.html#deleteMenuItem">deleteMenuItem</a></li><li><a href="global.html#deleteRestaurantReview">deleteRestaurantReview</a></li><li><a href="global.html#fetchBusStops">fetchBusStops</a></li><li><a href="global.html#fetchData">fetchData</a></li><li><a href="global.html#forgotPassword">forgotPassword</a></li><li><a href="global.html#formatPrice">formatPrice</a></li><li><a href="global.html#getAllItemReviews">getAllItemReviews</a></li><li><a href="global.html#getAllOrders">getAllOrders</a></li><li><a href="global.html#getAllPizzas">getAllPizzas</a></li><li><a href="global.html#getAllUsers">getAllUsers</a></li><li><a href="global.html#getDailyPizza">getDailyPizza</a></li><li><a href="global.html#getReviews">getReviews</a></li><li><a href="global.html#getToken">getToken</a></li><li><a href="global.html#handleRegistration">handleRegistration</a></li><li><a href="global.html#loginUser">loginUser</a></li><li><a href="global.html#postReviewService">postReviewService</a></li><li><a href="global.html#registerEmployee">registerEmployee</a></li><li><a href="global.html#registerUser">registerUser</a></li><li><a href="global.html#removeToken">removeToken</a></li><li><a href="global.html#setToken">setToken</a></li><li><a href="global.html#updateMenuItem">updateMenuItem</a></li><li><a href="global.html#updateOrderStatus">updateOrderStatus</a></li><li><a href="global.html#updateUser">updateUser</a></li><li><a href="global.html#useAuth">useAuth</a></li><li><a href="global.html#useBusStops">useBusStops</a></li><li><a href="global.html#useCart">useCart</a></li><li><a href="global.html#useCheckout">useCheckout</a></li><li><a href="global.html#useMenuManagement">useMenuManagement</a></li><li><a href="global.html#useOrderItemReviews">useOrderItemReviews</a></li><li><a href="global.html#useOrderManagement">useOrderManagement</a></li><li><a href="global.html#usePizzas">usePizzas</a></li><li><a href="global.html#useRestaurantReviews">useRestaurantReviews</a></li><li><a href="global.html#useReviewManagement">useReviewManagement</a></li><li><a href="global.html#useUserContext">useUserContext</a></li><li><a href="global.html#useUserManagement">useUserManagement</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Tue May 06 2025 16:35:42 GMT+0300 (Eastern European Summer Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
