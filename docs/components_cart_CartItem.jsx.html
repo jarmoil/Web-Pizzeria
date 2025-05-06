@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Home</title>
+    <title>JSDoc: Source: components/cart/CartItem.jsx</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,32 +17,56 @@
 
 <div id="main">
 
-    <h1 class="page-title">Home</h1>
+    <h1 class="page-title">Source: components/cart/CartItem.jsx</h1>
 
     
 
 
 
     
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React from 'react';
 
+/**
+ * Renders a single cart item with controls to adjust quantity or remove the item.
+ *
+ * @param {Object} props - Component props.
+ * @param {Object} props.pizza - The pizza object representing the cart item.
+ * @param {number} props.pizza.pizza_id - Unique ID of the pizza.
+ * @param {string} props.pizza.pizza_name - Name of the pizza.
+ * @param {number} props.pizza.quantity - Quantity of the pizza in the cart.
+ * @param {number} props.pizza.price - Price of the pizza.
+ * @param {Function} props.increaseQuantity - Function to increase the quantity of the pizza.
+ * @param {Function} props.decreaseQuantity - Function to decrease the quantity of the pizza.
+ * @param {Function} props.removeFromCart - Function to remove the pizza from the cart.
+ * @returns {JSX.Element} A list item representing the cart item.
+ */
+const CartItem = ({
+  pizza,
+  increaseQuantity,
+  decreaseQuantity,
+  removeFromCart,
+}) => {
+  return (
+    &lt;li className="cart-item">
+      &lt;span>{pizza.pizza_name}&lt;/span>
+      &lt;div className="quantity-controls">
+        &lt;button class="decrease-btn" onClick={() => decreaseQuantity(pizza.pizza_id)}>-&lt;/button>
+        &lt;span>{pizza.quantity}&lt;/span>
+        &lt;button class="increase-btn" onClick={() => increaseQuantity(pizza.pizza_id)}>+&lt;/button>
+      &lt;/div>
+      &lt;span>€{(pizza.price * pizza.quantity).toFixed(2)}&lt;/span>
+      &lt;span class="quantity-text">Quantity: {pizza.quantity}&lt;/span>
+      &lt;button class="remove-btn" onClick={() => removeFromCart(pizza.pizza_id)}>Remove&lt;/button>
+    &lt;/li>
+  );
+};
 
-    <h3> </h3>
-
-
-
-
-
-
-
-
-
-
-    
-
-
-
-
-
+export default CartItem;
+</code></pre>
+        </article>
+    </section>
 
 
 

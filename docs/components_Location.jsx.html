@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Home</title>
+    <title>JSDoc: Source: components/Location.jsx</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,32 +17,43 @@
 
 <div id="main">
 
-    <h1 class="page-title">Home</h1>
+    <h1 class="page-title">Source: components/Location.jsx</h1>
 
     
 
 
 
     
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * Location component for displaying the pizzeria's location.
+ * Includes the address and an embedded Google Maps iframe.
+ *
+ * @returns {JSX.Element} The "Location" page with the address and map.
+ */
+const Location = () => {
+    return (
+      &lt;div className="location-page">
+        &lt;h1>Sijaintimme&lt;/h1>
+        &lt;p>Helsinginkatu 1 00010, Helsinki&lt;/p>
+        &lt;iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1984.048972743524!2d24.957291!3d60.1878327!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4692097f25bcfa85%3A0x5fe2e21dfa1f3b95!2sHelsinginkatu%201%2C%2000500%20Helsinki%2C%20Finland!5e0!3m2!1sen!2sfi!4v1680000000000!5m2!1sen!2sfi"
+        width="600"
+          height="450"
+          style={{ border: 0 }}
+          allowFullScreen=""
+          loading="lazy"
+          title="Google Maps"
+        >&lt;/iframe>
+      &lt;/div>
+    );
+  };
 
-
-    <h3> </h3>
-
-
-
-
-
-
-
-
-
-
-    
-
-
-
-
-
+  export default Location;
+</code></pre>
+        </article>
+    </section>
 
 
 

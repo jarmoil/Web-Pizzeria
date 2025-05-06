@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Home</title>
+    <title>JSDoc: Source: components/Layout.jsx</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,32 +17,114 @@
 
 <div id="main">
 
-    <h1 class="page-title">Home</h1>
+    <h1 class="page-title">Source: components/Layout.jsx</h1>
 
     
 
 
 
     
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import {Link, Outlet} from 'react-router-dom';
+import {useState} from 'react';
+import {useCart} from '../context/CartContext';
+import {useAuth} from '../hooks/useAuth';
+import SignInButton from './user/SignInButton';
+import CartButton from './cart/CartButton';
+import LogoutButton from './user/LogoutButton';
 
+/**
+ * Layout component for rendering the main layout of the application.
+ * Includes a header with navigation links, user authentication actions, and a cart button.
+ * Renders child routes using the `Outlet` component.
+ *
+ * @returns {JSX.Element} The main layout of the application.
+ */
+const Layout = () => {
+    /**
+   * State to manage the visibility of the cart modal.
+   * @type {boolean}
+   */
+  const [isCartVisible, setCartVisible] = useState(false);
 
-    <h3> </h3>
+  /**
+   * State to manage the visibility of the sign-in modal.
+   * @type {boolean}
+   */
+  const [isSignInVisible, setSignInVisible] = useState(false);
 
+  const {cartCount} = useCart();
+  const {user, role} = useAuth();
 
+  /**
+   * Toggles the visibility of the cart modal.
+   */
+  const toggleCart = () => setCartVisible(!isCartVisible);
 
+  /**
+   * Toggles the visibility of the sign-in modal.
+   */
+  const toggleSignIn = () => setSignInVisible(!isSignInVisible);
 
+  return (
+    &lt;div>
+      &lt;header>
+        &lt;nav>
+          &lt;div id="logo">MyShop&lt;/div>
 
+          &lt;ul>
+            &lt;li>
+              &lt;Link to="/">Home&lt;/Link>
+            &lt;/li>
+            &lt;li>
+              &lt;Link to="/menu">Menu&lt;/Link>
+            &lt;/li>
+            {user &amp;&amp; (role === 'admin' || role === 'employee') &amp;&amp; (
+            &lt;li>
+              &lt;Link to="/managementPage">Management Page&lt;/Link>
+            &lt;/li>
+            )}
+            &lt;li>
+              &lt;Link to="/location">Location&lt;/Link>
+            &lt;/li>
+          &lt;/ul>
 
+          &lt;div id="header-actions">
+            &lt;button id="cart-btn" onClick={toggleCart}>
+              Cart
+              &lt;span id="cart-count">{cartCount}&lt;/span>
+            &lt;/button>
 
+            {user ? (
+              &lt;>
+                &lt;LogoutButton />
+              &lt;/>
+            ) : (
+              &lt;button id="signin-btn" onClick={toggleSignIn}>
+                Sign In
+              &lt;/button>
+            )}
+          &lt;/div>
 
+          {!user &amp;&amp; (
+            &lt;SignInButton isVisible={isSignInVisible} onClose={toggleSignIn} />
+          )}
+          &lt;CartButton isVisible={isCartVisible} onClose={toggleCart} />
+        &lt;/nav>
+      &lt;/header>
 
+      &lt;main>
+        &lt;Outlet />
+      &lt;/main>
+    &lt;/div>
+  );
+};
 
-    
-
-
-
-
-
+export default Layout;
+</code></pre>
+        </article>
+    </section>
 
 
 

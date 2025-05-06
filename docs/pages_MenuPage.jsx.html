@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Home</title>
+    <title>JSDoc: Source: pages/MenuPage.jsx</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,32 +17,43 @@
 
 <div id="main">
 
-    <h1 class="page-title">Home</h1>
+    <h1 class="page-title">Source: pages/MenuPage.jsx</h1>
 
     
 
 
 
     
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React from 'react';
+import usePizzas from '../hooks/usePizzas';
+import PizzaCard from '../components/menu/PizzaCard';
 
+/**
+ * MenuPage component for displaying the menu of pizzas.
+ * Fetches pizza data using the `usePizzas` hook and displays each pizza in a grid layout.
+ *
+ * @returns {JSX.Element} The menu page layout with a grid of pizza cards.
+ */
+const MenuPage = () => {
+  const {pizzas, loading, error} = usePizzas();
 
-    <h3> </h3>
+  if (loading) return &lt;p>Loading pizzas...&lt;/p>;
+  if (error) return &lt;p>Error: {error}&lt;/p>;
+  return (
+    &lt;div className="menu-wrapper-grid">
+      {pizzas.map((pizza) => (
+        &lt;PizzaCard key={pizza.pizza_id} pizza={pizza} />
+      ))}
+    &lt;/div>
+  );
+};
 
-
-
-
-
-
-
-
-
-
-    
-
-
-
-
-
+export default MenuPage;
+</code></pre>
+        </article>
+    </section>
 
 
 

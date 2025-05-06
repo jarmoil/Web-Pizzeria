@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Home</title>
+    <title>JSDoc: Source: components/sections/GallerySection.jsx</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,32 +17,47 @@
 
 <div id="main">
 
-    <h1 class="page-title">Home</h1>
+    <h1 class="page-title">Source: components/sections/GallerySection.jsx</h1>
 
     
 
 
 
     
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * GallerySection component for displaying a gallery of images.
+ * Includes multiple columns of images showcasing pizzas, ingredients, and the restaurant.
+ *
+ * @returns {JSX.Element} The "Gallery" section of the homepage.
+ */
+const GallerySection = () => {
+    return (
+      &lt;section id="homepage-gallery" className="homepage-section">
+        &lt;h2>Kuvagalleria&lt;/h2>
+        &lt;div className="homepage-gallery-grid">
+          &lt;div className="homepage-gallery-column">
+            &lt;img src="/images/galleria-kuva1.jpg" alt="Pizza dough" />
+            &lt;img src="/images/galleria-kuva2.jpg" alt="Pepperoni pizza" />
+          &lt;/div>
+          &lt;div className="homepage-gallery-column">
+            &lt;img src="/images/galleria-kuva3.jpg" alt="Pizza slice" />
+            &lt;img src="/images/galleria-kuva4.jpg" alt="Fresh ingredients" />
+          &lt;/div>
+          &lt;div className="homepage-gallery-column">
+            &lt;img src="/images/galleria-kuva5.jpg" alt="Restaurant glasses" />
+            &lt;img src="/images/galleria-kuva6.jpg" alt="Viiksivallu" />
+          &lt;/div>
+        &lt;/div>
+      &lt;/section>
+    );
+  };
 
-
-    <h3> </h3>
-
-
-
-
-
-
-
-
-
-
-    
-
-
-
-
-
+  export default GallerySection;
+</code></pre>
+        </article>
+    </section>
 
 
 

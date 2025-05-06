@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Home</title>
+    <title>JSDoc: Source: components/cart/CartItemsList.jsx</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,32 +17,58 @@
 
 <div id="main">
 
-    <h1 class="page-title">Home</h1>
+    <h1 class="page-title">Source: components/cart/CartItemsList.jsx</h1>
 
     
 
 
 
     
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React from 'react';
+import CartItem from './CartItem';
 
+/**
+ * Renders a list of cart items.
+ *
+ * @param {Object[]} cart - Array of pizza objects in the cart.
+ * @param {number} cart[].pizza_id - Unique ID of the pizza.
+ * @param {string} cart[].pizza_name - Name of the pizza.
+ * @param {number} cart[].quantity - Quantity of the pizza in the cart.
+ * @param {number} cart[].price - Price of the pizza.
+ * @param {Function} increaseQuantity - Function to increase the quantity of a pizza.
+ * @param {Function} decreaseQuantity - Function to decrease the quantity of a pizza.
+ * @param {Function} removeFromCart - Function to remove a pizza from the cart.
+ * @returns {JSX.Element} A list of cart items or a message if the cart is empty.
+ */
+const CartItemsList = ({
+  cart,
+  increaseQuantity,
+  decreaseQuantity,
+  removeFromCart,
+}) => {
+  if (cart.length === 0) return &lt;li>Your cart is empty&lt;/li>;
 
-    <h3> </h3>
+  return (
+    &lt;>
+      {cart.map((pizza) => (
+        &lt;CartItem
+          key={pizza.pizza_id}
+          pizza={pizza}
+          increaseQuantity={increaseQuantity}
+          decreaseQuantity={decreaseQuantity}
+          removeFromCart={removeFromCart}
+        />
+      ))}
+    &lt;/>
+  );
+};
 
-
-
-
-
-
-
-
-
-
-    
-
-
-
-
-
+export default CartItemsList;
+</code></pre>
+        </article>
+    </section>
 
 
 

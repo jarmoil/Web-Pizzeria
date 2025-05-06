@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Home</title>
+    <title>JSDoc: Source: utils/tokenStorage.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,32 +17,38 @@
 
 <div id="main">
 
-    <h1 class="page-title">Home</h1>
+    <h1 class="page-title">Source: utils/tokenStorage.js</h1>
 
     
 
 
 
     
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>const TOKEN_KEY = 'authToken';
 
+/**
+ * Retrieves the authentication token from local storage.
+ *
+ * @returns {string|null} The authentication token, or `null` if it does not exist.
+ */
+export const getToken = () => localStorage.getItem(TOKEN_KEY);
 
-    <h3> </h3>
+/**
+ * Stores the authentication token in local storage.
+ *
+ * @param {string} token - The authentication token to store.
+ */
+export const setToken = (token) => localStorage.setItem(TOKEN_KEY, token);
 
-
-
-
-
-
-
-
-
-
-    
-
-
-
-
-
+/**
+ * Removes the authentication token from local storage.
+ */
+export const removeToken = () => localStorage.removeItem(TOKEN_KEY);
+</code></pre>
+        </article>
+    </section>
 
 
 

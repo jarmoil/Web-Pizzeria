@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Home</title>
+    <title>JSDoc: Source: components/cart/CartTotal.jsx</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,32 +17,37 @@
 
 <div id="main">
 
-    <h1 class="page-title">Home</h1>
+    <h1 class="page-title">Source: components/cart/CartTotal.jsx</h1>
 
     
 
 
 
     
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React from 'react';
 
+/**
+ * Displays the total price of items in the cart.
+ *
+ * @param {Object} props - Component props.
+ * @param {number} props.totalPrice - The total price of all items in the cart.
+ * @returns {JSX.Element} A div displaying the total price.
+ */
+const CartTotal = ({totalPrice}) => {
+  return (
+    &lt;div className="cart-total">
+      &lt;span>Total:&lt;/span>
+      &lt;span>€{totalPrice.toFixed(2)}&lt;/span>
+    &lt;/div>
+  );
+};
 
-    <h3> </h3>
-
-
-
-
-
-
-
-
-
-
-    
-
-
-
-
-
+export default CartTotal;
+</code></pre>
+        </article>
+    </section>
 
 
 

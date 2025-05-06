@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Home</title>
+    <title>JSDoc: Source: components/sections/AboutSection.jsx</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,32 +17,43 @@
 
 <div id="main">
 
-    <h1 class="page-title">Home</h1>
+    <h1 class="page-title">Source: components/sections/AboutSection.jsx</h1>
 
     
 
 
 
     
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * AboutSection component for displaying information about the pizzeria.
+ * Includes a brief description of the pizzeria's background and an image.
+ *
+ * @returns {JSX.Element} The "About Us" section of the homepage.
+ */
+const AboutSection = () => {
+    return (
+      &lt;section id="homepage-about" className="homepage-section">
+        &lt;div className="homepage-about-grid">
+          &lt;div className="homepage-about-text">
+            &lt;h2>Meidän taustamme&lt;/h2>
+            &lt;p>
+              Olemme tehneet käsintehtyjä pizzoja kotimaisilla aineksilla vuodesta....
+            &lt;/p>
+          &lt;/div>
+          &lt;div className="homepage-about-image">
+            &lt;img src="/images/pizza-oven.jpg" alt="Pizza oven" />
+          &lt;/div>
+        &lt;/div>
+      &lt;/section>
+    );
+  };
 
-
-    <h3> </h3>
-
-
-
-
-
-
-
-
-
-
-    
-
-
-
-
-
+  export default AboutSection;
+</code></pre>
+        </article>
+    </section>
 
 
 

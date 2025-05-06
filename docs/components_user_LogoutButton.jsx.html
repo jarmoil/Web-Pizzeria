@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Home</title>
+    <title>JSDoc: Source: components/user/LogoutButton.jsx</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,32 +17,46 @@
 
 <div id="main">
 
-    <h1 class="page-title">Home</h1>
+    <h1 class="page-title">Source: components/user/LogoutButton.jsx</h1>
 
     
 
 
 
     
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import {useAuth} from '../../hooks/useAuth';
 
+/**
+ * LogoutButton component for logging out the current user.
+ * Displays a logout button if the user is logged in and reloads the page upon logout.
+ *
+ * @returns {JSX.Element|null} A logout button if the user is logged in, or `null` if no user is logged in.
+ */
+const LogoutButton = () => {
+  const {user, logout} = useAuth();
 
-    <h3> </h3>
+  /**
+   * Handles the logout process.
+   * Calls the `logout` function and reloads the page.
+   */
+  const handleLogout = () => {
+    logout();
+    window.location.reload();
+  };
 
+  return user ? (
+    &lt;button onClick={handleLogout} className="logout-btn">
+      Logout
+    &lt;/button>
+  ) : null;
+};
 
-
-
-
-
-
-
-
-
-    
-
-
-
-
-
+export default LogoutButton;
+</code></pre>
+        </article>
+    </section>
 
 
 

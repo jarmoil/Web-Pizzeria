@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Home</title>
+    <title>JSDoc: Source: components/cart/CartButton.jsx</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,32 +17,100 @@
 
 <div id="main">
 
-    <h1 class="page-title">Home</h1>
+    <h1 class="page-title">Source: components/cart/CartButton.jsx</h1>
 
     
 
 
 
     
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React, {useState} from 'react';
+import {useCart} from '../../context/CartContext';
+import CartItemsList from './CartItemsList';
+import CartTotal from './CartTotal';
+import AddressInput from '../shared/AddressInput';
+import FeedbackMessage from '../shared/FeedbackMessage';
+import {useCheckout} from '../../hooks/useCheckout';
 
+/**
+ * Renders the cart dropdown with a list of cart items, total price, and checkout options.
+ *
+ * @param {Object} props - Component props.
+ * @param {boolean} props.isVisible - Determines if the cart dropdown is visible.
+ * @param {Function} props.onClose - Function to close the cart dropdown.
+ * @returns {JSX.Element|null} The cart dropdown or `null` if not visible.
+ */
+const CartButton = ({isVisible, onClose}) => {
+  const {cart, increaseQuantity, decreaseQuantity, removeFromCart} = useCart();
+  const [address, setAddress] = useState('');
+  const [isPickup, setIsPickup] = useState(false);
+  const {handleCheckout, feedback, loading} = useCheckout();
 
-    <h3> </h3>
+  /**
+   * Calculates the total price of items in the cart.
+   *
+   * @type {number}
+   */
+  const totalPrice = cart.reduce(
+    (sum, item) => sum + item.price * item.quantity,
+    0
+  );
 
+  if (!isVisible) return null;
 
+  return (
+    &lt;div id="cart-dropdown" className="cart-dropdown">
+      &lt;div id="cart-box">
+        &lt;button id="cart-close" className="close-btn" onClick={onClose}>
+          &amp;times;
+        &lt;/button>
+        &lt;h2>Your Cart&lt;/h2>
+        &lt;ul id="cart-items">
+          &lt;CartItemsList
+            cart={cart}
+            increaseQuantity={increaseQuantity}
+            decreaseQuantity={decreaseQuantity}
+            removeFromCart={removeFromCart}
+          />
+        &lt;/ul>
+        &lt;CartTotal totalPrice={totalPrice} />
 
+        &lt;div className="pickup-option">
+          &lt;label>
+            &lt;input
+              type="checkbox"
+              checked={isPickup}
+              onChange={(e) => setIsPickup(e.target.checked)}
+            />
+            Pick up from restaurant (no delivery)
+          &lt;/label>
+        &lt;/div>
 
+        &lt;AddressInput
+          address={address}
+          setAddress={setAddress}
+          disabled={isPickup}
+        />
 
+        &lt;button
+          id="cart-checkout-btn"
+          onClick={() => handleCheckout(address, isPickup)}
+          disabled={loading}
+        >
+          {loading ? 'Processing...' : 'Checkout'}
+        &lt;/button>
+        &lt;FeedbackMessage message={feedback.message} type={feedback.type} />
+      &lt;/div>
+    &lt;/div>
+  );
+};
 
-
-
-
-
-    
-
-
-
-
-
+export default CartButton;
+</code></pre>
+        </article>
+    </section>
 
 
 

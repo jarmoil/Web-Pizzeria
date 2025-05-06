@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Home</title>
+    <title>JSDoc: Source: components/sections/HoursLocationSection.jsx</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,32 +17,52 @@
 
 <div id="main">
 
-    <h1 class="page-title">Home</h1>
+    <h1 class="page-title">Source: components/sections/HoursLocationSection.jsx</h1>
 
     
 
 
 
     
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import MyMapComponent from "../MyMapComponent";
 
+/**
+ * HoursLocationSection component for displaying the pizzeria's hours and location.
+ * Includes opening hours and a map showing the pizzeria's address.
+ *
+ * @returns {JSX.Element} The "Hours and Location" section of the homepage.
+ */
+const HoursLocationSection = () => {
+    return (
+      &lt;section id="homepage-hours-location" className="homepage-section">
+        &lt;div className="homepage-hours-location-grid">
+          &lt;div className="homepage-hours">
+            &lt;h3>Aukioloajat&lt;/h3>
+            &lt;ul>
+              &lt;li>Ma-Pe: 11:00 - 22:00&lt;/li>
+              &lt;li>La: 12:00 - 23:00&lt;/li>
+              &lt;li>Su: 12:00 - 21:00&lt;/li>
+            &lt;/ul>
+          &lt;/div>
+          &lt;div className="homepage-map">
+            &lt;h3>Osoite&lt;/h3>
+            &lt;p>
+              Pápán Pizzeria, Helsinginkatu 1&lt;br />
+              00010, Helsinki&lt;br />FIN
+            &lt;/p>
+            &lt;MyMapComponent />
+          &lt;/div>
+        &lt;/div>
+      &lt;/section>
+    );
+  };
 
-    <h3> </h3>
-
-
-
-
-
-
-
-
-
-
-    
-
-
-
-
-
+  export default HoursLocationSection;
+</code></pre>
+        </article>
+    </section>
 
 
 
