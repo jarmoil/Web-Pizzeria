@@ -1,6 +1,11 @@
 import useOrderManagement from '../../hooks/useOrderManagement';
 import {useAuth} from '../../hooks/useAuth';
 
+/**
+ * Order statuses and their labels.
+ * @constant
+ * @type {Object}
+ */
 const ORDER_STATUSES = {
   pending: 'Pending',
   processing: 'Processing',
@@ -8,6 +13,12 @@ const ORDER_STATUSES = {
   cancelled: 'Cancelled',
 };
 
+/**
+ * OrderManagement component for managing customer orders.
+ * Displays orders grouped by status and allows updating order statuses.
+ *
+ * @returns {JSX.Element} The order management interface.
+ */
 const OrderManagement = () => {
   const {user} = useAuth();
   const {orders, loading, error, updateOrderStatus} = useOrderManagement(
@@ -17,6 +28,10 @@ const OrderManagement = () => {
   if (loading) return <div>Loading orders...</div>;
   if (error) return <div>Error: {error}</div>;
 
+  /**
+   * Groups orders by their status.
+   * @type {Object}
+   */
   const ordersByStatus = orders.reduce((acc, order) => {
     const status = order.order_status || 'pending';
     if (!acc[status]) acc[status] = [];
@@ -24,6 +39,13 @@ const OrderManagement = () => {
     return acc;
   }, {});
 
+  /**
+   * Handles the status change of an order.
+   *
+   * @param {number} orderId - The ID of the order to update.
+   * @param {string} newStatus - The new status to set for the order.
+   * @returns {Promise<void>}
+   */
   const handleStatusChange = async (orderId, newStatus) => {
     try {
       await updateOrderStatus(orderId, newStatus);
@@ -32,6 +54,23 @@ const OrderManagement = () => {
     }
   };
 
+  /**
+   * Renders a single order card.
+   *
+   * @param {Object} order - The order object to render.
+   * @param {number} order.order_id - The ID of the order.
+   * @param {string} order.order_status - The current status of the order.
+   * @param {string} order.user_email - The email of the user who placed the order.
+   * @param {number} order.total_price - The total price of the order.
+   * @param {boolean} order.is_pickup - Whether the order is for pickup.
+   * @param {string} order.address - The delivery address for the order.
+   * @param {string} order.created_at - The date and time the order was created.
+   * @param {Object[]} order.items - The items in the order.
+   * @param {number} order.items[].order_item_id - The ID of the order item.
+   * @param {string} order.items[].pizza_name - The name of the pizza.
+   * @param {number} order.items[].quantity - The quantity of the pizza.
+   * @returns {JSX.Element} A card displaying the order details.
+   */
   const renderOrderCard = (order) => (
     <div key={order.order_id} className="order-card">
       <div className="order-header">
