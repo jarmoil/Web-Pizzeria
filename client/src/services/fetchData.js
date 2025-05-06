@@ -1,7 +1,10 @@
 // Muokattu, näyttää back endin errorit nyt
 
 export const fetchData = async (url, options = {}) => {
-  const baseUrl = import.meta.env.VITE_API_URL || 'http://localhost:3000/';
+  const baseUrl =
+    window.location.hostname === 'localhost'
+      ? 'http://localhost:3000/'
+      : import.meta.env.VITE_API_URL;
   const fullUrl = baseUrl + url;
 
   const response = await fetch(fullUrl, options);

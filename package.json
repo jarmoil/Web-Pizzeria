@@ -8,11 +8,15 @@
     "server": "cd server && nodemon src/server.js",
     "client": "cd client && vite",
     "build": "cd client && vite build",
-    "preview": "cd client && vite preview"
+    "preview": "cd client && vite preview",
+    "e2e": "set NODE_ENV=test&& npx playwright test"
   },
   "jest": {
     "testEnvironment": "node",
-    "testTimeout": 30000
+    "testTimeout": 30000,
+    "testPathIgnorePatterns": [
+      "/e2e/"
+    ]
   },
   "keywords": [],
   "author": "",
@@ -20,6 +24,8 @@
   "description": "",
   "devDependencies": {
     "@eslint/js": "^9.22.0",
+    "@playwright/test": "^1.52.0",
+    "@types/node": "^22.15.3",
     "@types/react": "^19.0.10",
     "@types/react-dom": "^19.0.4",
     "@vitejs/plugin-react-swc": "^3.8.0",
