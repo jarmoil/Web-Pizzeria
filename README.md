@@ -1,5 +1,13 @@
 # Web-Pizzeria
 
+website url:
+
+http://10.120.32.83/
+
+Palautelomake:
+
+https://docs.google.com/forms/d/e/1FAIpQLSe-VyBSF2xMaW6-3DJgHMge0h5ttv6PVYzDBhEbpsFvQN1U4A/viewform
+
 ## What this project does
 
 ### The idea of the project
