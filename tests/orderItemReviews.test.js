@@ -48,7 +48,10 @@ beforeAll(async () => {
 });
 
 afterAll(async () => {
-  await db.query('DELETE FROM order_item_reviews');
+  // Only delete reviews created by test user
+  await db.query('DELETE FROM order_item_reviews WHERE user_id = ?', [
+    testUserId,
+  ]);
   await db.query('DELETE FROM user_accounts WHERE user_id IN (?, ?)', [
     testUserId,
     testAdminId,
