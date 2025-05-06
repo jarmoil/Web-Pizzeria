@@ -25,8 +25,6 @@ export const AuthProvider = ({children}) => {
         setUser({
           token,
           user_id: decoded.user_id,
-          name: decoded.name,
-          email: decoded.email,
           role: decoded.role,
         });
       }
@@ -43,9 +41,7 @@ export const AuthProvider = ({children}) => {
         setUser({
           token,
           user_id: decoded.user_id,
-          name: decoded.name,
-          email: decoded.email,
-          role: decoded.role,
+          role: decoded.role
         });
       }
     } catch (err) {
