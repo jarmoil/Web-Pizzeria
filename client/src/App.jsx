@@ -6,10 +6,17 @@ import Location from './components/Location';
 import {Route, Routes} from 'react-router-dom';
 import ForgotPassword from './components/user/ForgotPassword';
 import SignUp from './components/user/SignUp';
-import MenuPage from './pages/menuPage';
+import MenuPage from './pages/MenuPage';
 import {AuthProvider} from './context/AuthContext';
 import ProtectedRoute from './components/shared/ProtectedRoute';
 
+/**
+ * The main application component that defines the structure and routing of the app.
+ * Includes routes for various pages such as the front page, menu, management page, and more.
+ * Wraps the application in the `AuthProvider` to provide authentication context.
+ *
+ * @returns {JSX.Element} The main application layout with routing.
+ */
 function App() {
   return (
     <div className="App">

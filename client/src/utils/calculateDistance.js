@@ -1,4 +1,12 @@
-// Haversine formula to calculate distance
+/**
+ * Calculates the distance between two geographical points using the Haversine formula.
+ *
+ * @param {number} lat1 - The latitude of the first point in decimal degrees.
+ * @param {number} lon1 - The longitude of the first point in decimal degrees.
+ * @param {number} lat2 - The latitude of the second point in decimal degrees.
+ * @param {number} lon2 - The longitude of the second point in decimal degrees.
+ * @returns {number} The distance between the two points in kilometers.
+ */
 export const calculateDistance = (lat1, lon1, lat2, lon2) => {
   const R = 6371; // Radius of the Earth in kilometers
   const dLat = ((lat2 - lat1) * Math.PI) / 180;
