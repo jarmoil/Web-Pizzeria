@@ -1,7 +1,14 @@
-// ProtectedRoute.jsx
-import {Navigate} from 'react-router';
-import {useUserContext} from '../../hooks/contextHooks';
+import { Navigate } from 'react-router';
+import { useUserContext } from '../../hooks/contextHooks';
 
+
+const ProtectedRoute = ({ children, requiredRoles }) => {
+  const { user, loading } = useUserContext();
+
+  if (loading) {
+    return <p>Loading...</p>; // Show a loading indicator while checking authentication
+  }
+  
 /**
  * ProtectedRoute component for restricting access to certain routes.
  * Redirects users to the homepage if they are not logged in, or to an unauthorized page if they lack the required roles.
@@ -19,7 +26,7 @@ const ProtectedRoute = ({children, requiredRoles}) => {
   }
 
   if (requiredRoles && !requiredRoles.includes(user.role)) {
-    return <Navigate to="/unauthorized" />; // Redirect to an unauthorized page
+    return <Navigate to="/unauthorized" />;
   }
 
   return children;

@@ -25,6 +25,9 @@ export const AuthProvider = ({children}) => {
    */
   const [user, setUser] = useState(null);
 
+  const [loading, setLoading] = useState(true);
+
+
   /**
    * State for managing the loading state during authentication operations.
    * @type {boolean}
@@ -35,6 +38,7 @@ export const AuthProvider = ({children}) => {
    * State for storing error messages related to authentication.
    * @type {string|null}
    */
+
   const [error, setError] = useState(null);
 
   /**
@@ -60,8 +64,15 @@ export const AuthProvider = ({children}) => {
     const token = getToken();
     if (token) {
       const decoded = decodeToken(token);
-      decoded && setUser({token, role: decoded.role});
+      if (decoded) {
+        setUser({
+          token,
+          user_id: decoded.user_id,
+          role: decoded.role,
+        });
+      }
     }
+    setLoading(false);
   }, []);
 
   /**
@@ -79,7 +90,13 @@ export const AuthProvider = ({children}) => {
       const {token} = await loginUser(credentials);
       setToken(token);
       const decoded = decodeToken(token);
-      decoded && setUser({token, role: decoded.role});
+      if (decoded) {
+        setUser({
+          token,
+          user_id: decoded.user_id,
+          role: decoded.role,
+        });
+      }
     } catch (err) {
       setError(err.response?.data?.message || 'Login failed');
     } finally {

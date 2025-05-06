@@ -9,6 +9,7 @@ import SignUp from './components/user/SignUp';
 import MenuPage from './pages/MenuPage';
 import {AuthProvider} from './context/AuthContext';
 import ProtectedRoute from './components/shared/ProtectedRoute';
+import AccountPage from './pages/AccountPage';
 
 /**
  * The main application component that defines the structure and routing of the app.
@@ -30,6 +31,14 @@ function App() {
               element={
                 <ProtectedRoute>
                   <ManagementPage />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/accountPage"
+              element={
+                <ProtectedRoute>
+                  <AccountPage />
                 </ProtectedRoute>
               }
             />
