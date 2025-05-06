@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: components/MyMapComponent.jsx</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: components/MyMapComponent.jsx</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import {MapContainer, TileLayer, Marker, Popup} from 'react-leaflet';
+import 'leaflet/dist/leaflet.css';
+import L from 'leaflet';
+import useBusStops from '../hooks/useBusStops';
+import {useEffect, useState} from 'react';
+import {calculateDistance} from '../utils/calculateDistance';
+
+/**
+ * Custom Leaflet icon for bus stops.
+ * @constant
+ * @type {L.Icon}
+ */
+const busStopIcon = new L.Icon({
+  iconUrl: 'images/stop.svg',
+  iconSize: [25, 25],
+  iconAnchor: [12, 25],
+  popupAnchor: [0, -25],
+});
+
+// Fix for default marker icons not showing
+delete L.Icon.Default.prototype._getIconUrl;
+L.Icon.Default.mergeOptions({
+  iconRetinaUrl:
+    'https://unpkg.com/leaflet@1.7.1/dist/images/marker-icon-2x.png',
+  iconUrl: 'https://unpkg.com/leaflet@1.7.1/dist/images/marker-icon.png',
+  shadowUrl: 'https://unpkg.com/leaflet@1.7.1/dist/images/marker-shadow.png',
+});
+
+/**
+ * MyMapComponent component for displaying a map with the restaurant's location and nearby bus stops.
+ * Calculates the user's distance to the restaurant and displays it in a popup.
+ *
+ * @returns {JSX.Element} A map with the restaurant's location, nearby bus stops, and distance information.
+ */
+const MyMapComponent = () => {
+    /**
+   * State for storing the calculated distance from the user to the restaurant.
+   * @type {string|null}
+   */
+  const [distance, setDistance] = useState(null);
+
+  /**
+   * Coordinates of the restaurant.
+   * @constant
+   * @type {number[]}
+   */
+  const restaurantLocation = [60.18789408213458, 24.959844440006883]; // Restaurant coordinates
+
+  /**
+   * Fetches nearby bus stops using the `useBusStops` hook.
+   * @type {Object}
+   * @property {Object[]} busStops - Array of nearby bus stops.
+   * @property {boolean} loading - Indicates if the bus stops are being loaded.
+   * @property {string|null} error - Error message if loading fails.
+   */
+  const {busStops, loading, error} = useBusStops(
+    restaurantLocation[0],
+    restaurantLocation[1],
+    300
+  );
+
+  /**
+   * Calculates the distance between the user's location and the restaurant.
+   * Uses the browser's geolocation API to get the user's coordinates.
+   */
+  useEffect(() => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const userLat = position.coords.latitude;
+          const userLon = position.coords.longitude;
+
+          // Calculate the distance
+          const dist = calculateDistance(
+            userLat,
+            userLon,
+            restaurantLocation[0],
+            restaurantLocation[1]
+          );
+          setDistance(dist.toFixed(2)); // Round to 2 decimal places
+        },
+        (error) => {
+          console.error('Error getting location:', error);
+          setDistance('Unable to determine location');
+        }
+      );
+    } else {
+      setDistance('Geolocation not supported');
+    }
+  }, []);
+
+  return (
+    &lt;MapContainer
+      center={restaurantLocation}
+      zoom={15}
+      style={{height: '300px', width: '100%'}}
+    >
+      &lt;TileLayer
+        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+        attribution='&amp;copy; &lt;a href="https://www.openstreetmap.org/copyright">OpenStreetMap&lt;/a> contributors'
+      />
+      &lt;Marker position={restaurantLocation}>
+        &lt;Popup>
+          &lt;div>
+            &lt;strong>Pápán Pizzeria&lt;/strong>
+            &lt;br />
+            Helsinginkatu 1&lt;br />
+            00010, Helsinki
+            &lt;br />
+            FIN
+            &lt;br />
+            {distance !== null ? (
+              &lt;span>Distance: {distance} km&lt;/span>
+            ) : (
+              &lt;span>Calculating distance...&lt;/span>
+            )}
+          &lt;/div>
+        &lt;/Popup>
+      &lt;/Marker>
+
+      {/* Show loading/error or bus stops */}
+      {loading &amp;&amp; &lt;div>Loading bus stops...&lt;/div>}
+      {error &amp;&amp; &lt;div>{error}&lt;/div>}
+      {!loading &amp;&amp;
+        busStops.length > 0 &amp;&amp;
+        busStops.map((stop, index) => (
+          &lt;Marker
+            key={index}
+            position={[stop.lat, stop.lon]}
+            icon={busStopIcon}
+          >
+            &lt;Popup>
+              &lt;strong>{stop.name}&lt;/strong>
+              &lt;br />
+              Code: {stop.code}
+              &lt;br />
+              Distance: {stop.distance} meters
+              &lt;br />
+              Vehicle: {stop.vehicleMode}
+            &lt;/Popup>
+          &lt;/Marker>
+        ))}
+    &lt;/MapContainer>
+  );
+};
+
+export default MyMapComponent;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#AboutSection">AboutSection</a></li><li><a href="global.html#AddressInput">AddressInput</a></li><li><a href="global.html#App">App</a></li><li><a href="global.html#AuthContext">AuthContext</a></li><li><a href="global.html#AuthProvider">AuthProvider</a></li><li><a href="global.html#CartButton">CartButton</a></li><li><a href="global.html#CartItem">CartItem</a></li><li><a href="global.html#CartItemsList">CartItemsList</a></li><li><a href="global.html#CartProvider">CartProvider</a></li><li><a href="global.html#CartTotal">CartTotal</a></li><li><a href="global.html#FeaturedPizzaSection">FeaturedPizzaSection</a></li><li><a href="global.html#FeedbackMessage">FeedbackMessage</a></li><li><a href="global.html#Footer">Footer</a></li><li><a href="global.html#FrontPage">FrontPage</a></li><li><a href="global.html#GallerySection">GallerySection</a></li><li><a href="global.html#HeroSection">HeroSection</a></li><li><a href="global.html#HoursLocationSection">HoursLocationSection</a></li><li><a href="global.html#Layout">Layout</a></li><li><a href="global.html#Location">Location</a></li><li><a href="global.html#LogoutButton">LogoutButton</a></li><li><a href="global.html#ManagementPage">ManagementPage</a></li><li><a href="global.html#MenuManagement">MenuManagement</a></li><li><a href="global.html#MenuPage">MenuPage</a></li><li><a href="global.html#MyMapComponent">MyMapComponent</a></li><li><a href="global.html#ORDER_STATUSES">ORDER_STATUSES</a></li><li><a href="global.html#OrderItemReviewSection">OrderItemReviewSection</a></li><li><a href="global.html#OrderManagement">OrderManagement</a></li><li><a href="global.html#PizzaCard">PizzaCard</a></li><li><a href="global.html#PostReviewForm">PostReviewForm</a></li><li><a href="global.html#ProtectedRoute">ProtectedRoute</a></li><li><a href="global.html#RatingsSection">RatingsSection</a></li><li><a href="global.html#ReviewManagement">ReviewManagement</a></li><li><a href="global.html#ReviewModal">ReviewModal</a></li><li><a href="global.html#SignInButton">SignInButton</a></li><li><a href="global.html#SignUp">SignUp</a></li><li><a href="global.html#SocialLink">SocialLink</a></li><li><a href="global.html#StarRating">StarRating</a></li><li><a href="global.html#UserManagement">UserManagement</a></li><li><a href="global.html#WEEKDAYS">WEEKDAYS</a></li><li><a href="global.html#addMenuItem">addMenuItem</a></li><li><a href="global.html#busStopIcon">busStopIcon</a></li><li><a href="global.html#calculateAverageRating">calculateAverageRating</a></li><li><a href="global.html#calculateDistance">calculateDistance</a></li><li><a href="global.html#createOrder">createOrder</a></li><li><a href="global.html#deleteItemReview">deleteItemReview</a></li><li><a href="global.html#deleteMenuItem">deleteMenuItem</a></li><li><a href="global.html#deleteRestaurantReview">deleteRestaurantReview</a></li><li><a href="global.html#fetchBusStops">fetchBusStops</a></li><li><a href="global.html#fetchData">fetchData</a></li><li><a href="global.html#forgotPassword">forgotPassword</a></li><li><a href="global.html#formatPrice">formatPrice</a></li><li><a href="global.html#getAllItemReviews">getAllItemReviews</a></li><li><a href="global.html#getAllOrders">getAllOrders</a></li><li><a href="global.html#getAllPizzas">getAllPizzas</a></li><li><a href="global.html#getAllUsers">getAllUsers</a></li><li><a href="global.html#getDailyPizza">getDailyPizza</a></li><li><a href="global.html#getReviews">getReviews</a></li><li><a href="global.html#getToken">getToken</a></li><li><a href="global.html#handleRegistration">handleRegistration</a></li><li><a href="global.html#loginUser">loginUser</a></li><li><a href="global.html#postReviewService">postReviewService</a></li><li><a href="global.html#registerEmployee">registerEmployee</a></li><li><a href="global.html#registerUser">registerUser</a></li><li><a href="global.html#removeToken">removeToken</a></li><li><a href="global.html#setToken">setToken</a></li><li><a href="global.html#updateMenuItem">updateMenuItem</a></li><li><a href="global.html#updateOrderStatus">updateOrderStatus</a></li><li><a href="global.html#updateUser">updateUser</a></li><li><a href="global.html#useAuth">useAuth</a></li><li><a href="global.html#useBusStops">useBusStops</a></li><li><a href="global.html#useCart">useCart</a></li><li><a href="global.html#useCheckout">useCheckout</a></li><li><a href="global.html#useMenuManagement">useMenuManagement</a></li><li><a href="global.html#useOrderItemReviews">useOrderItemReviews</a></li><li><a href="global.html#useOrderManagement">useOrderManagement</a></li><li><a href="global.html#usePizzas">usePizzas</a></li><li><a href="global.html#useRestaurantReviews">useRestaurantReviews</a></li><li><a href="global.html#useReviewManagement">useReviewManagement</a></li><li><a href="global.html#useUserContext">useUserContext</a></li><li><a href="global.html#useUserManagement">useUserManagement</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Tue May 06 2025 16:35:42 GMT+0300 (Eastern European Summer Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

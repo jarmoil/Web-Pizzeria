@@ -26,6 +26,7 @@ app.use('/api/v1', api);
 app.use('/uploads', express.static('uploads'));
 
 app.use('/docs', express.static(path.join(rootDir, 'docs')));
+app.use('/jsdocs', express.static(path.join(rootDir, 'jsdoc')));
 
 // Register upload routes
 app.use('/api/v1', uploadRoutes);
