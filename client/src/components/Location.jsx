@@ -1,3 +1,9 @@
+/**
+ * Location component for displaying the pizzeria's location.
+ * Includes the address and an embedded Google Maps iframe.
+ *
+ * @returns {JSX.Element} The "Location" page with the address and map.
+ */
 const Location = () => {
     return (
       <div className="location-page">

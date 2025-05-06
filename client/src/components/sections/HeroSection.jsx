@@ -1,5 +1,11 @@
 import { Link } from "react-router-dom";
 
+/**
+ * HeroSection component for displaying the homepage hero section.
+ * Includes a welcome message, a brief description, and a button linking to the menu.
+ *
+ * @returns {JSX.Element} The "Hero" section of the homepage.
+ */
 const HeroSection = () => {
     return (
       <section id="homepage-hero" className="homepage-section">

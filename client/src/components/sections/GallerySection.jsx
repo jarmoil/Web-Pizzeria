@@ -1,3 +1,9 @@
+/**
+ * GallerySection component for displaying a gallery of images.
+ * Includes multiple columns of images showcasing pizzas, ingredients, and the restaurant.
+ *
+ * @returns {JSX.Element} The "Gallery" section of the homepage.
+ */
 const GallerySection = () => {
     return (
       <section id="homepage-gallery" className="homepage-section">

@@ -2,12 +2,26 @@ import {useState} from 'react';
 import {useNavigate} from 'react-router-dom';
 import {useAuth} from '../../hooks/useAuth';
 
+/**
+ * SignInButton component for displaying a sign-in modal.
+ * Allows users to log in, navigate to the "Forgot Password" page, or sign up for a new account.
+ *
+ * @param {Object} props - Component props.
+ * @param {boolean} props.isVisible - Determines if the sign-in modal is visible.
+ * @param {Function} props.onClose - Function to close the sign-in modal.
+ * @returns {JSX.Element|null} The sign-in modal if visible, or `null` if not visible.
+ */
 const SignInButton = ({isVisible, onClose}) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const {login, error, loading} = useAuth();
   const navigate = useNavigate();
 
+  /**
+   * Handles the login process.
+   * Attempts to log in the user with the provided email and password.
+   * Closes the modal and reloads the page upon successful login.
+   */
   const handleLogin = async () => {
     try {
       await login({email, password});
@@ -18,10 +32,16 @@ const SignInButton = ({isVisible, onClose}) => {
     }
   };
 
+  /**
+   * Navigates to the "Forgot Password" page.
+   */
   const handleForgotPassword = () => {
     navigate('/forgotPassword');
   };
 
+  /**
+   * Navigates to the "Sign Up" page.
+   */
   const handleSignUp = () => {
     navigate('/signup');
   };

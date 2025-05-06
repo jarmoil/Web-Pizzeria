@@ -1,5 +1,13 @@
 import { Link } from "react-router-dom";
 
+/**
+ * SocialLink component for rendering a social media link.
+ *
+ * @param {Object} props - Component props.
+ * @param {string} props.href - The URL of the social media page.
+ * @param {string} props.icon - The icon class for the social media platform.
+ * @returns {JSX.Element} A list item containing a social media link.
+ */
 const SocialLink = ({ href, icon }) => (
   <li>
     <a href={href} target="_blank" rel="noopener noreferrer">
@@ -8,6 +16,12 @@ const SocialLink = ({ href, icon }) => (
   </li>
 );
 
+/**
+ * Footer component for displaying the footer section of the website.
+ * Includes sections for "About Us," "Quick Links," "Shop," and "Contact Us."
+ *
+ * @returns {JSX.Element} The footer section of the website.
+ */
 const Footer = () => {
   return (
     <>

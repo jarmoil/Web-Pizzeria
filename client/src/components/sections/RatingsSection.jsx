@@ -3,13 +3,40 @@ import useRestaurantReviews from '../../hooks/useRestaurantReviews';
 import {useAuth} from '../../hooks/useAuth';
 import StarRating from '../StarRating';
 
+/**
+ * RatingsSection component for displaying and submitting restaurant reviews.
+ * Allows authenticated users to submit reviews and displays existing reviews with sorting options.
+ *
+ * @returns {JSX.Element} The "Ratings" section of the homepage.
+ */
 const RatingsSection = () => {
   const {user} = useAuth();
   const {reviews, loading, error, postReview} = useRestaurantReviews();
+
+  /**
+   * Comment text for the review being submitted.
+   * @type {string}
+   */
   const [comment, setComment] = useState('');
+
+  /**
+   * Rating value for the review being submitted.
+   * @type {number}
+   */
   const [rating, setRating] = useState(5);
+
+  /**
+   * Sort order for displaying reviews.
+   * Can be "newest" or "oldest".
+   * @type {string}
+   */
   const [sortOrder, setSortOrder] = useState('newest');
 
+  /**
+   * Returns the reviews sorted by the selected sort order.
+   *
+   * @returns {Object[]} The sorted array of reviews.
+   */
   const getSortedReviews = () => {
     return [...reviews].sort((a, b) => {
       const dateA = new Date(a.created_at);
@@ -18,6 +45,12 @@ const RatingsSection = () => {
     });
   };
 
+  /**
+   * Handles the submission of a new review.
+   *
+   * @param {React.FormEvent<HTMLFormElement>} e - The form submission event.
+   * @returns {Promise<void>}
+   */
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {

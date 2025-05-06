@@ -6,14 +6,37 @@ import SignInButton from './user/SignInButton';
 import CartButton from './cart/CartButton';
 import LogoutButton from './user/LogoutButton';
 
+/**
+ * Layout component for rendering the main layout of the application.
+ * Includes a header with navigation links, user authentication actions, and a cart button.
+ * Renders child routes using the `Outlet` component.
+ *
+ * @returns {JSX.Element} The main layout of the application.
+ */
 const Layout = () => {
+    /**
+   * State to manage the visibility of the cart modal.
+   * @type {boolean}
+   */
   const [isCartVisible, setCartVisible] = useState(false);
+
+  /**
+   * State to manage the visibility of the sign-in modal.
+   * @type {boolean}
+   */
   const [isSignInVisible, setSignInVisible] = useState(false);
 
   const {cartCount} = useCart();
   const {user, role} = useAuth();
 
+  /**
+   * Toggles the visibility of the cart modal.
+   */
   const toggleCart = () => setCartVisible(!isCartVisible);
+
+  /**
+   * Toggles the visibility of the sign-in modal.
+   */
   const toggleSignIn = () => setSignInVisible(!isSignInVisible);
 
   return (

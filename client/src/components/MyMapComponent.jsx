@@ -5,6 +5,11 @@ import useBusStops from '../hooks/useBusStops';
 import {useEffect, useState} from 'react';
 import {calculateDistance} from '../utils/calculateDistance';
 
+/**
+ * Custom Leaflet icon for bus stops.
+ * @constant
+ * @type {L.Icon}
+ */
 const busStopIcon = new L.Icon({
   iconUrl: 'images/stop.svg',
   iconSize: [25, 25],
@@ -21,16 +26,43 @@ L.Icon.Default.mergeOptions({
   shadowUrl: 'https://unpkg.com/leaflet@1.7.1/dist/images/marker-shadow.png',
 });
 
+/**
+ * MyMapComponent component for displaying a map with the restaurant's location and nearby bus stops.
+ * Calculates the user's distance to the restaurant and displays it in a popup.
+ *
+ * @returns {JSX.Element} A map with the restaurant's location, nearby bus stops, and distance information.
+ */
 const MyMapComponent = () => {
+    /**
+   * State for storing the calculated distance from the user to the restaurant.
+   * @type {string|null}
+   */
   const [distance, setDistance] = useState(null);
+
+  /**
+   * Coordinates of the restaurant.
+   * @constant
+   * @type {number[]}
+   */
   const restaurantLocation = [60.18789408213458, 24.959844440006883]; // Restaurant coordinates
 
+  /**
+   * Fetches nearby bus stops using the `useBusStops` hook.
+   * @type {Object}
+   * @property {Object[]} busStops - Array of nearby bus stops.
+   * @property {boolean} loading - Indicates if the bus stops are being loaded.
+   * @property {string|null} error - Error message if loading fails.
+   */
   const {busStops, loading, error} = useBusStops(
     restaurantLocation[0],
     restaurantLocation[1],
     300
   );
 
+  /**
+   * Calculates the distance between the user's location and the restaurant.
+   * Uses the browser's geolocation API to get the user's coordinates.
+   */
   useEffect(() => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
