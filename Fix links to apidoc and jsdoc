@@ -6,11 +6,11 @@ http://10.120.32.83/
 
 apiDoc:
 
-http://10.120.32.83/docs/
+http://10.120.32.83/api/v1/docs/
 
 JSDoc:
 
-http://10.120.32.83/jsdocs/
+http://10.120.32.83/api/v1/jsdocs/
 
 Palautelomake:
 
